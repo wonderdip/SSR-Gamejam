@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://dftcg65rb8l7i"]
+
+[ext_resource type="Theme" uid="uid://d3jh3wstxuonk" path="res://Config/global_theme.tres" id="1_wv540"]
+[ext_resource type="Script" uid="uid://c28ovdol66qf0" path="res://Scripts/title_screen.gd" id="2_dsf7a"]
+[ext_resource type="Texture2D" uid="uid://dgqh5bgy3bt87" path="res://Assets/UI/TitleScreen/titleBG.png" id="3_824g0"]
+[ext_resource type="Texture2D" uid="uid://c7kh8l70fifgx" path="res://Assets/UI/TitleScreen/Title.png" id="4_tjte5"]
+[ext_resource type="Texture2D" uid="uid://b3uyx6554di4r" path="res://Assets/UI/TitleScreen/super.png" id="5_uv4ns"]
+[ext_resource type="Texture2D" uid="uid://bktjw3p8dxgqt" path="res://Assets/UI/TitleScreen/cross.png" id="6_nd20k"]
+[ext_resource type="Script" uid="uid://brtr5lo733nm3" path="res://Scripts/cross_sprite.gd" id="7_dsf7a"]
+
+[sub_resource type="Animation" id="Animation_8gbba"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bo1nx"]
+resource_name = "title_in"
+length = 0.8333367101285607
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(7.450581e-09, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7.450581e-09, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gbba"]
+_data = {
+&"RESET": SubResource("Animation_8gbba"),
+&"title_in": SubResource("Animation_bo1nx")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dtook"]
+radius = 8.0
+height = 128.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_21xkr"]
+height = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gh7k3"]
+radius = 26.0
+
+[node name="TitleScreen" type="Control" unique_id=184179160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wv540")
+script = ExtResource("2_dsf7a")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=325201184]
+position = Vector2(128, 72)
+texture = ExtResource("3_824g0")
+
+[node name="TitleName" type="Sprite2D" parent="." unique_id=991226106]
+position = Vector2(78, 39)
+texture = ExtResource("4_tjte5")
+
+[node name="SuperFont" type="Sprite2D" parent="TitleName" unique_id=519701093]
+position = Vector2(-23, -24)
+texture = ExtResource("5_uv4ns")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1293375726]
+libraries/ = SubResource("AnimationLibrary_8gbba")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="." unique_id=1888608064]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 96.0
+offset_bottom = 136.0
+theme_override_constants/separation = 2
+
+[node name="PlayButton" type="Button" parent="ButtonContainer" unique_id=162465475]
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+text = "Play"
+alignment = 0
+
+[node name="SettingsButton" type="Button" parent="ButtonContainer" unique_id=806940593]
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+text = "Settings"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="ButtonContainer" unique_id=2008674438]
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+text = "Quit"
+alignment = 0
+
+[node name="CrossSprite" type="Sprite2D" parent="." unique_id=1992894210]
+position = Vector2(192, 56)
+texture = ExtResource("6_nd20k")
+centered = false
+offset = Vector2(-44, -47)
+script = ExtResource("7_dsf7a")
+
+[node name="CrossArea" type="Area2D" parent="CrossSprite" unique_id=409851861]
+position = Vector2(0, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrossSprite/CrossArea" unique_id=1312105656]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_dtook")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CrossSprite/CrossArea" unique_id=1328574409]
+position = Vector2(0, -18)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_21xkr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CrossSprite/CrossArea" unique_id=1242013191]
+position = Vector2(0, -18)
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_gh7k3")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=65025898]
+visible = false
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 144.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]

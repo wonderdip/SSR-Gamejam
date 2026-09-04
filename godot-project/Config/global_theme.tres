@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://d3jh3wstxuonk"]
 
-[ext_resource type="FontFile" uid="uid://dp8u1phxc81c4" path="res://Assets/Plump_Prose.ttf" id="1_e0q8h"]
+[ext_resource type="FontFile" uid="uid://dp8u1phxc81c4" path="res://Assets/Fonts/Plump_Prose.ttf" id="1_e0q8h"]
 
 [resource]
 default_font = ExtResource("1_e0q8h")

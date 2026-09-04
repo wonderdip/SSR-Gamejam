@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dp8u1phxc81c4"
-path="res://.godot/imported/Plump_Prose.ttf-adb663b8885c2f1601cc47779076faa7.fontdata"
+path="res://.godot/imported/Plump_Prose.ttf-f8d601fcd170ac67a1424eebef44ea92.fontdata"
 
 [deps]
 
-source_file="res://Assets/Plump_Prose.ttf"
-dest_files=["res://.godot/imported/Plump_Prose.ttf-adb663b8885c2f1601cc47779076faa7.fontdata"]
+source_file="res://Assets/Fonts/Plump_Prose.ttf"
+dest_files=["res://.godot/imported/Plump_Prose.ttf-f8d601fcd170ac67a1424eebef44ea92.fontdata"]
 
 [params]
 
