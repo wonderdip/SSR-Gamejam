@@ -20,12 +20,13 @@ var highlight_positions: Array[int] = [
 
 var current_button := -1
 var highlight_tween_instance: Tween
-
+var x_position: int = 31
 
 func _ready() -> void:
 	play_button.pressed.connect(_on_button_pressed)
 	settings_button.pressed.connect(_on_button_pressed)
 	quit_button.pressed.connect(_on_button_pressed)
+	pointer.hide()
 	
 func _process(_delta: float) -> void:
 	var new_button := -1
@@ -45,7 +46,7 @@ func _process(_delta: float) -> void:
 		pointer.hide()
 		highlight.hide()
 		return
-
+	pointer.global_position.x = x_position
 	pointer.global_position.y = pointer_positions[current_button]
 	highlight.global_position.y = highlight_positions[current_button]
 
