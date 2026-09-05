@@ -1,10 +1,26 @@
 [gd_scene format=3 uid="uid://dwubc2sbj5pod"]
 
+[ext_resource type="Script" uid="uid://b1nmakptjxo6i" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dftcg65rb8l7i" path="res://Scenes/UI/title_screen.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bcclf3mcc1rx1" path="res://Scenes/mouse_area.tscn" id="7_6bp64"]
 
 [node name="Main" type="Node2D" unique_id=1991418438]
-
-[node name="TitleScreen" parent="." unique_id=184179160 instance=ExtResource("1_bo1nx")]
+script = ExtResource("1_8gbba")
 
 [node name="MouseArea" parent="." unique_id=445286092 instance=ExtResource("7_6bp64")]
+
+[node name="CurrentScene" type="Node2D" parent="." unique_id=258786582]
+unique_name_in_owner = true
+
+[node name="TitleScreen" parent="CurrentScene" unique_id=184179160 instance=ExtResource("1_bo1nx")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=99638249]
+layer = 10
+
+[node name="Control" type="Control" parent="HUD" unique_id=867276376]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

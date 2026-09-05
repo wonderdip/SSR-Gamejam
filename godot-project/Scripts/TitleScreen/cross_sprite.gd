@@ -53,8 +53,28 @@ func animate_cross():
 	cross_area.mouse_entered.connect(_on_mouse_on_cross)
 	cross_area.mouse_exited.connect(_on_mouse_off_cross)
 	cross_area.input_event.connect(_on_cross_input)
-	
+	shine()
 	rotate_cross()
+
+func shine():
+	var shader_material: ShaderMaterial = self.material
+	
+	while true:
+		var shine_tween := create_tween()
+		
+		shader_material.set_shader_parameter("shine_progress", 1.0)
+		
+		shine_tween.tween_method(
+			func(value): shader_material.set_shader_parameter("shine_progress", value),
+			1.0,
+			0.0,
+			2.5
+		)
+		
+		await shine_tween.finished
+		
+		# Optional delay between shines
+		await get_tree().create_timer(1.5).timeout
 
 func rotate_cross():
 	

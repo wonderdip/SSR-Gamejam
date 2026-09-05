@@ -1,15 +1,14 @@
-extends Control
+extends Node2D
 
 @onready var super_font: Sprite2D = $TitleName/SuperFont
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var cross_sprite: Sprite2D = $CrossSprite
+@onready var highlight: ColorRect = $Control/Highlight
 
+@export var play_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	animation_player.play("title_in")
 	super_font.hide()
-	await animation_player.animation_finished
 	animate_title()
 	cross_sprite.animate_cross()
 	
@@ -39,16 +38,19 @@ func animate_title():
 		.set_ease(Tween.EASE_IN_OUT)\
 		.set_trans(Tween.TRANS_SINE)
 			
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_play_button_pressed() -> void:
-	pass # Replace with function body.
+	await tween_highlight()
+	SceneManager.goto_packed_scene(play_scene)
 
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+func tween_highlight():
+	var tween = create_tween()
+	tween.tween_property(highlight, "color", Color.WHITE, 0.2
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	await tween.finished
+	await get_tree().create_timer(0.1).timeout

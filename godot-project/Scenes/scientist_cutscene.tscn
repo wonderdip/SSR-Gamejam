@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dso1cd1hgf35j"]
+
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="1_7ue0y"]
+[ext_resource type="Script" uid="uid://cc2wiapoo8hwo" path="res://Scripts/scientist_cutscene.gd" id="1_inxn8"]
+[ext_resource type="FontFile" uid="uid://bro1771qh380q" path="res://Assets/Fonts/Company_Contract.ttf" id="2_57ytr"]
+[ext_resource type="PackedScene" uid="uid://clrypwbdcwd40" path="res://Scenes/World/delivery_scene.tscn" id="2_inxn8"]
+[ext_resource type="Shader" uid="uid://6yegyf677e23" path="res://Shader/drunk_blur.gdshader" id="3_inxn8"]
+[ext_resource type="Texture2D" uid="uid://ktyed6j1v4o4" path="res://Assets/Cutscenes/scientist.png" id="4_epxpm"]
+[ext_resource type="Texture2D" uid="uid://dhascfy5bxcj3" path="res://Assets/Cutscenes/SCIBG.png" id="5_ojd1c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awwja"]
+shader = ExtResource("3_inxn8")
+shader_parameter/wave_amplitude = 0.012
+shader_parameter/wave_frequency = 16.00000076
+shader_parameter/wave_speed = 2.000000095
+shader_parameter/blur_samples = 8
+shader_parameter/blur_amount = 0.02000000095
+shader_parameter/time_scale = 2.9610001406475
+
+[node name="ScientistCutscene" type="Node2D" unique_id=1464628339]
+script = ExtResource("1_inxn8")
+dialogue = Array[String](["So as per our... [shuffle chance=0.6 speed=7 settle=0]Contract[/shuffle], you will be continously [shuffle chance=0.5 speed=7 settle=0]Cloned[/shuffle] until...[shuffle chance=0.4 speed=7 settle=0]we get what we want[/shuffle], Got it?", "Let's get you ready for your [shuffle chance=0.6 speed=7 settle=0]first run[/shuffle], shall we?"])
+pause_on_punctuation = 0.05
+delivery_scene = ExtResource("2_inxn8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=655837187]
+offset_top = 96.0
+offset_right = 256.0
+offset_bottom = 144.0
+texture = ExtResource("1_7ue0y")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="DialogueLabel" type="RichTextLabel" parent="." unique_id=446828384]
+offset_left = 6.0
+offset_top = 98.0
+offset_right = 252.0
+offset_bottom = 142.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_57ytr")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Scientist" type="Sprite2D" parent="." unique_id=146621068]
+material = SubResource("ShaderMaterial_awwja")
+position = Vector2(128, 48)
+texture = ExtResource("4_epxpm")
+
+[node name="BG" type="Sprite2D" parent="Scientist" unique_id=1837624235]
+z_index = -1
+use_parent_material = true
+position = Vector2(0, 24)
+texture = ExtResource("5_ojd1c")
