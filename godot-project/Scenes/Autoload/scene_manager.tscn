@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://bk16qqwnrvehu" path="res://Scripts/Autoload/scene_manager.gd" id="1_jmd8x"]
 [ext_resource type="PackedScene" uid="uid://4tk06hpv3qyv" path="res://Scenes/player.tscn" id="2_j1ye6"]
 [ext_resource type="PackedScene" uid="uid://bg67bxkoew2cx" path="res://Scenes/UI/ascension_scene.tscn" id="3_th275"]
+[ext_resource type="PackedScene" uid="uid://2mmpaac64lde" path="res://Scenes/World/RoomTemplates/Normal/normal_room.tscn" id="4_4b5v7"]
 [ext_resource type="PackedScene" uid="uid://bx00tup5x7tqq" path="res://Scenes/World/RoomTemplates/Item/ItemRoomOne.tscn" id="4_63jpk"]
 
 [node name="SceneManager" type="Node" unique_id=1206914034]
 script = ExtResource("1_jmd8x")
 player_scene = ExtResource("2_j1ye6")
 floor_ascension_scene = ExtResource("3_th275")
+normal_rooms = Array[PackedScene]([ExtResource("4_4b5v7")])
 item_rooms = Array[PackedScene]([ExtResource("4_63jpk")])
