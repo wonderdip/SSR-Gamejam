@@ -25,9 +25,20 @@ var movement_locked: bool = false
 var pixel_shader_material: ShaderMaterial
 var _step_timer: float = 0.0
 
+# Pre-cached animation names to avoid string concatenation every frame
+var _anim_names: Dictionary = {}
+var _current_anim_name: String = ""
+
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
 	pixel_shader_material.shader = pixelate_shader
+	
+	# Pre-cache all possible animation names
+	for state in ["Idle", "Walk", "Run"]:
+		for direction_idx in range(4):
+			var direction_name: String = Direction.keys()[direction_idx].capitalize()
+			var anim_name: String = state + direction_name
+			_anim_names[state + str(direction_idx)] = anim_name
 
 func _physics_process(delta: float) -> void:
 	if movement_locked:
@@ -55,7 +66,7 @@ func _direction_from_vector(vector: Vector2) -> Direction:
 		return Direction.DOWN if vector.y > 0.0 else Direction.UP
 
 func _update_animation(is_moving: bool, is_running: bool) -> void:
-	var direction_name: String = Direction.keys()[facing].capitalize()
+	# Use pre-cached animation names instead of building strings every frame
 	var state_name: String
 	if not is_moving:
 		state_name = "Idle"
@@ -63,9 +74,14 @@ func _update_animation(is_moving: bool, is_running: bool) -> void:
 		state_name = "Run"
 	else:
 		state_name = "Walk"
-	var anim_name: String = state_name + direction_name
-	if animation_player.current_animation != anim_name:
+	
+	var cache_key: String = state_name + str(facing)
+	var anim_name: String = _anim_names.get(cache_key, "")
+	
+	# Only play animation if it changed (avoids redundant animation restarts)
+	if anim_name != _current_anim_name and anim_name != "":
 		animation_player.play(anim_name)
+		_current_anim_name = anim_name
 
 func _update_footsteps(is_moving: bool, is_running: bool, delta: float) -> void:
 	if not is_moving:

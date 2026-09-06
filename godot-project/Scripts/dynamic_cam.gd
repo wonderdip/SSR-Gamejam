@@ -13,6 +13,9 @@ var trauma: float = 0.0
 var _noise: FastNoiseLite = FastNoiseLite.new()
 var _noise_seed_offset: float = 0.0
 
+# Use delta accumulation instead of Time.get_ticks_msec() every frame
+var _time_accumulator: float = 0.0
+
 func _ready() -> void:
 	_noise.seed = randi()
 	_noise_seed_offset = randf() * 1000.0
@@ -29,10 +32,11 @@ func _process(delta: float) -> void:
 		return
 
 	var shake: float = pow(trauma, trauma_power)
-	var time: float = Time.get_ticks_msec() / 1000.0 * noise_speed
+	# Accumulate time using delta instead of calling Time.get_ticks_msec() every frame
+	_time_accumulator += delta * noise_speed
 
 	offset = Vector2(
-		max_offset.x * shake * _noise.get_noise_2d(time, _noise_seed_offset),
-		max_offset.y * shake * _noise.get_noise_2d(time, _noise_seed_offset + 100.0)
+		max_offset.x * shake * _noise.get_noise_2d(_time_accumulator, _noise_seed_offset),
+		max_offset.y * shake * _noise.get_noise_2d(_time_accumulator, _noise_seed_offset + 100.0)
 	)
-	rotation = max_roll * shake * _noise.get_noise_2d(time, _noise_seed_offset + 200.0)
+	rotation = max_roll * shake * _noise.get_noise_2d(_time_accumulator, _noise_seed_offset + 200.0)

@@ -15,8 +15,10 @@ var _pause_timer: float = 0.0
 var _is_typing: bool = false
 var current_dialogue: int = 0
 var _last_revealed_index: int = 0
-# extra seconds to hold after . , ! ?  var _visible_progress: float = 0.0 var _pause_timer: float = 0.0 var _is_typing: bool = false  
-# Called when the node enters the scene tree for the first time.
+
+# Cache parsed text to avoid expensive get_parsed_text() calls every frame
+var _cached_parsed_text: String = ""
+var _cached_text_dirty: bool = true
 
 func _ready() -> void:
 	dialogue_label.bbcode_enabled = true
@@ -29,14 +31,13 @@ func _ready() -> void:
 		await get_tree().create_timer(0.25).timeout
 		start_typing()
 
-
-
 func start_typing() -> void:
 	_visible_progress = 0.0
 	_pause_timer = 0.0
 	_last_revealed_index = 0
 	dialogue_label.visible_characters = 0
 	_is_typing = true
+	_cached_text_dirty = true  # Mark cache as needing refresh
 
 func _process(delta: float) -> void:
 	if dialogue_label.visible_ratio == 1.0:
@@ -61,16 +62,21 @@ func _process(delta: float) -> void:
 		return
 
 	dialogue_label.visible_characters = next_index
-	var plain: String = dialogue_label.get_parsed_text()
+	
+	# Only update cache when needed (text changed or cache is dirty)
+	if _cached_text_dirty:
+		_cached_parsed_text = dialogue_label.get_parsed_text()
+		_cached_text_dirty = false
 
 	if next_index > _last_revealed_index:
-		var revealed_char: String = plain[next_index - 1]
+		var revealed_char: String = _cached_parsed_text[next_index - 1] if next_index - 1 < _cached_parsed_text.length() else ""
 		if revealed_char.strip_edges() != "":
 			AudioManager.play_sfx("dialog", -25, 1)
 		_last_revealed_index = next_index
 
-	if next_index > 0 and next_index <= plain.length():
-		var last_char: String = plain[next_index - 1]
+	# Check for punctuation to add pauses
+	if next_index > 0 and next_index <= _cached_parsed_text.length():
+		var last_char: String = _cached_parsed_text[next_index - 1]
 		if last_char in [".", ",", "!", "?"]:
 			_pause_timer = pause_on_punctuation
 
@@ -79,9 +85,10 @@ func skip_to_end() -> void:
 	dialogue_label.visible_characters = -1
 	typing_finished.emit()
 
-func next_dialogue():
+func next_dialogue() -> void:
 	current_dialogue += 1
 	dialogue_label.text = dialogue[current_dialogue]
+	_cached_text_dirty = true  # Mark cache as dirty when text changes
 	start_typing()
 
 func _input(event: InputEvent) -> void:
@@ -96,6 +103,6 @@ func _input(event: InputEvent) -> void:
 			else:
 				AudioManager.play_sfx("select")
 				exit_cutscene()
-				
-func exit_cutscene():
+			
+func exit_cutscene() -> void:
 	SceneManager.goto_packed_scene(delivery_scene)
