@@ -15,6 +15,8 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D):
+	if locked:
+		return
 	if body is Player:
 		body._exiting_level()
 		await get_tree().create_timer(0.25).timeout

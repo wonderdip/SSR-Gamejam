@@ -373,6 +373,7 @@ pixelate_shader = null
 [node name="LevelTrigger" type="Area2D" parent="." unique_id=1036098764]
 collision_layer = 32
 script = ExtResource("6_kixh8")
+direction = 1
 first_level_trigger = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=46964644]

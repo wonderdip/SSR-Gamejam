@@ -1,16 +1,12 @@
-[gd_scene format=4 uid="uid://cffsigy0dkqo8"]
+[gd_scene format=4 uid="uid://bx00tup5x7tqq"]
 
-[ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_car7v"]
-[ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="1_lpij0"]
-[ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mkwg0"]
-[ext_resource type="Texture2D" uid="uid://br6vg7sd5ihri" path="res://Assets/Characters/Sciontology/npc1.png" id="4_70dsn"]
-[ext_resource type="Texture2D" uid="uid://w7qs0v3234l3" path="res://Assets/auto_door.png" id="4_wsauq"]
-[ext_resource type="Script" uid="uid://o3sn2d8rssis" path="res://Scripts/interaction_trigger.gd" id="6_gwgwg"]
-[ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="7_ogupu"]
-[ext_resource type="PackedScene" uid="uid://bx00tup5x7tqq" path="res://Scenes/World/RoomTemplates/Item/south_item_room.tscn" id="8_2akcc"]
+[ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_wm0pe"]
+[ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="2_kq4e8"]
+[ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_cq41u"]
+[ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="4_42c7h"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2akcc"]
-texture = ExtResource("1_lpij0")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nfxgx"]
+texture = ExtResource("2_kq4e8")
 3:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
@@ -264,13 +260,13 @@ texture = ExtResource("1_lpij0")
 8:20/0 = 0
 9:20/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_awwja"]
+[sub_resource type="TileSet" id="TileSet_16w05"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_2akcc")
+sources/0 = SubResource("TileSetAtlasSource_nfxgx")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2lph4"]
-texture = ExtResource("1_lpij0")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhub2"]
+texture = ExtResource("2_kq4e8")
 3:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
@@ -552,13 +548,13 @@ texture = ExtResource("1_lpij0")
 8:20/0 = 0
 9:20/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_3c16j"]
+[sub_resource type="TileSet" id="TileSet_moe5i"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_2lph4")
+sources/0 = SubResource("TileSetAtlasSource_qhub2")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ur81b"]
-texture = ExtResource("3_mkwg0")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_va20u"]
+texture = ExtResource("3_cq41u")
 1:0/0 = 0
 2:0/0 = 0
 4:0/0 = 0
@@ -1704,13 +1700,13 @@ texture = ExtResource("3_mkwg0")
 14:88/0 = 0
 15:88/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_hpu63"]
+[sub_resource type="TileSet" id="TileSet_q5aus"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_ur81b")
+sources/0 = SubResource("TileSetAtlasSource_va20u")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_12re5"]
-texture = ExtResource("3_mkwg0")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5l48"]
+texture = ExtResource("3_cq41u")
 1:0/0 = 0
 2:0/0 = 0
 4:0/0 = 0
@@ -2844,169 +2840,40 @@ texture = ExtResource("3_mkwg0")
 14:88/0 = 0
 15:88/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_gwgwg"]
+[sub_resource type="TileSet" id="TileSet_pooov"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_12re5")
-
-[sub_resource type="Animation" id="Animation_wsauq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DoorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPC:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(128, 20)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPC:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_70dsn"]
-resource_name = "first_interaction"
-length = 1.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DoorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 2, 1, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPC:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(128, 20), Vector2(128, 52)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPC:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.3, 0.4, 0.5, 0.6, 0.7, 0.79999983, 0.9, 0.9999999, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 1, 0, 1, 2, 1, 0, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwgwg"]
-_data = {
-&"RESET": SubResource("Animation_wsauq"),
-&"first_interaction": SubResource("Animation_70dsn")
-}
+sources/0 = SubResource("TileSetAtlasSource_h5l48")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
-size = Vector2(16, 143)
+size = Vector2(32, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c16j"]
-size = Vector2(6, 33)
+[node name="SouthItemRoom" type="Node2D" unique_id=1010165572]
+script = ExtResource("1_wm0pe")
+metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogupu"]
-size = Vector2(32, 12.5)
+[node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=713382219]
+tile_map_data = PackedByteArray("AAADAAAAAAABABEAAAAEAAAAAAABABEAAAAFAAAAAAABABEAAAAJAAAAAAAAABEAAAAKAAAAAAABABEAAAALAAAAAAABABEAAAAMAAAAAAABABEAAAADAAEAAAABABIAAAAEAAEAAAABABIAAAAFAAEAAAABABIAAAAGAAEAAAACABIAAAAJAAEAAAAAABIAAAAKAAEAAAABABIAAAALAAEAAAABABIAAAAMAAEAAAABABIAAAADAAIAAAAOAAUAAAAEAAIAAAAPAAUAAAAFAAIAAAAPAAUAAAAGAAIAAAAPAAUAAAAHAAIAAAAPAAUAAAAIAAIAAAAPAAUAAAAJAAIAAAAPAAUAAAAKAAIAAAAPAAUAAAALAAIAAAAPAAUAAAAMAAIAAAAOAAUAABAMAAMAAAAOAAYAADALAAMAAAAPAAYAAAAKAAMAAAAPAAYAAAAJAAMAAAAPAAYAAAAIAAMAAAAPAAYAAAAHAAMAAAAPAAYAAAAGAAMAAAAPAAYAAAAFAAMAAAAPAAYAAAAEAAMAAAAPAAYAAAADAAMAAAAOAAYAAAADAAUAAAAOAAYAAAADAAQAAAAOAAYAAAAEAAQAAAAPAAYAAAAEAAUAAAAPAAYAAAAFAAUAAAAPAAYAAAAGAAQAAAAPAAYAAAAGAAUAAAAPAAYAAAAFAAQAAAAPAAYAAAAHAAUAAAAPAAYAAAAIAAUAAAAPAAYAAAAJAAUAAAAPAAYAAAAJAAQAAAAPAAYAAAAKAAQAAAAPAAYAAAAKAAUAAAAPAAYAAAAIAAQAAAAPAAYAAAAHAAQAAAAPAAYAAAALAAUAAAAPAAYAAAALAAQAAAAPAAYAAAAMAAUAAAAOAAYAADAMAAQAAAAOAAYAADAGAAAAAAACABEAAAAHAAEAAAAQAAYAAAAIAAEAAAAQAAYAAAAIAAAAAAAQAAYAAAAHAAAAAAAQAAYAAAAGAP//AAAMAAAAAAAHAP//AAAMAAAAAAAIAP//AAAMAAAAAAAJAP//AAAMAAAAAAADAAYAAAAAABEAAAAEAAYAAAABABEAAAAFAAYAAAABABEAAAAGAAYAAAABABEAAAAHAAYAAAABABEAAAAIAAYAAAABABEAAAAJAAYAAAABABEAAAAKAAYAAAABABEAAAALAAYAAAABABEAAAAMAAYAAAACABEAAAAOAAAAAAAMAAAAAAAOAAEAAAAMAAAAAAAOAAIAAAAMAAAAAAAOAAMAAAAMAAAAAAAOAAQAAAAMAAAAAAAOAAcAAAAMAAAAAAAOAAYAAAAMAAAAAAAOAAUAAAAMAAAAAAAOAAgAAAAMAAAAAAANAAgAAAAMAAAAAAACAAgAAAAMAAAAAAABAAgAAAAMAAAAAAAAAAgAAAAMAAAAAAAAAAcAAAAMAAAAAAAAAAYAAAAMAAAAAAAAAAUAAAAMAAAAAAAAAAQAAAAMAAAAAAAAAAMAAAAMAAAAAAAAAAIAAAAMAAAAAAAAAAEAAAAMAAAAAAAAAAAAAAAMAAAAAAABAAAAAAAMAAAAAAACAAAAAAAMAAAAAAACAAEAAAAMAAAAAAACAAIAAAAMAAAAAAACAAMAAAAMAAAAAAACAAQAAAAMAAAAAAABAAQAAAAMAAAAAAABAAMAAAAMAAAAAAABAAIAAAAMAAAAAAABAAEAAAAMAAAAAAABAAUAAAAMAAAAAAABAAYAAAAMAAAAAAABAAcAAAAMAAAAAAACAAcAAAAMAAAAAAACAAYAAAAMAAAAAAACAAUAAAAMAAAAAAAPAAgAAAAMAAAAAAAPAAcAAAAMAAAAAAAPAAYAAAAMAAAAAAAPAAUAAAAMAAAAAAAPAAQAAAAMAAAAAAAPAAMAAAAMAAAAAAAPAAIAAAAMAAAAAAAPAAEAAAAMAAAAAAAPAAAAAAAMAAAAAAANAAAAAAAMAAAAAAANAAEAAAAMAAAAAAANAAIAAAAMAAAAAAANAAMAAAAMAAAAAAANAAQAAAAMAAAAAAANAAUAAAAMAAAAAAANAAYAAAAMAAAAAAANAAcAAAAMAAAAAAADAAcAAAAAABIAAAAEAAcAAAABABIAAAAFAAcAAAABABIAAAAGAAcAAAABABIAAAAHAAcAAAABABIAAAAIAAcAAAABABIAAAAJAAcAAAABABIAAAAKAAcAAAABABIAAAALAAcAAAABABIAAAAMAAcAAAACABIAAAAMAAgAAAAMAAAAAAALAAgAAAAMAAAAAAAKAAgAAAAMAAAAAAAJAAgAAAAMAAAAAAAIAAgAAAAMAAAAAAAHAAgAAAAMAAAAAAAGAAgAAAAMAAAAAAAFAAgAAAAMAAAAAAAEAAgAAAAMAAAAAAADAAgAAAAMAAAAAAA=")
+tile_set = SubResource("TileSet_16w05")
 
-[node name="StartingRoom" type="Node2D" unique_id=788756620]
-script = ExtResource("1_car7v")
-starting_room = true
+[node name="Ceiling" type="TileMapLayer" parent="." unique_id=1972528061]
+tile_map_data = PackedByteArray("AAAMAAUAAAANAAIAABAMAAQAAAANAAIAABAMAAMAAAANAAIAABAMAAIAAAANAAIAABAMAAEAAAANAAIAABAMAAAAAAALAAEAAAADAAUAAAANAAIAAAADAAQAAAANAAIAAAADAAMAAAANAAIAAAADAAIAAAANAAIAAAADAAEAAAANAAIAAAADAAAAAAALAAEAABADAAYAAAALAAMAABAMAAYAAAALAAMAAAAEAAYAAAAMAAMAAAAFAAYAAAAMAAMAAAAGAAYAAAAMAAMAAAAHAAYAAAAMAAMAAAAIAAYAAAAMAAMAAAAJAAYAAAAMAAMAAAAKAAYAAAAMAAMAAAALAAYAAAAMAAMAAAA=")
+tile_set = SubResource("TileSet_moe5i")
 
-[node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=263269959]
-tile_map_data = PackedByteArray("AAABAAAAAAABABEAAAACAAAAAAABABEAAAADAAAAAAABABEAAAAEAAAAAAABABEAAAAFAAAAAAABABEAAAAJAAAAAAAAABEAAAAKAAAAAAABABEAAAALAAAAAAABABEAAAAMAAAAAAABABEAAAANAAAAAAABABEAAAAOAAAAAAABABEAAAABAAEAAAABABIAAAACAAEAAAABABIAAAADAAEAAAABABIAAAAEAAEAAAABABIAAAAFAAEAAAABABIAAAAGAAEAAAACABIAAAAJAAEAAAAAABIAAAAKAAEAAAABABIAAAALAAEAAAABABIAAAAMAAEAAAABABIAAAANAAEAAAABABIAAAAOAAEAAAABABIAAAACAAIAAAAPAAUAAAADAAIAAAAPAAUAAAAEAAIAAAAPAAUAAAAFAAIAAAAPAAUAAAAGAAIAAAAPAAUAAAAHAAIAAAAPAAUAAAAIAAIAAAAPAAUAAAAJAAIAAAAPAAUAAAAKAAIAAAAPAAUAAAALAAIAAAAPAAUAAAAMAAIAAAAPAAUAAAANAAIAAAAPAAUAAAAOAAIAAAAOAAUAABABAAcAAAAPAAYAAAABAAgAAAAPAAYAAAACAAgAAAAPAAYAAAADAAgAAAAPAAYAAAAEAAgAAAAPAAYAAAAFAAgAAAAPAAYAAAAGAAgAAAAPAAYAAAAJAAgAAAAPAAYAAAAKAAgAAAAPAAYAAAALAAgAAAAPAAYAAAAMAAgAAAAPAAYAAAANAAgAAAAPAAYAAAAOAAgAAAAPAAYAAAAOAAMAAAAOAAYAABANAAMAAAAPAAYAAAAMAAMAAAAPAAYAAAALAAMAAAAPAAYAAAAKAAMAAAAPAAYAAAAJAAMAAAAPAAYAAAAIAAMAAAAPAAYAAAAHAAMAAAAPAAYAAAAGAAMAAAAPAAYAAAAFAAMAAAAPAAYAAAAEAAMAAAAPAAYAAAADAAMAAAAPAAYAAAACAAMAAAAPAAYAAAACAAQAAAAPAAYAAAACAAUAAAAPAAYAAAACAAYAAAAPAAYAAAACAAcAAAAPAAYAAAADAAUAAAAPAAYAAAADAAQAAAAPAAYAAAAEAAQAAAAPAAYAAAAEAAUAAAAPAAYAAAAEAAYAAAAPAAYAAAADAAYAAAAPAAYAAAADAAcAAAAPAAYAAAAEAAcAAAAPAAYAAAAFAAcAAAAPAAYAAAAFAAYAAAAPAAYAAAAFAAUAAAAPAAYAAAAGAAQAAAAPAAYAAAAGAAUAAAAPAAYAAAAGAAcAAAAPAAYAAAAGAAYAAAAPAAYAAAAFAAQAAAAPAAYAAAAHAAUAAAAPAAYAAAAHAAYAAAAPAAYAAAAIAAYAAAAPAAYAAAAIAAcAAAAPAAYAAAAIAAUAAAAPAAYAAAAJAAUAAAAPAAYAAAAJAAQAAAAPAAYAAAAKAAQAAAAPAAYAAAAKAAUAAAAPAAYAAAAIAAQAAAAPAAYAAAAHAAQAAAAPAAYAAAAJAAYAAAAPAAYAAAAKAAYAAAAPAAYAAAALAAYAAAAPAAYAAAALAAUAAAAPAAYAAAALAAQAAAAPAAYAAAAMAAYAAAAPAAYAAAAMAAUAAAAPAAYAAAANAAUAAAAPAAYAAAANAAQAAAAPAAYAAAANAAYAAAAPAAYAAAAMAAQAAAAPAAYAAAAHAAcAAAAPAAYAAAAJAAcAAAAPAAYAAAAKAAcAAAAPAAYAAAALAAcAAAAPAAYAAAAMAAcAAAAPAAYAAAANAAcAAAAPAAYAAAAOAAcAAAAPAAYAAAAOAAYAAAAPAAYAAAAOAAUAAAAPAAYAAAAOAAQAAAAQAAUAABABAAIAAAAOAAUAAAABAAMAAAAOAAYAAAABAAQAAAAQAAUAAAABAAUAAAAPAAYAAAABAAYAAAAPAAYAAAAPAAIAAAAAABEAAAAAAAIAAAACABEAAAAAAAEAAAAMAAAAAAAAAAMAAAACABIAAAAAAAcAAAACABIAAAAAAAgAAAAMAAAAAAAAAAAAAAAMAAAAAAAPAAAAAAAMAAAAAAAPAAEAAAAMAAAAAAAPAAMAAAAAABIAAAAPAAQAAAAPAAUAAAAPAAgAAAAMAAAAAAAGAAAAAAACABEAAAAHAAgAAAAPAAUAACAIAAgAAAAPAAUAACAHAAEAAAAQAAYAAAAIAAEAAAAQAAYAAAAIAAAAAAAQAAYAAAAHAAAAAAAQAAYAAAD//wMAAAAMAAAAAAAQAAMAAAAMAAAAAAAQAAQAAAAMAAAAAAAGAAkAAAAMAAAAAAAHAAkAAAAMAAAAAAAIAAkAAAAMAAAAAAAJAAkAAAAMAAAAAAAGAP//AAAMAAAAAAAHAP//AAAMAAAAAAAIAP//AAAMAAAAAAAJAP//AAAMAAAAAAD//wUAAAAMAAAAAAAAAAYAAAACABEAAAD//wYAAAAMAAAAAAAPAAYAAAAAABEAAAAPAAcAAAAAABIAAAAQAAYAAAAMAAAAAAAAAAQAAAAPAAUAAAAAAAUAAAAPAAYAAAAPAAUAAAAPAAYAAAD//wQAAAAMAAAAAAAQAAUAAAAMAAAAAAA=")
-tile_set = SubResource("TileSet_awwja")
+[node name="BottomDecor" type="TileMapLayer" parent="." unique_id=1409318795]
+tile_map_data = PackedByteArray("AAAEAAEAAAAAAA8AAAAEAAAAAAAAAA4AAAALAAEAAAABAA8AAAALAAAAAAABAA4AAAAFAAEAAAABAA8AAAAFAAAAAAABAA4AAAAKAAEAAAAAAA8AAAAKAAAAAAAAAA4AAAA=")
+tile_set = SubResource("TileSet_q5aus")
 
-[node name="Ceiling" type="TileMapLayer" parent="." unique_id=808794133]
-tile_map_data = PackedByteArray("AAACAAgAAAAMAAMAADADAAgAAAAMAAMAADAEAAgAAAAMAAMAADAFAAgAAAAMAAMAADAGAAgAAAAIAAEAADAJAAgAAAAIAAEAACAKAAgAAAAMAAMAADALAAgAAAAMAAMAADAMAAgAAAAMAAMAADANAAgAAAAMAAMAADAAAAAAAAALAAEAAAAAAAEAAAALAAIAAAABAAgAAAAMAAMAACAOAAgAAAAMAAMAACAAAAgAAAALAAEAACAAAAcAAAALAAIAAAAAAAYAAAALAAEAAAAAAAIAAAANAAMAABAPAAgAAAALAAEAADAPAAcAAAALAAIAABAPAAEAAAALAAIAABAPAAAAAAALAAEAABAPAAIAAAANAAMAAAAPAAYAAAANAAEAAAA=")
-tile_set = SubResource("TileSet_3c16j")
+[node name="TopDecor" type="TileMapLayer" parent="." unique_id=2015635205]
+tile_set = SubResource("TileSet_pooov")
 
-[node name="BottomDecor" type="TileMapLayer" parent="." unique_id=1801266098]
-tile_map_data = PackedByteArray("AAACAAcAAAAHAE4AAAADAAcAAAAIAE4AAAAEAAcAAAAJAE4AAAACAAYAAAAHAE0AAAADAAYAAAAIAE0AAAAEAAYAAAAJAE0AAAADAAUAAAAIAEwAAAACAAUAAAAHAEwAAAAEAAUAAAAJAEwAAAAFAAcAAAAKAE4AAAAFAAYAAAAKAE0AAAAFAAUAAAAKAEwAAAALAAcAAAAIAE4AAAAMAAcAAAAJAE4AAAANAAcAAAAKAE4AAAAKAAcAAAAHAE4AAAAKAAYAAAAHAE0AAAANAAYAAAAKAE0AAAAMAAYAAAAJAE0AAAALAAYAAAAIAE0AAAALAAUAAAAIAEwAAAAMAAUAAAAJAEwAAAANAAUAAAAKAEwAAAAKAAUAAAAHAEwAAAADAAMAAAADAEoAAAAMAAMAAAADAEoAAAACAAEAAAAAAEkAAAACAAAAAAAAAEgAAAAEAAEAAAAAAA8AAAAEAAAAAAAAAA4AAAALAAEAAAABAA8AAAALAAAAAAABAA4AAAANAAEAAAACAEcAAAANAAAAAAACAEYAAAAOAAIAAAAMAC4AAAAOAAEAAAAMAC0AAAABAAIAAAAMAC4AAAABAAEAAAAMAC0AAAAFAAEAAAABAA8AAAAFAAAAAAABAA4AAAAKAAEAAAAAAA8AAAAKAAAAAAAAAA4AAAAPAAIAAAAPAAMAAAAPAAMAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAMAAAAPAAYAAAAGAAUAAAADACoAAAAHAAUAAAAEACoAAAAIAAUAAAAEACoAAAAJAAUAAAAFACoAAAAIAAYAAAAEACsAAAAJAAYAAAAFACsAAAAHAAYAAAAEACsAAAAGAAYAAAADACsAAAAGAAMAAAAFAB8AAAAJAAMAAAAFAB8AAAA=")
-tile_set = SubResource("TileSet_hpu63")
-
-[node name="TopDecor" type="TileMapLayer" parent="." unique_id=720067755]
-tile_map_data = PackedByteArray("AAAJAAQAAAADAAkAABAIAAQAAAADAAUAAAAHAAQAAAADAAUAAAAGAAMAAAADAAgAAAAGAAQAAAADAAkAAAAFAAQAAAAAAAgAAAAFAAMAAAAAAAUAAAAKAAQAAAACAAgAAAAKAAMAAAACAAUAAAAJAAMAAAADAAgAABAJAAIAAAANAFUAAAAJAAEAAAANAFQAAAAGAAIAAAAMACkAAAAGAAEAAAAMACgAAAADAAMAAAAAADQAADA=")
-tile_set = SubResource("TileSet_gwgwg")
-
-[node name="NPC" type="Sprite2D" parent="." unique_id=132833745]
-position = Vector2(128, 20)
-texture = ExtResource("4_70dsn")
-hframes = 3
-
-[node name="DoorSprite" type="Sprite2D" parent="." unique_id=1608314015]
-position = Vector2(128, 16)
-texture = ExtResource("4_wsauq")
-hframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=644351727]
-libraries/ = SubResource("AnimationLibrary_gwgwg")
-
-[node name="InteractionTrigger" type="Area2D" parent="." unique_id=1613448490]
+[node name="LevelTrigger" type="Area2D" parent="." unique_id=1416043457]
 collision_layer = 32
-script = ExtResource("6_gwgwg")
+script = ExtResource("4_42c7h")
+direction = 2
+first_level_trigger = true
+metadata/_custom_type_script = "uid://belmddpiuwavi"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionTrigger" unique_id=184728082]
-position = Vector2(136, 72.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=1435254690]
+position = Vector2(128, 2)
 shape = SubResource("RectangleShape2D_awwja")
-
-[node name="LevelTrigger" type="Area2D" parent="." unique_id=848776651]
-collision_layer = 32
-script = ExtResource("7_ogupu")
-direction = 1
-ascend_trigger = true
-metadata/_custom_type_script = "uid://belmddpiuwavi"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=1776202092]
-position = Vector2(253, 79.5)
-shape = SubResource("RectangleShape2D_3c16j")
-debug_color = Color(0.6884643, 0, 0.2776516, 0.41960785)
-
-[node name="LevelTrigger2" type="Area2D" parent="." unique_id=1459786854]
-collision_layer = 32
-script = ExtResource("7_ogupu")
-direction = 3
-forced_room = ExtResource("8_2akcc")
-metadata/_custom_type_script = "uid://belmddpiuwavi"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger2" unique_id=1829668649]
-position = Vector2(128, 143.75)
-shape = SubResource("RectangleShape2D_ogupu")
-debug_color = Color(0.28018004, 0.63165706, 1.347661e-06, 0.41960785)
-
-[connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]

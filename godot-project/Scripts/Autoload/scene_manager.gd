@@ -29,6 +29,7 @@ var _container: Node = null
 var _fade_layer: CanvasLayer
 var _fade_rect: ColorRect
 var _entry_direction: TRIGGERDIRECTION = TRIGGERDIRECTION.DOWN
+var _ascension_direction: TRIGGERDIRECTION
 
 func _ready() -> void:
 	_fade_layer = CanvasLayer.new()
@@ -60,6 +61,7 @@ func _on_exiting_level(dir: TRIGGERDIRECTION, ascending: bool, forced_room: Pack
 	# weighted chest/item odds, etc). Defaults to always-normal for now.
 	if ascending:
 		floor_num += 1
+		_ascension_direction = dir
 		await _transition_to(floor_ascension_scene)
 		return
 

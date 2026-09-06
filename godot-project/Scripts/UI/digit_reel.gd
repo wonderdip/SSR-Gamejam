@@ -64,7 +64,7 @@ func set_digit(digit: int, animate: bool = true) -> void:
 
 	_tween = create_tween()
 	_tween.set_ease(Tween.EASE_OUT)
-	_tween.set_trans(Tween.TRANS_CUBIC)
+	_tween.set_trans(Tween.TRANS_SPRING)
 	_tween.tween_property(_reel, "position:y", -float(target_index) * _step_height(), roll_duration)
 	await _tween.finished
 
