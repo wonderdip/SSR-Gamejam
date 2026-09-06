@@ -111,7 +111,7 @@ func cross_click():
 	click_tween.tween_property(self, "scale", Vector2(1, 1), 0.1)\
 		.set_ease(Tween.EASE_OUT)\
 		.set_trans(Tween.TRANS_SINE)
-	
+	AudioManager.play_sfx("cross_pickup", 0, randf_range(0.95, 1.05))
 	click_tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.15)\
 		.set_ease(Tween.EASE_IN_OUT)\
 		.set_trans(Tween.TRANS_SINE)

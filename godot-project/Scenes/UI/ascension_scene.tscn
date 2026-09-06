@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://bg67bxkoew2cx"]
+
+[ext_resource type="Script" uid="uid://du4my0ckrndfs" path="res://Scripts/UI/ascension_scene.gd" id="1_pqq61"]
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="2_l22km"]
+[ext_resource type="FontFile" uid="uid://h2rcqlqtbtup" path="res://Assets/Fonts/Digital_Display.ttf" id="3_l22km"]
+[ext_resource type="Script" uid="uid://d06jth3i74am5" path="res://Scripts/dynamic_cam.gd" id="5_l22km"]
+[ext_resource type="Script" uid="uid://d1x1ptujnxk4h" path="res://Scripts/UI/rolling_counter.gd" id="6_smrp4"]
+
+[sub_resource type="Environment" id="Environment_awwja"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.25
+
+[sub_resource type="Animation" id="Animation_l22km"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_pqq61"]
+resource_name = "up"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2.0],
+"method": &"add_trauma"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Floor/RollingCounter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"increase_floor"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["reel_click"],
+"method": &"sfx"
+}, {
+"args": ["elevator_ding"],
+"method": &"sfx"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smrp4"]
+_data = {
+&"RESET": SubResource("Animation_l22km"),
+&"up": SubResource("Animation_pqq61")
+}
+
+[node name="AscensionScene" type="Node2D" unique_id=1433053238]
+script = ExtResource("1_pqq61")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2059433575]
+environment = SubResource("Environment_awwja")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1462165991]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 272.0
+offset_bottom = 164.0
+color = Color(0, 0, 0, 1)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=381092758]
+offset_left = 51.0
+offset_top = 50.0
+offset_right = 205.0
+offset_bottom = 92.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_l22km")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Floor" type="Label" parent="." unique_id=783333636]
+offset_left = 53.0
+offset_top = 53.0
+offset_right = 139.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("3_l22km")
+theme_override_font_sizes/font_size = 19
+text = "Floor:"
+horizontal_alignment = 1
+
+[node name="RollingCounter" type="HBoxContainer" parent="Floor" unique_id=1023004316]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 42.0
+offset_top = -23.0
+offset_right = 98.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+alignment = 1
+script = ExtResource("6_smrp4")
+digit_count = 2
+digit_width = 21.0
+digit_height = 21.0
+digit_spacing = 21.0
+digit_gap = 4.0
+roll_duration = 0.75
+font = ExtResource("3_l22km")
+font_color = Color(7.2677435e-06, 0.75430113, 1.1551381e-06, 1)
+metadata/_custom_type_script = "uid://d1x1ptujnxk4h"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1279786168]
+libraries/ = SubResource("AnimationLibrary_smrp4")
+autoplay = &"up"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2134073187]
+position = Vector2(128, 72)
+script = ExtResource("5_l22km")
+max_roll = 0.3
+trauma_power = 4.0
+trauma_decay = 0.2
+noise_speed = 40.0

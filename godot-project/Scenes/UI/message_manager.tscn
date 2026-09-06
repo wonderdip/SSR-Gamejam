@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dxbjts5qs410w"]
+
+[ext_resource type="Script" uid="uid://cjciwd2lpiv1n" path="res://Scripts/UI/message_manager.gd" id="1_4rm5b"]
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="1_g2iu7"]
+[ext_resource type="FontFile" uid="uid://bro1771qh380q" path="res://Assets/Fonts/Company_Contract.ttf" id="2_ay3hr"]
+[ext_resource type="Texture2D" uid="uid://51vlxy2871q7" path="res://Assets/UI/msg_cursor1.png" id="2_g5xx4"]
+[ext_resource type="Texture2D" uid="uid://c58r7un7numhg" path="res://Assets/UI/msg_cursor2.png" id="3_hhgkr"]
+[ext_resource type="Texture2D" uid="uid://ctysq6a0sdt80" path="res://Assets/UI/msg_cursor3.png" id="4_5dmva"]
+
+[node name="MessageManager" type="CanvasLayer" unique_id=776850639 node_paths=PackedStringArray("box", "label")]
+script = ExtResource("1_4rm5b")
+box = NodePath("Container/NinePatchRect")
+label = NodePath("Container/NinePatchRect/Label")
+cursor_frames = Array[Texture2D]([ExtResource("2_g5xx4"), ExtResource("3_hhgkr"), ExtResource("2_g5xx4"), ExtResource("4_5dmva")])
+
+[node name="Container" type="Control" parent="." unique_id=1652706307]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Container" unique_id=453812614]
+layout_mode = 0
+anchor_top = 0.7222222
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1_g2iu7")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="RichTextLabel" parent="Container/NinePatchRect" unique_id=1459665697]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0234375
+anchor_top = -0.05
+anchor_right = 0.9921875
+anchor_bottom = 0.9
+theme_override_fonts/normal_font = ExtResource("2_ay3hr")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "this is a message"
+metadata/_edit_use_anchors_ = true
+
+[node name="MessageTimer" type="Timer" parent="." unique_id=1857043593]
+wait_time = 0.5
+one_shot = true
+
+[node name="ContinueLabel" type="Label" parent="." unique_id=877799024]
+z_index = 2
+offset_left = 194.0
+offset_top = -2.0
+offset_right = 253.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("2_ay3hr")
+theme_override_font_sizes/font_size = 6
+text = "Click to continue"
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="ContinueLabel" unique_id=1479750797]
+z_index = -1
+layout_mode = 0
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 16.0
+texture = ExtResource("1_g2iu7")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4

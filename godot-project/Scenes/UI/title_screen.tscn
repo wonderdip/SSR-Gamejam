@@ -13,6 +13,12 @@
 [ext_resource type="Script" uid="uid://chglqqovw5xv3" path="res://Scripts/TitleScreen/button_container.gd" id="9_uv4ns"]
 [ext_resource type="Texture2D" uid="uid://mysw7ciqxpsg" path="res://Assets/UI/pointer.png" id="10_nd20k"]
 
+[sub_resource type="Environment" id="Environment_awwja"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.5
+glow_bloom = 0.22
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uv4ns"]
 shader = ExtResource("5_nd20k")
 shader_parameter/shine_progress = 0.0
@@ -32,6 +38,9 @@ radius = 26.0
 [node name="TitleScreen" type="Node2D" unique_id=1086250587]
 script = ExtResource("2_dsf7a")
 play_scene = ExtResource("2_3txao")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1010953529]
+environment = SubResource("Environment_awwja")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=325201184]
 position = Vector2(128, 72)

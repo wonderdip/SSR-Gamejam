@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://6yegyf677e23" path="res://Shader/drunk_blur.gdshader" id="3_inxn8"]
 [ext_resource type="Texture2D" uid="uid://ktyed6j1v4o4" path="res://Assets/Cutscenes/scientist.png" id="4_epxpm"]
 [ext_resource type="Texture2D" uid="uid://dhascfy5bxcj3" path="res://Assets/Cutscenes/SCIBG.png" id="5_ojd1c"]
+[ext_resource type="Shader" uid="uid://x7tre7ngh4b2" path="res://Shader/vignette.gdshader" id="8_epxpm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_awwja"]
 shader = ExtResource("3_inxn8")
@@ -17,9 +18,15 @@ shader_parameter/blur_samples = 8
 shader_parameter/blur_amount = 0.02000000095
 shader_parameter/time_scale = 2.9610001406475
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c16j"]
+shader = ExtResource("8_epxpm")
+shader_parameter/alpha = 0.545
+shader_parameter/inner_radius = 0.4
+shader_parameter/outer_radius = 0.815
+
 [node name="ScientistCutscene" type="Node2D" unique_id=1464628339]
 script = ExtResource("1_inxn8")
-dialogue = Array[String](["So as per our... [shuffle chance=0.6 speed=7 settle=0]Contract[/shuffle], you will be continously [shuffle chance=0.5 speed=7 settle=0]Cloned[/shuffle] until...[shuffle chance=0.4 speed=7 settle=0]we get what we want[/shuffle], Got it?", "Let's get you ready for your [shuffle chance=0.6 speed=7 settle=0]first run[/shuffle], shall we?"])
+dialogue = Array[String](["So as per our... [shuffle chance=0.6 speed=7 settle=0]Contract[/shuffle], you will be [shuffle chance=0.5 speed=7 settle=0]Cloned[/shuffle] again...[shuffle chance=0.4 speed=7 settle=0]until we get what we want[/shuffle], Got it?", "You keep on forgetting... doesn't matter though your [shuffle chance=0.6 speed=7 settle=0]health[/shuffle] isn't important to us anyway.", "Now, let's get you ready for one more [shuffle chance=0.6 speed=7 settle=0]run through[/shuffle], shall we?"])
 pause_on_punctuation = 0.05
 delivery_scene = ExtResource("2_inxn8")
 
@@ -54,3 +61,34 @@ z_index = -1
 use_parent_material = true
 position = Vector2(0, 24)
 texture = ExtResource("5_ojd1c")
+
+[node name="Vignette" type="ColorRect" parent="Scientist/BG" unique_id=1894319121]
+z_index = 1
+material = SubResource("ShaderMaterial_3c16j")
+offset_left = -128.0
+offset_top = -72.0
+offset_right = 128.0
+offset_bottom = 72.0
+
+[node name="ContinueLabel" type="Label" parent="." unique_id=2100882701]
+z_index = 2
+offset_left = 194.0
+offset_top = -2.0
+offset_right = 253.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("2_57ytr")
+theme_override_font_sizes/font_size = 6
+text = "Click to continue"
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="ContinueLabel" unique_id=1680801719]
+z_index = -1
+layout_mode = 0
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 16.0
+texture = ExtResource("1_7ue0y")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4

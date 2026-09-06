@@ -26,7 +26,10 @@ func animate_title():
 	tween.tween_property(super_font, "position", Vector2(-23, -24), 0.5)\
 		.set_ease(Tween.EASE_OUT)\
 		.set_trans(Tween.TRANS_SPRING)
-
+		
+	AudioManager.play_sfx("impact", 5, 1)
+	AudioManager.play_sfx("crash", -10, 0.6)
+	
 	await tween.finished
 	tween.kill()
 	# Rotation loop
@@ -46,9 +49,11 @@ func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_quit_button_pressed() -> void:
+	await tween_highlight()
 	get_tree().quit()
 
 func tween_highlight():
+	AudioManager.play_sfx("select")
 	var tween = create_tween()
 	tween.tween_property(highlight, "color", Color.WHITE, 0.2
 	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cq7tmyhbvsjbc" path="res://Assets/Characters/Player/default-sheet.png" id="2_52wwq"]
 [ext_resource type="Texture2D" uid="uid://dsj56ndf2jpj6" path="res://Assets/bus.png" id="3_kixh8"]
 [ext_resource type="PackedScene" uid="uid://4tk06hpv3qyv" path="res://Scenes/player.tscn" id="4_ittcp"]
+[ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="6_kixh8"]
+[ext_resource type="FontFile" uid="uid://bro1771qh380q" path="res://Assets/Fonts/Company_Contract.ttf" id="7_ittcp"]
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="8_1egeh"]
 
 [sub_resource type="Gradient" id="Gradient_awwja"]
 colors = PackedColorArray(0.39308554, 0.3930855, 0.39308548, 1, 1, 1, 1, 1)
@@ -232,6 +235,23 @@ tracks/8/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5, 4.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["car_skid"],
+"method": &"sfx"
+}, {
+"args": [],
+"method": &"end_driving"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vadfg"]
 _data = {
@@ -262,6 +282,9 @@ size = Vector2(14, 22)
 
 [node name="DeliveryScene" type="Node2D" unique_id=1563353551]
 script = ExtResource("1_52wwq")
+driving_sfx_interval = 0.4
+volume_falloff_per_second = -10.0
+minimum_volume_db = -100.0
 
 [node name="OutdoorEntrance" type="Sprite2D" parent="." unique_id=2067548081]
 z_index = -1
@@ -345,11 +368,40 @@ shape = SubResource("RectangleShape2D_7staa")
 
 [node name="Player" parent="." unique_id=1871453495 instance=ExtResource("4_ittcp")]
 visible = false
+pixelate_shader = null
 
 [node name="LevelTrigger" type="Area2D" parent="." unique_id=1036098764]
 collision_layer = 32
+script = ExtResource("6_kixh8")
+first_level_trigger = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=46964644]
 position = Vector2(215, 73)
 shape = SubResource("RectangleShape2D_3c16j")
 debug_color = Color(0.95861477, 0.15281463, 0.3537934, 0.41960785)
+
+[node name="SkipLabel" type="Label" parent="." unique_id=860719360]
+z_index = 2
+offset_left = 208.0
+offset_top = -2.0
+offset_right = 253.0
+offset_bottom = 10.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_ittcp")
+theme_override_font_sizes/font_size = 6
+text = "Click to skip"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SkipLabel" unique_id=914354170]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 48.0
+offset_bottom = 18.0
+texture = ExtResource("8_1egeh")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
