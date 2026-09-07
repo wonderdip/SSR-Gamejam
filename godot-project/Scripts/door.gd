@@ -15,16 +15,20 @@ class_name Door
 @onready var right_door: Node2D = %RightDoor
 @onready var top_door: Node2D = %TopDoor
 @onready var bottom_door: Node2D = %BottomDoor
+@onready var gpu_particles_2d: GPUParticles2D = %GPUParticles2D
 
 func set_direction(direction: LevelManager.TRIGGERDIRECTION) -> void:
 	trigger.direction = direction
 	trigger.rotation = _rotation_for(direction)
+	var particle_material : ParticleProcessMaterial = gpu_particles_2d.process_material
 	
 	match direction:
 		LevelManager.TRIGGERDIRECTION.LEFT:
 			left_door.show()
+			trigger.global_position.y += 8
 		LevelManager.TRIGGERDIRECTION.RIGHT:
 			right_door.show()
+			trigger.global_position.y += 8
 		LevelManager.TRIGGERDIRECTION.UP:
 			top_door.show()
 		LevelManager.TRIGGERDIRECTION.DOWN:

@@ -6,11 +6,11 @@
 [ext_resource type="Script" uid="uid://d06jth3i74am5" path="res://Scripts/dynamic_cam.gd" id="5_l22km"]
 [ext_resource type="Script" uid="uid://d1x1ptujnxk4h" path="res://Scripts/UI/rolling_counter.gd" id="6_smrp4"]
 
-[sub_resource type="Environment" id="Environment_awwja"]
+[sub_resource type="Environment" id="Environment_3c16j"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 2.0
-glow_bloom = 0.25
+glow_intensity = 2.5
+glow_bloom = 0.2
 
 [sub_resource type="Animation" id="Animation_l22km"]
 length = 0.001
@@ -71,11 +71,23 @@ _data = {
 &"up": SubResource("Animation_pqq61")
 }
 
+[sub_resource type="Gradient" id="Gradient_l22km"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pqq61"]
+gradient = SubResource("Gradient_l22km")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
 [node name="AscensionScene" type="Node2D" unique_id=1433053238]
 script = ExtResource("1_pqq61")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2059433575]
-environment = SubResource("Environment_awwja")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=459100355]
+environment = SubResource("Environment_3c16j")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1462165991]
 offset_left = -16.0
@@ -143,3 +155,9 @@ max_roll = 0.3
 trauma_power = 4.0
 trauma_decay = 0.2
 noise_speed = 40.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1339673666]
+position = Vector2(166, 72)
+color = Color(0, 0.37231818, 0.0670176, 1)
+energy = 2.76
+texture = SubResource("GradientTexture2D_pqq61")

@@ -1,10 +1,6 @@
 extends Area2D
 class_name RoomTransitionTrigger
 
-## Lives inside a Door piece (see door.gd), not hand-placed per room anymore.
-## Normal doors pan the camera to target_room; ascend_trigger doors instead
-## ask LevelManager to tear down and regenerate the whole floor.
-
 @export_category("Target Room")
 @export var target_room: Room ## ignored when ascend_trigger is true
 @export var direction: LevelManager.TRIGGERDIRECTION = LevelManager.TRIGGERDIRECTION.DOWN
@@ -12,7 +8,6 @@ class_name RoomTransitionTrigger
 
 @export_category("Trigger")
 @export var one_shot: bool = false
-
 var _triggered: bool = false
 
 func _ready() -> void:

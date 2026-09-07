@@ -22,6 +22,7 @@ func _ready() -> void:
 	dungeon_generator.generation_started.connect(_clear_room_icons)
 	dungeon_generator.room_added.connect(_draw_room_icon)
 	dungeon_generator.generation_complete.connect(_draw_player_icon)
+	LevelManager.player_icon_update.connect(_update_player_icon)
 	
 func _clear_room_icons() -> void:
 	for icon in _room_icons:
@@ -83,5 +84,10 @@ func _update_player_icon() -> void:
 	var x: int = index % dungeon_generator.grid_cols
 	var y: int = index / dungeon_generator.grid_cols
 	
-	_player_icon.position = Vector2(x, y) * cell_size
+	var target_position: Vector2 = Vector2(x, y) * cell_size
+	var pos_tween = create_tween()
+	pos_tween.tween_property(_player_icon, "position", target_position, 0.25
+	).set_trans(Tween.TRANS_BACK
+	).set_ease(Tween.EASE_IN_OUT)
+	
 	

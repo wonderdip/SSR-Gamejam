@@ -3,8 +3,21 @@
 [ext_resource type="Script" uid="uid://c8np15sd00kd0" path="res://Scripts/dungeon_root.gd" id="1_root"]
 [ext_resource type="Script" uid="uid://bijo773t24lu8" path="res://Scripts/room_camera.gd" id="2_cam"]
 
+[sub_resource type="Environment" id="Environment_awwja"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.25
+glow_hdr_threshold = 1.5
+
 [node name="DungeonRoot" type="Node2D" unique_id=943036932]
 script = ExtResource("1_root")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1224359567]
+environment = SubResource("Environment_awwja")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=83133224]
+color = Color(0.7204674, 0.72046757, 0.7204672, 1)
 
 [node name="RoomContainer" type="Node2D" parent="." unique_id=1046581374]
 unique_name_in_owner = true

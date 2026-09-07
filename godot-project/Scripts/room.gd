@@ -18,6 +18,7 @@ class_name Room
 
 var dungeon_index: int = -1
 var tilemaps: Array[TileMapLayer]
+var discovered: bool = false
 
 func get_room_rect() -> Rect2:
 	return Rect2(global_position, room_size)
