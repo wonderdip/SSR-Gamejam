@@ -17,6 +17,7 @@ class_name Room
 ]
 
 var dungeon_index: int = -1
+var tilemaps: Array[TileMapLayer]
 
 func get_room_rect() -> Rect2:
 	return Rect2(global_position, room_size)
@@ -34,8 +35,12 @@ func configure_exits(active_directions: Array[LevelManager.TRIGGERDIRECTION], do
 	for direction in active_directions:
 		var door: Door = door_scene.instantiate()
 		add_child(door)
+
 		door.position = _socket_position(direction)
 		door.set_direction(direction)
+
+		erase_wall_for_door(direction)
+
 		doors[direction] = door.trigger
 	return doors
 
@@ -49,3 +54,38 @@ func _socket_position(direction: LevelManager.TRIGGERDIRECTION) -> Vector2:
 			return Vector2(room_size.x / 2.0, 0.0)
 		_:
 			return Vector2(room_size.x / 2.0, room_size.y)
+
+func erase_wall_for_door(direction: LevelManager.TRIGGERDIRECTION) -> void:
+	for child in get_children():
+		if child is TileMapLayer:
+			var tilemap := child as TileMapLayer
+			
+			match direction:
+				LevelManager.TRIGGERDIRECTION.LEFT:
+					_erase_left_doorway(tilemap)
+				LevelManager.TRIGGERDIRECTION.RIGHT:
+					_erase_right_doorway(tilemap)
+				LevelManager.TRIGGERDIRECTION.UP:
+					_erase_up_doorway(tilemap)
+				LevelManager.TRIGGERDIRECTION.DOWN:
+					_erase_down_doorway(tilemap)
+	
+func _erase_left_doorway(tilemap: TileMapLayer) -> void:
+	for y in range(4, 6):
+		tilemap.erase_cell(Vector2i(0, y))
+	
+func _erase_right_doorway(tilemap: TileMapLayer) -> void:
+	for y in range(4, 6):
+		tilemap.erase_cell(Vector2i(15, y))
+		
+func _erase_up_doorway(tilemap: TileMapLayer) -> void:
+	for x in range(7, 9):
+		tilemap.erase_cell(Vector2i(x, 0))
+	for x in range(7, 9):
+		tilemap.erase_cell(Vector2i(x, 1))
+
+func _erase_down_doorway(tilemap: TileMapLayer) -> void:
+	for x in range(7, 9):
+		tilemap.erase_cell(Vector2i(x, 8))
+		
+		

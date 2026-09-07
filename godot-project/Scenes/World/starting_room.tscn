@@ -2972,9 +2972,6 @@ tile_set = SubResource("TileSet_gwgwg")
 
 [node name="SouthItemRoom" parent="." unique_id=1010165572 instance=ExtResource("9_2lph4")]
 position = Vector2(0, 144)
-starting_room = null
-spawn_positions = null
-room_size = null
 
 [node name="NPC" type="Sprite2D" parent="." unique_id=132833745]
 position = Vector2(128, 20)

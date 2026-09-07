@@ -16,15 +16,11 @@ class_name Door
 @onready var top_door: Node2D = %TopDoor
 @onready var bottom_door: Node2D = %BottomDoor
 
-var dir: LevelManager.TRIGGERDIRECTION
-
-func _ready() -> void:
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	match dir:
+func set_direction(direction: LevelManager.TRIGGERDIRECTION) -> void:
+	trigger.direction = direction
+	trigger.rotation = _rotation_for(direction)
+	
+	match direction:
 		LevelManager.TRIGGERDIRECTION.LEFT:
 			left_door.show()
 		LevelManager.TRIGGERDIRECTION.RIGHT:
@@ -33,12 +29,7 @@ func _ready() -> void:
 			top_door.show()
 		LevelManager.TRIGGERDIRECTION.DOWN:
 			bottom_door.show()
-
-func set_direction(direction: LevelManager.TRIGGERDIRECTION) -> void:
-	trigger.direction = direction
-	trigger.rotation = _rotation_for(direction)
-	dir = direction
-	
+			
 func _rotation_for(direction: LevelManager.TRIGGERDIRECTION) -> float:
 	match direction:
 		LevelManager.TRIGGERDIRECTION.UP:

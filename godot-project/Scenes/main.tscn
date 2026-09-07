@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwubc2sbj5pod"]
 
 [ext_resource type="Script" uid="uid://b1nmakptjxo6i" path="res://Scripts/main.gd" id="1_8gbba"]
-[ext_resource type="PackedScene" uid="uid://dftcg65rb8l7i" path="res://Scenes/UI/title_screen.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cffsigy0dkqo8" path="res://Scenes/World/starting_room.tscn" id="3_21xkr"]
 [ext_resource type="PackedScene" uid="uid://1kjnu1jmihwl" path="res://Scenes/UI/map.tscn" id="4_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dxbjts5qs410w" path="res://Scenes/UI/message_manager.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://brhprt0cri750" path="res://Scenes/World/dungeon_root.tscn" id="6_21xkr"]
@@ -15,7 +15,7 @@ script = ExtResource("1_8gbba")
 [node name="CurrentScene" type="Node2D" parent="." unique_id=258786582]
 unique_name_in_owner = true
 
-[node name="TitleScreen" parent="CurrentScene" unique_id=1086250587 instance=ExtResource("1_bo1nx")]
+[node name="StartingRoom" parent="CurrentScene" unique_id=788756620 instance=ExtResource("3_21xkr")]
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=99638249]
 layer = 10

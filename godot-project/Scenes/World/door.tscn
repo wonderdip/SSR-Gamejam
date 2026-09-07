@@ -23,6 +23,7 @@ shape = SubResource("RectangleShape2D_door")
 debug_color = Color(0.99201065, 0, 0.26412743, 0.41960785)
 
 [node name="Visual" type="ColorRect" parent="." unique_id=890444539]
+visible = false
 offset_left = -8.0
 offset_top = -2.0
 offset_right = 8.0
@@ -33,17 +34,14 @@ metadata/_edit_use_anchors_ = true
 [node name="LeftDoor" type="Node2D" parent="." unique_id=1621703385]
 unique_name_in_owner = true
 visible = false
-z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftDoor" unique_id=647206466]
-visible = false
 position = Vector2(8, 0)
 texture = ExtResource("3_orjpq")
 
 [node name="RightDoor" type="Node2D" parent="." unique_id=69453237]
 unique_name_in_owner = true
 visible = false
-z_index = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="RightDoor" unique_id=399633688]
 position = Vector2(-8, 0)
@@ -53,7 +51,6 @@ flip_h = true
 [node name="TopDoor" type="Node2D" parent="." unique_id=180350174]
 unique_name_in_owner = true
 visible = false
-z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="TopDoor" unique_id=1569449298]
 position = Vector2(0, 16)
@@ -62,7 +59,6 @@ texture = ExtResource("4_vo6ee")
 [node name="BottomDoor" type="Node2D" parent="." unique_id=334575427]
 unique_name_in_owner = true
 visible = false
-z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="BottomDoor" unique_id=1513800992]
 position = Vector2(0, -8)
