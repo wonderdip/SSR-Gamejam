@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://1kjnu1jmihwl"]
+
+[ext_resource type="Script" uid="uid://dggf5augpduus" path="res://Scripts/UI/map.gd" id="1_k3vwj"]
+[ext_resource type="Texture2D" uid="uid://c2prdem5414in" path="res://Assets/UI/Map/room_icon.png" id="2_luopq"]
+[ext_resource type="Texture2D" uid="uid://cgqyohvqkh61w" path="res://Assets/UI/Map/boss_room_icon.png" id="3_fejqe"]
+[ext_resource type="Texture2D" uid="uid://clmodq7kc4oqv" path="res://Assets/UI/Map/item_room_icon.png" id="4_dxb2m"]
+[ext_resource type="Texture2D" uid="uid://c1dtq05lyq8v7" path="res://Assets/UI/Map/secret_room_icon.png" id="5_fejqe"]
+[ext_resource type="Texture2D" uid="uid://crvp58xak8woe" path="res://Assets/UI/Map/player_dot.png" id="6_dxb2m"]
+
+[node name="Map" type="Node2D" unique_id=915463228]
+script = ExtResource("1_k3vwj")
+normal_room_icon = ExtResource("2_luopq")
+boss_room_icon = ExtResource("3_fejqe")
+reward_room_icon = ExtResource("4_dxb2m")
+coin_room_icon = ExtResource("4_dxb2m")
+secret_room_icon = ExtResource("5_fejqe")
+player_icon = ExtResource("6_dxb2m")

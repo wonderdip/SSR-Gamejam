@@ -28,7 +28,9 @@ var _step_timer: float = 0.0
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
 	pixel_shader_material.shader = pixelate_shader
-
+	add_to_group("player", true)
+	LevelManager.ascend_requested.connect(_on_ascending_floor)
+	
 func _physics_process(delta: float) -> void:
 	if movement_locked:
 		return
@@ -81,15 +83,19 @@ func _exiting_level() -> void:
 	if _is_transitioning:
 		return
 	_is_transitioning = true
-	_pixelate_out()
-	movement_locked = true
 	
-func _entering_level() -> void:
-	movement_locked = true
-	await _pixelate_in()
+func _entering_level(ascending: bool) -> void:
+	
+	if ascending:
+		await _pixelate_in()
+		
 	movement_locked = false
 	player_sprite.material = null
 	_is_transitioning = false
+
+func _on_ascending_floor():
+	_pixelate_out()
+	movement_locked = true
 	
 func _pixelate_out(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 	player_sprite.material = pixel_shader_material

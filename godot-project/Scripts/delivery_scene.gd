@@ -13,7 +13,6 @@ var car_driving: bool = true
 var _driving_elapsed: float = 0.0
 
 func _ready() -> void:
-	SceneManager.gameloop_started.emit()
 	await get_tree().create_timer(0.5).timeout
 	animation_player.play("delivery")
 	driving_sound()

@@ -7,7 +7,94 @@
 [ext_resource type="Texture2D" uid="uid://w7qs0v3234l3" path="res://Assets/auto_door.png" id="4_wsauq"]
 [ext_resource type="Script" uid="uid://o3sn2d8rssis" path="res://Scripts/interaction_trigger.gd" id="6_gwgwg"]
 [ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="7_ogupu"]
-[ext_resource type="PackedScene" uid="uid://bx00tup5x7tqq" path="res://Scenes/World/RoomTemplates/Item/ItemRoomOne.tscn" id="8_2akcc"]
+[ext_resource type="PackedScene" uid="uid://btaoly10afo7a" path="res://Scenes/World/RoomTemplates/Item/south_item_room.tscn" id="9_2lph4"]
+[ext_resource type="Script" uid="uid://c047k8lmipoby" path="res://Scripts/room_transition_trigger.gd" id="9_ur81b"]
+
+[sub_resource type="Animation" id="Animation_wsauq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NPC:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(128, 20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NPC:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_70dsn"]
+resource_name = "first_interaction"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NPC:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(128, 20), Vector2(128, 52)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NPC:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 0.5, 0.6, 0.7, 0.79999983, 0.9, 0.9999999, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0, 1, 2, 1, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwgwg"]
+_data = {
+&"RESET": SubResource("Animation_wsauq"),
+&"first_interaction": SubResource("Animation_70dsn")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ogupu"]
 texture = ExtResource("1_lpij0")
@@ -2849,120 +2936,45 @@ physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
 sources/0 = SubResource("TileSetAtlasSource_ur81b")
 
-[sub_resource type="Animation" id="Animation_wsauq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DoorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPC:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(128, 20)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPC:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_70dsn"]
-resource_name = "first_interaction"
-length = 1.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DoorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 2, 1, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPC:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(128, 20), Vector2(128, 52)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPC:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.3, 0.4, 0.5, 0.6, 0.7, 0.79999983, 0.9, 0.9999999, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 1, 0, 1, 2, 1, 0, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwgwg"]
-_data = {
-&"RESET": SubResource("Animation_wsauq"),
-&"first_interaction": SubResource("Animation_70dsn")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
-size = Vector2(16, 143)
+size = Vector2(16, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c16j"]
-size = Vector2(6, 33)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpu63"]
+size = Vector2(32, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogupu"]
-size = Vector2(32, 12.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvv1g"]
+size = Vector2(6, 32)
 
 [node name="StartingRoom" type="Node2D" unique_id=788756620]
 script = ExtResource("1_car7v")
 starting_room = true
 
-[node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=263269959]
-tile_map_data = PackedByteArray("AAABAAAAAAABABEAAAACAAAAAAABABEAAAADAAAAAAABABEAAAAEAAAAAAABABEAAAAFAAAAAAABABEAAAAJAAAAAAAAABEAAAAKAAAAAAABABEAAAALAAAAAAABABEAAAAMAAAAAAABABEAAAANAAAAAAABABEAAAAOAAAAAAABABEAAAABAAEAAAABABIAAAACAAEAAAABABIAAAADAAEAAAABABIAAAAEAAEAAAABABIAAAAFAAEAAAABABIAAAAGAAEAAAACABIAAAAJAAEAAAAAABIAAAAKAAEAAAABABIAAAALAAEAAAABABIAAAAMAAEAAAABABIAAAANAAEAAAABABIAAAAOAAEAAAABABIAAAACAAIAAAAPAAUAAAADAAIAAAAPAAUAAAAEAAIAAAAPAAUAAAAFAAIAAAAPAAUAAAAGAAIAAAAPAAUAAAAHAAIAAAAPAAUAAAAIAAIAAAAPAAUAAAAJAAIAAAAPAAUAAAAKAAIAAAAPAAUAAAALAAIAAAAPAAUAAAAMAAIAAAAPAAUAAAANAAIAAAAPAAUAAAAOAAIAAAAOAAUAABABAAcAAAAPAAYAAAABAAgAAAAPAAYAAAACAAgAAAAPAAYAAAADAAgAAAAPAAYAAAAEAAgAAAAPAAYAAAAFAAgAAAAPAAYAAAAGAAgAAAAPAAYAAAAJAAgAAAAPAAYAAAAKAAgAAAAPAAYAAAALAAgAAAAPAAYAAAAMAAgAAAAPAAYAAAANAAgAAAAPAAYAAAAOAAgAAAAPAAYAAAAOAAMAAAAOAAYAABANAAMAAAAPAAYAAAAMAAMAAAAPAAYAAAALAAMAAAAPAAYAAAAKAAMAAAAPAAYAAAAJAAMAAAAPAAYAAAAIAAMAAAAPAAYAAAAHAAMAAAAPAAYAAAAGAAMAAAAPAAYAAAAFAAMAAAAPAAYAAAAEAAMAAAAPAAYAAAADAAMAAAAPAAYAAAACAAMAAAAPAAYAAAACAAQAAAAPAAYAAAACAAUAAAAPAAYAAAACAAYAAAAPAAYAAAACAAcAAAAPAAYAAAADAAUAAAAPAAYAAAADAAQAAAAPAAYAAAAEAAQAAAAPAAYAAAAEAAUAAAAPAAYAAAAEAAYAAAAPAAYAAAADAAYAAAAPAAYAAAADAAcAAAAPAAYAAAAEAAcAAAAPAAYAAAAFAAcAAAAPAAYAAAAFAAYAAAAPAAYAAAAFAAUAAAAPAAYAAAAGAAQAAAAPAAYAAAAGAAUAAAAPAAYAAAAGAAcAAAAPAAYAAAAGAAYAAAAPAAYAAAAFAAQAAAAPAAYAAAAHAAUAAAAPAAYAAAAHAAYAAAAPAAYAAAAIAAYAAAAPAAYAAAAIAAcAAAAPAAYAAAAIAAUAAAAPAAYAAAAJAAUAAAAPAAYAAAAJAAQAAAAPAAYAAAAKAAQAAAAPAAYAAAAKAAUAAAAPAAYAAAAIAAQAAAAPAAYAAAAHAAQAAAAPAAYAAAAJAAYAAAAPAAYAAAAKAAYAAAAPAAYAAAALAAYAAAAPAAYAAAALAAUAAAAPAAYAAAALAAQAAAAPAAYAAAAMAAYAAAAPAAYAAAAMAAUAAAAPAAYAAAANAAUAAAAPAAYAAAANAAQAAAAPAAYAAAANAAYAAAAPAAYAAAAMAAQAAAAPAAYAAAAHAAcAAAAPAAYAAAAJAAcAAAAPAAYAAAAKAAcAAAAPAAYAAAALAAcAAAAPAAYAAAAMAAcAAAAPAAYAAAANAAcAAAAPAAYAAAAOAAcAAAAPAAYAAAAOAAYAAAAPAAYAAAAOAAUAAAAPAAYAAAAOAAQAAAAQAAUAABABAAIAAAAOAAUAAAABAAMAAAAOAAYAAAABAAQAAAAQAAUAAAABAAUAAAAPAAYAAAABAAYAAAAPAAYAAAAPAAIAAAAAABEAAAAAAAIAAAACABEAAAAAAAEAAAAMAAAAAAAAAAMAAAACABIAAAAAAAcAAAACABIAAAAAAAgAAAAMAAAAAAAAAAAAAAAMAAAAAAAPAAAAAAAMAAAAAAAPAAEAAAAMAAAAAAAPAAMAAAAAABIAAAAPAAQAAAAPAAUAAAAPAAgAAAAMAAAAAAAGAAAAAAACABEAAAAHAAgAAAAPAAUAACAIAAgAAAAPAAUAACAHAAEAAAAQAAYAAAAIAAEAAAAQAAYAAAAIAAAAAAAQAAYAAAAHAAAAAAAQAAYAAAD//wMAAAAMAAAAAAAQAAMAAAAMAAAAAAAQAAQAAAAMAAAAAAAGAAkAAAAMAAAAAAAHAAkAAAAMAAAAAAAIAAkAAAAMAAAAAAAJAAkAAAAMAAAAAAAGAP//AAAMAAAAAAAHAP//AAAMAAAAAAAIAP//AAAMAAAAAAAJAP//AAAMAAAAAAD//wUAAAAMAAAAAAAAAAYAAAACABEAAAD//wYAAAAMAAAAAAAPAAYAAAAAABEAAAAPAAcAAAAAABIAAAAQAAYAAAAMAAAAAAAAAAQAAAAPAAUAAAAAAAUAAAAPAAYAAAAPAAUAAAAPAAYAAAD//wQAAAAMAAAAAAAQAAUAAAAMAAAAAAA=")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=644351727]
+libraries/ = SubResource("AnimationLibrary_gwgwg")
+
+[node name="TileMapLayers" type="Node2D" parent="." unique_id=572775741]
+
+[node name="WallsAndFloor" type="TileMapLayer" parent="TileMapLayers" unique_id=263269959]
+tile_map_data = PackedByteArray("AAABAAAAAAABABEAAAACAAAAAAABABEAAAADAAAAAAABABEAAAAEAAAAAAABABEAAAAFAAAAAAABABEAAAAJAAAAAAAAABEAAAAKAAAAAAABABEAAAALAAAAAAABABEAAAAMAAAAAAABABEAAAANAAAAAAABABEAAAAOAAAAAAABABEAAAABAAEAAAABABIAAAACAAEAAAABABIAAAADAAEAAAABABIAAAAEAAEAAAABABIAAAAFAAEAAAABABIAAAAGAAEAAAACABIAAAAJAAEAAAAAABIAAAAKAAEAAAABABIAAAALAAEAAAABABIAAAAMAAEAAAABABIAAAANAAEAAAABABIAAAAOAAEAAAABABIAAAACAAIAAAAPAAUAAAADAAIAAAAPAAUAAAAEAAIAAAAPAAUAAAAFAAIAAAAPAAUAAAAGAAIAAAAPAAUAAAAHAAIAAAAPAAUAAAAIAAIAAAAPAAUAAAAJAAIAAAAPAAUAAAAKAAIAAAAPAAUAAAALAAIAAAAPAAUAAAAMAAIAAAAPAAUAAAANAAIAAAAPAAUAAAAOAAIAAAAOAAUAABABAAcAAAAPAAYAAAABAAgAAAAPAAYAAAACAAgAAAAPAAYAAAADAAgAAAAPAAYAAAAEAAgAAAAPAAYAAAAFAAgAAAAPAAYAAAAGAAgAAAAPAAYAAAAJAAgAAAAPAAYAAAAKAAgAAAAPAAYAAAALAAgAAAAPAAYAAAAMAAgAAAAPAAYAAAANAAgAAAAPAAYAAAAOAAgAAAAPAAYAAAAOAAMAAAAOAAYAABANAAMAAAAPAAYAAAAMAAMAAAAPAAYAAAALAAMAAAAPAAYAAAAKAAMAAAAPAAYAAAAJAAMAAAAPAAYAAAAIAAMAAAAPAAYAAAAHAAMAAAAPAAYAAAAGAAMAAAAPAAYAAAAFAAMAAAAPAAYAAAAEAAMAAAAPAAYAAAADAAMAAAAPAAYAAAACAAMAAAAPAAYAAAACAAQAAAAPAAYAAAACAAUAAAAPAAYAAAACAAYAAAAPAAYAAAACAAcAAAAPAAYAAAADAAUAAAAPAAYAAAADAAQAAAAPAAYAAAAEAAQAAAAPAAYAAAAEAAUAAAAPAAYAAAAEAAYAAAAPAAYAAAADAAYAAAAPAAYAAAADAAcAAAAPAAYAAAAEAAcAAAAPAAYAAAAFAAcAAAAPAAYAAAAFAAYAAAAPAAYAAAAFAAUAAAAPAAYAAAAGAAQAAAAPAAYAAAAGAAUAAAAPAAYAAAAGAAcAAAAPAAYAAAAGAAYAAAAPAAYAAAAFAAQAAAAPAAYAAAAHAAUAAAAPAAYAAAAHAAYAAAAPAAYAAAAIAAYAAAAPAAYAAAAIAAcAAAAPAAYAAAAIAAUAAAAPAAYAAAAJAAUAAAAPAAYAAAAJAAQAAAAPAAYAAAAKAAQAAAAPAAYAAAAKAAUAAAAPAAYAAAAIAAQAAAAPAAYAAAAHAAQAAAAPAAYAAAAJAAYAAAAPAAYAAAAKAAYAAAAPAAYAAAALAAYAAAAPAAYAAAALAAUAAAAPAAYAAAALAAQAAAAPAAYAAAAMAAYAAAAPAAYAAAAMAAUAAAAPAAYAAAANAAUAAAAPAAYAAAANAAQAAAAPAAYAAAANAAYAAAAPAAYAAAAMAAQAAAAPAAYAAAAHAAcAAAAPAAYAAAAJAAcAAAAPAAYAAAAKAAcAAAAPAAYAAAALAAcAAAAPAAYAAAAMAAcAAAAPAAYAAAANAAcAAAAPAAYAAAAOAAcAAAAPAAYAAAAOAAYAAAAPAAYAAAAOAAUAAAAPAAYAAAAOAAQAAAAQAAUAABABAAIAAAAOAAUAAAABAAMAAAAOAAYAAAABAAQAAAAQAAUAAAABAAUAAAAPAAYAAAABAAYAAAAPAAYAAAAPAAIAAAAAABEAAAAAAAIAAAACABEAAAAAAAEAAAAMAAAAAAAAAAMAAAACABIAAAAAAAcAAAACABIAAAAAAAgAAAAMAAAAAAAAAAAAAAAMAAAAAAAPAAAAAAAMAAAAAAAPAAEAAAAMAAAAAAAPAAMAAAAAABIAAAAPAAQAAAAPAAUAAAAPAAgAAAAMAAAAAAAGAAAAAAACABEAAAAHAAgAAAAPAAUAACAIAAgAAAAPAAUAACAHAAEAAAAQAAYAAAAIAAEAAAAQAAYAAAAIAAAAAAAQAAYAAAAHAAAAAAAQAAYAAAD//wMAAAAMAAAAAAAQAAMAAAAMAAAAAAAQAAQAAAAMAAAAAAAGAP//AAAMAAAAAAAHAP//AAAMAAAAAAAIAP//AAAMAAAAAAAJAP//AAAMAAAAAAD//wUAAAAMAAAAAAAAAAYAAAACABEAAAD//wYAAAAMAAAAAAAPAAYAAAAAABEAAAAPAAcAAAAAABIAAAAQAAYAAAAMAAAAAAAAAAQAAAAPAAUAAAAAAAUAAAAPAAYAAAAPAAUAAAAPAAYAAAD//wQAAAAMAAAAAAAQAAUAAAAMAAAAAAA=")
 tile_set = SubResource("TileSet_awwja")
 
-[node name="Ceiling" type="TileMapLayer" parent="." unique_id=808794133]
+[node name="Ceiling" type="TileMapLayer" parent="TileMapLayers" unique_id=808794133]
 tile_map_data = PackedByteArray("AAACAAgAAAAMAAMAADADAAgAAAAMAAMAADAEAAgAAAAMAAMAADAFAAgAAAAMAAMAADAGAAgAAAAIAAEAADAJAAgAAAAIAAEAACAKAAgAAAAMAAMAADALAAgAAAAMAAMAADAMAAgAAAAMAAMAADANAAgAAAAMAAMAADAAAAAAAAALAAEAAAAAAAEAAAALAAIAAAABAAgAAAAMAAMAACAOAAgAAAAMAAMAACAAAAgAAAALAAEAACAAAAcAAAALAAIAAAAAAAYAAAALAAEAAAAAAAIAAAANAAMAABAPAAgAAAALAAEAADAPAAcAAAALAAIAABAPAAEAAAALAAIAABAPAAAAAAALAAEAABAPAAIAAAANAAMAAAAPAAYAAAANAAEAAAA=")
 tile_set = SubResource("TileSet_3c16j")
 
-[node name="BottomDecor" type="TileMapLayer" parent="." unique_id=1801266098]
+[node name="BottomDecor" type="TileMapLayer" parent="TileMapLayers" unique_id=1801266098]
 tile_map_data = PackedByteArray("AAACAAcAAAAHAE4AAAADAAcAAAAIAE4AAAAEAAcAAAAJAE4AAAACAAYAAAAHAE0AAAADAAYAAAAIAE0AAAAEAAYAAAAJAE0AAAADAAUAAAAIAEwAAAACAAUAAAAHAEwAAAAEAAUAAAAJAEwAAAAFAAcAAAAKAE4AAAAFAAYAAAAKAE0AAAAFAAUAAAAKAEwAAAALAAcAAAAIAE4AAAAMAAcAAAAJAE4AAAANAAcAAAAKAE4AAAAKAAcAAAAHAE4AAAAKAAYAAAAHAE0AAAANAAYAAAAKAE0AAAAMAAYAAAAJAE0AAAALAAYAAAAIAE0AAAALAAUAAAAIAEwAAAAMAAUAAAAJAEwAAAANAAUAAAAKAEwAAAAKAAUAAAAHAEwAAAADAAMAAAADAEoAAAAMAAMAAAADAEoAAAACAAEAAAAAAEkAAAACAAAAAAAAAEgAAAAEAAEAAAAAAA8AAAAEAAAAAAAAAA4AAAALAAEAAAABAA8AAAALAAAAAAABAA4AAAANAAEAAAACAEcAAAANAAAAAAACAEYAAAAOAAIAAAAMAC4AAAAOAAEAAAAMAC0AAAABAAIAAAAMAC4AAAABAAEAAAAMAC0AAAAFAAEAAAABAA8AAAAFAAAAAAABAA4AAAAKAAEAAAAAAA8AAAAKAAAAAAAAAA4AAAAPAAIAAAAPAAMAAAAPAAMAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAMAAAAPAAYAAAAGAAUAAAADACoAAAAHAAUAAAAEACoAAAAIAAUAAAAEACoAAAAJAAUAAAAFACoAAAAIAAYAAAAEACsAAAAJAAYAAAAFACsAAAAHAAYAAAAEACsAAAAGAAYAAAADACsAAAAGAAMAAAAFAB8AAAAJAAMAAAAFAB8AAAA=")
 tile_set = SubResource("TileSet_hpu63")
 
-[node name="TopDecor" type="TileMapLayer" parent="." unique_id=720067755]
+[node name="TopDecor" type="TileMapLayer" parent="TileMapLayers" unique_id=720067755]
 tile_map_data = PackedByteArray("AAAJAAQAAAADAAkAABAIAAQAAAADAAUAAAAHAAQAAAADAAUAAAAGAAMAAAADAAgAAAAGAAQAAAADAAkAAAAFAAQAAAAAAAgAAAAFAAMAAAAAAAUAAAAKAAQAAAACAAgAAAAKAAMAAAACAAUAAAAJAAMAAAADAAgAABAJAAIAAAANAFUAAAAJAAEAAAANAFQAAAAGAAIAAAAMACkAAAAGAAEAAAAMACgAAAADAAMAAAAAADQAADA=")
 tile_set = SubResource("TileSet_gwgwg")
+
+[node name="SouthItemRoom" parent="." unique_id=1010165572 instance=ExtResource("9_2lph4")]
+position = Vector2(0, 144)
+starting_room = null
+spawn_positions = null
+room_size = null
 
 [node name="NPC" type="Sprite2D" parent="." unique_id=132833745]
 position = Vector2(128, 20)
@@ -2974,39 +2986,33 @@ position = Vector2(128, 16)
 texture = ExtResource("4_wsauq")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=644351727]
-libraries/ = SubResource("AnimationLibrary_gwgwg")
-
 [node name="InteractionTrigger" type="Area2D" parent="." unique_id=1613448490]
 collision_layer = 32
 script = ExtResource("6_gwgwg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionTrigger" unique_id=184728082]
-position = Vector2(136, 72.5)
+position = Vector2(136, 104)
 shape = SubResource("RectangleShape2D_awwja")
 
-[node name="LevelTrigger" type="Area2D" parent="." unique_id=848776651]
-collision_layer = 32
+[node name="RoomTransitionTrigger" type="Area2D" parent="." unique_id=981192508 node_paths=PackedStringArray("target_room")]
+script = ExtResource("9_ur81b")
+target_room = NodePath("..")
+metadata/_custom_type_script = "uid://c047k8lmipoby"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomTransitionTrigger" unique_id=1661785165]
+position = Vector2(128, 142)
+shape = SubResource("RectangleShape2D_hpu63")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=240222191]
+position = Vector2(128, 72)
+
+[node name="LevelTrigger" type="Area2D" parent="." unique_id=2019039014]
 script = ExtResource("7_ogupu")
-direction = 1
 ascend_trigger = true
 metadata/_custom_type_script = "uid://belmddpiuwavi"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=1776202092]
-position = Vector2(253, 79.5)
-shape = SubResource("RectangleShape2D_3c16j")
-debug_color = Color(0.6884643, 0, 0.2776516, 0.41960785)
-
-[node name="LevelTrigger2" type="Area2D" parent="." unique_id=1459786854]
-collision_layer = 32
-script = ExtResource("7_ogupu")
-direction = 3
-forced_room = ExtResource("8_2akcc")
-metadata/_custom_type_script = "uid://belmddpiuwavi"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger2" unique_id=1829668649]
-position = Vector2(128, 143.75)
-shape = SubResource("RectangleShape2D_ogupu")
-debug_color = Color(0.28018004, 0.63165706, 1.347661e-06, 0.41960785)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=1678608176]
+position = Vector2(253, 80)
+shape = SubResource("RectangleShape2D_fvv1g")
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]

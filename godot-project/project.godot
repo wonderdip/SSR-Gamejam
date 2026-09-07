@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://bvugfun0i2n61"
 SceneManager="*uid://dcepugfqvf6yh"
 AudioManager="*uid://c5c2717rqpv8v"
 MessageBus="*uid://clt46ydy72yj6"
+LevelManager="*uid://djdclpdk7m2ii"
 
 [display]
 
@@ -38,6 +39,10 @@ window/stretch/scale_mode="integer"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[global_group]
+
+player=""
 
 [importer_defaults]
 

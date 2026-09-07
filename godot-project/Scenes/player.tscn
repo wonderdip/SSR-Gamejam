@@ -329,7 +329,7 @@ _data = {
 &"intro_catch": SubResource("Animation_vgqql")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1871453495]
+[node name="Player" type="CharacterBody2D" unique_id=1871453495 groups=["player"]]
 collision_mask = 22
 script = ExtResource("1_cvnsp")
 pixelate_shader = ExtResource("3_vgqql")

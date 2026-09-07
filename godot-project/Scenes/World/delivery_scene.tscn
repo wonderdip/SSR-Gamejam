@@ -278,7 +278,7 @@ size = Vector2(256, 6)
 size = Vector2(256, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c16j"]
-size = Vector2(14, 22)
+size = Vector2(20, 22)
 
 [node name="DeliveryScene" type="Node2D" unique_id=1563353551]
 script = ExtResource("1_52wwq")
@@ -376,7 +376,7 @@ script = ExtResource("6_kixh8")
 first_level_trigger = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=46964644]
-position = Vector2(215, 73)
+position = Vector2(212, 73)
 shape = SubResource("RectangleShape2D_3c16j")
 debug_color = Color(0.95861477, 0.15281463, 0.3537934, 0.41960785)
 

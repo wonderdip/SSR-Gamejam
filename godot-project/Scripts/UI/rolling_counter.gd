@@ -31,7 +31,7 @@ func _ready() -> void:
 	_apply_value(_value, false)
 
 func increase_floor():
-	set_value(SceneManager.floor_num)
+	set_value(LevelManager.floor_num)
 
 func set_value(new_value: int, animate: bool = true) -> void:
 	_value = new_value

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://brhprt0cri750"]
+
+[ext_resource type="Script" uid="uid://c8np15sd00kd0" path="res://Scripts/dungeon_root.gd" id="1_root"]
+[ext_resource type="Script" uid="uid://bijo773t24lu8" path="res://Scripts/room_camera.gd" id="2_cam"]
+
+[node name="DungeonRoot" type="Node2D" unique_id=943036932]
+script = ExtResource("1_root")
+
+[node name="RoomContainer" type="Node2D" parent="." unique_id=1046581374]
+unique_name_in_owner = true
+
+[node name="RoomCamera" type="Camera2D" parent="." unique_id=1317953432]
+position = Vector2(128, 72)
+script = ExtResource("2_cam")
+transition_duration = 0.25
+transition_trans_type = 10
