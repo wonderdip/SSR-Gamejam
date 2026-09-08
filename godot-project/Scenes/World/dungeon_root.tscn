@@ -5,10 +5,16 @@
 
 [sub_resource type="Environment" id="Environment_awwja"]
 background_mode = 3
-glow_enabled = true
-glow_intensity = 2.0
+glow_normalized = true
+glow_intensity = 3.0
 glow_bloom = 0.25
-glow_hdr_threshold = 1.5
+fog_light_color = Color(0.18706673, 0.20678654, 0.23747069, 1)
+fog_light_energy = 38.85
+fog_sun_scatter = 13.5
+fog_density = 1.295
+adjustment_enabled = true
+adjustment_contrast = 1.25
+adjustment_saturation = 1.25
 
 [node name="DungeonRoot" type="Node2D" unique_id=943036932]
 script = ExtResource("1_root")
@@ -17,7 +23,7 @@ script = ExtResource("1_root")
 environment = SubResource("Environment_awwja")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=83133224]
-color = Color(0.7204674, 0.72046757, 0.7204672, 1)
+color = Color(0.5065307, 0.64137584, 0.7769075, 1)
 
 [node name="RoomContainer" type="Node2D" parent="." unique_id=1046581374]
 unique_name_in_owner = true
@@ -27,3 +33,8 @@ position = Vector2(128, 72)
 script = ExtResource("2_cam")
 transition_duration = 0.25
 transition_trans_type = 10
+max_offset = Vector2(32, 32)
+max_roll = 0.3
+trauma_power = 40.0
+trauma_decay = 0.02
+noise_speed = 40.0

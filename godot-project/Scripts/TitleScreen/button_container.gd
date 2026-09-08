@@ -1,44 +1,53 @@
 extends VBoxContainer
 
-var pointer_positions: Array[int] = [
+@export var pointer_positions: Array[int] = [
 	83,
 	99,
 	115
 ]
 
-var highlight_positions: Array[int] = [
+@export var highlight_positions: Array[int] = [
 	78,
 	93,
 	108
 ]
 
-@onready var play_button: Button = $PlayButton
-@onready var settings_button: Button = $SettingsButton
-@onready var quit_button: Button = $QuitButton
+@export var first_button: Button
+@export var second_button: Button
+@export var third_button: Button
 @onready var pointer: Sprite2D = $"../Pointer"
 @onready var highlight: ColorRect = $"../Highlight"
 
 var current_button := -1
 var highlight_tween_instance: Tween
-var x_position: int = 31
+var highlight_base_color: Color
+
+@export var x_position: int = 31
+
 var pressed: bool
 
 func _ready() -> void:
-	play_button.pressed.connect(_on_button_pressed)
-	settings_button.pressed.connect(_on_button_pressed)
-	quit_button.pressed.connect(_on_button_pressed)
+	first_button.pressed.connect(_on_button_pressed)
+	second_button.pressed.connect(_on_button_pressed)
+	third_button.pressed.connect(_on_button_pressed)
 	pointer.hide()
 	pressed = false
+	highlight_base_color = highlight.color
+	
+func reset():
+	pointer.hide()
+	pressed = false
+	highlight.color = highlight_base_color
 	
 func _process(_delta: float) -> void:
 	if not pressed:
 		var new_button := -1
 
-		if play_button.is_hovered():
+		if first_button.is_hovered():
 			new_button = 0
-		elif settings_button.is_hovered():
+		elif second_button.is_hovered():
 			new_button = 1
-		elif quit_button.is_hovered():
+		elif third_button.is_hovered():
 			new_button = 2
 
 		if new_button == current_button:
@@ -51,7 +60,7 @@ func _process(_delta: float) -> void:
 			return
 		pointer.global_position.x = x_position
 		pointer.global_position.y = pointer_positions[current_button]
-		highlight.global_position.y = highlight_positions[current_button]
+		highlight.position.y = highlight_positions[current_button]
 
 		pointer.show()
 		highlight.show()

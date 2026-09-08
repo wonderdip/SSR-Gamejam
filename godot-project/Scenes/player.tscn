@@ -350,9 +350,10 @@ pixelate_shader = ExtResource("3_vgqql")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2100217846]
 position = Vector2(8, 8)
-color = Color(0.46122718, 0.31757206, 9.62615e-08, 1)
+color = Color(0.5292059, 0.2687313, 0.047660664, 1)
+energy = 0.5
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_vgqql")
-texture_scale = 0.25
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1900667381]
 texture = ExtResource("1_v0iea")

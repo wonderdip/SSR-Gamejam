@@ -11,29 +11,43 @@ class_name Door
 ## with switching between four child visual variants instead.
 
 @onready var trigger: RoomTransitionTrigger = %Trigger
+@onready var collision_shape_2d: CollisionShape2D = $Trigger/CollisionShape2D
 @onready var left_door: Node2D = %LeftDoor
 @onready var right_door: Node2D = %RightDoor
 @onready var top_door: Node2D = %TopDoor
 @onready var bottom_door: Node2D = %BottomDoor
-@onready var gpu_particles_2d: GPUParticles2D = %GPUParticles2D
+@export var trigger_y_offset: int = 8
+@export var trigger_x_offset: int = 8
 
 func set_direction(direction: LevelManager.TRIGGERDIRECTION) -> void:
 	trigger.direction = direction
 	trigger.rotation = _rotation_for(direction)
-	var particle_material : ParticleProcessMaterial = gpu_particles_2d.process_material
 	
 	match direction:
 		LevelManager.TRIGGERDIRECTION.LEFT:
 			left_door.show()
-			trigger.global_position.y += 8
+			trigger.global_position.y += trigger_y_offset
+			trigger.global_position.x += trigger_x_offset
+			collision_shape_2d.debug_color = Color.RED
+			
 		LevelManager.TRIGGERDIRECTION.RIGHT:
 			right_door.show()
-			trigger.global_position.y += 8
+			trigger.global_position.y += trigger_y_offset
+			trigger.global_position.x -= trigger_x_offset
+			collision_shape_2d.debug_color = Color.BLUE
+			
 		LevelManager.TRIGGERDIRECTION.UP:
 			top_door.show()
+			trigger.global_position.y += trigger_y_offset
+			collision_shape_2d.debug_color = Color.GREEN
+			
 		LevelManager.TRIGGERDIRECTION.DOWN:
 			bottom_door.show()
-			
+			trigger.global_position.y -= trigger_y_offset
+			collision_shape_2d.debug_color = Color.YELLOW
+	
+	collision_shape_2d.debug_color.a = 0.5
+	
 func _rotation_for(direction: LevelManager.TRIGGERDIRECTION) -> float:
 	match direction:
 		LevelManager.TRIGGERDIRECTION.UP:

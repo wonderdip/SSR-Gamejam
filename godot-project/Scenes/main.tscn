@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxbjts5qs410w" path="res://Scenes/UI/message_manager.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://brhprt0cri750" path="res://Scenes/World/dungeon_root.tscn" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://bcclf3mcc1rx1" path="res://Scenes/mouse_area.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://blruyhpveobyg" path="res://Scenes/UI/pause_menu.tscn" id="7_344ge"]
 
 [node name="Main" type="Node2D" unique_id=1991418438]
 script = ExtResource("1_8gbba")
@@ -17,12 +18,16 @@ unique_name_in_owner = true
 
 [node name="StartingRoom" parent="CurrentScene" unique_id=788756620 instance=ExtResource("3_21xkr")]
 
+[node name="DungeonRoot" parent="." unique_id=943036932 instance=ExtResource("6_21xkr")]
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=99638249]
 layer = 10
 
 [node name="Map" parent="HUD" unique_id=915463228 instance=ExtResource("4_21xkr")]
 
 [node name="DialogueManager" parent="." unique_id=776850639 instance=ExtResource("4_jjvhh")]
+process_mode = 1
 visible = false
 
-[node name="DungeonRoot" parent="." unique_id=943036932 instance=ExtResource("6_21xkr")]
+[node name="PauseMenu" parent="." unique_id=1183434397 instance=ExtResource("7_344ge")]
+layer = 101

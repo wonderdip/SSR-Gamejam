@@ -107,7 +107,7 @@ offset_bottom = 120.0
 pivot_offset_ratio = Vector2(0, 0.5)
 color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
-[node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=198343157]
+[node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=198343157 node_paths=PackedStringArray("first_button", "second_button", "third_button")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
@@ -118,6 +118,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -10
 script = ExtResource("9_uv4ns")
+first_button = NodePath("PlayButton")
+second_button = NodePath("SettingsButton")
+third_button = NodePath("QuitButton")
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayButton" type="Button" parent="Control/ButtonContainer" unique_id=162465475]
@@ -141,7 +144,7 @@ text = "Quit"
 flat = true
 alignment = 0
 
-[node name="Pointer" type="Sprite2D" parent="Control" unique_id=368314497]
+[node name="Pointer" type="Sprite2D" parent="Control" unique_id=1688396295]
 position = Vector2(31, 99)
 texture = ExtResource("10_nd20k")
 centered = false

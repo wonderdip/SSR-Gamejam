@@ -32,7 +32,6 @@ func _ready() -> void:
 	continue_label.hide()
 	normal_position = box.position
 	normal_size = box.size
-	process_mode = Node.PROCESS_MODE_DISABLED
 	box.visible = false
 	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
@@ -58,7 +57,6 @@ func show_passive(text: String, _speed: int = 30) -> void:
 		return
 	_passive = true
 	visible = true
-	process_mode = Node.PROCESS_MODE_INHERIT
 	box.visible = true
 	label.text = text
 	label.visible_characters = -1
@@ -67,7 +65,6 @@ func _clear_passive() -> void:
 	_passive = false
 	box.visible = false
 	visible = false
-	process_mode = Node.PROCESS_MODE_DISABLED
 
 func _unhandled_input(event: InputEvent) -> void:
 	## Passive mode: box is visible but we deliberately ignore input here.
@@ -97,7 +94,6 @@ func play_text(payload: Array[String], speed: int) -> void:
 	if is_reading() or payload.is_empty():
 		return
 	visible = true
-	process_mode = Node.PROCESS_MODE_INHERIT
 	Messages = payload.duplicate()
 	box.visible = true
 
@@ -119,15 +115,20 @@ func play_text(payload: Array[String], speed: int) -> void:
 		_waiting_for_input = true
 		message_timer.start(normal_timer)
 		await advanced
+	
+	close()
 
+func close():
 	_closing = true
 	box.visible = false
 	visible = false
-	process_mode = Node.PROCESS_MODE_DISABLED
+	continue_label.hide()
+	Messages.clear()
+	_strip_last_cursor_tag()
 	await get_tree().create_timer(0.1).timeout
 	_closing = false
 	MessageBus.notify_closed()
-	
+
 func show_cursor() -> void:
 	label.visible_characters = -1
 	_cursor_frame_index = 0

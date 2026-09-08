@@ -9,8 +9,29 @@
 [ext_resource type="FontFile" uid="uid://bro1771qh380q" path="res://Assets/Fonts/Company_Contract.ttf" id="7_ittcp"]
 [ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="8_1egeh"]
 
+[sub_resource type="Gradient" id="Gradient_vgqql"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1egeh"]
+gradient = SubResource("Gradient_vgqql")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
 [sub_resource type="Gradient" id="Gradient_awwja"]
 colors = PackedColorArray(0.39308554, 0.3930855, 0.39308548, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_1egeh"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_1egeh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Animation" id="Animation_yp2ti"]
 length = 0.001
@@ -298,6 +319,13 @@ centered = false
 hframes = 6
 vframes = 4
 
+[node name="PointLight2D" type="PointLight2D" parent="PlayerSprite" unique_id=1863604418]
+position = Vector2(8, 8)
+color = Color(0.5292059, 0.2687313, 0.047660664, 1)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_1egeh")
+
 [node name="DeliveryCar" type="Sprite2D" parent="." unique_id=1738520965]
 position = Vector2(44, -58)
 texture = ExtResource("3_kixh8")
@@ -335,6 +363,18 @@ color = Color(0.2520276, 0.25202766, 0.25202763, 1)
 color_ramp = SubResource("Gradient_awwja")
 anim_speed_min = 4.89
 anim_speed_max = 4.89
+
+[node name="PointLight2D" type="PointLight2D" parent="DeliveryCar" unique_id=1040978343]
+position = Vector2(-14, 40)
+color = Color(1, 0, 0, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_awwja")
+
+[node name="PointLight2D2" type="PointLight2D" parent="DeliveryCar" unique_id=1604730997]
+position = Vector2(14, 40)
+color = Color(1, 0, 0, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_awwja")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1754903340]
 libraries/ = SubResource("AnimationLibrary_vadfg")
@@ -374,6 +414,8 @@ pixelate_shader = null
 collision_layer = 32
 script = ExtResource("6_kixh8")
 first_level_trigger = true
+warning = true
+warning_msg = "Entering the main Sciontology building"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=46964644]
 position = Vector2(212, 73)

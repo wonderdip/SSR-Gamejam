@@ -1,6 +1,7 @@
 extends Node
 
 signal scene_changed(new_scene: Node)
+signal scene_removed
 
 @export_category("Fade")
 @export var fade_duration: float = 0.4
@@ -46,7 +47,8 @@ func goto_scene(path: String) -> void:
 
 func remove_scene():
 	current_scene.queue_free()
-
+	scene_removed.emit()
+	
 func goto_packed_scene(packed_scene: PackedScene) -> void:
 	await _transition_to(packed_scene)
 

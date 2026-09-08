@@ -2945,6 +2945,54 @@ size = Vector2(32, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvv1g"]
 size = Vector2(6, 32)
 
+[sub_resource type="Gradient" id="Gradient_2lph4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.6392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_2lph4")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.5)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2lph4"]
+gradient = SubResource("Gradient_2lph4")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.2991453)
+fill_to = Vector2(0.44444445, 0.8034188)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ur81b"]
+gradient = SubResource("Gradient_2lph4")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.2991453)
+fill_to = Vector2(0.6752137, 0.8034188)
+
+[sub_resource type="Gradient" id="Gradient_ur81b"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.6392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_12re5"]
+gradient = SubResource("Gradient_ur81b")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(0.7051282, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_12re5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3c16j"]
+gradient = SubResource("Gradient_12re5")
+width = 256
+height = 144
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="StartingRoom" type="Node2D" unique_id=788756620]
 script = ExtResource("1_car7v")
 starting_room = true
@@ -3006,10 +3054,55 @@ position = Vector2(128, 72)
 [node name="LevelTrigger" type="Area2D" parent="." unique_id=2019039014]
 script = ExtResource("7_ogupu")
 ascend_trigger = true
+warning = true
+warning_msg = "Hey don't go up there! If you do there's no going back..."
 metadata/_custom_type_script = "uid://belmddpiuwavi"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTrigger" unique_id=1678608176]
 position = Vector2(253, 80)
 shape = SubResource("RectangleShape2D_fvv1g")
+
+[node name="LeftTVLight" type="PointLight2D" parent="." unique_id=90501864]
+position = Vector2(80, 20)
+color = Color(0.65, 0.74916667, 1, 1)
+texture = SubResource("GradientTexture2D_awwja")
+
+[node name="LeftPCLight" type="PointLight2D" parent="." unique_id=364565925]
+position = Vector2(104, 56)
+color = Color(0.65, 0.74916667, 1, 1)
+energy = 0.75
+texture = SubResource("GradientTexture2D_2lph4")
+
+[node name="RightPCLight" type="PointLight2D" parent="." unique_id=2144408651]
+position = Vector2(152, 56)
+color = Color(0.65, 0.74916667, 1, 1)
+energy = 0.75
+texture = SubResource("GradientTexture2D_ur81b")
+
+[node name="RightTVLight" type="PointLight2D" parent="." unique_id=148437241]
+position = Vector2(176, 20)
+color = Color(0.65, 0.74916667, 1, 1)
+texture = SubResource("GradientTexture2D_awwja")
+
+[node name="LeftTVLight2" type="PointLight2D" parent="." unique_id=8348600]
+position = Vector2(80, 168)
+color = Color(0.65, 0.74916667, 1, 1)
+texture = SubResource("GradientTexture2D_awwja")
+
+[node name="RightTVLight2" type="PointLight2D" parent="." unique_id=761492096]
+position = Vector2(176, 168)
+color = Color(0.65, 0.74916667, 1, 1)
+texture = SubResource("GradientTexture2D_awwja")
+
+[node name="EntranceLight" type="PointLight2D" parent="." unique_id=567147193]
+position = Vector2(16, 80)
+color = Color(0.7531602, 0.53301, 0.1940996, 1)
+texture = SubResource("GradientTexture2D_12re5")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1566057258]
+position = Vector2(128, 72)
+color = Color(0.64844644, 0.491255, 0.004493872, 1)
+energy = 0.25
+texture = SubResource("GradientTexture2D_3c16j")
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]

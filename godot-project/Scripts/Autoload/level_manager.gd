@@ -32,6 +32,7 @@ var player_room_index: int = -1
 var _room_container: Node = null
 var _room_type_by_index: Dictionary = {} ## int -> String, filled while generating
 var _room_instances: Dictionary = {} ## int -> Room, this floor's rooms
+var main_cam: Camera2D
 
 func _ready() -> void:
 	ascend_requested.connect(_on_ascend_requested)
@@ -173,24 +174,31 @@ func initial_player_spawn():
 	player.global_position = start_room.spawn_positions[0]
 	player.show()
 	player._entering_level(true)
+	_room_container.get_parent()._on_main_scene_changed(start_room)
 	
-	var camera := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
-	if camera != null:
-		camera.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
-
+	main_cam = get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
+	if main_cam != null:
+		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
 
 func _place_player_on_floor() -> void:
 	var player: Player = SceneManager.player
 	if player == null:
 		return
 	
-	var start_index: int = dungeon_generator.start_index
+	var start_index: int
+	if player_room != null:
+		start_index = dungeon_generator.start_index
+		print("using default room")
+	else:
+		start_index = player_room_index
+		print("using player room")
+		
 	var start_room: Room = _room_instances.get(start_index)
-
+	
 	if start_room == null:
 		push_error("LevelManager: no room was instantiated at the dungeon's start index")
 		return
-
+	
 	player_room_index = start_index
 	player_room = start_room
 	
@@ -202,9 +210,9 @@ func _place_player_on_floor() -> void:
 	player.show()
 	player._entering_level(true)
 	
-	var camera := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
-	if camera != null:
-		camera.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
+	main_cam = get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
+	if main_cam != null:
+		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
 
 func set_player_room(room: Room) -> void:
 	player_room = room
