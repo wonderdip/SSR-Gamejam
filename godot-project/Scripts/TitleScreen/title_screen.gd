@@ -43,12 +43,14 @@ func animate_title():
 			
 func _on_play_button_pressed() -> void:
 	await tween_highlight()
-	if LevelManager._room_type_by_index.is_empty():
-		SceneManager.goto_packed_scene(play_scene)
-	else:
+	if LevelManager.in_dungeon:
 		SceneManager.remove_scene()
 		LevelManager.main_cam.set_enabled(true)
 		LevelManager._place_player_on_floor()
+	elif LevelManager.game_started:
+		SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
+	else:
+		SceneManager.goto_packed_scene(play_scene)
 
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.

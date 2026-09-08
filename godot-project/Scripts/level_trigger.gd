@@ -21,6 +21,9 @@ func _on_body_entered(body: Node2D):
 		await get_tree().create_timer(0.25).timeout
 		
 		if first_level_trigger:
+			LevelManager.in_dungeon = false
+			LevelManager.game_started = true
+			LevelManager.main_cam.set_enabled(false)
 			SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
 		else:
 			if warning:

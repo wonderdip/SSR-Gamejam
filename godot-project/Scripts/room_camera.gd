@@ -43,6 +43,7 @@ func transition_to_room(target_position: Vector2, bounds: Rect2 = Rect2()) -> vo
 	_active_tween.tween_property(self, "global_position", target_position, transition_duration)
 	_active_tween.finished.connect(_on_transition_finished.bind(target_position, bounds))
 	player.movement_locked = true
+	player._update_animation(false, false)
 	
 func _on_transition_finished(target_position: Vector2, bounds: Rect2) -> void:
 	_apply_bounds(bounds)

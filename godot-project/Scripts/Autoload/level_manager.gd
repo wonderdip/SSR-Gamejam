@@ -28,6 +28,8 @@ enum RoomType { NORMAL, CHEST, ITEM, BOSS, SECRET }
 var floor_num: int = 0
 var player_room: Room
 var player_room_index: int = -1
+var in_dungeon: bool = false ## true while the dungeon (not the hub/other scenes) is the active view
+var game_started: bool = false ## true once the player has reached the hub at least once this session
 
 var _room_container: Node = null
 var _room_type_by_index: Dictionary = {} ## int -> String, filled while generating
@@ -180,6 +182,8 @@ func initial_player_spawn():
 	if main_cam != null:
 		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
 
+	game_started = true
+
 func _place_player_on_floor() -> void:
 	var player: Player = SceneManager.player
 	if player == null:
@@ -187,11 +191,9 @@ func _place_player_on_floor() -> void:
 	
 	var start_index: int
 	if player_room != null:
-		start_index = dungeon_generator.start_index
-		print("using default room")
-	else:
 		start_index = player_room_index
-		print("using player room")
+	else:
+		start_index = dungeon_generator.start_index
 		
 	var start_room: Room = _room_instances.get(start_index)
 	
@@ -213,6 +215,8 @@ func _place_player_on_floor() -> void:
 	main_cam = get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	if main_cam != null:
 		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
+
+	in_dungeon = true
 
 func set_player_room(room: Room) -> void:
 	player_room = room
