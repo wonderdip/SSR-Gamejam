@@ -43,14 +43,25 @@ func animate_title():
 			
 func _on_play_button_pressed() -> void:
 	await tween_highlight()
+	print("got past tween")
+	
 	if LevelManager.in_dungeon:
+		print("going to dungeon")
+		await SceneManager.fade_out()
+		print("past the fade out")
 		SceneManager.remove_scene()
+		
+		SceneManager.fade_in()
+		print("past the fade in")
 		LevelManager.main_cam.set_enabled(true)
 		LevelManager._place_player_on_floor()
+		print("placed player")
 	elif LevelManager.game_started:
+		print("going to hub")
 		SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
 	else:
 		SceneManager.goto_packed_scene(play_scene)
+		print("going to play scene")
 
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.

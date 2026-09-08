@@ -26,7 +26,7 @@ func _on_main_menu_button_pressed() -> void:
 	await tween_highlight()
 	MessageBus._message_box.close()
 	hide()
-	LevelManager.main_cam.set_enabled(false)
+	if LevelManager.main_cam: LevelManager.main_cam.set_enabled(false)
 	SceneManager.goto_scene("res://Scenes/UI/title_screen.tscn")
 
 func tween_highlight():

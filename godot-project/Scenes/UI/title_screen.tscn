@@ -86,6 +86,7 @@ mouse_filter = 2
 theme = ExtResource("1_wv540")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=1655951305]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 0
 offset_left = 24.0
 offset_top = 74.0
@@ -108,16 +109,20 @@ pivot_offset_ratio = Vector2(0, 0.5)
 color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=198343157 node_paths=PackedStringArray("first_button", "second_button", "third_button")]
+custom_maximum_size = Vector2(-1, 52)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.5138889
-anchor_right = 0.4453125
-anchor_bottom = 0.8333333
+anchor_right = 0.45703125
+anchor_bottom = 0.8680556
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -10
+theme_override_constants/separation = -3
 script = ExtResource("9_uv4ns")
+pointer_positions = Array[int]([84, 100, 116])
+highlight_positions = Array[int]([78, 94, 110])
 first_button = NodePath("PlayButton")
 second_button = NodePath("SettingsButton")
 third_button = NodePath("QuitButton")
@@ -145,7 +150,7 @@ flat = true
 alignment = 0
 
 [node name="Pointer" type="Sprite2D" parent="Control" unique_id=1688396295]
-position = Vector2(31, 99)
+position = Vector2(31, 100)
 texture = ExtResource("10_nd20k")
 centered = false
 offset = Vector2(-4, -4)

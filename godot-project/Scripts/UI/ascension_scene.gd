@@ -13,7 +13,7 @@ func _ready() -> void:
 	rolling_counter.set_value(LevelManager.floor_num - 1, false)
 	
 func _on_anim_finished(_anim_name: StringName):
-	LevelManager._build_floor(true)
+	await LevelManager._build_floor(true)
 	SceneManager.remove_scene()
 	room_camera.enabled = true
 	

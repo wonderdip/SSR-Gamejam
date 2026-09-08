@@ -23,7 +23,7 @@ func _on_body_entered(body: Node2D):
 		if first_level_trigger:
 			LevelManager.in_dungeon = false
 			LevelManager.game_started = true
-			LevelManager.main_cam.set_enabled(false)
+			if LevelManager.main_cam: LevelManager.main_cam.set_enabled(false)
 			SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
 		else:
 			if warning:

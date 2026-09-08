@@ -1,11 +1,5 @@
 extends Node
 
-## Owns everything about the dungeon: floor progression, room pools, building
-## a floor's rooms from DungeonGenerator's output, wiring doors between them,
-## and placing the player/camera. SceneManager is only ever asked for its
-## generic fade_out()/fade_in() utilities and the shared `player` reference —
-## it has no idea rooms or floors exist.
-
 signal ascend_requested()
 signal player_icon_update()
 

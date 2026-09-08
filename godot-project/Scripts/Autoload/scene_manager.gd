@@ -74,13 +74,16 @@ func _deferred_swap_scene(packed_scene: PackedScene) -> void:
 	await fade_in()
 
 func fade_out() -> void:
+	print("made tween")
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	var tween: Tween = create_tween()
 	tween.tween_property(_fade_rect, "modulate:a", 1.0, fade_duration)
 	await tween.finished
 
 func fade_in() -> void:
+	print("made tween")
 	var tween: Tween = create_tween()
 	tween.tween_property(_fade_rect, "modulate:a", 0.0, fade_duration)
 	await tween.finished
+	print("past tween")
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
