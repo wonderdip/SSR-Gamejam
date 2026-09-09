@@ -11,7 +11,8 @@ func _ready() -> void:
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape") and not event.is_echo():
-		pause_menu.show()
+		if SceneManager.current_scene.name != "TitleScreen":
+			pause_menu.show()
 
 func _on_main_scene_changed(scene: Node):
 	if scene is Room:

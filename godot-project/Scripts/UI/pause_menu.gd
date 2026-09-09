@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var highlight: ColorRect
-@export var button_container: VBoxContainer
+@export var button_container: ButtonContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

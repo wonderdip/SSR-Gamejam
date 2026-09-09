@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var room_container: Node2D = %RoomContainer
-@onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
 func _ready() -> void:

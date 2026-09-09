@@ -3,24 +3,8 @@
 [ext_resource type="Script" uid="uid://c8np15sd00kd0" path="res://Scripts/dungeon_root.gd" id="1_root"]
 [ext_resource type="Script" uid="uid://bijo773t24lu8" path="res://Scripts/room_camera.gd" id="2_cam"]
 
-[sub_resource type="Environment" id="Environment_awwja"]
-background_mode = 3
-glow_normalized = true
-glow_intensity = 3.0
-glow_bloom = 0.25
-fog_light_color = Color(0.18706673, 0.20678654, 0.23747069, 1)
-fog_light_energy = 38.85
-fog_sun_scatter = 13.5
-fog_density = 1.295
-adjustment_enabled = true
-adjustment_contrast = 1.25
-adjustment_saturation = 1.25
-
 [node name="DungeonRoot" type="Node2D" unique_id=943036932]
 script = ExtResource("1_root")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1224359567]
-environment = SubResource("Environment_awwja")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=83133224]
 color = Color(0.5065307, 0.64137584, 0.7769075, 1)

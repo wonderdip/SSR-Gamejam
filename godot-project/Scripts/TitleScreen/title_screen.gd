@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var super_font: Sprite2D = $TitleName/SuperFont
 @onready var cross_sprite: Sprite2D = $CrossSprite
-@onready var highlight: ColorRect = $Control/Highlight
+@onready var highlight: ColorRect = $ButtonContainer/Highlight
 
 @export var play_scene: PackedScene
 

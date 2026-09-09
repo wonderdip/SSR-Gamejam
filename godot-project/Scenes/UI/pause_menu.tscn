@@ -9,56 +9,12 @@
 [node name="PauseMenu" type="CanvasLayer" unique_id=1183434397 node_paths=PackedStringArray("highlight", "button_container")]
 process_mode = 2
 script = ExtResource("1_kdnb7")
-highlight = NodePath("Control/Highlight")
-button_container = NodePath("Control/ButtonContainer")
+highlight = NodePath("ButtonContainer/Highlight")
+button_container = NodePath("ButtonContainer")
 
-[node name="Control" type="Control" parent="." unique_id=827958843]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_r2i2h")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=350939637]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -26.0
-offset_right = 47.0
-offset_bottom = 26.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_oykix")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-
-[node name="Highlight" type="ColorRect" parent="Control" unique_id=183258652]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.5
-offset_top = -6.0
-offset_right = 45.5
-offset_bottom = 6.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0, 0.5)
-color = Color(0.29803923, 0.29803923, 0.29803923, 1)
-
-[node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=250490040 node_paths=PackedStringArray("first_button", "second_button", "third_button")]
+[node name="ButtonContainer" type="Control" parent="." unique_id=1864705508 node_paths=PackedStringArray("first_button", "second_button", "third_button", "pointer", "highlight")]
 custom_maximum_size = Vector2(-1, 52)
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,43 +26,88 @@ offset_right = 47.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -3
+theme = ExtResource("1_r2i2h")
 script = ExtResource("3_kdnb7")
 pointer_positions = Array[int]([56, 72, 88])
-highlight_positions = Array[int]([50, 66, 82])
+highlight_positions = Array[int]([4, 20, 36])
 first_button = NodePath("BackButton")
 second_button = NodePath("SettingsButton")
 third_button = NodePath("MainMenuButton")
+pointer = NodePath("Pointer")
+highlight = NodePath("Highlight")
 x_position = 89
 
-[node name="BackButton" type="Button" parent="Control/ButtonContainer" unique_id=687804359]
+[node name="NinePatchRect" type="NinePatchRect" parent="ButtonContainer" unique_id=350939637]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -26.0
+offset_right = 42.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_oykix")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Highlight" type="ColorRect" parent="ButtonContainer" unique_id=183258652]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -6.0
+offset_right = 41.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+color = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="BackButton" type="Button" parent="ButtonContainer" unique_id=687804359]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 25.0
 text = "Back"
 flat = true
 alignment = 0
 
-[node name="SettingsButton" type="Button" parent="Control/ButtonContainer" unique_id=2086329447]
+[node name="SettingsButton" type="Button" parent="ButtonContainer" unique_id=2086329447]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_top = 16.0
+offset_right = 85.0
+offset_bottom = 35.0
 text = "Settings"
 flat = true
 alignment = 0
 
-[node name="MainMenuButton" type="Button" parent="Control/ButtonContainer" unique_id=2021776889]
+[node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=2021776889]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_top = 32.0
+offset_right = 85.0
+offset_bottom = 51.0
 text = "Main Menu"
 flat = true
 alignment = 0
 
-[node name="Pointer" type="Sprite2D" parent="Control" unique_id=1998597720]
-position = Vector2(89, 57)
+[node name="Pointer" type="Sprite2D" parent="ButtonContainer" unique_id=1998597720]
+position = Vector2(-1, 11)
 texture = ExtResource("4_oykix")
 centered = false
 offset = Vector2(-4, -4)
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="Control/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Control/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="Control/ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

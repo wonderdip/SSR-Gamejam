@@ -374,3 +374,6 @@ libraries/ = SubResource("AnimationLibrary_v0iea")
 visible = false
 position = Vector2(8, -12)
 texture = ExtResource("5_fkybt")
+
+[node name="GunPos" type="Marker2D" parent="." unique_id=1253276993]
+position = Vector2(-4, 8)

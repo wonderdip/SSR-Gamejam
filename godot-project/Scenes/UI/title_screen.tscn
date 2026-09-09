@@ -73,32 +73,37 @@ position = Vector2(0, -18)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_gh7k3")
 
-[node name="Control" type="Control" parent="." unique_id=1142786107]
+[node name="ButtonContainer" type="Control" parent="." unique_id=1064121834 node_paths=PackedStringArray("first_button", "second_button", "third_button", "pointer", "highlight")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 256.0
-offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme = ExtResource("1_wv540")
+script = ExtResource("9_uv4ns")
+pointer_positions = Array[int]([84, 100, 116])
+highlight_positions = Array[int]([78, 94, 110])
+first_button = NodePath("PlayButton")
+second_button = NodePath("SettingsButton")
+third_button = NodePath("QuitButton")
+pointer = NodePath("Pointer")
+highlight = NodePath("Highlight")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=1655951305]
+[node name="NinePatchRect" type="NinePatchRect" parent="ButtonContainer" unique_id=1655951305]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 0
 offset_left = 24.0
 offset_top = 74.0
 offset_right = 117.0
-offset_bottom = 125.0
+offset_bottom = 126.0
 texture = ExtResource("8_824g0")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Highlight" type="ColorRect" parent="Control" unique_id=296863813]
+[node name="Highlight" type="ColorRect" parent="ButtonContainer" unique_id=296863813]
 visible = false
 layout_mode = 0
 offset_left = 25.0
@@ -108,53 +113,45 @@ offset_bottom = 120.0
 pivot_offset_ratio = Vector2(0, 0.5)
 color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
-[node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=198343157 node_paths=PackedStringArray("first_button", "second_button", "third_button")]
-custom_maximum_size = Vector2(-1, 52)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.125
-anchor_top = 0.5138889
-anchor_right = 0.45703125
-anchor_bottom = 0.8680556
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -3
-script = ExtResource("9_uv4ns")
-pointer_positions = Array[int]([84, 100, 116])
-highlight_positions = Array[int]([78, 94, 110])
-first_button = NodePath("PlayButton")
-second_button = NodePath("SettingsButton")
-third_button = NodePath("QuitButton")
-metadata/_edit_use_anchors_ = true
-
-[node name="PlayButton" type="Button" parent="Control/ButtonContainer" unique_id=162465475]
+[node name="PlayButton" type="Button" parent="ButtonContainer" unique_id=162465475]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_left = 32.0
+offset_top = 74.0
+offset_right = 117.0
+offset_bottom = 93.0
 text = "Play"
 flat = true
 alignment = 0
 
-[node name="SettingsButton" type="Button" parent="Control/ButtonContainer" unique_id=806940593]
+[node name="SettingsButton" type="Button" parent="ButtonContainer" unique_id=806940593]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_left = 32.0
+offset_top = 90.0
+offset_right = 117.0
+offset_bottom = 109.0
 text = "Settings"
 flat = true
 alignment = 0
 
-[node name="QuitButton" type="Button" parent="Control/ButtonContainer" unique_id=2008674438]
+[node name="QuitButton" type="Button" parent="ButtonContainer" unique_id=2008674438]
 custom_maximum_size = Vector2(-1, 19)
-layout_mode = 2
+layout_mode = 0
+offset_left = 32.0
+offset_top = 106.0
+offset_right = 117.0
+offset_bottom = 125.0
 text = "Quit"
 flat = true
 alignment = 0
 
-[node name="Pointer" type="Sprite2D" parent="Control" unique_id=1688396295]
+[node name="Pointer" type="Sprite2D" parent="ButtonContainer" unique_id=1688396295]
 position = Vector2(31, 100)
 texture = ExtResource("10_nd20k")
 centered = false
 offset = Vector2(-4, -4)
 
-[connection signal="pressed" from="Control/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="Control/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="Control/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]

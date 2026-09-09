@@ -1,4 +1,5 @@
-extends VBoxContainer
+extends Control
+class_name ButtonContainer
 
 @export var pointer_positions: Array[int] = [
 	83,
@@ -15,8 +16,8 @@ extends VBoxContainer
 @export var first_button: Button
 @export var second_button: Button
 @export var third_button: Button
-@onready var pointer: Sprite2D = $"../Pointer"
-@onready var highlight: ColorRect = $"../Highlight"
+@export var pointer: Sprite2D
+@export var highlight: ColorRect
 
 var current_button := -1
 var highlight_tween_instance: Tween
