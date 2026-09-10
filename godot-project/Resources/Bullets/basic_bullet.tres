@@ -4,11 +4,39 @@
 [ext_resource type="Texture2D" uid="uid://dk0klvry4cfgr" path="res://Assets/Items/Bullets/basic_bullet.png" id="2_xu7i1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3txao"]
-radius = 4.0
+radius = 5.0
+
+[sub_resource type="Curve" id="Curve_xu7i1"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3c5tf"]
+curve = SubResource("Curve_xu7i1")
+
+[sub_resource type="Curve" id="Curve_5nt5x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_juo7y"]
+curve = SubResource("Curve_5nt5x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oljys"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+radial_velocity_min = 29.999977
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 5, 0)
+scale_min = 1.1999999
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_juo7y")
+hue_variation_curve = SubResource("CurveTexture_3c5tf")
 
 [resource]
 script = ExtResource("1_70u62")
 speed = 200
 area_shape = SubResource("CircleShape2D_3txao")
+collision_particles = SubResource("ParticleProcessMaterial_oljys")
 texture = ExtResource("2_xu7i1")
 metadata/_custom_type_script = "uid://b56aohcca4nqb"

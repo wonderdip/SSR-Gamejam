@@ -70,7 +70,7 @@ func shoot():
 		
 	# Handle bullet spread
 	var angle = (get_global_mouse_position() - gun_sprite.global_position).angle()
-	var random_offset = randf_range(-7, 7)
+	var random_offset = randf_range(-gun_data.accuracy, gun_data.accuracy)
 	angle += deg_to_rad(random_offset)
 	
 	can_shoot = false  # Prevent instant re-shooting
