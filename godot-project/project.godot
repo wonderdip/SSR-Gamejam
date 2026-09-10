@@ -25,6 +25,7 @@ SceneManager="*uid://dcepugfqvf6yh"
 AudioManager="*uid://c5c2717rqpv8v"
 MessageBus="*uid://clt46ydy72yj6"
 LevelManager="*uid://djdclpdk7m2ii"
+ItemManager="*uid://xcftwd2adidh"
 
 [display]
 

@@ -43,17 +43,21 @@ func reset():
 func _process(_delta: float) -> void:
 	if not pressed:
 		var new_button := -1
-
+		
 		if first_button.is_hovered():
 			new_button = 0
+			
 		elif second_button.is_hovered():
 			new_button = 1
+			
 		elif third_button.is_hovered():
 			new_button = 2
-
+		
 		if new_button == current_button:
 			return
-
+		
+		AudioManager.play_sfx("button_switch", - 10, randf_range(0.95, 1.05))
+		
 		current_button = new_button
 		if current_button == -1:
 			pointer.hide()

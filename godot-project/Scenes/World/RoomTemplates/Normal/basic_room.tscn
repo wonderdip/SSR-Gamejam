@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_d8gsv"]
 [ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="2_66gei"]
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mdoty"]
+[ext_resource type="Texture2D" uid="uid://b8ajht7gn015s" path="res://icon.svg" id="4_66gei"]
+[ext_resource type="Script" uid="uid://bss1c7eycejlj" path="res://Scripts/chest.gd" id="4_mdoty"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xl8l"]
 texture = ExtResource("2_66gei")
@@ -2844,6 +2846,12 @@ physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
 sources/0 = SubResource("TileSetAtlasSource_uhgbo")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awwja"]
+radius = 16.0
+
 [node name="BasicRoom" type="Node2D" unique_id=1714128476]
 script = ExtResource("1_d8gsv")
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
@@ -2862,3 +2870,25 @@ tile_set = SubResource("TileSet_xi3rd")
 
 [node name="TopDecor" type="TileMapLayer" parent="." unique_id=1727263005]
 tile_set = SubResource("TileSet_tsssq")
+
+[node name="Chest" type="StaticBody2D" parent="." unique_id=1832963746 node_paths=PackedStringArray("interaction_area")]
+collision_layer = 16
+script = ExtResource("4_mdoty")
+interaction_area = NodePath("Area2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest" unique_id=1480978558]
+position = Vector2(72, 56)
+shape = SubResource("RectangleShape2D_awwja")
+
+[node name="Sprite2D" type="Sprite2D" parent="Chest" unique_id=68804898]
+position = Vector2(72, 56)
+texture = ExtResource("4_66gei")
+region_enabled = true
+region_rect = Rect2(34.34839, 57.1305, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="Chest" unique_id=109600586]
+position = Vector2(72, 56)
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/Area2D" unique_id=1598991250]
+shape = SubResource("CircleShape2D_awwja")

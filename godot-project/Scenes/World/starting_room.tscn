@@ -3033,6 +3033,7 @@ hframes = 4
 
 [node name="InteractionTrigger" type="Area2D" parent="." unique_id=1613448490]
 collision_layer = 32
+collision_mask = 0
 script = ExtResource("6_gwgwg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionTrigger" unique_id=184728082]
@@ -3040,6 +3041,7 @@ position = Vector2(136, 110)
 shape = SubResource("RectangleShape2D_awwja")
 
 [node name="RoomTransitionTrigger" type="Area2D" parent="." unique_id=981192508 node_paths=PackedStringArray("target_room")]
+collision_layer = 32
 script = ExtResource("9_ur81b")
 target_room = NodePath("..")
 metadata/_custom_type_script = "uid://c047k8lmipoby"
@@ -3052,6 +3054,7 @@ shape = SubResource("RectangleShape2D_hpu63")
 position = Vector2(128, 72)
 
 [node name="LevelTrigger" type="Area2D" parent="." unique_id=2019039014]
+collision_layer = 32
 script = ExtResource("7_ogupu")
 ascend_trigger = true
 warning = true

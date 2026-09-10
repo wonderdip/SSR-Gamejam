@@ -10,10 +10,18 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		get_tree().paused = true
+		upscale_tween()
 		button_container.reset()
 	else:
 		get_tree().paused = false
 
+func upscale_tween():
+	var tween = create_tween()
+	button_container.scale = Vector2(0, 0)
+	tween.tween_property(button_container, "scale", Vector2(1, 1), 0.5
+	).set_ease(Tween.EASE_OUT
+	).set_trans(Tween.TRANS_SPRING)
+	
 func _on_back_button_pressed() -> void:
 	await tween_highlight()
 	hide()

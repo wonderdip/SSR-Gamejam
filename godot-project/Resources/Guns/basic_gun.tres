@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://jmc1lyiqehor"]
+
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_vf031"]
+[ext_resource type="Texture2D" uid="uid://kj2ou8apub73" path="res://Assets/Items/Guns/basic.png" id="2_b3qae"]
+
+[resource]
+script = ExtResource("1_vf031")
+item_name = "Basic Gun"
+texture = ExtResource("2_b3qae")
+description = "A trusty basic gun"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

@@ -1,8 +1,5 @@
-extends Node
+extends ItemData
 class_name GunData
-
-@export var gun_name: String = ""
-@export var gun_texture: Texture2D
 
 @export var damage: int = 1
 @export var magazine_size: int = 10
@@ -14,7 +11,3 @@ class_name GunData
 
 # Additional properties
 @export var bullet: PackedScene
-@export var description: String = "A basic gun"
-@export var unlocked: bool = true
-@export var chance : float
-@export_enum("Common", "Uncommon", "Rare", "Epic", "Legendary") var rarity : int = 0
