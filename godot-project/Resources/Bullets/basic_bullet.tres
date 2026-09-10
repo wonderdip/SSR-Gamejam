@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://dqhg28s467s37"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_70u62"]
+[ext_resource type="Texture2D" uid="uid://dk0klvry4cfgr" path="res://Assets/Items/Bullets/basic_bullet.png" id="2_xu7i1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3txao"]
+radius = 4.0
+
+[resource]
+script = ExtResource("1_70u62")
+speed = 200
+area_shape = SubResource("CircleShape2D_3txao")
+texture = ExtResource("2_xu7i1")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

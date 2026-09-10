@@ -10,4 +10,7 @@ class_name GunData
 @export_range(0, 10) var shot_delay: float = 0.1
 
 # Additional properties
-@export var bullet: PackedScene
+@export var bullet: BulletData
+@export var pivot_pos: Vector2 = Vector2(8, 16)
+@export var bullet_pos: Vector2 = Vector2(17, 13)
+@export var shot_particles: ParticleProcessMaterial

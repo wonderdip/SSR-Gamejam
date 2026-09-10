@@ -3,6 +3,7 @@ signal typing_finished
 
 @onready var dialogue_label: RichTextLabel = $DialogueLabel
 @onready var continue_label: Label = $ContinueLabel
+@onready var scientist: Sprite2D = $Scientist
 
 @export_multiline() var dialogue: Array[String] = []
 @export var characters_per_second: float = 30.0
@@ -15,6 +16,8 @@ var _pause_timer: float = 0.0
 var _is_typing: bool = false
 var current_dialogue: int = 0
 var _last_revealed_index: int = 0
+var drunk_material: ShaderMaterial
+
 # extra seconds to hold after . , ! ?  var _visible_progress: float = 0.0 var _pause_timer: float = 0.0 var _is_typing: bool = false  
 # Called when the node enters the scene tree for the first time.
 
@@ -28,9 +31,8 @@ func _ready() -> void:
 	if start_automatically:
 		await get_tree().create_timer(0.25).timeout
 		start_typing()
-
-
-
+	drunk_material = scientist.material
+	
 func start_typing() -> void:
 	_visible_progress = 0.0
 	_pause_timer = 0.0
@@ -82,6 +84,7 @@ func skip_to_end() -> void:
 func next_dialogue():
 	current_dialogue += 1
 	dialogue_label.text = dialogue[current_dialogue]
+	#drunk_material.set_shader_parameter("blur_amount", 0.05)
 	start_typing()
 
 func _input(event: InputEvent) -> void:

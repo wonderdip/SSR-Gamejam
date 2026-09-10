@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://2mmpaac64lde" path="res://Scenes/World/RoomTemplates/Normal/basic_room.tscn" id="2_dbtmq"]
 [ext_resource type="PackedScene" uid="uid://dao86w0d6df3w" path="res://Scenes/World/door.tscn" id="2_qp4ph"]
 [ext_resource type="Script" uid="uid://b5m72735xutv6" path="res://Scripts/UI/dungeon_generator.gd" id="4_d1a6w"]
+[ext_resource type="PackedScene" uid="uid://dwxtey3utjlwl" path="res://Scenes/World/RoomTemplates/Item/chest_room.tscn" id="5_637do"]
 
 [node name="LevelManager" type="Node" unique_id=783386996 node_paths=PackedStringArray("dungeon_generator")]
 script = ExtResource("1_wpubf")
@@ -12,8 +13,8 @@ ascent_scene = ExtResource("2_cdt6n")
 dungeon_generator = NodePath("DungeonGenerator")
 door_scene = ExtResource("2_qp4ph")
 normal_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
-chest_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
-item_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
+chest_rooms = Array[PackedScene]([ExtResource("5_637do")])
+item_rooms = Array[PackedScene]([ExtResource("5_637do")])
 boss_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
 secret_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
 

@@ -14,6 +14,7 @@ enum Direction { DOWN, UP, LEFT, RIGHT }
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player_sprite: Sprite2D = $PlayerSprite
+@onready var gun_pos: Marker2D = $GunPos
 
 @export_category("Other")
 @export var transition_shader: Shader

@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 @export var interaction_area: Area2D
+@export var animation_player: AnimationPlayer
 var can_open: bool = false
 var opened: bool = false
 var player: Player = null
@@ -19,8 +20,11 @@ func _input(event: InputEvent) -> void:
 	and not event.is_echo() 
 	and not opened
 	and can_open):
+		animation_player.play("open_chest")
+		await animation_player.animation_finished
 		var gun: GunInstance = GunInstance.new()
 		gun.gun_data = ItemManager.get_random_gun()
 		player.add_child(gun)
+		gun.player = player
 		
 		opened = true
