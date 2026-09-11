@@ -2,6 +2,7 @@ extends ItemData
 class_name MeleeData
 
 @export var damage: float = 10
+@export var swing_speed: float = 1
 @export var collision_shape: Shape2D
 @export var y_offset: int = -24
 

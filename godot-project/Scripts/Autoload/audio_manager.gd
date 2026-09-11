@@ -1,6 +1,7 @@
 extends Node
 
 @export var sfx_pool: Array[SoundEffect]
+@export var music_pool: Array[SoundEffect]
 
 var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
@@ -20,7 +21,9 @@ func _ready() -> void:
 	set_music_volume(0.5)
 	set_sfx_volume(0.5)
 		
-func play_music(stream: AudioStream, volume_db: float = 0.0) -> void:
+func play_music(tag: String, volume_db: float = 0.0) -> void:
+	var stream: AudioStream = get_audio_stream(tag).audio_stream
+	
 	if music_player.stream == stream and music_player.playing:
 		return
 	
@@ -37,6 +40,10 @@ func get_audio_stream(tag: String) -> SoundEffect:
 	for sound in sfx_pool:
 		if sound.tag == tag:
 			matches.append(sound)
+	
+	for song in music_pool:
+		if song.tag == tag:
+			matches.append(song)
 	
 	if matches.is_empty():
 		return null

@@ -52,7 +52,7 @@ func _roll_rarity() -> ItemEnums.RARITIES:
 func get_random_melee() -> MeleeData:
 	var rarity: ItemEnums.RARITIES = _roll_rarity()
 	var pool: Array[MeleeData] = get_melees_by_rarity(rarity)
-
+	
 	while pool.is_empty() and rarity > ItemEnums.RARITIES.Common:
 		rarity -= 1
 		pool = get_melees_by_rarity(rarity)
