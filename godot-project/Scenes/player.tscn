@@ -380,6 +380,10 @@ texture = ExtResource("5_fkybt")
 [node name="GunPos" type="Marker2D" parent="." unique_id=1253276993]
 position = Vector2(-4, 8)
 
-[node name="Inventory" type="Node" parent="." unique_id=1778914484]
+[node name="MeleePos" type="Marker2D" parent="." unique_id=186856966]
+position = Vector2(8, 8)
+
+[node name="Inventory" type="Node" parent="." unique_id=1778914484 node_paths=PackedStringArray("player")]
 script = ExtResource("5_x3wgy")
+player = NodePath("..")
 metadata/_custom_type_script = "uid://dxnyqcl553ckp"

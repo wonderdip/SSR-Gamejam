@@ -2,18 +2,19 @@ extends Node
 class_name Inventory
 
 signal gun_equipped(gun_data: GunData)
-signal melee_equipped(item_data: ItemData)
+signal melee_equipped(item_data: MeleeData)
 signal anomaly_added(item_data: ItemData)
 signal consumable_changed(item_data: ItemData, count: int)
 
-@onready var player: Player = get_parent() as Player
+@export var player: Player
 
 var equipped_gun: GunData
-var equipped_melee: ItemData
+var equipped_melee: MeleeData
 var anomalies: Array[ItemData] = []
 var consumables: Dictionary = {} # ItemData -> int
 
 var gun_instance: GunInstance
+var melee_instance: MeleeInstance
 
 func add_item(item: ItemData) -> void:
 	match item.item_type:
@@ -39,10 +40,17 @@ func _equip_gun(gun_data: GunData) -> void:
 	gun_instance.player = player
 	gun_equipped.emit(gun_data)
 
-func _equip_melee(item: ItemData) -> void:
-	equipped_melee = item
-	melee_equipped.emit(item)
-	# TODO: spawn a MeleeInstance once melee combat exists, mirroring _equip_gun
+func _equip_melee(melee_data: MeleeData) -> void:
+	if melee_instance:
+		melee_instance.queue_free()
+		
+	equipped_melee = melee_data
+	melee_instance = MeleeInstance.new()
+	melee_instance.melee_data = melee_data
+	player.melee_pos.add_child(melee_instance)
+	melee_instance.player = player
+	melee_equipped.emit(melee_data)
+	
 
 func _add_passive(item: ItemData) -> void:
 	anomalies.append(item)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://ds4tt1snhs6pj"]
+
+[ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_aek6j"]
+[ext_resource type="Texture2D" uid="uid://dt72tsdvij4bw" path="res://Assets/Items/Melees/buster_sword.png" id="2_rcvlp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcvlp"]
+size = Vector2(10, 48)
+
+[resource]
+script = ExtResource("1_aek6j")
+collision_shape = SubResource("RectangleShape2D_rcvlp")
+item_name = "Buster Sword"
+texture = ExtResource("2_rcvlp")
+item_type = 1
+metadata/_custom_type_script = "uid://beapjtsj1udek"

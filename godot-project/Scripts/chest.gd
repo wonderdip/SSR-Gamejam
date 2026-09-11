@@ -22,6 +22,6 @@ func _input(event: InputEvent) -> void:
 	and can_open):
 		animation_player.play("open_chest")
 		await animation_player.animation_finished
-		var gun_data: GunData = ItemManager.get_random_gun()
-		player.inventory.add_item(gun_data)
+		var weapon : ItemData = ItemManager.get_random_melee()
+		player.inventory.add_item(weapon)
 		opened = true
