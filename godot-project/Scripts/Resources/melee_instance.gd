@@ -31,7 +31,7 @@ func _ready() -> void:
 	sprite.z_index = 11
 	add_child(sprite)
 	
-	top_level = true
+	position.y = melee_data.y_offset
 	
 	#particles = GPUParticles2D.new()
 	#particles.process_material = melee_data.collision_particles
@@ -52,13 +52,6 @@ func _physics_process(delta):
 	# Rotate the pivot toward the mouse
 	var angle = (mouse_pos - pivot_pos).angle()
 	pivot.global_rotation = angle
-	
-	# Flip sprite
-	var delta_x = mouse_pos.x - pivot_pos.x
-	if delta_x < -dead_zone:
-		pivot.scale.y = -1
-	elif delta_x > dead_zone:
-		pivot.scale.y = 1
 
 func _on_area_2d_body_entered(body: Node):
 	particles.emitting = true
