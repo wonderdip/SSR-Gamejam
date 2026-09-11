@@ -24,12 +24,12 @@ func _ready() -> void:
 	
 	bullet_point = Marker2D.new()
 	bullet_point.position = gun_data.bullet_pos
-	pivot.add_child(bullet_point)
+	add_child(bullet_point)
 	
 	gun_sprite = Sprite2D.new()
 	gun_sprite.texture = gun_data.texture
 	gun_sprite.z_index = 10
-	pivot.add_child(gun_sprite)
+	add_child(gun_sprite)
 	
 	current_ammo = gun_data.magazine_size
 	

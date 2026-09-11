@@ -17,7 +17,8 @@ enum Direction { DOWN, UP, LEFT, RIGHT }
 @onready var gun_pos: Marker2D = $GunPos
 
 @export_category("Other")
-@export var transition_shader: Shader
+@export var inventory: Inventory
+@export var max_inventory_size: int = 3
 @export var pixelate_shader: Shader
 
 var facing: Direction = Direction.DOWN

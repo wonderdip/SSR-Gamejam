@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cq7tmyhbvsjbc" path="res://Assets/Characters/Player/default-sheet.png" id="1_v0iea"]
 [ext_resource type="Shader" uid="uid://b6i48n1ujokta" path="res://Shader/pixelate.gdshader" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://bpjsa5ru570n6" path="res://Assets/Characters/Player/surprised.png" id="5_fkybt"]
+[ext_resource type="Script" uid="uid://dxnyqcl553ckp" path="res://Scripts/Resources/inventory.gd" id="5_x3wgy"]
 
 [sub_resource type="Gradient" id="Gradient_vgqql"]
 interpolation_mode = 2
@@ -341,11 +342,12 @@ _data = {
 &"intro_catch": SubResource("Animation_vgqql")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1871453495 groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1871453495 node_paths=PackedStringArray("inventory") groups=["player"]]
 z_index = 10
 collision_mask = 54
 script = ExtResource("1_cvnsp")
 run_speed = 140.0
+inventory = NodePath("Inventory")
 pixelate_shader = ExtResource("3_vgqql")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2100217846]
@@ -377,3 +379,7 @@ texture = ExtResource("5_fkybt")
 
 [node name="GunPos" type="Marker2D" parent="." unique_id=1253276993]
 position = Vector2(-4, 8)
+
+[node name="Inventory" type="Node" parent="." unique_id=1778914484]
+script = ExtResource("5_x3wgy")
+metadata/_custom_type_script = "uid://dxnyqcl553ckp"

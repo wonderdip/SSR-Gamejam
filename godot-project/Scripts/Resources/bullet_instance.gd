@@ -8,6 +8,7 @@ var travelled_distance = 0
 var sprite: Sprite2D
 var particles: GPUParticles2D
 var can_move: bool = true
+var has_hit: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,11 +61,14 @@ func _physics_process(delta):
 		if travelled_distance > bullet_data.max_distance:
 			queue_free()
 
+
+
 func _on_area_2d_body_entered(body: Node):
-	if body is TileMapLayer:
-		print("hit tilemap")
-		particles.emitting = true
-		can_move = false
-		sprite.hide()
-		await particles.finished
-		queue_free()
+	if has_hit or not body is TileMapLayer:
+		return
+	has_hit = true
+	can_move = false
+	sprite.hide()
+	particles.emitting = true
+	await get_tree().create_timer(particles.lifetime).timeout
+	queue_free()

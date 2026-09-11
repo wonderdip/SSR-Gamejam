@@ -147,6 +147,7 @@ metadata/_custom_type_script = "uid://d1x1ptujnxk4h"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1279786168]
 libraries/ = SubResource("AnimationLibrary_smrp4")
 autoplay = &"up"
+speed_scale = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2134073187]
 position = Vector2(128, 72)

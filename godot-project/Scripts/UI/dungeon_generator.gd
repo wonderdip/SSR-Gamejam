@@ -19,24 +19,14 @@ class_name DungeonGenerator
 @export_category("Special Room Counts")
 @export var min_boss_rooms: int = 1
 @export var max_boss_rooms: int = 1
-@export var min_reward_rooms: int = 1
-@export var max_reward_rooms: int = 1
-@export var min_coin_rooms: int = 1
-@export var max_coin_rooms: int = 1
-@export var min_secret_rooms: int = 1
-@export var max_secret_rooms: int = 1
+@export var min_weapon_rooms: int = 1
+@export var max_weapon_rooms: int = 1
+@export var min_anomaly_rooms: int = 1
+@export var max_anomaly_rooms: int = 1
 
 @export_category("Branching")
 @export_range(0.0, 1.0) var branch_chance: float = 0.5
 @export var max_neighbours_to_visit: int = 1 ## room is skipped if it already has more neighbours than this
-
-@export_category("Secret Room")
-@export var secret_room_max_attempts: int = 900
-@export var secret_room_min_x: int = 1
-@export var secret_room_max_x: int = 9
-@export var secret_room_min_y: int = 2
-@export var secret_room_max_y: int = 9
-@export var secret_room_min_isolation: int = 3 ## required neighbour count to qualify as secret room
 
 @export_category("Generation Timing")
 @export var step_interval: float = 0.0 ## 0 = generate instantly, >0 = animate one room per interval
@@ -44,7 +34,7 @@ class_name DungeonGenerator
 
 signal generation_started()
 signal room_added(index: int, room_type: String)
-signal generation_complete(floorplan: Array[int], boss_rooms: Array[int], reward_rooms: Array[int], coin_rooms: Array[int], secret_rooms: Array[int])
+signal generation_complete(floorplan: Array[int], boss_rooms: Array[int], weapon_rooms: Array[int], anomaly_rooms: Array[int])
 signal generation_failed()
 
 var floorplan: Array[int] = []
@@ -142,24 +132,21 @@ func _place_special_rooms() -> bool:
 		return false
 
 	var boss_rooms := _pop_random_end_rooms(_random_count(min_boss_rooms, max_boss_rooms))
-	var reward_rooms := _pop_random_end_rooms(_random_count(min_reward_rooms, max_reward_rooms))
-	var coin_rooms := _pop_random_end_rooms(_random_count(min_coin_rooms, max_coin_rooms))
-	var secret_rooms := _pick_secret_rooms(_random_count(min_secret_rooms, max_secret_rooms), boss_rooms)
+	var weapon_rooms := _pop_random_end_rooms(_random_count(min_weapon_rooms, max_weapon_rooms))
+	var anomaly_rooms := _pop_random_end_rooms(_random_count(min_anomaly_rooms, max_anomaly_rooms))
 
-	if boss_rooms.size() < min_boss_rooms or reward_rooms.size() < min_reward_rooms \
-			or coin_rooms.size() < min_coin_rooms or secret_rooms.size() < min_secret_rooms:
+	if boss_rooms.size() < min_boss_rooms or weapon_rooms.size() < min_weapon_rooms \
+			or anomaly_rooms.size() < min_anomaly_rooms:
 		return false
 
 	for i in boss_rooms:
 		room_added.emit(i, "boss")
-	for i in reward_rooms:
-		room_added.emit(i, "reward")
-	for i in coin_rooms:
-		room_added.emit(i, "coin")
-	for i in secret_rooms:
-		room_added.emit(i, "secret")
+	for i in weapon_rooms:
+		room_added.emit(i, "weapon")
+	for i in anomaly_rooms:
+		room_added.emit(i, "anomaly")
 
-	generation_complete.emit(floorplan, boss_rooms, reward_rooms, coin_rooms, secret_rooms)
+	generation_complete.emit(floorplan, boss_rooms, weapon_rooms, anomaly_rooms)
 	return true
 
 func _random_count(min_count: int, max_count: int) -> int:
@@ -179,39 +166,6 @@ func _pop_random_end_rooms(count: int) -> Array[int]:
 		var picked := _pop_random_end_room()
 		if picked == -1:
 			break
-		result.append(picked)
-	return result
-
-func _pick_secret_room(avoid_adjacent_to: Array[int]) -> int:
-	for _attempt in range(secret_room_max_attempts):
-		var x := randi_range(secret_room_min_x, secret_room_max_x)
-		var y := randi_range(secret_room_min_y, secret_room_max_y)
-		var i := y * grid_cols + x
-
-		if floorplan[i] == 1:
-			continue
-
-		var touches_avoided := false
-		for avoided in avoid_adjacent_to:
-			if avoided == i - 1 or avoided == i + 1 \
-					or avoided == i + grid_cols or avoided == i - grid_cols:
-				touches_avoided = true
-				break
-		if touches_avoided:
-			continue
-
-		if _neighbour_count(i) >= secret_room_min_isolation:
-			return i
-
-	return -1
-
-func _pick_secret_rooms(count: int, avoid_adjacent_to: Array[int]) -> Array[int]:
-	var result: Array[int] = []
-	for _n in range(count):
-		var picked := _pick_secret_room(avoid_adjacent_to)
-		if picked == -1:
-			break
-		floorplan[picked] = 1
 		result.append(picked)
 	return result
 

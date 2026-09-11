@@ -14,10 +14,9 @@ enum RoomType { NORMAL, CHEST, ITEM, BOSS, SECRET }
 
 @export_category("Room Pools")
 @export var normal_rooms: Array[PackedScene] = []
-@export var chest_rooms: Array[PackedScene] = []
-@export var item_rooms: Array[PackedScene] = []
+@export var weapon_rooms: Array[PackedScene] = []
+@export var anomaly_rooms: Array[PackedScene] = []
 @export var boss_rooms: Array[PackedScene] = []
-@export var secret_rooms: Array[PackedScene] = []
 
 var floor_num: int = 0
 var player_room: Room
@@ -69,7 +68,7 @@ func _teardown_current_floor() -> void:
 func _on_generator_room_added(index: int, room_type: String) -> void:
 	_room_type_by_index[index] = room_type
 
-func _on_generator_complete(floorplan: Array[int], _boss: Array[int], _reward: Array[int], _coin: Array[int], _secret: Array[int]) -> void:
+func _on_generator_complete(floorplan: Array[int], _boss: Array[int], _weapon: Array[int], _anomaly: Array[int]) -> void:
 	_instantiate_floor(floorplan)
 	_wire_room_doors(floorplan)
 	_place_player_on_floor()
@@ -109,12 +108,10 @@ func _pool_for_generator_type(room_type: String) -> Array[PackedScene]:
 	match room_type:
 		"boss":
 			return boss_rooms
-		"reward":
-			return item_rooms
-		"coin":
-			return chest_rooms
-		"secret":
-			return secret_rooms
+		"weapon":
+			return weapon_rooms
+		"anomaly":
+			return anomaly_rooms
 		_:
 			return normal_rooms
 

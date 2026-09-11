@@ -16,15 +16,12 @@ func _on_played_entered_interaction_area(body: Node):
 		can_open = true
 	
 func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("interact") 
-	and not event.is_echo() 
+	if (event.is_action_pressed("interact")
+	and not event.is_echo()
 	and not opened
 	and can_open):
 		animation_player.play("open_chest")
 		await animation_player.animation_finished
-		var gun: GunInstance = GunInstance.new()
-		gun.gun_data = ItemManager.get_random_gun()
-		player.add_child(gun)
-		gun.player = player
-		
+		var gun_data: GunData = ItemManager.get_random_gun()
+		player.inventory.add_item(gun_data)
 		opened = true

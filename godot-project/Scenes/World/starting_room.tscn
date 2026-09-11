@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://w7qs0v3234l3" path="res://Assets/auto_door.png" id="4_wsauq"]
 [ext_resource type="Script" uid="uid://o3sn2d8rssis" path="res://Scripts/interaction_trigger.gd" id="6_gwgwg"]
 [ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="7_ogupu"]
-[ext_resource type="PackedScene" uid="uid://btaoly10afo7a" path="res://Scenes/World/RoomTemplates/Item/south_item_room.tscn" id="9_2lph4"]
+[ext_resource type="PackedScene" uid="uid://btaoly10afo7a" path="res://Scenes/World/south_item_room.tscn" id="9_2lph4"]
 [ext_resource type="Script" uid="uid://c047k8lmipoby" path="res://Scripts/room_transition_trigger.gd" id="9_ur81b"]
 
 [sub_resource type="Animation" id="Animation_wsauq"]

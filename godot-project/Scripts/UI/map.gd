@@ -4,9 +4,8 @@ class_name Map
 @export_category("Icons")
 @export var normal_room_icon: Texture2D
 @export var boss_room_icon: Texture2D
-@export var reward_room_icon: Texture2D
-@export var coin_room_icon: Texture2D
-@export var secret_room_icon: Texture2D
+@export var weapon_room_icon: Texture2D
+@export var anomaly_room_icon: Texture2D
 @export var player_icon: Texture2D
 
 @export_category("Layout")
@@ -49,21 +48,18 @@ func _icon_for_type(room_type: String) -> Texture2D:
 			return normal_room_icon
 		"boss":
 			return boss_room_icon
-		"reward":
-			return reward_room_icon
-		"coin":
-			return coin_room_icon
-		"secret":
-			return secret_room_icon
+		"weapon":
+			return weapon_room_icon
+		"anomaly":
+			return anomaly_room_icon
 		_:
 			return null
 	
 func _draw_player_icon(
 	_floorplan: Array[int], 
 	_boss_rooms: Array[int], 
-	_reward_rooms: Array[int], 
-	_coin_rooms: Array[int], 
-	_secret_rooms: Array[int]
+	_weapon_rooms: Array[int], 
+	_anomaly_rooms: Array[int], 
 ) -> void:
 
 	if _player_icon != null:
