@@ -19,4 +19,6 @@ boss_rooms = Array[PackedScene]([ExtResource("2_dbtmq")])
 
 [node name="DungeonGenerator" type="Node" parent="." unique_id=1646269249]
 script = ExtResource("4_d1a6w")
+min_weapon_rooms = 3
+max_weapon_rooms = 4
 metadata/_custom_type_script = "uid://b5m72735xutv6"

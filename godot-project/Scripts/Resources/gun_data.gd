@@ -15,3 +15,4 @@ class_name GunData
 @export var pivot_pos: Vector2 = Vector2(8, 16)
 @export var bullet_pos: Vector2 = Vector2(0, 0)
 @export var shot_particles: ParticleProcessMaterial
+@export var shot_sound: String = ""

@@ -8,7 +8,6 @@ var played: bool = false
 func _ready() -> void:
 	await get_tree().process_frame
 	LevelManager.initial_player_spawn()
-	AudioManager.play_music("lobby")
 	
 func _on_body_entered(body: Node2D) -> void:
 	var player : Player = body if body is Player else null

@@ -20,6 +20,10 @@
 [ext_resource type="AudioStream" uid="uid://30dyb6p1a14r" path="res://Assets/Audio/SFX/SFX_TypeWriterMutiplev2.wav" id="18_nkd2g"]
 [ext_resource type="AudioStream" uid="uid://b3buxd5nmd81x" path="res://Assets/Audio/SFX/UI/zipclick.ogg" id="19_nkd2g"]
 [ext_resource type="AudioStream" uid="uid://6n18r5u1rkh7" path="res://Assets/Audio/Music/lobby_theme.wav" id="20_53vhv"]
+[ext_resource type="AudioStream" uid="uid://4uxatdp3y3x5" path="res://Assets/Audio/SFX/Weapons/heavy_sword1.wav" id="20_a36jh"]
+[ext_resource type="AudioStream" uid="uid://bcpgd7tt07wcj" path="res://Assets/Audio/SFX/Weapons/sword_swing1.wav" id="21_8oknk"]
+[ext_resource type="AudioStream" uid="uid://drxuuseukok4g" path="res://Assets/Audio/SFX/Weapons/sword_swing2.wav" id="22_hc4hy"]
+[ext_resource type="AudioStream" uid="uid://bjptnwqxqb6t6" path="res://Assets/Audio/SFX/Weapons/sword_swing3.wav" id="23_i0578"]
 
 [sub_resource type="Resource" id="Resource_1npab"]
 script = ExtResource("2_rx4vr")
@@ -123,6 +127,30 @@ tag = "button_switch"
 audio_stream = ExtResource("19_nkd2g")
 metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
+[sub_resource type="Resource" id="Resource_8eosv"]
+script = ExtResource("2_rx4vr")
+tag = "heavy_sword"
+audio_stream = ExtResource("20_a36jh")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_kp4jo"]
+script = ExtResource("2_rx4vr")
+tag = "sword_swing"
+audio_stream = ExtResource("21_8oknk")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_a6x67"]
+script = ExtResource("2_rx4vr")
+tag = "sword_swing"
+audio_stream = ExtResource("22_hc4hy")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_wtjpd"]
+script = ExtResource("2_rx4vr")
+tag = "sword_swing"
+audio_stream = ExtResource("23_i0578")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
 [sub_resource type="Resource" id="Resource_nkd2g"]
 script = ExtResource("2_rx4vr")
 tag = "lobby"
@@ -131,5 +159,5 @@ metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
 [node name="AudioManager" type="Node" unique_id=1886217390]
 script = ExtResource("1_1npab")
-sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i")])
+sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_a6x67"), SubResource("Resource_wtjpd")])
 music_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_nkd2g")])

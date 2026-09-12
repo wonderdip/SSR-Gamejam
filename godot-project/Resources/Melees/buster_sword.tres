@@ -1,14 +1,37 @@
 [gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://ds4tt1snhs6pj"]
 
 [ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_aek6j"]
+[ext_resource type="Texture2D" uid="uid://b8ajht7gn015s" path="res://icon.svg" id="2_kp4jo"]
 [ext_resource type="Texture2D" uid="uid://dt72tsdvij4bw" path="res://Assets/Items/Melees/buster_sword.png" id="2_rcvlp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcvlp"]
-size = Vector2(10, 48)
+size = Vector2(10, 52)
+
+[sub_resource type="Curve" id="Curve_kp4jo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a6x67"]
+curve = SubResource("Curve_kp4jo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtjpd"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = -20.0
+initial_velocity_max = -20.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_a6x67")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
 
 [resource]
 script = ExtResource("1_aek6j")
+swing_speed = 4.0
 collision_shape = SubResource("RectangleShape2D_rcvlp")
+trail = SubResource("ParticleProcessMaterial_wtjpd")
+slash_texture = ExtResource("2_kp4jo")
+swing_sound = "sword_swing"
+equip_sound = "heavy_sword"
 item_name = "Buster Sword"
 texture = ExtResource("2_rcvlp")
 item_type = 1
