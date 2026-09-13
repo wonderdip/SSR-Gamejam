@@ -8,7 +8,8 @@ script = ExtResource("1_j33wg")
 metadata/_custom_type_script = "uid://c6jbssk0vys0"
 
 [node name="GunSprite" type="Sprite2D" parent="." unique_id=1515089741]
+position = Vector2(4, -6)
 texture = ExtResource("2_xuecx")
 
 [node name="BulletPoint" type="Marker2D" parent="." unique_id=835239954]
-position = Vector2(5, 1)
+position = Vector2(10, -6)

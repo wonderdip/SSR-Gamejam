@@ -86,6 +86,11 @@ void fragment() {
 		angle_distance
 	);
 
+	// NEW: kill anything outside the actual ring radius
+	float radial_limit = radius + thickness + glow_width;
+	float radial_mask = 1.0 - smoothstep(radial_limit, radial_limit + 0.05, dist);
+	arc_mask *= radial_mask;
+
 	// ---------------------------------------------------------
 	// SWEEP POSITION
 	// ---------------------------------------------------------

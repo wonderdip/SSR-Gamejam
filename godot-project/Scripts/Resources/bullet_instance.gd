@@ -39,15 +39,9 @@ func _ready() -> void:
 	particles.amount = 12
 	particles.z_index = 11
 	add_child(particles)
-	hide_sprite_temporarily()
 	
 	body_entered.connect(_on_area_2d_body_entered)
 	
-func hide_sprite_temporarily():
-	# Hide sprite immediately when the bullet is created
-	sprite.hide()
-	await get_tree().create_timer(0.05).timeout
-	sprite.show()
 	
 func _physics_process(delta):
 	if can_move:

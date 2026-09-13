@@ -8,6 +8,8 @@ var damage: float
 @export var melee_sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 @export var hit_particle: GPUParticles2D
+@export var animation_player: AnimationPlayer
+@export var vfx: Node2D
 
 var pivot: Marker2D
 var dead_zone: float = 5.0
@@ -47,11 +49,11 @@ func update_art():
 
 	melee_sprite.flip_h = mouse_pos.x < pivot_pos.x - dead_zone
 	
-	if trail_particles:
+	if vfx:
 		if melee_sprite.flip_h:
-			trail_particles.scale.x = -1
+			vfx.scale.x = -1
 		else:
-			trail_particles.scale.x = 1
+			vfx.scale.x = 1
 		
 func swing():
 	is_swinging = true
@@ -86,27 +88,29 @@ func swing():
 	swing_tween = create_tween()
 	
 	swing_tween.tween_method(
-		func(angle: float):
-			pivot.global_rotation = angle,
-		base_angle,
-		start_angle,
-		windup_time
+		func(angle: float): pivot.global_rotation = angle,
+		base_angle, start_angle, windup_time
 	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	
+
 	AudioManager.play_sfx(melee_data.swing_sound, 0.0, randf_range(0.95, 1.05))
-	
+
 	if trail_particles:
 		trail_particles.emitting = true
 		trail_particles.show()
 	
+	if animation_player:
+		swing_tween.tween_callback(func():
+			if animation_player.has_animation("slash"):
+				var anim_len := animation_player.get_animation("slash").length
+				animation_player.speed_scale = anim_len / strike_time
+				animation_player.play("slash")
+		)
+
 	swing_tween.tween_method(
-		func(angle: float):
-			pivot.global_rotation = angle,
-		start_angle,
-		end_angle,
-		strike_time
+		func(angle: float): pivot.global_rotation = angle,
+		start_angle, end_angle, strike_time
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-	
+
 	swing_tween.tween_callback(_end_swing)
 
 func _end_swing():
