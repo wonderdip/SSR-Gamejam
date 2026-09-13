@@ -100,7 +100,7 @@ func swing():
 	is_swinging = true
 	collision_shape.disabled = false
 	trail_particles.emitting = true
-	
+	trail_particles.show()
 	var base_angle := pivot.global_rotation
 	var half_arc: float = deg_to_rad(melee_data.swing_arc_degrees) / 2.0
 	var duration: float = 1.0 / max(melee_data.swing_speed, 0.01)
@@ -152,6 +152,7 @@ func swing():
 func _end_swing():
 	is_swinging = false
 	collision_shape.disabled = true
+	trail_particles.hide()
 	trail_particles.emitting = false
 	
 func _on_area_2d_body_entered(body: Node):

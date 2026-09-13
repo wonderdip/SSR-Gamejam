@@ -17,8 +17,8 @@ curve = SubResource("Curve_kp4jo")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtjpd"]
 particle_flag_disable_z = true
 spread = 0.0
-initial_velocity_min = -20.0
-initial_velocity_max = -20.0
+initial_velocity_min = -40.0
+initial_velocity_max = -40.0
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_a6x67")
 hue_variation_min = -2.2351742e-08
@@ -26,7 +26,7 @@ hue_variation_max = -2.2351742e-08
 
 [resource]
 script = ExtResource("1_aek6j")
-swing_speed = 4.0
+swing_speed = 3.0
 collision_shape = SubResource("RectangleShape2D_rcvlp")
 trail = SubResource("ParticleProcessMaterial_wtjpd")
 slash_texture = ExtResource("2_kp4jo")
