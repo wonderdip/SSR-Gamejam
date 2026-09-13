@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bffjpwdbjkxe5"]
+
+[ext_resource type="Script" uid="uid://c34up5750mih5" path="res://Scripts/Resources/melee_instance.gd" id="1_domhp"]
+[ext_resource type="Texture2D" uid="uid://c2bdxp2griq7w" path="res://Assets/Items/Melees/plasma_saber.png" id="2_0ljai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7au8"]
+size = Vector2(8, 36)
+
+[sub_resource type="Gradient" id="Gradient_0ljai"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_clq1n"]
+gradient = SubResource("Gradient_0ljai")
+width = 128
+height = 567
+
+[sub_resource type="Gradient" id="Gradient_4e23i"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a7au8"]
+gradient = SubResource("Gradient_4e23i")
+width = 128
+height = 567
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_02y5l"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3c16j"]
+gradient = SubResource("Gradient_02y5l")
+width = 333
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0.6)
+
+[node name="PlasmaSword" type="Area2D" unique_id=354987931 node_paths=PackedStringArray("trail_particles", "melee_sprite", "collision_shape", "hit_particle")]
+script = ExtResource("1_domhp")
+trail_particles = NodePath("")
+melee_sprite = NodePath("MeleeSprite")
+collision_shape = NodePath("CollisionShape2D")
+hit_particle = NodePath("HitParticle")
+metadata/_custom_type_script = "uid://c34up5750mih5"
+
+[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=726500475]
+position = Vector2(0, -24)
+texture = ExtResource("2_0ljai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305449350]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_a7au8")
+
+[node name="HitParticle" type="GPUParticles2D" parent="." unique_id=901362488]
+
+[node name="LeftLight" type="PointLight2D" parent="." unique_id=341427246]
+position = Vector2(-4, -31)
+color = Color(1, 0.41960785, 0.4392157, 1)
+texture = SubResource("GradientTexture2D_clq1n")
+texture_scale = 0.06
+
+[node name="RightLight" type="PointLight2D" parent="." unique_id=967748593]
+position = Vector2(4, -31)
+color = Color(1, 0.41960785, 0.4392157, 1)
+texture = SubResource("GradientTexture2D_a7au8")
+texture_scale = 0.06
+
+[node name="TopLight" type="PointLight2D" parent="." unique_id=2063604995]
+position = Vector2(2.9802322e-07, -56.999996)
+color = Color(1, 0.41960785, 0.4392157, 1)
+texture = SubResource("GradientTexture2D_3c16j")
+texture_scale = 0.06

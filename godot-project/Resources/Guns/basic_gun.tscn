@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d2x8tp5svblqu"]
+
+[ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_j33wg"]
+[ext_resource type="Texture2D" uid="uid://kj2ou8apub73" path="res://Assets/Items/Guns/basic.png" id="2_xuecx"]
+
+[node name="BasicGun" type="Node2D" unique_id=392284592]
+script = ExtResource("1_j33wg")
+metadata/_custom_type_script = "uid://c6jbssk0vys0"
+
+[node name="GunSprite" type="Sprite2D" parent="." unique_id=1515089741]
+texture = ExtResource("2_xuecx")
+
+[node name="BulletPoint" type="Marker2D" parent="." unique_id=835239954]
+position = Vector2(5, 1)

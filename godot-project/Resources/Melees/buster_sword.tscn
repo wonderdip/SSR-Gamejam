@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cjjyefqycyap3"]
+
+[ext_resource type="Script" uid="uid://c34up5750mih5" path="res://Scripts/Resources/melee_instance.gd" id="1_2njau"]
+[ext_resource type="Texture2D" uid="uid://dt72tsdvij4bw" path="res://Assets/Items/Melees/buster_sword.png" id="2_go4im"]
+
+[sub_resource type="Curve" id="Curve_wktlv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2njau"]
+curve = SubResource("Curve_wktlv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3dn2y"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = -40.0
+initial_velocity_max = -40.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_2njau")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
+size = Vector2(12, 40)
+
+[node name="BusterSword" type="Area2D" unique_id=811913683 node_paths=PackedStringArray("trail_particles", "melee_sprite", "collision_shape", "hit_particle")]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_2njau")
+trail_particles = NodePath("TrailParticles")
+melee_sprite = NodePath("MeleeSprite")
+collision_shape = NodePath("CollisionShape2D")
+hit_particle = NodePath("HitParticle")
+metadata/_custom_type_script = "uid://c34up5750mih5"
+
+[node name="TrailParticles" type="GPUParticles2D" parent="." unique_id=489995169]
+position = Vector2(0, -24)
+emitting = false
+amount = 16
+texture = ExtResource("2_go4im")
+lifetime = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_3dn2y")
+
+[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=1924428155]
+position = Vector2(0, -24)
+texture = ExtResource("2_go4im")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1553510863]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_awwja")
+
+[node name="HitParticle" type="GPUParticles2D" parent="." unique_id=1686762731]

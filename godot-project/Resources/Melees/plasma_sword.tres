@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://cu5gtkk7mno62"]
+
+[ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_0tng3"]
+[ext_resource type="PackedScene" uid="uid://bffjpwdbjkxe5" path="res://Resources/Melees/plasma_sword.tscn" id="1_771ov"]
+[ext_resource type="Texture2D" uid="uid://c2bdxp2griq7w" path="res://Assets/Items/Melees/plasma_saber.png" id="3_0q44m"]
+
+[resource]
+script = ExtResource("1_0tng3")
+scene = ExtResource("1_771ov")
+swing_sound = "sword_swing"
+item_name = "Plasma Sword"
+texture = ExtResource("3_0q44m")
+item_type = 1
+metadata/_custom_type_script = "uid://beapjtsj1udek"

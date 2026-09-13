@@ -28,16 +28,16 @@ func add_item(item: ItemData) -> void:
 			_add_consumable(item)
 		_:
 			push_warning("Inventory: unhandled item_type for " + item.item_name)
-
+			
 func _equip_gun(gun_data: GunData) -> void:
 	if gun_instance:
 		gun_instance.queue_free()
-
+	
 	equipped_gun = gun_data
-	gun_instance = GunInstance.new()
+	gun_instance = gun_data.scene.instantiate() as GunInstance
 	gun_instance.gun_data = gun_data
-	player.gun_pos.add_child(gun_instance)
 	gun_instance.player = player
+	player.gun_pos.add_child(gun_instance)
 	gun_equipped.emit(gun_data)
 
 func _equip_melee(melee_data: MeleeData) -> void:
@@ -45,12 +45,11 @@ func _equip_melee(melee_data: MeleeData) -> void:
 		melee_instance.queue_free()
 		
 	equipped_melee = melee_data
-	melee_instance = MeleeInstance.new()
+	melee_instance = melee_data.scene.instantiate() as MeleeInstance
 	melee_instance.melee_data = melee_data
-	player.melee_pos.add_child(melee_instance)
 	melee_instance.player = player
+	player.melee_pos.add_child(melee_instance)
 	melee_equipped.emit(melee_data)
-	
 
 func _add_passive(item: ItemData) -> void:
 	anomalies.append(item)

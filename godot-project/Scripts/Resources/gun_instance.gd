@@ -4,8 +4,8 @@ class_name GunInstance
 @export var gun_data: GunData
 @export var current_ammo: int
 
-var gun_sprite: Sprite2D
-var bullet_point : Marker2D
+@onready var gun_sprite: Sprite2D = $GunSprite
+@onready var bullet_point: Marker2D = $BulletPoint
 
 var pivot: Marker2D
 var can_shoot: bool = true 
@@ -14,23 +14,11 @@ var dead_zone: float = 5.0
 var player: Player
 
 func _ready() -> void:
+	pivot = player.gun_pos
 	name = (ItemEnums.RARITIES.keys()[gun_data.rarity]
 	 + " " + 
 	gun_data.item_name)
-	
-	
 	print(name)
-	pivot = SceneManager.player.gun_pos
-	
-	bullet_point = Marker2D.new()
-	bullet_point.position = gun_data.bullet_pos
-	add_child(bullet_point)
-	
-	gun_sprite = Sprite2D.new()
-	gun_sprite.texture = gun_data.texture
-	gun_sprite.z_index = 10
-	add_child(gun_sprite)
-	
 	current_ammo = gun_data.magazine_size
 	
 func _process(_delta):
