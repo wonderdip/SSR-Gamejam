@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c34up5750mih5" path="res://Scripts/Resources/melee_instance.gd" id="1_domhp"]
 [ext_resource type="Texture2D" uid="uid://c2bdxp2griq7w" path="res://Assets/Items/Melees/plasma_saber.png" id="2_0ljai"]
+[ext_resource type="Shader" uid="uid://co7whhu2bl5d4" path="res://Shader/slash.gdshader" id="2_clq1n"]
 
 [sub_resource type="Gradient" id="Gradient_0ljai"]
 
@@ -30,14 +31,143 @@ fill = 1
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.5, 0.6)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4e23i"]
+shader = ExtResource("2_clq1n")
+shader_parameter/slash_color = Color(1, 0.30980393, 0.32941177, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/glow_color = Color(0.4333519, 0.11395587, 0.124602415, 1)
+shader_parameter/progress = 1.0
+shader_parameter/arc_degrees = 170.0000076
+shader_parameter/radius = 0.10000000149012
+shader_parameter/thickness = 0.08300000324398
+shader_parameter/edge_width = 0.0010000000475
+shader_parameter/glow_width = 0.07400000281648
+shader_parameter/taper = 5.0
+shader_parameter/glow_strength = 5.0
+shader_parameter/streak_strength = 0.0
+shader_parameter/streak_width = 0.0010000000475
+shader_parameter/distortion = 0.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/pixel_size = 0.0010000000475
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7au8"]
 size = Vector2(8, 36)
 
-[node name="PlasmaSword" type="Area2D" unique_id=354987931 node_paths=PackedStringArray("melee_sprite", "collision_shape", "hit_particle", "vfx")]
+[sub_resource type="Animation" id="Animation_wktlv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08300000324398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9.536743e-07, 34)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VFX/SlashRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dhdsh"]
+resource_name = "slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.20000002, 0.33333334, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.666000031635, 0.250000011875, 0.250000011875, 0.666000031635]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.20000002, 0.33333334, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.00999999977648, 0.29900001350398, 0.29900001350398, 0.00999999977648]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.20000002, 0.33333334, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 18), Vector2(0, 43.075), Vector2(0, 43.075), Vector2(0, 18)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VFX/SlashRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ljai"]
+_data = {
+&"RESET": SubResource("Animation_wktlv"),
+&"slash": SubResource("Animation_dhdsh")
+}
+
+[node name="PlasmaSword" type="Area2D" unique_id=354987931 node_paths=PackedStringArray("melee_sprite", "collision_shape", "hit_particle", "animation_player", "vfx")]
 script = ExtResource("1_domhp")
 melee_sprite = NodePath("MeleeSprite")
 collision_shape = NodePath("CollisionShape2D")
 hit_particle = NodePath("VFX/HitParticle")
+animation_player = NodePath("AnimationPlayer")
 vfx = NodePath("VFX")
 metadata/_custom_type_script = "uid://c34up5750mih5"
 
@@ -63,6 +193,14 @@ color = Color(1, 0.41960785, 0.4392157, 1)
 texture = SubResource("GradientTexture2D_3c16j")
 texture_scale = 0.06
 
+[node name="SlashRect" type="ColorRect" parent="VFX" unique_id=245726051]
+visible = false
+material = SubResource("ShaderMaterial_4e23i")
+offset_top = 34.0
+offset_right = 80.0
+offset_bottom = 114.0
+rotation = -2.3561945
+
 [node name="MeleeSprite" type="Sprite2D" parent="." unique_id=726500475]
 position = Vector2(0, -24)
 texture = ExtResource("2_0ljai")
@@ -70,3 +208,6 @@ texture = ExtResource("2_0ljai")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305449350]
 position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_a7au8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1935309418]
+libraries/ = SubResource("AnimationLibrary_0ljai")

@@ -86,9 +86,14 @@ void fragment() {
 		angle_distance
 	);
 
-	// NEW: kill anything outside the actual ring radius
-	float radial_limit = radius + thickness + glow_width;
-	float radial_mask = 1.0 - smoothstep(radial_limit, radial_limit + 0.05, dist);
+	// Clip to a band around the ring — both inner and outer sides
+	float outer_limit = radius + thickness + glow_width;
+	float inner_limit = max(radius - thickness - glow_width, 0.0);
+
+	float radial_mask =
+		smoothstep(inner_limit, inner_limit + 0.05, dist) *
+		(1.0 - smoothstep(outer_limit, outer_limit + 0.05, dist));
+
 	arc_mask *= radial_mask;
 
 	// ---------------------------------------------------------

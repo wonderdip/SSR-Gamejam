@@ -5,6 +5,8 @@ class_name MeleeData
 @export var damage: float = 10
 @export var swing_speed: float = 6
 @export var swing_arc_degrees: float = 100.0  # total sweep angle
+@export var swings_before_cd: int = 5
+@export var cooldown: float = 0.5
 
 @export_category("Config")
 @export var scene: PackedScene
@@ -12,3 +14,4 @@ class_name MeleeData
 @export_category("Sounds")
 @export var swing_sound: String = ""
 @export var equip_sound: String = ""
+@export var hit_sound: String = ""

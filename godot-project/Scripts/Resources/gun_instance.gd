@@ -12,6 +12,7 @@ var can_shoot: bool = true
 var reloading: bool = false
 var dead_zone: float = 5.0
 var player: Player
+var reload_time_left: float = 0.0
 
 func _ready() -> void:
 	pivot = player.gun_pos
@@ -22,6 +23,8 @@ func _ready() -> void:
 	current_ammo = gun_data.magazine_size
 	
 func _process(_delta):
+	if reloading:
+		reload_time_left = max(reload_time_left - _delta, 0.0)
 	call_deferred("update_art")
 	
 	if Input.is_action_just_pressed("reload"):
@@ -87,23 +90,18 @@ func shoot():
 		can_shoot = true  # Otherwise, allow shooting again
 	
 func reload():
-	# Don't reload if we're already reloading or if the magazine is already full
 	if reloading or current_ammo >= gun_data.magazine_size:
 		return
-	
-	# Start reload process
+
 	reloading = true
-	can_shoot = false  # Disable shooting while reloading
-	
-	# Create a timer for reload
+	can_shoot = false
+	reload_time_left = gun_data.reload_time
+
 	var reload_timer = get_tree().create_timer(gun_data.reload_time)
-	
-	# Wait for reload time to complete
 	await reload_timer.timeout
-	
-	# Only complete the reload if the gun still exists and hasn't been removed
+
 	if is_instance_valid(self) and not is_queued_for_deletion():
-		# Reload complete
 		current_ammo = gun_data.magazine_size
 		reloading = false
 		can_shoot = true
+		reload_time_left = 0.0

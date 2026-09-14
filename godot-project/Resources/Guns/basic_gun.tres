@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_vf031"]
 [ext_resource type="PackedScene" uid="uid://d2x8tp5svblqu" path="res://Resources/Guns/basic_gun.tscn" id="2_5f2e2"]
 [ext_resource type="Texture2D" uid="uid://kj2ou8apub73" path="res://Assets/Items/Guns/basic.png" id="2_b3qae"]
+[ext_resource type="Texture2D" uid="uid://bh8rt8kycx03r" path="res://Assets/Items/Guns/mini_basic.png" id="2_iioyr"]
 
 [resource]
 script = ExtResource("1_vf031")
@@ -11,5 +12,6 @@ bullet = ExtResource("1_8qnil")
 scene = ExtResource("2_5f2e2")
 item_name = "Basic Gun"
 texture = ExtResource("2_b3qae")
+mini_texture = ExtResource("2_iioyr")
 description = "A trusty basic gun"
 metadata/_custom_type_script = "uid://bx02otob6ncxd"

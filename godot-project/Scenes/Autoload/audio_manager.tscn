@@ -24,6 +24,13 @@
 [ext_resource type="AudioStream" uid="uid://bcpgd7tt07wcj" path="res://Assets/Audio/SFX/Weapons/sword_swing1.wav" id="21_8oknk"]
 [ext_resource type="AudioStream" uid="uid://drxuuseukok4g" path="res://Assets/Audio/SFX/Weapons/sword_swing2.wav" id="22_hc4hy"]
 [ext_resource type="AudioStream" uid="uid://bjptnwqxqb6t6" path="res://Assets/Audio/SFX/Weapons/sword_swing3.wav" id="23_i0578"]
+[ext_resource type="AudioStream" uid="uid://bwg5255r6waen" path="res://Assets/Audio/SFX/Weapons/plasma_swing1.mp3" id="24_x1elt"]
+[ext_resource type="AudioStream" uid="uid://jbf37k8absw7" path="res://Assets/Audio/SFX/Weapons/plasma_swing2.mp3" id="25_4ypwi"]
+[ext_resource type="AudioStream" uid="uid://duwd0j0dbpamh" path="res://Assets/Audio/SFX/Weapons/plasma_pull_out.mp3" id="26_x1elt"]
+[ext_resource type="AudioStream" uid="uid://c3vlrgsy225qy" path="res://Assets/Audio/SFX/Weapons/ghost.ogg" id="27_op681"]
+[ext_resource type="AudioStream" uid="uid://b2af0p16j5h4y" path="res://Assets/Audio/SFX/Weapons/GhostOhh.ogg" id="28_1n1pt"]
+[ext_resource type="AudioStream" uid="uid://bhmtmxh6jom3o" path="res://Assets/Audio/SFX/Weapons/GhostOhh2.ogg" id="29_ao66k"]
+[ext_resource type="AudioStream" uid="uid://bno7wxyxqrne6" path="res://Assets/Audio/SFX/Weapons/HeavyHit.ogg" id="30_1n1pt"]
 
 [sub_resource type="Resource" id="Resource_1npab"]
 script = ExtResource("2_rx4vr")
@@ -151,6 +158,48 @@ tag = "sword_swing"
 audio_stream = ExtResource("23_i0578")
 metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
+[sub_resource type="Resource" id="Resource_0ljai"]
+script = ExtResource("2_rx4vr")
+tag = "plasma_swing"
+audio_stream = ExtResource("24_x1elt")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_hc4hy"]
+script = ExtResource("2_rx4vr")
+tag = "plasma_swing"
+audio_stream = ExtResource("25_4ypwi")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_i0578"]
+script = ExtResource("2_rx4vr")
+tag = "plasma_pull_out"
+audio_stream = ExtResource("26_x1elt")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_wm0aq"]
+script = ExtResource("2_rx4vr")
+tag = "ghostly_pull_out"
+audio_stream = ExtResource("27_op681")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_al0q2"]
+script = ExtResource("2_rx4vr")
+tag = "ghost"
+audio_stream = ExtResource("28_1n1pt")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_r50q1"]
+script = ExtResource("2_rx4vr")
+tag = "ghost"
+audio_stream = ExtResource("29_ao66k")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_1xg3f"]
+script = ExtResource("2_rx4vr")
+tag = "heavy_hit"
+audio_stream = ExtResource("30_1n1pt")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
 [sub_resource type="Resource" id="Resource_nkd2g"]
 script = ExtResource("2_rx4vr")
 tag = "lobby"
@@ -159,5 +208,5 @@ metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
 [node name="AudioManager" type="Node" unique_id=1886217390]
 script = ExtResource("1_1npab")
-sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_a6x67"), SubResource("Resource_wtjpd")])
+sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_a6x67"), SubResource("Resource_wtjpd"), SubResource("Resource_0ljai"), SubResource("Resource_hc4hy"), SubResource("Resource_i0578"), SubResource("Resource_wm0aq"), SubResource("Resource_al0q2"), SubResource("Resource_r50q1"), SubResource("Resource_1xg3f")])
 music_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_nkd2g")])

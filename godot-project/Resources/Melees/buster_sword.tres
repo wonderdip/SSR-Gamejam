@@ -1,16 +1,20 @@
 [gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://ds4tt1snhs6pj"]
 
+[ext_resource type="Texture2D" uid="uid://b78ojm0kq16ln" path="res://Assets/Items/Melees/mini_buster.png" id="1_a6x67"]
 [ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_aek6j"]
 [ext_resource type="PackedScene" uid="uid://cjjyefqycyap3" path="res://Resources/Melees/buster_sword.tscn" id="1_kp4jo"]
 [ext_resource type="Texture2D" uid="uid://dt72tsdvij4bw" path="res://Assets/Items/Melees/buster_sword.png" id="2_rcvlp"]
 
 [resource]
 script = ExtResource("1_aek6j")
-swing_speed = 3.0
+swing_speed = 2.0
+swing_arc_degrees = 120.0
 scene = ExtResource("1_kp4jo")
 swing_sound = "sword_swing"
 equip_sound = "heavy_sword"
+hit_sound = "heavy_hit"
 item_name = "Buster Sword"
 texture = ExtResource("2_rcvlp")
+mini_texture = ExtResource("1_a6x67")
 item_type = 1
 metadata/_custom_type_script = "uid://beapjtsj1udek"

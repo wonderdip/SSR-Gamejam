@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://cavqqh3qomtxx"]
+
+[ext_resource type="Script" uid="uid://c34up5750mih5" path="res://Scripts/Resources/melee_instance.gd" id="1_bhwsm"]
+[ext_resource type="Shader" uid="uid://co7whhu2bl5d4" path="res://Shader/slash.gdshader" id="3_ka1vr"]
+[ext_resource type="Texture2D" uid="uid://ohyq0cyfpjsd" path="res://Assets/Items/Melees/soul_reaper.png" id="4_liscn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prxdd"]
+shader = ExtResource("3_ka1vr")
+shader_parameter/slash_color = Color(0, 0, 0, 1)
+shader_parameter/edge_color = Color(0.44, 0.030799996, 0.09900011, 1)
+shader_parameter/glow_color = Color(1, 1, 1, 0)
+shader_parameter/progress = 1.0
+shader_parameter/arc_degrees = 227.3770103254075
+shader_parameter/radius = 0.37600001460012
+shader_parameter/thickness = 0.08300000324398
+shader_parameter/edge_width = 0.0090000004275
+shader_parameter/glow_width = 0.00999999977648
+shader_parameter/taper = 5.0
+shader_parameter/glow_strength = 0.0
+shader_parameter/streak_strength = 0.0
+shader_parameter/streak_width = 0.0010000000475
+shader_parameter/distortion = 0.02400000114
+shader_parameter/noise_scale = 7.6650003165875
+shader_parameter/pixel_size = 0.0010000000475
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ghw8"]
+size = Vector2(17.392305, 40)
+
+[sub_resource type="Animation" id="Animation_nw2xm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08300000324398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xl0o1"]
+resource_name = "slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.666000031635, 0.50000002375, 0.50000002375, 0.666000031635]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.00999999977648, 0.08000000310148, 0.08000000310148, 0.00999999977648]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2crcg"]
+_data = {
+&"RESET": SubResource("Animation_nw2xm"),
+&"slash": SubResource("Animation_xl0o1")
+}
+
+[node name="SoulReaper" type="Area2D" unique_id=713737988 node_paths=PackedStringArray("melee_sprite", "collision_shape", "animation_player", "vfx")]
+script = ExtResource("1_bhwsm")
+melee_sprite = NodePath("MeleeSprite")
+collision_shape = NodePath("CollisionShape2D")
+animation_player = NodePath("AnimationPlayer")
+vfx = NodePath("VFX")
+metadata/_custom_type_script = "uid://c34up5750mih5"
+
+[node name="VFX" type="Node2D" parent="." unique_id=1178164271]
+
+[node name="SlashRect" type="ColorRect" parent="VFX" unique_id=1332759526]
+visible = false
+material = SubResource("ShaderMaterial_prxdd")
+offset_left = -2.0
+offset_top = 42.0
+offset_right = 78.0
+offset_bottom = 122.0
+rotation = -2.3561945
+
+[node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=1361282197]
+emitting = false
+
+[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=271337184]
+position = Vector2(0, -24)
+texture = ExtResource("4_liscn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67705902]
+visible = false
+position = Vector2(-14.000002, -38.000004)
+rotation = 1.0471976
+shape = SubResource("RectangleShape2D_8ghw8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=331133870]
+libraries/ = SubResource("AnimationLibrary_2crcg")

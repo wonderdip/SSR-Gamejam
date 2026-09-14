@@ -3,6 +3,7 @@ class_name MeleeInstance
 
 var melee_data: MeleeData
 var damage: float
+var swings: int
 
 @export var trail_particles: GPUParticles2D
 @export var melee_sprite: Sprite2D
@@ -16,6 +17,8 @@ var dead_zone: float = 5.0
 var player: Player
 var is_swinging: bool = false
 var swing_tween: Tween
+var recharging: bool = false
+var cooldown_time_left: float = 0.0
 
 func _ready() -> void:
 	pivot = player.melee_pos
@@ -23,6 +26,10 @@ func _ready() -> void:
 	set_physics_layers()
 	collision_shape.disabled = true
 	body_entered.connect(_on_area_2d_body_entered)
+	swings = melee_data.swings_before_cd
+	
+	if melee_data.equip_sound:
+		AudioManager.play_sfx(melee_data.equip_sound,0 ,randf_range(0.95, 1.05))
 	
 func set_physics_layers():
 	set_collision_layer_value(1, false)
@@ -33,12 +40,16 @@ func set_physics_layers():
 	set_collision_mask_value(5, true)
 	
 func _physics_process(_delta):
+	if recharging:
+		cooldown_time_left = max(cooldown_time_left - _delta, 0.0)
 	if not is_swinging:
 		update_art()
 
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and swings > 0 and not recharging:
 		if not is_swinging:
 			swing()
+
+
 
 func update_art():
 	if is_swinging:
@@ -58,6 +69,7 @@ func update_art():
 func swing():
 	is_swinging = true
 	collision_shape.disabled = false
+	swings -= 1
 
 	var base_angle := pivot.global_rotation
 	var half_arc: float = deg_to_rad(melee_data.swing_arc_degrees) / 2.0
@@ -112,13 +124,36 @@ func swing():
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 
 	swing_tween.tween_callback(_end_swing)
-
+	
 func _end_swing():
 	is_swinging = false
 	collision_shape.disabled = true
 	if trail_particles:
 		trail_particles.hide()
 		trail_particles.emitting = false
+
+	if swings <= 0 and not recharging:
+		_start_cooldown()
+
+func _start_cooldown() -> void:
+	recharging = true
+	cooldown_time_left = melee_data.cooldown
+	
+	var timer := get_tree().create_timer(melee_data.cooldown)
+	melee_sprite.modulate = Color.BLACK
+	
+	var tween = create_tween()
+	tween.tween_property(melee_sprite, "modulate", Color.WHITE, melee_data.cooldown)
+	
+	await timer.timeout
+	tween.kill()
+	
+	if not is_instance_valid(self):
+		return
+		
+	swings = melee_data.swings_before_cd
+	recharging = false
+	cooldown_time_left = 0.0
 	
 func _on_area_2d_body_entered(body: Node):
 	#particles.emitting = true
