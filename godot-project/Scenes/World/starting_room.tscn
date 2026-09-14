@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="7_ogupu"]
 [ext_resource type="PackedScene" uid="uid://btaoly10afo7a" path="res://Scenes/World/south_item_room.tscn" id="9_2lph4"]
 [ext_resource type="Script" uid="uid://c047k8lmipoby" path="res://Scripts/room_transition_trigger.gd" id="9_ur81b"]
+[ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="10_ur81b"]
 
 [sub_resource type="Animation" id="Animation_wsauq"]
 length = 0.001
@@ -3015,7 +3016,7 @@ tile_map_data = PackedByteArray("AAACAAcAAAAHAE4AAAADAAcAAAAIAE4AAAAEAAcAAAAJAE4
 tile_set = SubResource("TileSet_hpu63")
 
 [node name="TopDecor" type="TileMapLayer" parent="TileMapLayers" unique_id=720067755]
-tile_map_data = PackedByteArray("AAAJAAQAAAADAAkAABAIAAQAAAADAAUAAAAHAAQAAAADAAUAAAAGAAMAAAADAAgAAAAGAAQAAAADAAkAAAAFAAQAAAAAAAgAAAAFAAMAAAAAAAUAAAAKAAQAAAACAAgAAAAKAAMAAAACAAUAAAAJAAMAAAADAAgAABAJAAIAAAANAFUAAAAJAAEAAAANAFQAAAAGAAIAAAAMACkAAAAGAAEAAAAMACgAAAADAAMAAAAAADQAADA=")
+tile_map_data = PackedByteArray("AAAJAAQAAAADAAkAABAIAAQAAAADAAUAAAAHAAQAAAADAAUAAAAGAAMAAAADAAgAAAAGAAQAAAADAAkAAAAFAAQAAAAAAAgAAAAFAAMAAAAAAAUAAAAKAAQAAAACAAgAAAAKAAMAAAACAAUAAAAJAAMAAAADAAgAABAJAAIAAAANAFUAAAAJAAEAAAANAFQAAAAGAAIAAAAMACkAAAAGAAEAAAAMACgAAAA=")
 tile_set = SubResource("TileSet_gwgwg")
 
 [node name="SouthItemRoom" parent="." unique_id=1010165572 instance=ExtResource("9_2lph4")]
@@ -3113,6 +3114,14 @@ position = Vector2(128, 72)
 color = Color(0.64844644, 0.491255, 0.004493872, 1)
 energy = 0.25
 texture = SubResource("GradientTexture2D_3c16j")
+
+[node name="Note2" parent="." unique_id=634588885 instance=ExtResource("10_ur81b")]
+position = Vector2(80, 100)
+specific_note = "Every floor has its dangers, but you can also find boons of all kinds"
+
+[node name="Note" parent="." unique_id=144118866 instance=ExtResource("10_ur81b")]
+position = Vector2(56, 54)
+specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the building, the cult of Sciontology hides many mysteries "
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]
 [connection signal="body_entered" from="RoomTransitionTrigger" to="InteractionTrigger" method="_on_room_transition_trigger_body_entered"]

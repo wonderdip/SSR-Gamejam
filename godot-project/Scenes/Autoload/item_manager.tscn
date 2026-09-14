@@ -4,11 +4,13 @@
 [ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="2_dbrv6"]
 [ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="3_dbrv6"]
 [ext_resource type="Resource" uid="uid://jmc1lyiqehor" path="res://Resources/Guns/basic_gun.tres" id="4_gycri"]
+[ext_resource type="Resource" uid="uid://ds4tt1snhs6pj" path="res://Resources/Melees/buster_sword.tres" id="4_rdw3f"]
+[ext_resource type="Resource" uid="uid://cu5gtkk7mno62" path="res://Resources/Melees/plasma_sword.tres" id="5_g8pkp"]
 [ext_resource type="Resource" uid="uid://blujy4yyy8f54" path="res://Resources/Melees/soul_reaper.tres" id="5_rdw3f"]
 
 [node name="ItemManager" type="Node" unique_id=838053468]
 script = ExtResource("1_efi6f")
-melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f")])
+melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f"), ExtResource("4_rdw3f"), ExtResource("5_g8pkp")])
 guns = Array[ExtResource("3_dbrv6")]([ExtResource("4_gycri")])
 rarity_weights = {
 0: 100.0,

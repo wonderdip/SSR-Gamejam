@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bdujxs8si072i"]
+
+[ext_resource type="Script" uid="uid://d0dge4sjetppv" path="res://Scripts/note.gd" id="1_6k1c7"]
+[ext_resource type="Texture2D" uid="uid://byf5b21cesfoc" path="res://Assets/Objects/note.png" id="1_g6lof"]
+[ext_resource type="Shader" uid="uid://otchkmw5lgmi" path="res://Shader/Shine.gdshader" id="2_wj1s4"]
+[ext_resource type="Texture2D" uid="uid://5y6tnedeb47c" path="res://Assets/Objects/note_big.png" id="3_8uk1f"]
+[ext_resource type="FontFile" uid="uid://cm57baw7dxa43" path="res://Assets/Fonts/High_Birth.ttf" id="4_wj1s4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gh7k3"]
+shader = ExtResource("2_wj1s4")
+shader_parameter/shine_progress = 0.999999977648
+shader_parameter/shine_size = 0.07999999821184
+shader_parameter/shine_angle = 45.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dtook"]
+radius = 18.110771
+
+[node name="Note" type="Area2D" unique_id=634588885]
+collision_layer = 32
+script = ExtResource("1_6k1c7")
+
+[node name="SmallSprite" type="Sprite2D" parent="." unique_id=1441227244]
+material = SubResource("ShaderMaterial_gh7k3")
+texture = ExtResource("1_g6lof")
+centered = false
+offset = Vector2(-8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1126078481]
+visible = false
+shape = SubResource("CircleShape2D_dtook")
+
+[node name="NoteUI" type="CanvasLayer" parent="." unique_id=607254814]
+visible = false
+
+[node name="NoteUISprite" type="Sprite2D" parent="NoteUI" unique_id=1109879351]
+position = Vector2(128, 72)
+texture = ExtResource("3_8uk1f")
+
+[node name="Label" type="Label" parent="NoteUI/NoteUISprite" unique_id=1291681498]
+anchors_preset = -1
+anchor_left = 0.063025214
+anchor_top = 0.07024793
+anchor_right = 0.93697476
+anchor_bottom = 0.9793388
+offset_left = -59.5
+offset_top = -60.5
+offset_right = -59.5
+offset_bottom = -60.5
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.1728327, 0.17283267, 0.17283267, 1)
+theme_override_fonts/font = ExtResource("4_wj1s4")
+theme_override_font_sizes/font_size = 9
+text = "hey"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="NoteUI/NoteUISprite" unique_id=1768503044]
+custom_maximum_size = Vector2(13, 9)
+offset_left = 40.0
+offset_top = -54.0
+offset_right = 53.0
+offset_bottom = -45.0
+theme_override_font_sizes/font_size = 7
+text = "X"
+
+[connection signal="pressed" from="NoteUI/NoteUISprite/Button" to="." method="_on_button_pressed"]
