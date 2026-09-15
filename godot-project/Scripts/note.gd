@@ -4,23 +4,35 @@ class_name Note
 @export_multiline var notes: Array[String] = []
 @export_multiline var specific_note: String = ""
 @onready var note_ui: CanvasLayer = $NoteUI
-@onready var label: Label = $NoteUI/NoteUISprite/Label
-@onready var note_ui_sprite: Sprite2D = $NoteUI/NoteUISprite
 @onready var small_sprite: Sprite2D = $SmallSprite
 
+@onready var control: Control = $NoteUI/Control
+@onready var note_ui_sprite: TextureRect = $NoteUI/Control/NoteUISprite
+@onready var button: Button = $NoteUI/Control/NoteUISprite/Button
+@onready var label: Label = $NoteUI/Control/Label
+
 var max_font_size: int = 9
+var min_font_size: int = 3
 var can_open: bool = false
 var player: Player = null
 var opened: bool = false
 
 # Called when the node enters the scene tree for the first time.
+static var used_notes: Array[String] = []
+
 func _ready() -> void:
 	note_ui.hide()
 
 	if specific_note.length() > 0:
 		label.text = specific_note
 	else:
-		label.text = notes.pick_random()
+		var available: Array[String] = notes.filter(func(n): return not used_notes.has(n))
+		if available.is_empty():
+			available = notes  # every option's been used — allow repeats rather than break
+
+		var random_note: String = available.pick_random()
+		label.text = random_note
+		used_notes.append(random_note)
 
 	fit_text()
 
@@ -37,27 +49,50 @@ func _on_player_exited_interaction_area(body: Node):
 	if body is Player and body == player:
 		player = null
 		can_open = false
-	
+
 func fit_text() -> void:
 	var font := label.get_theme_font("font")
-	var font_size := max_font_size
-	var max_width := label.size.x
+	var available_height := label.size.y
 
-	while font_size > 1:
-		var text_size := font.get_multiline_string_size(
-			label.text,
-			HORIZONTAL_ALIGNMENT_LEFT,
-			max_width,
-			font_size
-		)
+	label.scale = Vector2.ONE
 
-		if text_size.y <= label.size.y:
+	var best_font_size := min_font_size
+	var best_text_height := 0.0
+
+	for candidate_size in range(min_font_size, max_font_size + 1):
+		label.add_theme_font_size_override("font_size", candidate_size)
+
+		var line_height := font.get_height(candidate_size) + label.get_theme_constant("line_spacing")
+		var text_height := label.get_line_count() * line_height
+
+		if text_height <= available_height:
+			best_font_size = candidate_size
+			best_text_height = text_height
+		else:
 			break
+
+	label.add_theme_font_size_override("font_size", best_font_size)
+
+	var scale_factor := 1.0
+	if best_text_height > 0:
+		scale_factor = min(available_height / best_text_height, 1.0)
+
+	label.pivot_offset = label.size / 2.0
+	label.scale = Vector2.ONE * scale_factor
 	
-		font_size -= 1
-	
-	label.add_theme_font_size_override("font_size", font_size)
-	
+func _autowrap_to_brk_flags(mode: TextServer.AutowrapMode) -> int:
+	match mode:
+		TextServer.AUTOWRAP_OFF:
+			return TextServer.BREAK_NONE
+		TextServer.AUTOWRAP_ARBITRARY:
+			return TextServer.BREAK_MANDATORY | TextServer.BREAK_GRAPHEME_BOUND
+		TextServer.AUTOWRAP_WORD:
+			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND
+		TextServer.AUTOWRAP_WORD_SMART:
+			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
+		_:
+			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND
+
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("interact")
 	and not event.is_echo()
@@ -72,17 +107,17 @@ func _input(event: InputEvent) -> void:
 func open_note():
 	player.movement_locked = true
 	opened = true
-	note_ui_sprite.scale = Vector2(0, 0)
+	control.scale = Vector2(0, 0)
 	note_ui.show()
 	var tween = create_tween()
-	tween.tween_property(note_ui_sprite, "scale", Vector2(1, 1), 0.5
+	tween.tween_property(control, "scale", Vector2(1, 1), 0.5
 	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 func close_note():
-	note_ui_sprite.scale = Vector2(1, 1)
+	control.scale = Vector2(1, 1)
 	
 	var tween = create_tween()
-	tween.tween_property(note_ui_sprite, "scale", Vector2(0, 0), 0.4
+	tween.tween_property(control, "scale", Vector2(0, 0), 0.4
 	).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	
 	await tween.finished

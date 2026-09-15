@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_d8gsv"]
 [ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="2_66gei"]
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mdoty"]
+[ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="4_66gei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d8gsv"]
 texture = ExtResource("2_66gei")
@@ -2855,8 +2856,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.5)
 
-[node name="BasicRoom" type="Node2D" unique_id=1714128476]
+[node name="BasicRoom" type="Node2D" unique_id=1714128476 node_paths=PackedStringArray("note")]
 script = ExtResource("1_d8gsv")
+note = NodePath("Note")
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
 [node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=160450559]
@@ -2883,3 +2885,6 @@ texture = SubResource("GradientTexture2D_mdoty")
 position = Vector2(176, 20)
 color = Color(0.65, 0.74916667, 1, 1)
 texture = SubResource("GradientTexture2D_mdoty")
+
+[node name="Note" parent="." unique_id=634588885 instance=ExtResource("4_66gei")]
+position = Vector2(64, 114)

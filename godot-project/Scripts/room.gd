@@ -16,9 +16,16 @@ class_name Room
 	Vector2(120, 120)
 ]
 
+@export var note: Note
+
 var dungeon_index: int = -1
 var tilemaps: Array[TileMapLayer]
 var discovered: bool = false
+var has_note: bool = true
+
+func _ready() -> void:
+	if randf() < 0.85 and note:
+		note.queue_free()
 
 func get_room_rect() -> Rect2:
 	return Rect2(global_position, room_size)

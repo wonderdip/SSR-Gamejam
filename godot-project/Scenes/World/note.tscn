@@ -18,6 +18,7 @@ radius = 18.110771
 [node name="Note" type="Area2D" unique_id=634588885]
 collision_layer = 32
 script = ExtResource("1_6k1c7")
+notes = Array[String](["DON'T TRUST THEM. They know things about you that you never told them. Ask yourself how they know.", "They wiped my memory. I know because I'm writing this, and I don't remember writing anything.", "If you're reading this, you're probably me. I don't know what happened to the last one.", "I thought the voices were coming from the walls. They're not. Someone is watching us.", "Don't believe anyone who says you've been here before. You haven't, have you??", "I found photographs of people who look exactly like me. Different clothes. Different dates. Same face.", "There's another group involved...", "I don't know why I'm here, but they expect me to find something.", "Every note I leave disappears eventually. If this one survives, something has gone wrong.", "If you reach the final room, don't let down your guard theres a bigger enemy in the shadows"])
 
 [node name="SmallSprite" type="Sprite2D" parent="." unique_id=1441227244]
 material = SubResource("ShaderMaterial_gh7k3")
@@ -26,42 +27,75 @@ centered = false
 offset = Vector2(-8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1126078481]
-visible = false
 shape = SubResource("CircleShape2D_dtook")
 
 [node name="NoteUI" type="CanvasLayer" parent="." unique_id=607254814]
 visible = false
 
-[node name="NoteUISprite" type="Sprite2D" parent="NoteUI" unique_id=1109879351]
-position = Vector2(128, 72)
-texture = ExtResource("3_8uk1f")
+[node name="Control" type="Control" parent="NoteUI" unique_id=1820152656]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="NoteUI/NoteUISprite" unique_id=1291681498]
-anchors_preset = -1
-anchor_left = 0.063025214
-anchor_top = 0.07024793
-anchor_right = 0.93697476
-anchor_bottom = 0.9793388
+[node name="NoteUISprite" type="TextureRect" parent="NoteUI/Control" unique_id=555506696]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -59.5
 offset_top = -60.5
-offset_right = -59.5
-offset_bottom = -60.5
-pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_right = 59.5
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8uk1f")
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="NoteUI/Control/NoteUISprite" unique_id=1768503044]
+custom_maximum_size = Vector2(13, 9)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.83613443
+anchor_top = 0.037190083
+anchor_right = 0.9453781
+anchor_bottom = 0.11157025
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 7
+text = "X"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="NoteUI/Control" unique_id=1291681498]
+custom_minimum_size = Vector2(102, 110)
+custom_maximum_size = Vector2(102, 110)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -55.0
+offset_right = 51.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.1728327, 0.17283267, 0.17283267, 1)
 theme_override_fonts/font = ExtResource("4_wj1s4")
 theme_override_font_sizes/font_size = 9
-text = "hey"
+text = "hey whats up dude"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
+visible_characters_behavior = 1
 
-[node name="Button" type="Button" parent="NoteUI/NoteUISprite" unique_id=1768503044]
-custom_maximum_size = Vector2(13, 9)
-offset_left = 40.0
-offset_top = -54.0
-offset_right = 53.0
-offset_bottom = -45.0
-theme_override_font_sizes/font_size = 7
-text = "X"
-
-[connection signal="pressed" from="NoteUI/NoteUISprite/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NoteUI/Control/NoteUISprite/Button" to="." method="_on_button_pressed"]

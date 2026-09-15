@@ -3119,9 +3119,13 @@ texture = SubResource("GradientTexture2D_3c16j")
 position = Vector2(80, 100)
 specific_note = "Every floor has its dangers, but you can also find boons of all kinds"
 
+[node name="Note3" parent="." unique_id=1745404757 instance=ExtResource("10_ur81b")]
+position = Vector2(176, 112)
+specific_note = "Once you start you can't stop until... anyway I've left more notes for you to find but the floors are mazes, nothing is ever the same"
+
 [node name="Note" parent="." unique_id=144118866 instance=ExtResource("10_ur81b")]
-position = Vector2(56, 54)
-specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the building, the cult of Sciontology hides many mysteries "
+position = Vector2(56, 52)
+specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the floors, the cult of Sciontology hides many mysteries "
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]
 [connection signal="body_entered" from="RoomTransitionTrigger" to="InteractionTrigger" method="_on_room_transition_trigger_body_entered"]
