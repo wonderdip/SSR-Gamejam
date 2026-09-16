@@ -9,6 +9,7 @@
 script = ExtResource("1_aek6j")
 swing_speed = 2.0
 swing_arc_degrees = 120.0
+swings_before_cd = 20
 scene = ExtResource("1_kp4jo")
 swing_sound = "sword_swing"
 equip_sound = "heavy_sword"

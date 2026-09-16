@@ -9,6 +9,7 @@
 script = ExtResource("1_u1wul")
 swing_speed = 5.0
 swing_arc_degrees = 200.0
+swings_before_cd = 20
 scene = ExtResource("1_tin4q")
 swing_sound = "ghost"
 equip_sound = "ghostly_pull_out"

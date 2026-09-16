@@ -75,15 +75,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			get_viewport().set_input_as_handled()
-			AudioManager.play_sfx("select")
-			continue_label.hide()
-			if is_scrolling:
-				label.visible_characters = -1
-			elif _waiting_for_input:
-				_waiting_for_input = false
-				advanced.emit()
-
+			next()
+	if Input.is_action_just_pressed("interact"):
+		next()
+		
+func next():
+	get_viewport().set_input_as_handled()
+	AudioManager.play_sfx("select")
+	continue_label.hide()
+	if is_scrolling:
+		label.visible_characters = -1
+	elif _waiting_for_input:
+		_waiting_for_input = false
+		advanced.emit()
+		
 func _on_message_requested(messages: Array[String], speed: int) -> void:
 	play_text(messages, speed)
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1kjnu1jmihwl" path="res://Scenes/UI/map.tscn" id="4_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dxbjts5qs410w" path="res://Scenes/UI/message_manager.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://brhprt0cri750" path="res://Scenes/World/dungeon_root.tscn" id="6_21xkr"]
-[ext_resource type="PackedScene" uid="uid://xroj88eapvyx" path="res://Scenes/UI/weapon_hud.tscn" id="6_344ge"]
+[ext_resource type="PackedScene" uid="uid://xroj88eapvyx" path="res://Scenes/UI/stat_hud.tscn" id="6_344ge"]
 [ext_resource type="PackedScene" uid="uid://bcclf3mcc1rx1" path="res://Scenes/mouse_area.tscn" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://blruyhpveobyg" path="res://Scenes/UI/pause_menu.tscn" id="7_344ge"]
 

@@ -8,6 +8,7 @@
 [resource]
 script = ExtResource("1_0tng3")
 swing_arc_degrees = 70.0
+swings_before_cd = 20
 scene = ExtResource("1_771ov")
 swing_sound = "plasma_swing"
 equip_sound = "plasma_pull_out"

@@ -2856,9 +2856,8 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.5)
 
-[node name="BasicRoom" type="Node2D" unique_id=1714128476 node_paths=PackedStringArray("note")]
+[node name="BasicRoom" type="Node2D" unique_id=1714128476]
 script = ExtResource("1_d8gsv")
-note = NodePath("Note")
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
 [node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=160450559]

@@ -15,6 +15,15 @@ shader_parameter/shine_angle = 45.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_dtook"]
 radius = 18.110771
 
+[sub_resource type="Gradient" id="Gradient_wj1s4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_wj1s4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
 [node name="Note" type="Area2D" unique_id=634588885]
 collision_layer = 32
 script = ExtResource("1_6k1c7")
@@ -97,5 +106,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 visible_characters_behavior = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1652837167]
+color = Color(0.65943307, 0.42275736, 0.24147025, 1)
+energy = 0.3
+texture = SubResource("GradientTexture2D_awwja")
 
 [connection signal="pressed" from="NoteUI/Control/NoteUISprite/Button" to="." method="_on_button_pressed"]

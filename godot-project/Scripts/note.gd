@@ -22,9 +22,22 @@ static var used_notes: Array[String] = []
 
 func _ready() -> void:
 	note_ui.hide()
-
+	
 	if specific_note.length() > 0:
 		label.text = specific_note
+		fit_text()
+	elif randf() > 0.85:
+		get_msg()
+	else:
+		queue_free()
+		
+	body_entered.connect(_on_played_entered_interaction_area)
+	body_exited.connect(_on_player_exited_interaction_area)
+	shine()
+
+func get_msg():
+	if specific_note.length() > 0:
+		return
 	else:
 		var available: Array[String] = notes.filter(func(n): return not used_notes.has(n))
 		if available.is_empty():
@@ -35,10 +48,6 @@ func _ready() -> void:
 		used_notes.append(random_note)
 
 	fit_text()
-
-	body_entered.connect(_on_played_entered_interaction_area)
-	body_exited.connect(_on_player_exited_interaction_area)
-	shine()
 
 func _on_played_entered_interaction_area(body: Node):
 	if body is Player:
@@ -79,19 +88,6 @@ func fit_text() -> void:
 
 	label.pivot_offset = label.size / 2.0
 	label.scale = Vector2.ONE * scale_factor
-	
-func _autowrap_to_brk_flags(mode: TextServer.AutowrapMode) -> int:
-	match mode:
-		TextServer.AUTOWRAP_OFF:
-			return TextServer.BREAK_NONE
-		TextServer.AUTOWRAP_ARBITRARY:
-			return TextServer.BREAK_MANDATORY | TextServer.BREAK_GRAPHEME_BOUND
-		TextServer.AUTOWRAP_WORD:
-			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND
-		TextServer.AUTOWRAP_WORD_SMART:
-			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
-		_:
-			return TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND
 
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("interact")
@@ -101,7 +97,8 @@ func _input(event: InputEvent) -> void:
 			close_note()
 		else:
 			open_note()
-			small_sprite.modulate = Color.DIM_GRAY
+			small_sprite.material = null
+			small_sprite.modulate = Color.GRAY
 		get_viewport().set_input_as_handled()
 		
 func open_note():
@@ -109,13 +106,14 @@ func open_note():
 	opened = true
 	control.scale = Vector2(0, 0)
 	note_ui.show()
+	AudioManager.play_sfx("note_open")
 	var tween = create_tween()
 	tween.tween_property(control, "scale", Vector2(1, 1), 0.5
 	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 func close_note():
 	control.scale = Vector2(1, 1)
-	
+	AudioManager.play_sfx("note_close")
 	var tween = create_tween()
 	tween.tween_property(control, "scale", Vector2(0, 0), 0.4
 	).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)

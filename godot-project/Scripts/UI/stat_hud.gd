@@ -1,17 +1,15 @@
 extends Control
-class_name WeaponHUD
+class_name StatHUD
 
 @export var COUNTER_LIT : Color = Color(1, 1, 1, 1)
 @export var COUNTER_SPENT : Color = Color(0.15, 0.15, 0.15, 1)
 
 @onready var weapon_icon: TextureRect = $Icon
 @onready var panel: NinePatchRect = $Panel
-@onready var container: VBoxContainer = $Container
+@onready var container: HBoxContainer = $Container
 
 @export var melee_counter_texture: Texture2D
 @export var bullet_counter_texture: Texture2D
-@export var counter_size: Vector2 = Vector2(10, 10)
-
 
 var player: Player
 
@@ -35,13 +33,22 @@ func _on_weapon_equipped(weapon_data: ItemData) -> void:
 
 func _build_counters(container: Control, count: int, texture: Texture2D) -> void:
 	for child in container.get_children():
+		container.remove_child(child)
 		child.queue_free()
 
+	var separation := container.get_theme_constant("separation")
+	var available_width := container.size.x - separation * (count - 1)
+	var base_width := floori(available_width / count)
+	var remainder := int(available_width) - base_width * count
+
 	for i in count:
-		var counter := TextureRect.new()
+		var counter := NinePatchRect.new()
 		counter.texture = texture
-		counter.custom_minimum_size = counter_size
-		counter.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		counter.custom_minimum_size.x = base_width + (1 if i < remainder else 0)
+		counter.patch_margin_bottom = 2
+		counter.patch_margin_top = 2
+		counter.patch_margin_left = 1
+		counter.patch_margin_right = 1
 		container.add_child(counter)
 	
 func _process(_delta: float) -> void:

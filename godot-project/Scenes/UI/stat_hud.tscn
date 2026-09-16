@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://xroj88eapvyx"]
+
+[ext_resource type="Script" uid="uid://bf76ywxxvfiru" path="res://Scripts/UI/stat_hud.gd" id="1_0b71h"]
+[ext_resource type="Texture2D" uid="uid://k3el4o5i4s5y" path="res://Assets/Items/Melees/mini_plasma.png" id="2_7mv8i"]
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="3_rhdhk"]
+[ext_resource type="Texture2D" uid="uid://bdlfva5qto51s" path="res://Assets/UI/weapon_charge.png" id="5_rhdhk"]
+
+[sub_resource type="Theme" id="Theme_7mv8i"]
+default_font_size = 8
+
+[node name="StatHUD" type="Control" unique_id=1817972953]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_7mv8i")
+script = ExtResource("1_0b71h")
+melee_counter_texture = ExtResource("5_rhdhk")
+bullet_counter_texture = ExtResource("5_rhdhk")
+
+[node name="Panel" type="NinePatchRect" parent="." unique_id=1812867664]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.375
+anchor_bottom = 0.1388889
+offset_right = 96.0
+offset_bottom = 20.0
+scale = Vector2(0.5, 0.5)
+offset_transform_position_ratio = Vector2(-1, 0)
+texture = ExtResource("3_rhdhk")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="." unique_id=12937385]
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 0
+anchor_left = 0.0078125
+anchor_top = 0.013888889
+anchor_right = 0.0703125
+anchor_bottom = 0.125
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_7mv8i")
+expand_mode = 4
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=1726190613]
+custom_minimum_size = Vector2(150, 32)
+custom_maximum_size = Vector2(150, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07421875
+anchor_top = 0.013888889
+anchor_right = 0.3671875
+anchor_bottom = 0.125
+offset_right = 75.0
+offset_bottom = 16.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
