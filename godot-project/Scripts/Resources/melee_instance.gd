@@ -39,9 +39,9 @@ func set_physics_layers():
 	set_collision_mask_value(3, true)
 	set_collision_mask_value(5, true)
 	
-func _physics_process(_delta):
+func _process(delta: float) -> void:
 	if recharging:
-		cooldown_time_left = max(cooldown_time_left - _delta, 0.0)
+		cooldown_time_left = max(cooldown_time_left - delta, 0.0)
 	if not is_swinging:
 		update_art()
 

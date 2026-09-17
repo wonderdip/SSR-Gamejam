@@ -22,9 +22,9 @@ func _ready() -> void:
 	print(name)
 	current_ammo = gun_data.magazine_size
 	
-func _process(_delta):
+func _process(delta: float):
 	if reloading:
-		reload_time_left = max(reload_time_left - _delta, 0.0)
+		reload_time_left = max(reload_time_left - delta, 0.0)
 	call_deferred("update_art")
 	
 	if Input.is_action_just_pressed("reload"):
@@ -47,9 +47,6 @@ func update_art():
 		pivot.scale.y = -1
 	elif delta_x > dead_zone:
 		pivot.scale.y = 1
-	
-	reloading = false
-	can_shoot = true
 
 func shoot():
 	if not can_shoot or reloading:

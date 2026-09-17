@@ -58,10 +58,10 @@ func _process(_delta: float) -> void:
 func _update_counters(container: Control, instance: Node) -> void:
 	if not instance:
 		return
-
+	
 	var total: int
 	var lit_count: int
-
+	
 	if instance is MeleeInstance:
 		total = instance.melee_data.swings_before_cd
 		if instance.recharging:

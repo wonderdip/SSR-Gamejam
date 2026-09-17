@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 	and can_open):
 		animation_player.play("open_chest")
 		await animation_player.animation_finished
-		var weapon : ItemData = ItemManager.get_random_melee()
+		var weapon : ItemData = ItemManager.get_random_gun()
 		player.inventory.add_item(weapon)
 		opened = true
 		modulate = Color.DIM_GRAY
