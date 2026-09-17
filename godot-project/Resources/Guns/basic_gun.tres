@@ -8,6 +8,7 @@
 
 [resource]
 script = ExtResource("1_vf031")
+damage = 25
 bullet = ExtResource("1_8qnil")
 scene = ExtResource("2_5f2e2")
 item_name = "Basic Gun"

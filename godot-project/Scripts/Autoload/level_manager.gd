@@ -211,5 +211,6 @@ func _place_player_on_floor() -> void:
 
 func set_player_room(room: Room) -> void:
 	player_room = room
+	room.spawn_enemies()
 	player_room_index = room.dungeon_index
 	player_icon_update.emit()

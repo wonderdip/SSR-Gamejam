@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://cvfnnn0f6vnbv"]
+
+[ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_5bly5"]
+[ext_resource type="Texture2D" uid="uid://30ovvwxfhqyi" path="res://Assets/Characters/Sciontology/recruit.png" id="2_ekxys"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdoty"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_ekxys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_juh3s"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.017453292519943295]
+}
+
+[sub_resource type="Animation" id="Animation_7r56r"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.08726646259971647, -0.08726646259971647]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.05235987755982989, 0.05235987755982989]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rarie"]
+_data = {
+&"RESET": SubResource("Animation_ekxys"),
+&"idle": SubResource("Animation_juh3s"),
+&"walk": SubResource("Animation_7r56r")
+}
+
+[node name="Recruit" type="CharacterBody2D" unique_id=1706568622 node_paths=PackedStringArray("sprite", "animation_player")]
+z_index = 10
+collision_layer = 4
+collision_mask = 29
+script = ExtResource("1_5bly5")
+enemy_name = "Recruit"
+speed = 40.0
+weapon = 1
+sprite = NodePath("Sprite2D")
+animation_player = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://csbo78s7hwpng"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171013243]
+shape = SubResource("CapsuleShape2D_mdoty")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=641295790]
+texture = ExtResource("2_ekxys")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1124190504]
+libraries/ = SubResource("AnimationLibrary_rarie")

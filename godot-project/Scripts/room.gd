@@ -1,13 +1,10 @@
 extends Node2D
 class_name Room
 
-## room_size must match every template (256x144 here, matching the game's
-## viewport) since LevelManager positions rooms on a uniform grid.
+@export var enemy_list: Array[PackedScene] = []
 @export var room_size: Vector2 = Vector2(256, 144)
 
-## Legacy fields, still usable for hand-placed rooms (e.g. a tutorial room
-## that isn't part of a generated floor). Procedurally generated floors place
-## the player via get_room_center() instead and don't need these.
+## Manually placed room vars
 @export var starting_room: bool = false
 @export var spawn_positions: Array[Vector2] = [
 	Vector2(8, 72),
@@ -19,7 +16,32 @@ class_name Room
 var dungeon_index: int = -1
 var tilemaps: Array[TileMapLayer]
 var discovered: bool = false
-		
+
+# Room.gd
+var cleared: bool = false
+var enemies_alive: int = 0
+
+func spawn_enemies() -> void:
+	if cleared or enemy_list.is_empty():
+		return
+	for enemy in enemy_list:
+		var enemy_instance = enemy.instantiate() as Enemy
+		add_child(enemy_instance)
+		enemy_instance.global_position = (
+			get_room_center() + 
+			Vector2(
+				randi_range(-(room_size.x / 4), (room_size.x / 4)),
+				randi_range(-(room_size.y / 4), (room_size.y / 4))
+				)
+			)
+		enemy_instance.died.connect(_on_enemy_died)
+		enemies_alive += 1
+
+func _on_enemy_died(_enemy: Enemy) -> void:
+	enemies_alive -= 1
+	if enemies_alive <= 0:
+		cleared = true
+			
 func get_room_rect() -> Rect2:
 	return Rect2(global_position, room_size)
 

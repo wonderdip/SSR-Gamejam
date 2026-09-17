@@ -14,6 +14,7 @@ var has_hit: bool = false
 func _ready() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
+	
 	set_collision_layer_value(4, true)
 	
 	set_collision_mask_value(3, true)
@@ -56,8 +57,17 @@ func _physics_process(delta):
 			queue_free()
 
 func _on_area_2d_body_entered(body: Node):
-	if has_hit or not body is TileMapLayer:
+	if has_hit:
 		return
+	
+	if body is Enemy:
+		body.take_damage(damage)
+		delete_bullet()
+		
+	if body is TileMapLayer:
+		delete_bullet()
+
+func delete_bullet():
 	has_hit = true
 	can_move = false
 	sprite.hide()

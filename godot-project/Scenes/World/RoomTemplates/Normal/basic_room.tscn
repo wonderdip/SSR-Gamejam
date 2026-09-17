@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_d8gsv"]
 [ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="2_66gei"]
+[ext_resource type="PackedScene" uid="uid://cvfnnn0f6vnbv" path="res://Resources/Enemies/recruit.tscn" id="2_mdoty"]
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mdoty"]
 [ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="4_66gei"]
 
@@ -2858,6 +2859,7 @@ fill_to = Vector2(0.9, 0.5)
 
 [node name="BasicRoom" type="Node2D" unique_id=1714128476]
 script = ExtResource("1_d8gsv")
+enemy_list = Array[PackedScene]([ExtResource("2_mdoty")])
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
 [node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=160450559]

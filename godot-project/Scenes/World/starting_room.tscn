@@ -3125,7 +3125,7 @@ specific_note = "Once you start you can't stop until... anyway I've left more no
 
 [node name="Note" parent="." unique_id=144118866 instance=ExtResource("10_ur81b")]
 position = Vector2(56, 52)
-specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the floors, the cult of Sciontology hides many mysteries "
+specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the floors, the \"Church\" of Sciontology hides many mysteries "
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]
 [connection signal="body_entered" from="RoomTransitionTrigger" to="InteractionTrigger" method="_on_room_transition_trigger_body_entered"]
