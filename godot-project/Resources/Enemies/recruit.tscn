@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdoty"]
 radius = 8.0
-height = 32.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_ekxys"]
 length = 0.001
@@ -60,7 +60,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.017453292519943295]
+"values": [0.01745329251994329]
 }
 
 [sub_resource type="Animation" id="Animation_7r56r"]
@@ -100,6 +100,17 @@ _data = {
 &"walk": SubResource("Animation_7r56r")
 }
 
+[sub_resource type="Gradient" id="Gradient_ekxys"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_ekxys")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.2)
+
 [node name="Recruit" type="CharacterBody2D" unique_id=1706568622 node_paths=PackedStringArray("sprite", "animation_player")]
 z_index = 10
 collision_layer = 4
@@ -113,6 +124,7 @@ animation_player = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://csbo78s7hwpng"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171013243]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_mdoty")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=641295790]
@@ -120,3 +132,9 @@ texture = ExtResource("2_ekxys")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1124190504]
 libraries/ = SubResource("AnimationLibrary_rarie")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=235084388]
+color = Color(0.593666, 0.4482121, 0.25295055, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_awwja")
+texture_scale = 0.5
