@@ -11,29 +11,41 @@ extends Node
 	ItemEnums.RARITIES.Legendary: 1.0,
 }
 
-func get_random_weapon():
-	var rng: int = randi_range(1, 2)
-	if rng == 1:
-		return get_random_gun()
-	else:
-		return get_random_melee()
-		
-func get_random_gun() -> GunData:
-	var rarity: ItemEnums.RARITIES = _roll_rarity()
-	var pool: Array[GunData] = get_guns_by_rarity(rarity)
+var _all_weapons: Array = []
 
-	while pool.is_empty() and rarity > ItemEnums.RARITIES.Common:
-		rarity -= 1
-		pool = get_guns_by_rarity(rarity)
+func _ready() -> void:
+	for g in guns:
+		if g != null:
+			_all_weapons.append(g)
+	for m in melees:
+		if m != null:
+			_all_weapons.append(m)
 
-	if pool.is_empty():
-		push_warning("No guns available in any rarity pool")
-		return null
+# exclude: weapons you don't want returned (e.g. ones the player already owns)
+func get_random_weapon(exclude: Array = []) -> Resource:
+	var start: ItemEnums.RARITIES = _roll_rarity()
 
-	return pool[randi() % pool.size()]
+	for rarity in _rarities_by_distance(start):
+		var pool: Array = _all_weapons.filter(
+			func(w): return w.rarity == rarity and not exclude.has(w)
+		)
+		if not pool.is_empty():
+			return pool.pick_random()
 
-func get_guns_by_rarity(rarity: ItemEnums.RARITIES) -> Array[GunData]:
-	return guns.filter(func(g): return g != null and g.rarity == rarity)
+	push_warning("No weapons available")
+	return null
+
+# Rolled rarity first, then fall back to the closest rarities (lower before higher)
+func _rarities_by_distance(start: int) -> Array:
+	var all: Array = rarity_weights.keys()
+	all.sort_custom(func(a, b):
+		var da: int = abs(a - start)
+		var db: int = abs(b - start)
+		if da == db:
+			return a < b
+		return da < db
+	)
+	return all
 
 func _roll_rarity() -> ItemEnums.RARITIES:
 	var total_weight: float = 0.0
@@ -48,20 +60,3 @@ func _roll_rarity() -> ItemEnums.RARITIES:
 			return rarity
 
 	return ItemEnums.RARITIES.Common
-
-func get_random_melee() -> MeleeData:
-	var rarity: ItemEnums.RARITIES = _roll_rarity()
-	var pool: Array[MeleeData] = get_melees_by_rarity(rarity)
-	
-	while pool.is_empty() and rarity > ItemEnums.RARITIES.Common:
-		rarity -= 1
-		pool = get_melees_by_rarity(rarity)
-
-	if pool.is_empty():
-		push_warning("No melees available in any rarity pool")
-		return null
-
-	return pool[randi() % pool.size()]
-
-func get_melees_by_rarity(rarity: ItemEnums.RARITIES) -> Array[MeleeData]:
-	return melees.filter(func(g): return g != null and g.rarity == rarity)

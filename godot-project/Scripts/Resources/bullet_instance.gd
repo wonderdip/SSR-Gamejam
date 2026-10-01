@@ -10,6 +10,8 @@ var particles: GPUParticles2D
 var can_move: bool = true
 var has_hit: bool = false
 
+var anim_timer: float = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_collision_layer_value(1, false)
@@ -27,6 +29,9 @@ func _ready() -> void:
 	sprite = Sprite2D.new()
 	sprite.texture = bullet_data.texture
 	sprite.z_index = 11
+	if bullet_data.animated:
+		sprite.hframes = bullet_data.hframes
+		sprite.vframes = bullet_data.vframes
 	add_child(sprite)
 	
 	top_level = true
@@ -45,6 +50,13 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta):
+	if bullet_data.animated and not has_hit:
+		anim_timer += delta
+		var frame_duration := 1.0 / bullet_data.fps
+		if anim_timer >= frame_duration:
+			anim_timer -= frame_duration
+			sprite.frame = (sprite.frame + 1) % (bullet_data.hframes + bullet_data.vframes)
+			
 	if can_move:
 		var direction = Vector2.RIGHT.rotated(rotation)
 		

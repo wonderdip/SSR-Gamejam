@@ -76,6 +76,7 @@ func _update_facing() -> void:
 
 func take_damage(amount: float) -> void:
 	health -= amount
+	ScreenSfx.cam_shake(2, 1, 0.2)
 	if animation_player and animation_player.has_animation("hit"):
 		animation_player.play("hit")
 	if health <= 0:

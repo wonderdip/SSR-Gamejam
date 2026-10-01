@@ -1,8 +1,5 @@
-extends DynamicCamera
+extends Camera2D
 class_name RoomCamera
-
-## Adds room-to-room panning and floor-change snapping on top of
-## DynamicCamera's screen shake.
 
 @export_category("Transition")
 @export var transition_duration: float = 0.6
@@ -19,9 +16,9 @@ var _active_tween: Tween
 var player: Player
 
 func _ready() -> void:
-	super._ready()
 	add_to_group(&"room_camera")
-
+	ScreenSfx.register_cam(self)
+	
 func transition_to_room(target_position: Vector2, bounds: Rect2 = Rect2()) -> void:
 	if _active_tween and _active_tween.is_valid():
 		_active_tween.kill()
@@ -49,6 +46,7 @@ func _on_transition_finished(target_position: Vector2, bounds: Rect2) -> void:
 	_apply_bounds(bounds)
 	room_transition_finished.emit(target_position)
 	player.movement_locked = false
+	
 ## Instantly places the camera with no tween — used right after a floor is
 ## (re)built, where there's nothing meaningful to pan from.
 func snap_to_room(target_position: Vector2, bounds: Rect2) -> void:

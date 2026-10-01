@@ -4,8 +4,8 @@ class_name GunInstance
 @export var gun_data: GunData
 @export var current_ammo: int
 
-@onready var gun_sprite: Sprite2D = $GunSprite
-@onready var bullet_point: Marker2D = $BulletPoint
+@export var gun_sprite: Sprite2D
+@export var bullet_point: Marker2D
 
 var pivot: Marker2D
 var can_shoot: bool = true 
@@ -27,12 +27,21 @@ func _process(delta: float):
 		reload_time_left = max(reload_time_left - delta, 0.0)
 	call_deferred("update_art")
 	
+	if player.movement_locked:
+		can_shoot = false
+	else:
+		can_shoot = true
+	
 	if Input.is_action_just_pressed("reload"):
 		reload()
 	
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
-		
+	if gun_data.holdable:
+		if Input.is_action_pressed("shoot"):
+			shoot()
+	else:
+		if Input.is_action_just_pressed("shoot"):
+			shoot()
+			
 func update_art():
 	var mouse_pos = get_global_mouse_position()
 	var pivot_pos = pivot.global_position
@@ -78,6 +87,7 @@ func shoot():
 			new_bullet.global_rotation = angle + (increment * i - arc_rad / 2)
 		
 		call_deferred("add_child", new_bullet)
+		ScreenSfx.cam_shake(1, 0.5, 0.1)
 		
 	await get_tree().create_timer(gun_data.shot_delay).timeout  # Apply shot delay
 	# If out of bullets, start reload automatically

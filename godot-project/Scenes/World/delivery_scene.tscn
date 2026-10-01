@@ -293,10 +293,10 @@ size = Vector2(116, 62)
 size = Vector2(34, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adcqc"]
-size = Vector2(256, 6)
+size = Vector2(256, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7staa"]
-size = Vector2(256, 6)
+size = Vector2(256, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c16j"]
 size = Vector2(20, 22)
@@ -399,11 +399,11 @@ position = Vector2(239, 72)
 shape = SubResource("RectangleShape2D_l1hd3")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Borders" unique_id=684412019]
-position = Vector2(128, 147)
+position = Vector2(128, 139)
 shape = SubResource("RectangleShape2D_adcqc")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Borders" unique_id=203638186]
-position = Vector2(128, -3)
+position = Vector2(128, 6)
 shape = SubResource("RectangleShape2D_7staa")
 
 [node name="Player" parent="." unique_id=1871453495 instance=ExtResource("4_ittcp")]

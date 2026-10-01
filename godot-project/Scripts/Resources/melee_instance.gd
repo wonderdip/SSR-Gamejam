@@ -42,14 +42,13 @@ func set_physics_layers():
 func _process(delta: float) -> void:
 	if recharging:
 		cooldown_time_left = max(cooldown_time_left - delta, 0.0)
+		
 	if not is_swinging:
 		update_art()
-
+	
 	if Input.is_action_just_pressed("shoot") and swings > 0 and not recharging:
 		if not is_swinging:
 			swing()
-
-
 
 func update_art():
 	if is_swinging:

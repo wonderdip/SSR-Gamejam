@@ -41,7 +41,6 @@ func _input(event: InputEvent) -> void:
 				animation_player.seek(4.5)
 				skip_label.hide()
 
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "delivery":
 		skip_label.hide()

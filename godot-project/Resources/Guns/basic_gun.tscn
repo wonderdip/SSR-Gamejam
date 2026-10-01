@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_j33wg"]
 [ext_resource type="Texture2D" uid="uid://kj2ou8apub73" path="res://Assets/Items/Guns/basic.png" id="2_xuecx"]
 
-[node name="BasicGun" type="Node2D" unique_id=392284592]
+[node name="BasicGun" type="Node2D" unique_id=392284592 node_paths=PackedStringArray("gun_sprite", "bullet_point")]
 script = ExtResource("1_j33wg")
+gun_sprite = NodePath("GunSprite")
+bullet_point = NodePath("BulletPoint")
 metadata/_custom_type_script = "uid://c6jbssk0vys0"
 
 [node name="GunSprite" type="Sprite2D" parent="." unique_id=1515089741]

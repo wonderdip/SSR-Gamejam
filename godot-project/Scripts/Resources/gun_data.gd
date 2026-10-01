@@ -10,6 +10,7 @@ class_name GunData
 
 @export_range(0, 360) var shot_radius: float = 0
 @export_range(0, 10) var shot_delay: float = 0.1
+@export var holdable: bool = false
 
 @export_category("Config")
 @export var bullet: BulletData

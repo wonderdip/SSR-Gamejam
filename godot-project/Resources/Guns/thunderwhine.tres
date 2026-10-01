@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://bqr8vfjcjiitp"]
+
+[ext_resource type="Resource" uid="uid://t836ch5hc420" path="res://Resources/Bullets/bolt.tres" id="1_cdo3m"]
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_qj8ys"]
+[ext_resource type="Texture2D" uid="uid://b5t8dliqaxson" path="res://Assets/Items/Guns/mini_thunderwhine.png" id="1_ybpfp"]
+[ext_resource type="PackedScene" uid="uid://cow1vrapmrb16" path="res://Resources/Guns/thunderwhine.tscn" id="2_cdo3m"]
+[ext_resource type="Texture2D" uid="uid://17wktaagtmii" path="res://Assets/Items/Guns/thunderwhine.png" id="4_dp8g2"]
+
+[resource]
+script = ExtResource("1_qj8ys")
+damage = 2
+magazine_size = 100
+accuracy = 1
+holdable = true
+bullet = ExtResource("1_cdo3m")
+scene = ExtResource("2_cdo3m")
+item_name = "ThunderWhine"
+texture = ExtResource("4_dp8g2")
+mini_texture = ExtResource("1_ybpfp")
+description = "They said they caught lightning in a bottle, I didn't believe them..."
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

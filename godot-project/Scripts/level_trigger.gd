@@ -4,6 +4,8 @@ class_name LevelTrigger
 @export var direction : LevelManager.TRIGGERDIRECTION
 @export var first_level_trigger: bool = false
 @export var ascend_trigger: bool = false
+@export var key: ItemData
+@export_multiline() var key_warning: String = ""
 @export var warning: bool = false
 @export_multiline() var warning_msg: String = ""
 
@@ -17,6 +19,15 @@ func _ready() -> void:
 	
 func _on_body_entered(body: Node2D):
 	if body is Player:
+		body.movement_locked = true
+		body._update_animation(false, false)
+		if not body.inventory.equipped_gun == key:
+			if key:
+				MessageBus.send([key_warning])
+				ScreenSfx.cam_shake(6, 4, 0.6)
+				await MessageBus.message_box_closed
+			return
+			
 		body._exiting_level()
 		await get_tree().create_timer(0.25).timeout
 		
@@ -28,7 +39,7 @@ func _on_body_entered(body: Node2D):
 		else:
 			if warning:
 				MessageBus.send([warning_msg])
-				LevelManager.main_cam.add_trauma(2)
+				ScreenSfx.cam_shake(6, 4, 0.6)
 				await MessageBus.message_box_closed
 				
 			LevelManager.ascend_requested.emit()

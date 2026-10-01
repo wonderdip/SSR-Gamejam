@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cow1vrapmrb16"]
+
+[ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_bvyp4"]
+[ext_resource type="Texture2D" uid="uid://17wktaagtmii" path="res://Assets/Items/Guns/thunderwhine.png" id="2_5jr6b"]
+
+[node name="GunInstance" type="Node2D" unique_id=1321863277 node_paths=PackedStringArray("gun_sprite", "bullet_point")]
+script = ExtResource("1_bvyp4")
+gun_sprite = NodePath("Sprite2D")
+bullet_point = NodePath("Marker2D")
+metadata/_custom_type_script = "uid://c6jbssk0vys0"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=322993924]
+position = Vector2(10, -4)
+texture = ExtResource("2_5jr6b")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2066817988]
+position = Vector2(36, -6)

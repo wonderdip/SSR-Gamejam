@@ -96,7 +96,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_wktlv"]
 resource_name = "slash"
-length = 0.39999999999999997
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

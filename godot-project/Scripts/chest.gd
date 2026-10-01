@@ -2,6 +2,8 @@ extends StaticBody2D
 
 @export var interaction_area: Area2D
 @export var animation_player: AnimationPlayer
+@export var specific_reward: ItemData
+
 var can_open: bool = false
 var opened: bool = false
 var player: Player = null
@@ -22,7 +24,12 @@ func _input(event: InputEvent) -> void:
 	and can_open):
 		animation_player.play("open_chest")
 		await animation_player.animation_finished
-		var weapon : ItemData = ItemManager.get_random_gun()
+		
+		var weapon : ItemData
+		
+		if specific_reward: weapon = specific_reward
+		else: weapon = ItemManager.get_random_weapon()
+		
 		player.inventory.add_item(weapon)
 		opened = true
 		modulate = Color.DIM_GRAY

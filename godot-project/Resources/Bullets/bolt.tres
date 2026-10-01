@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://t836ch5hc420"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_ep7tm"]
+[ext_resource type="Texture2D" uid="uid://b6flfre1tgap6" path="res://Assets/Items/Bullets/bolt_sheet.png" id="2_mnd23"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mnd23"]
+radius = 5.0
+height = 10.0
+
+[resource]
+script = ExtResource("1_ep7tm")
+speed = 100
+max_distance = 50
+area_shape = SubResource("CapsuleShape2D_mnd23")
+animated = true
+vframes = 10
+texture = ExtResource("2_mnd23")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

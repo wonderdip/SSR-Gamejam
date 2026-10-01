@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://du4my0ckrndfs" path="res://Scripts/UI/ascension_scene.gd" id="1_pqq61"]
 [ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="2_l22km"]
 [ext_resource type="FontFile" uid="uid://h2rcqlqtbtup" path="res://Assets/Fonts/Digital_Display.ttf" id="3_l22km"]
-[ext_resource type="Script" uid="uid://d06jth3i74am5" path="res://Scripts/dynamic_cam.gd" id="5_l22km"]
 [ext_resource type="Script" uid="uid://d1x1ptujnxk4h" path="res://Scripts/UI/rolling_counter.gd" id="6_smrp4"]
 
 [sub_resource type="Environment" id="Environment_3c16j"]
@@ -22,24 +21,10 @@ step = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D")
+tracks/0/path = NodePath("Floor/RollingCounter")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.8),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [2.0],
-"method": &"add_trauma"
-}]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Floor/RollingCounter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -47,13 +32,13 @@ tracks/1/keys = {
 "method": &"increase_floor"
 }]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0.8, 2.2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -148,14 +133,6 @@ metadata/_custom_type_script = "uid://d1x1ptujnxk4h"
 libraries/ = SubResource("AnimationLibrary_smrp4")
 autoplay = &"up"
 speed_scale = 4.0
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2134073187]
-position = Vector2(128, 72)
-script = ExtResource("5_l22km")
-max_roll = 0.3
-trauma_power = 4.0
-trauma_decay = 0.2
-noise_speed = 40.0
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1339673666]
 position = Vector2(166, 72)
