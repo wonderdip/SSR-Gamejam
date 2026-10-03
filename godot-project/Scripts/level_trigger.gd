@@ -21,7 +21,7 @@ func _on_body_entered(body: Node2D):
 	if body is Player:
 		body.movement_locked = true
 		body._update_animation(false, false)
-		if not body.inventory.equipped_gun == key:
+		if not body.inventory.equipped_gun:
 			if key:
 				MessageBus.send([key_warning])
 				ScreenSfx.cam_shake(6, 4, 0.6)

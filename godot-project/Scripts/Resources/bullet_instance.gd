@@ -11,6 +11,8 @@ var can_move: bool = true
 var has_hit: bool = false
 
 var anim_timer: float = 0.0
+var speed: float
+var hit_bodies: Array[Node] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,7 +49,10 @@ func _ready() -> void:
 	add_child(particles)
 	
 	body_entered.connect(_on_area_2d_body_entered)
-	
+	speed = bullet_data.speed * randf_range(1.0 - bullet_data.speed_variance, 1.0 + bullet_data.speed_variance)
+	if bullet_data.animated:
+		sprite.frame = randi() % (bullet_data.hframes * bullet_data.vframes)  # desync neighbouring bolts
+	sprite.flip_v = randf() < 0.5   # cheap variety for lightning
 	
 func _physics_process(delta):
 	if bullet_data.animated and not has_hit:
@@ -55,28 +60,35 @@ func _physics_process(delta):
 		var frame_duration := 1.0 / bullet_data.fps
 		if anim_timer >= frame_duration:
 			anim_timer -= frame_duration
-			sprite.frame = (sprite.frame + 1) % (bullet_data.hframes + bullet_data.vframes)
-			
+			sprite.frame = (sprite.frame + 1) % (bullet_data.hframes * bullet_data.vframes)
+
 	if can_move:
 		var direction = Vector2.RIGHT.rotated(rotation)
-		
-		# Move the Node2D (root) position
-		global_position += direction * bullet_data.speed * delta
-		
-		travelled_distance += bullet_data.speed * delta
-		
+		global_position += direction * speed * delta
+		travelled_distance += speed * delta
+
+		var t := clampf(travelled_distance / bullet_data.max_distance, 0.0, 1.0)
+		var s := lerpf(1.0, bullet_data.end_scale, t)
+		sprite.scale = Vector2.ONE * s
+		collision_shape.scale = Vector2.ONE * s    # hitbox grows with the visual
+		if bullet_data.fade_out:
+			sprite.modulate.a = 1.0 - t
+
 		if travelled_distance > bullet_data.max_distance:
 			queue_free()
 
 func _on_area_2d_body_entered(body: Node):
 	if has_hit:
 		return
-	
+
 	if body is Enemy:
+		if body in hit_bodies:
+			return
+		hit_bodies.append(body)
 		body.take_damage(damage)
-		delete_bullet()
-		
-	if body is TileMapLayer:
+		if not bullet_data.piercing:
+			delete_bullet()
+	elif body is TileMapLayer:
 		delete_bullet()
 
 func delete_bullet():

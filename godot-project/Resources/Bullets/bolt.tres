@@ -10,7 +10,10 @@ height = 10.0
 [resource]
 script = ExtResource("1_ep7tm")
 speed = 100
-max_distance = 50
+max_distance = 60
+piercing = true
+speed_variance = 0.25
+end_scale = 1.2
 area_shape = SubResource("CapsuleShape2D_mnd23")
 animated = true
 vframes = 10

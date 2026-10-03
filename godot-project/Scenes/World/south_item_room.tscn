@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_cq41u"]
 [ext_resource type="Script" uid="uid://c047k8lmipoby" path="res://Scripts/room_transition_trigger.gd" id="4_wm0pe"]
 [ext_resource type="PackedScene" uid="uid://o1da6y4ed606" path="res://Scenes/World/chest.tscn" id="5_b45fl"]
+[ext_resource type="Resource" uid="uid://bqr8vfjcjiitp" path="res://Resources/Guns/thunderwhine.tres" id="6_g1e3v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nfxgx"]
 texture = ExtResource("2_kq4e8")
@@ -2883,3 +2884,4 @@ position = Vector2(128, 72)
 
 [node name="Chest" parent="." unique_id=1144401864 instance=ExtResource("5_b45fl")]
 position = Vector2(120, 50)
+specific_reward = ExtResource("6_g1e3v")

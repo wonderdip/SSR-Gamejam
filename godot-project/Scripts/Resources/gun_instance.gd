@@ -1,8 +1,8 @@
 extends Node2D
 class_name GunInstance
 
-@export var gun_data: GunData
-@export var current_ammo: int
+var gun_data: GunData
+var current_ammo: int
 
 @export var gun_sprite: Sprite2D
 @export var bullet_point: Marker2D
@@ -13,6 +13,7 @@ var reloading: bool = false
 var dead_zone: float = 5.0
 var player: Player
 var reload_time_left: float = 0.0
+var on_cooldown: bool = false
 
 func _ready() -> void:
 	pivot = player.gun_pos
@@ -58,43 +59,41 @@ func update_art():
 		pivot.scale.y = 1
 
 func shoot():
-	if not can_shoot or reloading:
-		return  # Don't shoot if already reloading or on cooldown
-	
+	if player.movement_locked or on_cooldown or reloading:
+		return
+
 	if current_ammo <= 0:
 		reload()
 		return
-		
-	# Handle bullet spread
-	var angle = (get_global_mouse_position() - gun_sprite.global_position).angle()
-	var random_offset = randf_range(-gun_data.accuracy, gun_data.accuracy)
-	angle += deg_to_rad(random_offset)
-	
-	can_shoot = false  # Prevent instant re-shooting
-	current_ammo -= gun_data.bullet_count  # Subtract ONE bullet per shot (not bullet_count)
-	
+
+	on_cooldown = true
+	current_ammo -= gun_data.bullet_count
+
+	var base_angle = (get_global_mouse_position() - gun_sprite.global_position).angle()
+	base_angle += deg_to_rad(randf_range(-gun_data.accuracy, gun_data.accuracy))
+
 	for i in range(gun_data.bullet_count):
 		var new_bullet = BulletInstance.new()
 		new_bullet.bullet_data = gun_data.bullet
 		new_bullet.global_position = bullet_point.global_position
 		new_bullet.damage = gun_data.damage
-		
+
 		if gun_data.bullet_count == 1:
-			new_bullet.rotation = angle
+			new_bullet.rotation = base_angle
 		else:
 			var arc_rad = deg_to_rad(gun_data.shot_radius)
 			var increment = arc_rad / (gun_data.bullet_count - 1)
-			new_bullet.global_rotation = angle + (increment * i - arc_rad / 2)
-		
+			new_bullet.global_rotation = base_angle + (increment * i - arc_rad / 2)
+
 		call_deferred("add_child", new_bullet)
-		ScreenSfx.cam_shake(1, 0.5, 0.1)
-		
-	await get_tree().create_timer(gun_data.shot_delay).timeout  # Apply shot delay
-	# If out of bullets, start reload automatically
+
+	ScreenSfx.cam_shake(1, 0.5, 0.1)  # moved out of the loop so shotguns don't stack shakes
+
+	await get_tree().create_timer(gun_data.shot_delay).timeout
+	on_cooldown = false
+
 	if current_ammo <= 0:
 		reload()
-	else:
-		can_shoot = true  # Otherwise, allow shooting again
 	
 func reload():
 	if reloading or current_ammo >= gun_data.magazine_size:
