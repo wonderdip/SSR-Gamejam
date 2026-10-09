@@ -9,8 +9,13 @@ class_name BulletData
 @export var fade_out: bool = false
 
 @export var area_shape: Shape2D
+@export var area_rotation: float
+@export var offset: Vector2i
 @export var collision_particles: ParticleProcessMaterial
 @export var animated: bool = false
 @export var hframes: int = 1
 @export var vframes: int = 1
 @export var fps: int = 12
+@export var random_frame_range: Vector2i
+
+@export var material: ShaderMaterial

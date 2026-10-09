@@ -1,21 +1,37 @@
 [gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://t836ch5hc420"]
 
+[ext_resource type="Shader" uid="uid://dxhaaamkp4lw5" path="res://Shader/glow.gdshader" id="1_c8jk6"]
 [ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_ep7tm"]
 [ext_resource type="Texture2D" uid="uid://b6flfre1tgap6" path="res://Assets/Items/Bullets/bolt_sheet.png" id="2_mnd23"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mnd23"]
 radius = 5.0
-height = 10.0
+height = 64.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8jk6"]
+shader = ExtResource("1_c8jk6")
+shader_parameter/glow_color = Color(0.47854745, 0.79366827, 0.99999994, 1)
+shader_parameter/core_brightness = 2.000000095
+shader_parameter/halo_size = 1.4000000665
+shader_parameter/halo_intensity = 1.0000000475
+shader_parameter/flicker_speed = 10.0
+shader_parameter/flicker_amount = 0.250000011875
 
 [resource]
 script = ExtResource("1_ep7tm")
 speed = 100
-max_distance = 60
+max_distance = 30
 piercing = true
 speed_variance = 0.25
-end_scale = 1.2
+end_scale = 1.1
+fade_out = true
 area_shape = SubResource("CapsuleShape2D_mnd23")
+area_rotation = 90.0
+offset = Vector2i(32, 0)
 animated = true
 vframes = 10
+fps = 10
+random_frame_range = Vector2i(0, 4)
+material = SubResource("ShaderMaterial_c8jk6")
 texture = ExtResource("2_mnd23")
 metadata/_custom_type_script = "uid://b56aohcca4nqb"

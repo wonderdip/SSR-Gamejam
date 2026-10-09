@@ -9,6 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://bcclf3mcc1rx1" path="res://Scenes/mouse_area.tscn" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://blruyhpveobyg" path="res://Scenes/UI/pause_menu.tscn" id="7_344ge"]
 
+[sub_resource type="Environment" id="Environment_awwja"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.59
+glow_strength = 0.87
+glow_bloom = 0.1
+
 [node name="Main" type="Node2D" unique_id=1991418438]
 script = ExtResource("1_8gbba")
 
@@ -35,3 +42,6 @@ visible = false
 
 [node name="PauseMenu" parent="." unique_id=1183434397 instance=ExtResource("7_344ge")]
 layer = 101
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1288603135]
+environment = SubResource("Environment_awwja")

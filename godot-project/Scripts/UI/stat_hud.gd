@@ -69,6 +69,7 @@ func _update_counters(container: Control, instance: Node) -> void:
 			lit_count = floor(progress * total)
 		else:
 			lit_count = instance.swings
+			
 	elif instance is GunInstance:
 		total = instance.gun_data.magazine_size
 		if instance.reloading:

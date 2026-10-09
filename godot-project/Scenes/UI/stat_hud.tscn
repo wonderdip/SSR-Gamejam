@@ -41,18 +41,20 @@ metadata/_edit_use_anchors_ = true
 [node name="Icon" type="TextureRect" parent="." unique_id=12937385]
 custom_minimum_size = Vector2(32, 32)
 custom_maximum_size = Vector2(32, 32)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.0078125
 anchor_top = 0.013888889
 anchor_right = 0.0703125
 anchor_bottom = 0.125
 offset_right = 16.0
 offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_7mv8i")
 expand_mode = 4
 stretch_mode = 4
-metadata/_edit_use_anchors_ = true
 
 [node name="Container" type="HBoxContainer" parent="." unique_id=1726190613]
 custom_minimum_size = Vector2(150, 32)

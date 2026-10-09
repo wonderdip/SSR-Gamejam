@@ -6,6 +6,7 @@ class_name GunData
 @export var magazine_size: int = 10
 @export var bullet_count: int = 1
 @export var reload_time: float = 1.0
+@export var full_reload: bool = true
 @export var accuracy: int = 2 #lower is better
 
 @export_range(0, 360) var shot_radius: float = 0

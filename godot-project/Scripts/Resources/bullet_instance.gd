@@ -26,6 +26,8 @@ func _ready() -> void:
 	
 	collision_shape = CollisionShape2D.new()
 	collision_shape.shape = bullet_data.area_shape.duplicate()
+	collision_shape.rotation_degrees = bullet_data.area_rotation
+	collision_shape.position = bullet_data.offset
 	add_child(collision_shape)
 	
 	sprite = Sprite2D.new()
@@ -34,6 +36,8 @@ func _ready() -> void:
 	if bullet_data.animated:
 		sprite.hframes = bullet_data.hframes
 		sprite.vframes = bullet_data.vframes
+	sprite.material = bullet_data.material
+	sprite.position = bullet_data.offset
 	add_child(sprite)
 	
 	top_level = true
@@ -50,8 +54,10 @@ func _ready() -> void:
 	
 	body_entered.connect(_on_area_2d_body_entered)
 	speed = bullet_data.speed * randf_range(1.0 - bullet_data.speed_variance, 1.0 + bullet_data.speed_variance)
+	
 	if bullet_data.animated:
-		sprite.frame = randi() % (bullet_data.hframes * bullet_data.vframes)  # desync neighbouring bolts
+		sprite.frame = randi_range(bullet_data.random_frame_range.x, bullet_data.random_frame_range.y)
+		
 	sprite.flip_v = randf() < 0.5   # cheap variety for lightning
 	
 func _physics_process(delta):
@@ -61,7 +67,7 @@ func _physics_process(delta):
 		if anim_timer >= frame_duration:
 			anim_timer -= frame_duration
 			sprite.frame = (sprite.frame + 1) % (bullet_data.hframes * bullet_data.vframes)
-
+		
 	if can_move:
 		var direction = Vector2.RIGHT.rotated(rotation)
 		global_position += direction * speed * delta

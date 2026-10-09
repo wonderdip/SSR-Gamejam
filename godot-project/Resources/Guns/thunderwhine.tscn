@@ -14,4 +14,4 @@ position = Vector2(10, -4)
 texture = ExtResource("2_5jr6b")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2066817988]
-position = Vector2(48, -5)
+position = Vector2(29, -5)

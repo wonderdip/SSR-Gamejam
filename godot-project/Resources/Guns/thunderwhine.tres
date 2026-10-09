@@ -8,10 +8,11 @@
 
 [resource]
 script = ExtResource("1_qj8ys")
-damage = 2
-magazine_size = 100
+damage = 5
+magazine_size = 30
+full_reload = false
 accuracy = 4
-shot_delay = 0.05
+shot_delay = 0.12
 holdable = true
 bullet = ExtResource("1_cdo3m")
 scene = ExtResource("2_cdo3m")
