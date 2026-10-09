@@ -5,11 +5,14 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SceneManager.ascension_started.emit()
 	animation_player.animation_finished.connect(_on_anim_finished)
 	rolling_counter.set_value(LevelManager.floor_num - 1, false)
 	ScreenSfx.cam_shake(3,2, 2)
+	
 func _on_anim_finished(_anim_name: StringName):
 	await LevelManager._build_floor(true)
+	SceneManager.ascension_finished.emit()
 	SceneManager.remove_scene()
 	
 func sfx(tag: String):

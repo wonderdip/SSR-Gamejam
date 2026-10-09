@@ -85,7 +85,7 @@ func shoot():
 			var increment = arc_rad / (gun_data.bullet_count - 1)
 			new_bullet.global_rotation = base_angle + (increment * i - arc_rad / 2)
 
-		call_deferred("add_child", new_bullet)
+		get_parent().call_deferred("add_child", new_bullet)
 
 	ScreenSfx.cam_shake(1, 0.5, 0.1)  # moved out of the loop so shotguns don't stack shakes
 

@@ -33,5 +33,6 @@ vframes = 10
 fps = 10
 random_frame_range = Vector2i(0, 4)
 material = SubResource("ShaderMaterial_c8jk6")
+item_name = "Bolt"
 texture = ExtResource("2_mnd23")
 metadata/_custom_type_script = "uid://b56aohcca4nqb"

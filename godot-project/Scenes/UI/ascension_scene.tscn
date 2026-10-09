@@ -69,6 +69,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.2)
 
 [node name="AscensionScene" type="Node2D" unique_id=1433053238]
+z_index = 15
 script = ExtResource("1_pqq61")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=459100355]

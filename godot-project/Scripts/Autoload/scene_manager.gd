@@ -2,6 +2,8 @@ extends Node
 
 signal scene_changed(new_scene: Node)
 signal scene_removed
+signal ascension_started
+signal ascension_finished
 
 @export_category("Fade")
 @export var fade_duration: float = 0.4

@@ -1,6 +1,7 @@
 extends Area2D
 class_name WeaponPickup
 
+var instance: Node
 var item_data: ItemData
 var player: Player = null
 var prompt: Label
@@ -17,19 +18,17 @@ func _ready() -> void:
 	shape.shape = circle
 	add_child(shape)
 
-	var sprite := ColorRect.new()
-	sprite.set_anchors_preset(Control.PRESET_CENTER)
-	sprite.size = Vector2(8, 8)
-	sprite.position -= sprite.size * 0.5
-	#sprite.texture = Texture2D.new()
+	var sprite := Sprite2D.new()
+	sprite.scale = Vector2(0.7, 0.7)
+	sprite.texture = item_data.texture
 	
-	var shader: ShaderMaterial = ShaderMaterial.new()
-	shader.shader = load("res://Shader/floor_glow.gdshader")
-	shader.set_shader_parameter("glow_color", Color(0.369, 0.486, 1.0, 1.0))
-	shader.set_shader_parameter("intensity", 2.7)
-	shader.set_shader_parameter("spread", 2.0)
-	shader.set_shader_parameter("pulse_speed", 5.0)
-	sprite.material = shader
+	#var shader: ShaderMaterial = ShaderMaterial.new()
+	#shader.shader = load("res://Shader/floor_glow.gdshader")
+	#shader.set_shader_parameter("glow_color", Color(0.369, 0.486, 1.0, 1.0))
+	#shader.set_shader_parameter("intensity", 2.7)
+	#shader.set_shader_parameter("spread", 2.0)
+	#shader.set_shader_parameter("pulse_speed", 5.0)
+	#sprite.material = shader
 	add_child(sprite)
 	
 	prompt = Label.new()
@@ -59,5 +58,9 @@ func _input(event: InputEvent) -> void:
 	if player and event.is_action_pressed("interact") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		var inv := player.inventory
-		queue_free()                 # free first: add_item may drop a swapped weapon here
-		inv.add_item(item_data)
+		inv.add_item(item_data, instance)
+		queue_free()
+
+func _exit_tree() -> void:
+	if instance and is_instance_valid(instance) and instance.get_parent() == null:
+		instance.free()

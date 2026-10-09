@@ -32,10 +32,8 @@ func _on_weapon_equipped(weapon_data: ItemData) -> void:
 				_build_counters(container, weapon_data.swings_before_cd, melee_counter_texture)
 
 func _build_counters(container: Control, count: int, texture: Texture2D) -> void:
-	for child in container.get_children():
-		container.remove_child(child)
-		child.queue_free()
-
+	clear_counters()
+	
 	var separation := container.get_theme_constant("separation")
 	var available_width := container.size.x - separation * (count - 1)
 	var base_width := floori(available_width / count)
@@ -52,9 +50,18 @@ func _build_counters(container: Control, count: int, texture: Texture2D) -> void
 		container.add_child(counter)
 	
 func _process(_delta: float) -> void:
-	_update_counters(container, player.inventory.melee_instance)
-	_update_counters(container, player.inventory.gun_instance)
+	if player.inventory.current_weapon:
+		_update_counters(container, player.inventory.current_weapon)
+	else:
+		clear_counters()
 
+func clear_counters():
+	if container.get_child_count() > 0:
+		weapon_icon.texture = null
+		for child in container.get_children():
+			container.remove_child(child)
+			child.queue_free()
+			
 func _update_counters(container: Control, instance: Node) -> void:
 	if not instance:
 		return
