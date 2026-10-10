@@ -15,8 +15,13 @@ var _driving_elapsed: float = 0.0
 func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	animation_player.play("delivery")
+	AudioManager.play_music("street", -10)
+	SceneManager.scene_changed.connect(_on_leaving)
 	driving_sound()
-	
+
+func _on_leaving():
+	AudioManager.stop_music()
+
 func sfx(tag: String, volume_db: float = -10.0) -> void:
 	AudioManager.play_sfx(tag, volume_db)
 

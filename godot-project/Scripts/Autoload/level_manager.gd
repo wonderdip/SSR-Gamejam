@@ -58,6 +58,8 @@ func _build_floor(with_fade_out: bool) -> void:
 	dungeon_generator.generate()
 
 func _teardown_current_floor() -> void:
+	player_room = null
+	player_room_index = -1
 	if SceneManager.player != null and SceneManager.player.get_parent() != null:
 		SceneManager.player.get_parent().remove_child(SceneManager.player)
 
@@ -99,11 +101,13 @@ func _instantiate_floor(floorplan: Array[int]) -> void:
 		var grid_y: int = index / dungeon_generator.grid_cols
 		
 		room.dungeon_index = index
+		if index == dungeon_generator.start_index:
+			room.cleared = true
 		room.position = Vector2(grid_x, grid_y) * room.room_size
 		
 		_room_container.add_child(room)
 		_room_instances[index] = room
-
+	
 func _pool_for_generator_type(room_type: String) -> Array[PackedScene]:
 	match room_type:
 		"boss":
@@ -212,5 +216,7 @@ func _place_player_on_floor() -> void:
 func set_player_room(room: Room) -> void:
 	player_room = room
 	room.spawn_enemies()
+	if room.enemies_alive > 0:
+		room.lock_doors()
 	player_room_index = room.dungeon_index
 	player_icon_update.emit()

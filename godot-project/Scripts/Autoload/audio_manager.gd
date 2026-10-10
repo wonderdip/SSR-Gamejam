@@ -29,6 +29,7 @@ func play_music(tag: String, volume_db: float = 0.0) -> void:
 	
 	music_player.stop()
 	music_player.stream = stream
+	music_player.volume_db = volume_db
 	music_player.play()
 	
 func stop_music() -> void:

@@ -16,6 +16,7 @@ shot_delay = 0.12
 holdable = true
 bullet = ExtResource("1_cdo3m")
 scene = ExtResource("2_cdo3m")
+shot_sound = "spark"
 item_name = "ThunderWhine"
 texture = ExtResource("4_dp8g2")
 mini_texture = ExtResource("1_ybpfp")

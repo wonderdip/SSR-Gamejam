@@ -35,6 +35,9 @@
 [ext_resource type="AudioStream" uid="uid://bk63cpqh7h1a3" path="res://Assets/Audio/SFX/note_open2.mp3" id="32_mwtf5"]
 [ext_resource type="AudioStream" uid="uid://b1nc4ek3ruj6m" path="res://Assets/Audio/SFX/note_close1.mp3" id="33_6v0m1"]
 [ext_resource type="AudioStream" uid="uid://bfgsu3dbmrwll" path="res://Assets/Audio/SFX/note_close2.mp3" id="34_yjcuy"]
+[ext_resource type="AudioStream" uid="uid://bi1i2yhco4k6n" path="res://Assets/Audio/SFX/Weapons/ElectricSpark.ogg" id="35_mwtf5"]
+[ext_resource type="AudioStream" uid="uid://qn44ov84rffe" path="res://Assets/Audio/SFX/Weapons/LightningStrike.ogg" id="36_6v0m1"]
+[ext_resource type="AudioStream" uid="uid://cm0mbc2iro5ja" path="res://Assets/Audio/Music/StreetAmbience (2).ogg" id="38_yjcuy"]
 
 [sub_resource type="Resource" id="Resource_1npab"]
 script = ExtResource("2_rx4vr")
@@ -228,13 +231,31 @@ tag = "note_close"
 audio_stream = ExtResource("34_yjcuy")
 metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
+[sub_resource type="Resource" id="Resource_kpqb3"]
+script = ExtResource("2_rx4vr")
+tag = "spark"
+audio_stream = ExtResource("35_mwtf5")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_mwtf5"]
+script = ExtResource("2_rx4vr")
+tag = "spark"
+audio_stream = ExtResource("36_6v0m1")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
 [sub_resource type="Resource" id="Resource_nkd2g"]
 script = ExtResource("2_rx4vr")
 tag = "lobby"
 audio_stream = ExtResource("20_53vhv")
 metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
+[sub_resource type="Resource" id="Resource_pqvgl"]
+script = ExtResource("2_rx4vr")
+tag = "street"
+audio_stream = ExtResource("38_yjcuy")
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
 [node name="AudioManager" type="Node" unique_id=1886217390]
 script = ExtResource("1_1npab")
-sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_a6x67"), SubResource("Resource_wtjpd"), SubResource("Resource_0ljai"), SubResource("Resource_hc4hy"), SubResource("Resource_i0578"), SubResource("Resource_wm0aq"), SubResource("Resource_al0q2"), SubResource("Resource_r50q1"), SubResource("Resource_1xg3f"), SubResource("Resource_wj1s4"), SubResource("Resource_vg4ut"), SubResource("Resource_xtm57"), SubResource("Resource_0aibp")])
-music_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_nkd2g")])
+sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kcm5a"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_vgqql"), SubResource("Resource_fkybt"), SubResource("Resource_x3wgy"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_smrp4"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_a6x67"), SubResource("Resource_wtjpd"), SubResource("Resource_0ljai"), SubResource("Resource_hc4hy"), SubResource("Resource_i0578"), SubResource("Resource_wm0aq"), SubResource("Resource_al0q2"), SubResource("Resource_r50q1"), SubResource("Resource_1xg3f"), SubResource("Resource_wj1s4"), SubResource("Resource_vg4ut"), SubResource("Resource_xtm57"), SubResource("Resource_0aibp"), SubResource("Resource_kpqb3"), SubResource("Resource_mwtf5")])
+music_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_nkd2g"), SubResource("Resource_pqvgl")])

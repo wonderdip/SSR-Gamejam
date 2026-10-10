@@ -21,14 +21,6 @@ func _ready() -> void:
 	var sprite := Sprite2D.new()
 	sprite.scale = Vector2(0.7, 0.7)
 	sprite.texture = item_data.texture
-	
-	#var shader: ShaderMaterial = ShaderMaterial.new()
-	#shader.shader = load("res://Shader/floor_glow.gdshader")
-	#shader.set_shader_parameter("glow_color", Color(0.369, 0.486, 1.0, 1.0))
-	#shader.set_shader_parameter("intensity", 2.7)
-	#shader.set_shader_parameter("spread", 2.0)
-	#shader.set_shader_parameter("pulse_speed", 5.0)
-	#sprite.material = shader
 	add_child(sprite)
 	
 	prompt = Label.new()

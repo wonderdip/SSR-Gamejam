@@ -13,6 +13,8 @@ signal died(enemy: Enemy)
 @export var sprite: Sprite2D
 @export var animation_player: AnimationPlayer
 
+var flash_shader: Shader = preload("res://Shader/hit_flash.gdshader")
+
 enum AttackTypes { GUN, MELEE }
 enum MovementTypes { PLAYER, RANDOM, FAR, IDLE }
 
@@ -26,7 +28,10 @@ func _ready() -> void:
 	max_health = health
 	player_ref = get_tree().get_first_node_in_group("player")
 	_pick_random_target()
-
+	
+	sprite.material = ShaderMaterial.new()
+	sprite.material.shader = flash_shader
+	
 func _physics_process(delta: float) -> void:
 	velocity = _get_movement_velocity(delta)
 	move_and_slide()
@@ -77,11 +82,17 @@ func _update_facing() -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	ScreenSfx.cam_shake(2, 1, 0.2)
+	sprite.material.set_shader_parameter("active", true)
+	
 	if animation_player and animation_player.has_animation("hit"):
 		animation_player.play("hit")
+		
 	if health <= 0:
 		die()
-
+		
+	await get_tree().create_timer(0.1).timeout
+	sprite.material.set_shader_parameter("active", false)
+	
 func die() -> void:
 	died.emit(self)
 	queue_free()

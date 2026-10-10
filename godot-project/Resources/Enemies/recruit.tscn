@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_5bly5"]
 [ext_resource type="Texture2D" uid="uid://30ovvwxfhqyi" path="res://Assets/Characters/Sciontology/recruit.png" id="2_ekxys"]
+[ext_resource type="Shader" uid="uid://duemve88qkyom" path="res://Shader/hit_flash.gdshader" id="2_juh3s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdoty"]
 radius = 8.0
 height = 24.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+shader = ExtResource("2_juh3s")
+shader_parameter/active = false
 
 [sub_resource type="Animation" id="Animation_ekxys"]
 length = 0.001
@@ -128,6 +133,7 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_mdoty")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=641295790]
+material = SubResource("ShaderMaterial_ynf5e")
 texture = ExtResource("2_ekxys")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1124190504]

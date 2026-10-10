@@ -6,6 +6,7 @@ signal melee_equipped(item_data: MeleeData)
 signal weapon_dropped(item_data: ItemData)
 signal anomaly_added(item_data: ItemData)
 signal consumable_changed(item_data: ItemData, count: int)
+signal active_weapon_changed(weapon: Node)
 
 @export var player: Player
 
@@ -113,7 +114,8 @@ func _set_active(weapon: CanvasItem) -> void:
 		w.visible = active
 		w.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
 	current_weapon = weapon
-
+	active_weapon_changed.emit(weapon)
+	
 func _remove_gun() -> void:
 	gun_instance.get_parent().remove_child(gun_instance)
 	gun_instance.queue_free()

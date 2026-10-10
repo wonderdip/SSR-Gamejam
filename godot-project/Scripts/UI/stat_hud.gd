@@ -15,21 +15,18 @@ var player: Player
 
 func _ready() -> void:
 	player = SceneManager.player
-	player.inventory.melee_equipped.connect(_on_weapon_equipped)
-	player.inventory.gun_equipped.connect(_on_weapon_equipped)
+	player.inventory.active_weapon_changed.connect(_on_active_weapon_changed)
+	_on_active_weapon_changed(player.inventory.current_weapon)
 
-	_on_weapon_equipped(player.inventory.equipped_melee)
-	_on_weapon_equipped(player.inventory.equipped_gun)
-
-func _on_weapon_equipped(weapon_data: ItemData) -> void:
-	weapon_icon.visible = weapon_data != null
-	if weapon_data:
-		weapon_icon.texture = weapon_data.mini_texture
-		match weapon_data.item_type:
-			ItemEnums.ITEM_TYPE.GUN:
-				_build_counters(container, weapon_data.magazine_size, bullet_counter_texture)
-			ItemEnums.ITEM_TYPE.MELEE:
-				_build_counters(container, weapon_data.swings_before_cd, melee_counter_texture)
+func _on_active_weapon_changed(weapon: Node) -> void:
+	clear_counters()
+	weapon_icon.visible = weapon != null
+	if weapon is GunInstance:
+		weapon_icon.texture = weapon.gun_data.mini_texture
+		_build_counters(container, weapon.gun_data.magazine_size, bullet_counter_texture)
+	elif weapon is MeleeInstance:
+		weapon_icon.texture = weapon.melee_data.mini_texture
+		_build_counters(container, weapon.melee_data.swings_before_cd, melee_counter_texture)
 
 func _build_counters(container: Control, count: int, texture: Texture2D) -> void:
 	clear_counters()
@@ -52,12 +49,12 @@ func _build_counters(container: Control, count: int, texture: Texture2D) -> void
 func _process(_delta: float) -> void:
 	if player.inventory.current_weapon:
 		_update_counters(container, player.inventory.current_weapon)
+		
 	else:
 		clear_counters()
 
 func clear_counters():
 	if container.get_child_count() > 0:
-		weapon_icon.texture = null
 		for child in container.get_children():
 			container.remove_child(child)
 			child.queue_free()

@@ -10,9 +10,8 @@ var ascending := false
 func _ready() -> void:
 	player = SceneManager.player
 	weapon_hud.hide()
-
-	player.inventory.gun_equipped.connect(show_weapon_hud)
-	player.inventory.melee_equipped.connect(show_weapon_hud)
+	
+	player.inventory.active_weapon_changed.connect(show_weapon_hud)
 	SceneManager.ascension_started.connect(set_ascending.bind(true))
 	SceneManager.ascension_finished.connect(set_ascending.bind(false))
 
@@ -22,7 +21,7 @@ func update():
 	else:
 		map.hide()
 
-func show_weapon_hud(_data: ItemData) -> void:
+func show_weapon_hud(_weapon: Node) -> void:
 	if ascending:
 		return
 	if player.inventory.current_weapon:

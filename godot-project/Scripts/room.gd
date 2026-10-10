@@ -20,10 +20,13 @@ var discovered: bool = false
 # Room.gd
 var cleared: bool = false
 var enemies_alive: int = 0
+var spawned: bool = false
+var exit_doors: Array[Door] = []
 
 func spawn_enemies() -> void:
-	if cleared or enemy_list.is_empty():
+	if spawned or cleared or enemy_list.is_empty():
 		return
+	spawned = true
 	for enemy in enemy_list:
 		var enemy_instance = enemy.instantiate() as Enemy
 		add_child(enemy_instance)
@@ -41,6 +44,15 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 	enemies_alive -= 1
 	if enemies_alive <= 0:
 		cleared = true
+		unlock_doors()
+
+func lock_doors() -> void:
+	for door in exit_doors:
+		door.set_locked(true)
+
+func unlock_doors() -> void:
+	for door in exit_doors:
+		door.set_locked(false)
 			
 func get_room_rect() -> Rect2:
 	return Rect2(global_position, room_size)
@@ -61,10 +73,11 @@ func configure_exits(active_directions: Array[LevelManager.TRIGGERDIRECTION], do
 
 		door.position = _socket_position(direction)
 		door.set_direction(direction)
-
+		exit_doors.append(door)
 		erase_wall_for_door(direction)
 
 		doors[direction] = door.trigger
+		
 	return doors
 
 func _socket_position(direction: LevelManager.TRIGGERDIRECTION) -> Vector2:
