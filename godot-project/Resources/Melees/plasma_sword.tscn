@@ -164,7 +164,7 @@ _data = {
 
 [node name="PlasmaSword" type="Area2D" unique_id=354987931 node_paths=PackedStringArray("melee_sprite", "collision_shape", "hit_particle", "animation_player", "vfx")]
 script = ExtResource("1_domhp")
-melee_sprite = NodePath("MeleeSprite")
+melee_sprite = NodePath("VFX/MeleeSprite")
 collision_shape = NodePath("CollisionShape2D")
 hit_particle = NodePath("VFX/HitParticle")
 animation_player = NodePath("AnimationPlayer")
@@ -201,7 +201,7 @@ offset_right = 80.0
 offset_bottom = 114.0
 rotation = -2.3561945
 
-[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=726500475]
+[node name="MeleeSprite" type="Sprite2D" parent="VFX" unique_id=726500475]
 position = Vector2(0, -24)
 texture = ExtResource("2_0ljai")
 

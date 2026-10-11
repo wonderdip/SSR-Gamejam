@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://dkpac7kx1l2i7"]
+
+[ext_resource type="PackedScene" uid="uid://daokxvaecq6s0" path="res://Resources/Melees/ifrits_revenge.tscn" id="1_2payo"]
+[ext_resource type="Texture2D" uid="uid://7bwx68wsph23" path="res://Assets/Items/Melees/mini_flame.png" id="1_4ih10"]
+[ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_rhm7k"]
+[ext_resource type="Texture2D" uid="uid://c6su2niau77ag" path="res://Assets/Items/Melees/flame_sword.png" id="3_4ih10"]
+
+[resource]
+script = ExtResource("1_rhm7k")
+scene = ExtResource("1_2payo")
+swing_sound = "fire_sword"
+equip_sound = "fire_sword"
+hit_sound = "heavy_hit"
+item_name = "Ifrits Revenge"
+texture = ExtResource("3_4ih10")
+mini_texture = ExtResource("1_4ih10")
+description = "A sword imbued with the soul of the flame Sprit Ifrit"
+item_type = 1
+metadata/_custom_type_script = "uid://beapjtsj1udek"

@@ -7,6 +7,9 @@ var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
 var last_played: Dictionary = {}
 
+
+var _lookup: Dictionary = {}  # String -> SoundEffect
+
 func _ready() -> void:
 	music_player = AudioStreamPlayer.new()
 	music_player.bus = "Music"
@@ -20,9 +23,43 @@ func _ready() -> void:
 	
 	set_music_volume(0.5)
 	set_sfx_volume(0.5)
-		
+	
+	for effect in sfx_pool:
+		_register(effect)
+	for song in music_pool:
+		_register(song)
+
+func _register(effect: SoundEffect) -> void:
+	if effect.tag in _lookup:
+		push_warning("Duplicate audio tag: %s" % effect.tag)
+		return
+	_lookup[effect.tag] = effect
+
+func get_audio_stream(tag: String) -> AudioStream:
+	var effect: SoundEffect = _lookup.get(tag)
+	if effect == null:
+		push_warning("No audio found for tag: %s" % tag)
+		return null
+	return effect.get_stream()
+
+func play_sfx(tag: String, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
+	var stream := get_audio_stream(tag)
+	if stream == null:
+		return
+
+	var player := _get_free_sfx_player()
+	if player == null:
+		return
+
+	player.stream = stream
+	player.volume_db = volume_db
+	player.pitch_scale = pitch_scale
+	player.play()
+
 func play_music(tag: String, volume_db: float = 0.0) -> void:
-	var stream: AudioStream = get_audio_stream(tag).audio_stream
+	var stream: AudioStream = get_audio_stream(tag)
+	if stream == null:
+		return
 	
 	if music_player.stream == stream and music_player.playing:
 		return
@@ -34,59 +71,7 @@ func play_music(tag: String, volume_db: float = 0.0) -> void:
 	
 func stop_music() -> void:
 	music_player.stop()
-	
-func get_audio_stream(tag: String) -> SoundEffect:
-	var matches: Array[SoundEffect] = []
-	
-	for sound in sfx_pool:
-		if sound.tag == tag:
-			matches.append(sound)
-	
-	for song in music_pool:
-		if song.tag == tag:
-			matches.append(song)
-	
-	if matches.is_empty():
-		return null
-	
-	# If only one variant exists, return it
-	if matches.size() == 1:
-		last_played[tag] = matches[0]
-		return matches[0]
-	
-	# If more than one variant exists, pick randomly but avoid immediate repeats
-	var choice: SoundEffect
-	var last_for_this_tag = last_played.get(tag, null)
-	
-	# Remove the last played variant from options (if it exists)
-	if last_for_this_tag != null and last_for_this_tag in matches:
-		var filtered_matches = matches.filter(func(s): return s != last_for_this_tag)
-		# Only use filtered list if we still have options
-		if not filtered_matches.is_empty():
-			choice = filtered_matches.pick_random()
-		else:
-			# Fallback if somehow all matches are the same
-			choice = matches.pick_random()
-	else:
-		choice = matches.pick_random()
-	
-	last_played[tag] = choice
-	return choice
-	
-func play_sfx(tag: String, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
-	
-	var sfx : SoundEffect = get_audio_stream(tag)
-	var stream = sfx.audio_stream
-	var player := _get_free_sfx_player()
 
-	if player == null:
-		return
-
-	player.stream = stream
-	player.volume_db = volume_db
-	player.pitch_scale = pitch_scale
-	player.play()
-	
 func _get_free_sfx_player() -> AudioStreamPlayer:
 	for player in sfx_players:
 		if not player.playing:

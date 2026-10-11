@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mkwg0"]
 [ext_resource type="Texture2D" uid="uid://br6vg7sd5ihri" path="res://Assets/Characters/Sciontology/npc1.png" id="4_70dsn"]
 [ext_resource type="Texture2D" uid="uid://w7qs0v3234l3" path="res://Assets/auto_door.png" id="4_wsauq"]
+[ext_resource type="Resource" uid="uid://cnn02f1100oq6" path="res://Resources/Guns/flame_thrower.tres" id="5_535qd"]
 [ext_resource type="Script" uid="uid://o3sn2d8rssis" path="res://Scripts/interaction_trigger.gd" id="6_gwgwg"]
 [ext_resource type="Script" uid="uid://belmddpiuwavi" path="res://Scripts/level_trigger.gd" id="7_ogupu"]
 [ext_resource type="PackedScene" uid="uid://btaoly10afo7a" path="res://Scenes/World/south_item_room.tscn" id="9_2lph4"]
@@ -3023,6 +3024,9 @@ tile_set = SubResource("TileSet_gwgwg")
 [node name="SouthItemRoom" parent="." unique_id=1010165572 instance=ExtResource("9_2lph4")]
 position = Vector2(0, 144)
 
+[node name="Chest" parent="SouthItemRoom" index="6" unique_id=1144401864]
+specific_reward = ExtResource("5_535qd")
+
 [node name="NPC" type="Sprite2D" parent="." unique_id=132833745]
 position = Vector2(128, 20)
 texture = ExtResource("4_70dsn")
@@ -3132,3 +3136,5 @@ specific_note = "Good luck, hopefully you remember everything soon, be careful c
 
 [connection signal="body_entered" from="InteractionTrigger" to="InteractionTrigger" method="_on_body_entered"]
 [connection signal="body_entered" from="RoomTransitionTrigger" to="InteractionTrigger" method="_on_room_transition_trigger_body_entered"]
+
+[editable path="SouthItemRoom"]

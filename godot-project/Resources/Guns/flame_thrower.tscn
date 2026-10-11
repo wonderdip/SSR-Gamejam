@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dy50pgjney21m"]
+
+[ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_7ldve"]
+[ext_resource type="Texture2D" uid="uid://dapychjmlskm" path="res://Assets/Items/Guns/flamethrower.png" id="2_gftkl"]
+
+[node name="FlameThrower" type="Node2D" unique_id=1173789450 node_paths=PackedStringArray("gun_sprite", "bullet_point")]
+script = ExtResource("1_7ldve")
+gun_sprite = NodePath("Sprite2D")
+bullet_point = NodePath("Marker2D")
+metadata/_custom_type_script = "uid://c6jbssk0vys0"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=552884133]
+position = Vector2(14, -5)
+texture = ExtResource("2_gftkl")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=250807096]
+position = Vector2(32, -5)

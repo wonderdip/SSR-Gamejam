@@ -86,15 +86,16 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body: Node):
 	if has_hit:
 		return
-
+	
 	if body is Enemy:
 		if body in hit_bodies:
 			return
 		hit_bodies.append(body)
-		body.take_damage(damage)
+		body.take_damage(damage, Vector2.RIGHT.rotated(rotation), bullet_data.knockback)
 		if not bullet_data.piercing:
 			delete_bullet()
-	elif body is TileMapLayer:
+			
+	elif body is TileMapLayer and not bullet_data.piercing:
 		delete_bullet()
 
 func delete_bullet():

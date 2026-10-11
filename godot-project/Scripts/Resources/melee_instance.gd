@@ -56,14 +56,12 @@ func update_art():
 	var mouse_pos = get_global_mouse_position()
 	var pivot_pos = pivot.global_position
 	pivot.global_rotation = (mouse_pos - pivot_pos).angle()
-
-	melee_sprite.flip_h = mouse_pos.x < pivot_pos.x - dead_zone
 	
-	if vfx:
-		if melee_sprite.flip_h:
-			vfx.scale.x = -1
-		else:
-			vfx.scale.x = 1
+	if mouse_pos.x < pivot_pos.x - dead_zone:
+		vfx.scale.x = -1
+	else:
+		vfx.scale.x = 1
+
 		
 func swing():
 	is_swinging = true
@@ -155,6 +153,9 @@ func _start_cooldown() -> void:
 	cooldown_time_left = 0.0
 	
 func _on_area_2d_body_entered(body: Node):
-	#particles.emitting = true
-	if body.has_method("take_damage"):
+	if body is Enemy:
+		var dir: Vector2 = body.global_position - player.global_position
+		body.take_damage(melee_data.damage, dir, melee_data.knockback)
+		
+	elif body.has_method("take_damage"):
 		body.take_damage(melee_data.damage)

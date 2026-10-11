@@ -111,10 +111,11 @@ _data = {
 &"slash": SubResource("Animation_xl0o1")
 }
 
-[node name="SoulReaper" type="Area2D" unique_id=713737988 node_paths=PackedStringArray("melee_sprite", "collision_shape", "animation_player", "vfx")]
+[node name="SoulReaper" type="Area2D" unique_id=713737988 node_paths=PackedStringArray("melee_sprite", "collision_shape", "hit_particle", "animation_player", "vfx")]
 script = ExtResource("1_bhwsm")
-melee_sprite = NodePath("MeleeSprite")
+melee_sprite = NodePath("VFX/MeleeSprite")
 collision_shape = NodePath("CollisionShape2D")
+hit_particle = NodePath("VFX/HitParticle")
 animation_player = NodePath("AnimationPlayer")
 vfx = NodePath("VFX")
 metadata/_custom_type_script = "uid://c34up5750mih5"
@@ -133,14 +134,14 @@ rotation = -2.3561945
 [node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=1361282197]
 emitting = false
 
-[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=271337184]
-position = Vector2(0, -24)
+[node name="MeleeSprite" type="Sprite2D" parent="VFX" unique_id=271337184]
+position = Vector2(4, -24)
+rotation = 0.6946605
 texture = ExtResource("4_liscn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67705902]
-visible = false
-position = Vector2(-14.000002, -38.000004)
-rotation = 1.0471976
+position = Vector2(14, -36)
+rotation = 1.5707964
 shape = SubResource("RectangleShape2D_8ghw8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=331133870]

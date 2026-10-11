@@ -4,23 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dt72tsdvij4bw" path="res://Assets/Items/Melees/buster_sword.png" id="2_go4im"]
 [ext_resource type="Shader" uid="uid://co7whhu2bl5d4" path="res://Shader/slash.gdshader" id="3_go4im"]
 
-[sub_resource type="Curve" id="Curve_wktlv"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_2njau"]
-curve = SubResource("Curve_wktlv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3dn2y"]
-particle_flag_disable_z = true
-spread = 0.0
-initial_velocity_min = -40.0
-initial_velocity_max = -40.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_2njau")
-hue_variation_min = -2.2351742e-08
-hue_variation_max = -2.2351742e-08
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_awwja"]
 shader = ExtResource("3_go4im")
 shader_parameter/slash_color = Color(0.26, 0.37100005, 1, 1)
@@ -72,26 +55,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VFX/SlashRect:position")
+tracks/2/path = NodePath("VFX/SlashRect:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9.536743e-07, 34)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VFX/SlashRect:visible")
+tracks/3/path = NodePath("VFX/SlashRect:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(-12, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_wktlv"]
@@ -124,26 +107,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VFX/SlashRect:position")
+tracks/2/path = NodePath("VFX/SlashRect:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(-2.9802322e-08, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 18), Vector2(0, 43.075), Vector2(0, 43.075), Vector2(0, 18)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("VFX/SlashRect:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.39999998),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VFX/SlashRect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, 19), Vector2(1, 42), Vector2(1, 42), Vector2(-2, 19)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dhdsh"]
@@ -156,7 +139,7 @@ _data = {
 collision_layer = 8
 collision_mask = 20
 script = ExtResource("1_2njau")
-melee_sprite = NodePath("MeleeSprite")
+melee_sprite = NodePath("VFX/MeleeSprite")
 collision_shape = NodePath("CollisionShape2D")
 hit_particle = NodePath("VFX/HitParticle")
 animation_player = NodePath("AnimationPlayer")
@@ -165,27 +148,19 @@ metadata/_custom_type_script = "uid://c34up5750mih5"
 
 [node name="VFX" type="Node2D" parent="." unique_id=778752444]
 
-[node name="TrailParticles" type="GPUParticles2D" parent="VFX" unique_id=489995169]
-position = Vector2(0, -24)
-emitting = false
-amount = 16
-texture = ExtResource("2_go4im")
-lifetime = 0.5
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_3dn2y")
-
 [node name="SlashRect" type="ColorRect" parent="VFX" unique_id=1994554205]
 visible = false
 material = SubResource("ShaderMaterial_awwja")
-offset_top = 34.0
-offset_right = 80.0
-offset_bottom = 114.0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 84.0
 rotation = -2.3561945
 
 [node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=1686762731]
 emitting = false
 
-[node name="MeleeSprite" type="Sprite2D" parent="." unique_id=1924428155]
+[node name="MeleeSprite" type="Sprite2D" parent="VFX" unique_id=1924428155]
 position = Vector2(0, -24)
 texture = ExtResource("2_go4im")
 

@@ -3,6 +3,7 @@ class_name MeleeData
 
 @export_category("Stats")
 @export var damage: float = 10
+@export var knockback: float = 250
 @export var swing_speed: float = 6
 @export var swing_arc_degrees: float = 100.0  # total sweep angle
 @export var swings_before_cd: int = 5

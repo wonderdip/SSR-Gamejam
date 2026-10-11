@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://co2ebva7qfc1o"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_35ric"]
+[ext_resource type="Shader" uid="uid://dxhaaamkp4lw5" path="res://Shader/glow.gdshader" id="1_w7ia4"]
+[ext_resource type="Texture2D" uid="uid://jfrb4d2qpik3" path="res://Assets/Items/Bullets/fire_sheet.png" id="3_w7ia4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jsvrb"]
+height = 48.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sy2k"]
+shader = ExtResource("1_w7ia4")
+shader_parameter/glow_color = Color(0.36, 0.12912, 0.0936, 1)
+shader_parameter/core_brightness = 1.0000000475
+shader_parameter/halo_size = 0.0
+shader_parameter/halo_intensity = 4.0
+shader_parameter/flicker_speed = 0.0
+shader_parameter/flicker_amount = 0.250000011875
+
+[resource]
+script = ExtResource("1_35ric")
+speed = 30
+max_distance = 20
+piercing = true
+speed_variance = 0.25
+end_scale = 1.1
+fade_out = true
+area_shape = SubResource("CapsuleShape2D_jsvrb")
+area_rotation = 90.0
+offset = Vector2i(30, 0)
+animated = true
+vframes = 14
+fps = 20
+random_frame_range = Vector2i(1, 13)
+material = SubResource("ShaderMaterial_0sy2k")
+item_name = "Bolt"
+texture = ExtResource("3_w7ia4")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

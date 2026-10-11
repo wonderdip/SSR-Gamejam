@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://cnn02f1100oq6"]
+
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_cuw5c"]
+[ext_resource type="Resource" uid="uid://co2ebva7qfc1o" path="res://Resources/Bullets/fire.tres" id="1_np8hq"]
+[ext_resource type="PackedScene" uid="uid://dy50pgjney21m" path="res://Resources/Guns/flame_thrower.tscn" id="1_yna1m"]
+[ext_resource type="Texture2D" uid="uid://cllkks0u2telj" path="res://Assets/Items/Guns/mini_flamethrower.png" id="1_yucw4"]
+[ext_resource type="Texture2D" uid="uid://dapychjmlskm" path="res://Assets/Items/Guns/flamethrower.png" id="3_1scvw"]
+
+[resource]
+script = ExtResource("1_cuw5c")
+damage = 5
+magazine_size = 30
+full_reload = false
+accuracy = 10
+shot_delay = 0.15
+holdable = true
+bullet = ExtResource("1_np8hq")
+scene = ExtResource("1_yna1m")
+shot_sound = "fire"
+item_name = "Flame Thrower"
+texture = ExtResource("3_1scvw")
+mini_texture = ExtResource("1_yucw4")
+description = "A basic flame thrower"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"
