@@ -10,8 +10,8 @@ bullet_point = NodePath("BulletPoint")
 metadata/_custom_type_script = "uid://c6jbssk0vys0"
 
 [node name="GunSprite" type="Sprite2D" parent="." unique_id=1515089741]
-position = Vector2(4, -6)
+position = Vector2(6, -5)
 texture = ExtResource("2_xuecx")
 
 [node name="BulletPoint" type="Marker2D" parent="." unique_id=835239954]
-position = Vector2(10, -6)
+position = Vector2(15, -7)

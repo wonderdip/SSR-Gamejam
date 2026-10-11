@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://671h521tgic0"]
+
+[ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_de0bi"]
+[ext_resource type="Texture2D" uid="uid://dw16atv13hs8c" path="res://Assets/Items/Guns/railgun.png" id="2_waoqw"]
+
+[node name="Railgun" type="Node2D" unique_id=131096076 node_paths=PackedStringArray("gun_sprite", "bullet_point")]
+script = ExtResource("1_de0bi")
+gun_sprite = NodePath("Sprite2D")
+bullet_point = NodePath("Marker2D")
+metadata/_custom_type_script = "uid://c6jbssk0vys0"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1514741378]
+position = Vector2(8, -8)
+texture = ExtResource("2_waoqw")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=623685511]
+position = Vector2(12, -7)

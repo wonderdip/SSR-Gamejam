@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://wosod8edvhkm"]
+
+[ext_resource type="Resource" uid="uid://wrcx5mon4whg" path="res://Resources/Bullets/laser.tres" id="1_6ia60"]
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_607ng"]
+[ext_resource type="PackedScene" uid="uid://671h521tgic0" path="res://Resources/Guns/railgun.tscn" id="2_l383t"]
+[ext_resource type="Texture2D" uid="uid://b80behr724d01" path="res://Assets/Items/Guns/railgun_mini.png" id="2_toxf7"]
+[ext_resource type="Texture2D" uid="uid://dw16atv13hs8c" path="res://Assets/Items/Guns/railgun.png" id="4_toxf7"]
+
+[resource]
+script = ExtResource("1_607ng")
+damage = 100
+magazine_size = 1
+reload_time = 0.2
+accuracy = 0
+player_lock = true
+shot_delay = 0.35
+bullet = ExtResource("1_6ia60")
+scene = ExtResource("2_l383t")
+item_name = "Railgun"
+texture = ExtResource("4_toxf7")
+mini_texture = ExtResource("2_toxf7")
+description = "A certain scientific railgun"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://58w0jkbpbjwo"]
+
+[ext_resource type="Script" uid="uid://dg4vubr1lwsyq" path="res://Scripts/Resources/item_data.gd" id="1_8jph1"]
+[ext_resource type="Texture2D" uid="uid://chb5e3t71w36m" path="res://Assets/Items/book.png" id="2_hwxnd"]
+
+[resource]
+script = ExtResource("1_8jph1")
+item_name = "Sciontology 101"
+texture = ExtResource("2_hwxnd")
+description = "A book containing all the information you could ever need but info is locked behind sciontology rank. Fill it in yourself you pleb!"
+item_type = 4
+rarity = 4
+metadata/_custom_type_script = "uid://dg4vubr1lwsyq"

@@ -8,6 +8,7 @@ class_name GunData
 @export var reload_time: float = 1.0
 @export var full_reload: bool = true
 @export var accuracy: int = 2 #lower is better
+@export var player_lock: bool = false
 
 @export_range(0, 360) var shot_radius: float = 0
 @export_range(0, 10) var shot_delay: float = 0.1

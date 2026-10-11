@@ -11,9 +11,13 @@ class_name BulletData
 
 @export var area_shape: Shape2D
 @export var area_rotation: float
+@export var area_grow: bool = false
+@export var grow_speed: float = 0.5
+@export var windup: float = 0.2
 @export var offset: Vector2i
 @export var collision_particles: ParticleProcessMaterial
 @export var animated: bool = false
+@export var delete_on_anim_done: bool = false
 @export var hframes: int = 1
 @export var vframes: int = 1
 @export var fps: int = 12

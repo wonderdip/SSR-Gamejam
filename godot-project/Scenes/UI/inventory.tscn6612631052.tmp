@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://dqx8q1ofilley"]
+
+[ext_resource type="Script" uid="uid://kduvh2ppxh40" path="res://Scripts/UI/inventory_ui.gd" id="1_dt15g"]
+[ext_resource type="Texture2D" uid="uid://dw16atv13hs8c" path="res://Assets/Items/Guns/railgun.png" id="2_osrsm"]
+
+[node name="Inventory" type="Control" unique_id=52060055]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dt15g")
+
+[node name="CurrentItem" type="Sprite2D" parent="." unique_id=1717365741]
+position = Vector2(128, 72)
+scale = Vector2(2, 2)
+texture = ExtResource("2_osrsm")
+
+[node name="Left" type="Button" parent="." unique_id=1190498347]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.3888889
+anchor_right = 0.1328125
+anchor_bottom = 0.6111111
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "<"
+metadata/_edit_use_anchors_ = true
+
+[node name="Right" type="Button" parent="." unique_id=1548681983]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8671875
+anchor_top = 0.3888889
+anchor_right = 0.9375
+anchor_bottom = 0.6111111
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = ">"
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemName" type="Label" parent="." unique_id=249303826]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32421875
+anchor_top = 0.027777778
+anchor_right = 0.67578125
+anchor_bottom = 0.19444445
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Rarity" type="Label" parent="." unique_id=379966398]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32421875
+anchor_top = 0.18055555
+anchor_right = 0.67578125
+anchor_bottom = 0.3472222
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 12
+text = "Rarity"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="Label" parent="." unique_id=576532774]
+layout_mode = 0
+anchor_left = 0.0234375
+anchor_top = 0.6805556
+anchor_right = 0.609375
+anchor_bottom = 0.9722222
+theme_override_font_sizes/font_size = 8
+text = "Description:"
+metadata/_edit_use_anchors_ = true
+
+[node name="GunDetails" type="VBoxContainer" parent="." unique_id=1684105739]
+layout_mode = 0
+anchor_left = 0.6328125
+anchor_top = 0.6805556
+anchor_right = 0.7890625
+anchor_bottom = 0.9861111
+metadata/_edit_use_anchors_ = true
+
+[node name="Dmg" type="Label" parent="GunDetails" unique_id=1500307674]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Dmg:"
+
+[node name="Mag" type="Label" parent="GunDetails" unique_id=990672537]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Mag Size:"
+
+[node name="Reload" type="Label" parent="GunDetails" unique_id=1929206868]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Reload:"
+
+[node name="MeleeDetails" type="VBoxContainer" parent="." unique_id=1489764448]
+layout_mode = 0
+anchor_left = 0.6328125
+anchor_top = 0.6805556
+anchor_right = 0.79296875
+anchor_bottom = 0.9861111
+offset_right = -1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Dmg" type="Label" parent="MeleeDetails" unique_id=1033793948]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Dmg:"
+
+[node name="Swings" type="Label" parent="MeleeDetails" unique_id=2058889277]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Swings:"
+
+[node name="Cooldown" type="Label" parent="MeleeDetails" unique_id=456350511]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Cooldown:"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

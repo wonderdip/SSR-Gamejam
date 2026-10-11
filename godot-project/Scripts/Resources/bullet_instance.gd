@@ -58,10 +58,32 @@ func _ready() -> void:
 	if bullet_data.animated:
 		sprite.frame = randi_range(bullet_data.random_frame_range.x, bullet_data.random_frame_range.y)
 		
-	sprite.flip_v = randf() < 0.5   # cheap variety for lightning
+	sprite.flip_v = randf() < 0.5 
+	
+	if bullet_data.area_grow:
+		var shape: RectangleShape2D = bullet_data.area_shape.duplicate()
+		collision_shape.shape = shape
+		var full_length: float = bullet_data.area_shape.size.y
+		shape.size.y = 0.0
+		collision_shape.position.x = 0.0
+		
+		await get_tree().create_timer(bullet_data.windup).timeout
+		
+		var area_tween = create_tween()
+		area_tween.tween_method(
+			func(length: float):
+				shape.size.y = length
+				collision_shape.position.x = length / 2.0,
+			0.0, full_length, bullet_data.grow_speed
+		)
 	
 func _physics_process(delta):
 	if bullet_data.animated and not has_hit:
+		var last_frame = bullet_data.hframes * bullet_data.vframes - 1
+		if sprite.frame >= last_frame and bullet_data.delete_on_anim_done:
+			await get_tree().create_timer(1.0 / bullet_data.fps).timeout
+			delete_bullet()
+			
 		anim_timer += delta
 		var frame_duration := 1.0 / bullet_data.fps
 		if anim_timer >= frame_duration:

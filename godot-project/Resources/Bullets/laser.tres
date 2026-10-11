@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://wrcx5mon4whg"]
+
+[ext_resource type="Shader" uid="uid://dxhaaamkp4lw5" path="res://Shader/glow.gdshader" id="1_8ttlf"]
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="2_tx4yq"]
+[ext_resource type="Texture2D" uid="uid://cg4874bqrnabi" path="res://Assets/Items/Bullets/laser.png" id="3_8ttlf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_535qd"]
+size = Vector2(5, 200)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx4yq"]
+shader = ExtResource("1_8ttlf")
+shader_parameter/glow_color = Color(0.47854745, 0.79366827, 0.99999994, 1)
+shader_parameter/core_brightness = 2.000000095
+shader_parameter/halo_size = 1.4000000665
+shader_parameter/halo_intensity = 1.0000000475
+shader_parameter/flicker_speed = 10.0
+shader_parameter/flicker_amount = 0.250000011875
+
+[resource]
+script = ExtResource("2_tx4yq")
+speed = 0
+max_distance = 1000
+piercing = true
+speed_variance = 0.25
+end_scale = 1.1
+fade_out = true
+area_shape = SubResource("RectangleShape2D_535qd")
+area_rotation = 90.0
+area_grow = true
+grow_speed = 0.3
+offset = Vector2i(96, 0)
+animated = true
+delete_on_anim_done = true
+vframes = 13
+fps = 20
+random_frame_range = Vector2i(1, 1)
+material = SubResource("ShaderMaterial_tx4yq")
+item_name = "Laser"
+texture = ExtResource("3_8ttlf")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

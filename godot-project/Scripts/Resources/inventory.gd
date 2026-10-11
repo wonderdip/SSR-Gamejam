@@ -7,6 +7,7 @@ signal weapon_dropped(item_data: ItemData)
 signal anomaly_added(item_data: ItemData)
 signal consumable_changed(item_data: ItemData, count: int)
 signal active_weapon_changed(weapon: Node)
+signal unique_item_obtained(item_data: ItemData)
 
 @export var player: Player
 
@@ -14,12 +15,15 @@ var equipped_gun: GunData
 var equipped_melee: MeleeData
 var anomalies: Array[ItemData] = []
 var consumables: Dictionary = {}
+var unique_items: Array[ItemData] = []
 
 var gun_instance: GunInstance
 var melee_instance: MeleeInstance
 var current_weapon: Node = null   # whichever one is active
 
 func add_item(item: ItemData, instance: Node = null) -> void:
+	item.unlocked = true
+	print(item.item_name)
 	match item.item_type:
 		ItemEnums.ITEM_TYPE.GUN:
 			_equip_gun(item, instance as GunInstance)
@@ -29,6 +33,8 @@ func add_item(item: ItemData, instance: Node = null) -> void:
 			_add_passive(item)
 		ItemEnums.ITEM_TYPE.CONSUMABLE:
 			_add_consumable(item)
+		ItemEnums.ITEM_TYPE.UNIQUE:
+			_add_unique(item)
 		_:
 			push_warning("Inventory: unhandled item_type for " + item.item_name)
 
@@ -138,6 +144,11 @@ func _add_consumable(item: ItemData) -> void:
 	consumables[item] = consumables.get(item, 0) + 1
 	consumable_changed.emit(item, consumables[item])
 
+func _add_unique(item: ItemData) -> void:
+	unique_items.append(item)
+	unique_item_obtained.emit(item)
+	
+	
 func use_consumable(item: ItemData) -> bool:
 	if consumables.get(item, 0) <= 0:
 		return false

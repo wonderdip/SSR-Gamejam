@@ -68,7 +68,10 @@ func shoot():
 
 	on_cooldown = true
 	current_ammo -= gun_data.bullet_count
-
+	
+	if gun_data.player_lock:
+		player.movement_locked = true
+	
 	var base_angle = (get_global_mouse_position() - gun_sprite.global_position).angle()
 	base_angle += deg_to_rad(randf_range(-gun_data.accuracy, gun_data.accuracy))
 
@@ -86,13 +89,18 @@ func shoot():
 			new_bullet.global_rotation = base_angle + (increment * i - arc_rad / 2)
 
 		get_parent().call_deferred("add_child", new_bullet)
-
+		
 	ScreenSfx.cam_shake(1, 0.5, 0.1)  # moved out of the loop so shotguns don't stack shakes
 	AudioManager.play_sfx(gun_data.shot_sound, -8, randf_range(0.95, 1.05))
 	
+	
+	
 	await get_tree().create_timer(gun_data.shot_delay).timeout
 	on_cooldown = false
-
+	
+	if gun_data.player_lock:
+		player.movement_locked = false
+		
 	if current_ammo <= 0:
 		reload()
 	

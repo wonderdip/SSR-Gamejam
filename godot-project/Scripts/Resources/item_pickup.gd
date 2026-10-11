@@ -2,7 +2,8 @@ extends Area2D
 class_name WeaponPickup
 
 var instance: Node
-var item_data: ItemData
+@export var item_data: ItemData
+@export var texture_scale: Vector2
 var player: Player = null
 var prompt: Label
 
@@ -19,7 +20,10 @@ func _ready() -> void:
 	add_child(shape)
 
 	var sprite := Sprite2D.new()
-	sprite.scale = Vector2(0.7, 0.7)
+	sprite.scale = texture_scale if texture_scale else Vector2(0.7, 0.7)
+	if rotation_degrees != 0:
+		sprite.rotate(rotation)
+		rotation_degrees = 0
 	sprite.texture = item_data.texture
 	add_child(sprite)
 	

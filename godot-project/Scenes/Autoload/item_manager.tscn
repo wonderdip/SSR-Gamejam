@@ -8,11 +8,14 @@
 [ext_resource type="Resource" uid="uid://blujy4yyy8f54" path="res://Resources/Melees/soul_reaper.tres" id="5_rdw3f"]
 [ext_resource type="Resource" uid="uid://dkpac7kx1l2i7" path="res://Resources/Melees/ifrits_revenge.tres" id="6_g8pkp"]
 [ext_resource type="Resource" uid="uid://bqr8vfjcjiitp" path="res://Resources/Guns/thunderwhine.tres" id="7_rdw3f"]
+[ext_resource type="Resource" uid="uid://cnn02f1100oq6" path="res://Resources/Guns/flame_thrower.tres" id="9_g6ydc"]
+[ext_resource type="Resource" uid="uid://wosod8edvhkm" path="res://Resources/Guns/rail_gun.tres" id="10_8w0mq"]
+[ext_resource type="Resource" uid="uid://jmc1lyiqehor" path="res://Resources/Guns/basic_gun.tres" id="11_cai3q"]
 
 [node name="ItemManager" type="Node" unique_id=838053468]
 script = ExtResource("1_efi6f")
 melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f"), ExtResource("4_rdw3f"), ExtResource("5_g8pkp"), ExtResource("6_g8pkp")])
-guns = Array[ExtResource("3_dbrv6")]([ExtResource("7_rdw3f")])
+guns = Array[ExtResource("3_dbrv6")]([ExtResource("7_rdw3f"), ExtResource("9_g6ydc"), ExtResource("10_8w0mq"), ExtResource("11_cai3q")])
 rarity_weights = {
 0: 100.0,
 1: 0.0,

@@ -9,13 +9,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
 size = Vector2(32, 6)
 
-[sub_resource type="Gradient" id="Gradient_vo6ee"]
+[sub_resource type="Gradient" id="Gradient_orjpq"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.0042918455, 1)
 colors = PackedColorArray(1, 1, 1, 0.81960785, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bs4jx"]
-gradient = SubResource("Gradient_vo6ee")
+gradient = SubResource("Gradient_orjpq")
 width = 128
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.5, 0.36324787)

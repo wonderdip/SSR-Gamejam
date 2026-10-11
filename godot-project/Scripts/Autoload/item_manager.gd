@@ -60,3 +60,16 @@ func _roll_rarity() -> ItemEnums.RARITIES:
 			return rarity
 
 	return ItemEnums.RARITIES.Common
+
+func get_all_items() -> Array[ItemData]:
+	var items: Array[ItemData] = []
+	for g in guns:
+		if g != null:
+			items.append(g)
+	for m in melees:
+		if m != null:
+			items.append(m)
+	items.sort_custom(func(a: ItemData, b: ItemData) -> bool:
+		return a.item_name.naturalnocasecmp_to(b.item_name) < 0
+	)
+	return items
