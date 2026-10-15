@@ -11,11 +11,14 @@
 [ext_resource type="Resource" uid="uid://cnn02f1100oq6" path="res://Resources/Guns/flame_thrower.tres" id="9_g6ydc"]
 [ext_resource type="Resource" uid="uid://wosod8edvhkm" path="res://Resources/Guns/rail_gun.tres" id="10_8w0mq"]
 [ext_resource type="Resource" uid="uid://jmc1lyiqehor" path="res://Resources/Guns/basic_gun.tres" id="11_cai3q"]
+[ext_resource type="Script" uid="uid://dg4vubr1lwsyq" path="res://Scripts/Resources/item_data.gd" id="12_cai3q"]
+[ext_resource type="Resource" uid="uid://58w0jkbpbjwo" path="res://Resources/Items/sciontology_101.tres" id="13_256f8"]
 
 [node name="ItemManager" type="Node" unique_id=838053468]
 script = ExtResource("1_efi6f")
 melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f"), ExtResource("4_rdw3f"), ExtResource("5_g8pkp"), ExtResource("6_g8pkp")])
 guns = Array[ExtResource("3_dbrv6")]([ExtResource("7_rdw3f"), ExtResource("9_g6ydc"), ExtResource("10_8w0mq"), ExtResource("11_cai3q")])
+unique = Array[ExtResource("12_cai3q")]([ExtResource("13_256f8")])
 rarity_weights = {
 0: 100.0,
 1: 0.0,

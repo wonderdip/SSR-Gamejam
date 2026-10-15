@@ -1,152 +1,173 @@
 [gd_scene format=3 uid="uid://dqx8q1ofilley"]
 
 [ext_resource type="Script" uid="uid://kduvh2ppxh40" path="res://Scripts/UI/inventory_ui.gd" id="1_dt15g"]
-[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="2_ic2qw"]
+[ext_resource type="FontFile" uid="uid://cm57baw7dxa43" path="res://Assets/Fonts/High_Birth.ttf" id="2_ic2qw"]
 [ext_resource type="Texture2D" uid="uid://dw16atv13hs8c" path="res://Assets/Items/Guns/railgun.png" id="2_osrsm"]
+[ext_resource type="Texture2D" uid="uid://drr1cehca5bkw" path="res://Assets/Items/book_inside.png" id="3_yyv02"]
+
+[sub_resource type="Theme" id="Theme_osrsm"]
+default_font = ExtResource("2_ic2qw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ic2qw"]
 
 [node name="Inventory" type="CanvasLayer" unique_id=861110854]
 process_mode = 2
 layer = 15
 script = ExtResource("1_dt15g")
+colors = Array[Color]([Color(0.28118682, 0.28118688, 0.28118682, 1), Color(0, 0.65882355, 0, 1), Color(0, 0, 0.7176471, 1), Color(0.4627451, 0, 0.6627451, 1), Color(0.84705883, 0.67058825, 0, 1)])
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=621447290]
-offset_right = 256.0
-offset_bottom = 144.0
-texture = ExtResource("2_ic2qw")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
+[node name="Control" type="Control" parent="." unique_id=2017041428]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_osrsm")
+metadata/_edit_use_anchors_ = true
 
-[node name="CurrentItem" type="Sprite2D" parent="." unique_id=1717365741]
-position = Vector2(128, 71)
+[node name="BG" type="Sprite2D" parent="Control" unique_id=2029960926]
+material = SubResource("ShaderMaterial_ic2qw")
+position = Vector2(128, 72)
+texture = ExtResource("3_yyv02")
+
+[node name="CurrentItem" type="Sprite2D" parent="Control" unique_id=1717365741]
+position = Vector2(64, 72)
 scale = Vector2(2, 2)
 texture = ExtResource("2_osrsm")
 
-[node name="Left" type="Button" parent="." unique_id=1190498347]
-anchors_preset = -1
-anchor_left = 0.0625
-anchor_top = 0.3888889
-anchor_right = 0.1328125
-anchor_bottom = 0.6111111
-grow_horizontal = 2
+[node name="Left" type="Button" parent="Control" unique_id=1190498347]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -18.5
+offset_right = 26.0
+offset_bottom = 18.5
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "<"
-metadata/_edit_use_anchors_ = true
 
-[node name="Right" type="Button" parent="." unique_id=1548681983]
-anchors_preset = -1
-anchor_left = 0.8671875
-anchor_top = 0.3888889
-anchor_right = 0.9375
-anchor_bottom = 0.6111111
-grow_horizontal = 2
+[node name="Right" type="Button" parent="Control" unique_id=1548681983]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -18.5
+offset_right = -6.0
+offset_bottom = 18.5
+grow_horizontal = 0
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = ">"
-metadata/_edit_use_anchors_ = true
 
-[node name="ItemName" type="Label" parent="." unique_id=249303826]
+[node name="ItemName" type="Label" parent="Control" unique_id=249303826]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.32421875
-anchor_top = 0.027777778
-anchor_right = 0.67578125
-anchor_bottom = 0.19444445
-offset_left = -74.0
-offset_right = -74.0
+anchor_left = 0.0390625
+anchor_top = 0.041666668
+anchor_right = 0.828125
+anchor_bottom = 0.14583333
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="Rarity" type="Label" parent="." unique_id=379966398]
+[node name="Rarity" type="Label" parent="Control" unique_id=379966398]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.328125
-anchor_top = 0.18055555
-anchor_right = 0.671875
-anchor_bottom = 0.3472222
-offset_left = -74.0
-offset_top = -3.0
-offset_right = -74.0
-offset_bottom = -3.0
+anchor_left = 0.0390625
+anchor_top = 0.125
+anchor_right = 0.703125
+anchor_bottom = 0.22916667
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
 text = "Rarity"
 metadata/_edit_use_anchors_ = true
 
-[node name="Description" type="Label" parent="." unique_id=576532774]
-custom_minimum_size = Vector2(150, 42)
-custom_maximum_size = Vector2(150, 42)
-anchors_preset = -1
-anchor_left = 0.0234375
-anchor_top = 0.6805556
-anchor_right = 0.609375
-anchor_bottom = 0.9722222
-theme_override_font_sizes/font_size = 8
-text = "Description:"
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
+[node name="Exit" type="Button" parent="Control" unique_id=969382673]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 6.0
+offset_right = 250.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Exit"
 
-[node name="GunDetails" type="VBoxContainer" parent="." unique_id=1684105739]
-anchors_preset = -1
-anchor_left = 0.6328125
-anchor_top = 0.6805556
-anchor_right = 0.7890625
-anchor_bottom = 0.9861111
-offset_top = -2.0
-offset_bottom = -2.0
-metadata/_edit_use_anchors_ = true
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=351769930]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 6.0
+offset_right = 246.0
+offset_bottom = 136.0
+mouse_filter = 2
 
-[node name="Dmg" type="Label" parent="GunDetails" unique_id=1500307674]
+[node name="GunDetails" type="VBoxContainer" parent="Control/VBoxContainer" unique_id=1684105739]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="GunDmg" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=1500307674]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Dmg:"
 
-[node name="Mag" type="Label" parent="GunDetails" unique_id=990672537]
+[node name="Mag" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=990672537]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Mag Size:"
 
-[node name="Reload" type="Label" parent="GunDetails" unique_id=1929206868]
+[node name="Reload" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=1929206868]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Reload:"
 
-[node name="MeleeDetails" type="VBoxContainer" parent="." unique_id=1489764448]
-anchors_preset = -1
-anchor_left = 0.6328125
-anchor_top = 0.6805556
-anchor_right = 0.79296875
-anchor_bottom = 0.9861111
-offset_top = -2.0
-offset_bottom = -2.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Dmg" type="Label" parent="MeleeDetails" unique_id=1033793948]
+[node name="MeleeDetails" type="VBoxContainer" parent="Control/VBoxContainer" unique_id=1489764448]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="MeleeDmg" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=1033793948]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Dmg:"
 
-[node name="Swings" type="Label" parent="MeleeDetails" unique_id=2058889277]
+[node name="Swings" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=2058889277]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Swings:"
 
-[node name="Cooldown" type="Label" parent="MeleeDetails" unique_id=456350511]
+[node name="Cooldown" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=456350511]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Cooldown:"
 
-[node name="Exit" type="Button" parent="." unique_id=969382673]
-offset_left = 214.0
-offset_top = 4.0
-offset_right = 251.0
-offset_bottom = 35.0
-text = "Exit"
+[node name="Description" type="Label" parent="Control/VBoxContainer" unique_id=576532774]
+custom_minimum_size = Vector2(90, 82)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+theme_override_font_sizes/font_size = 8
+text = "Description: this is a "
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]

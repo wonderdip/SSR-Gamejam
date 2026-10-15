@@ -15,4 +15,5 @@ item_name = "Basic Gun"
 texture = ExtResource("2_b3qae")
 mini_texture = ExtResource("2_iioyr")
 description = "A trusty basic gun"
+in_loot_pool = false
 metadata/_custom_type_script = "uid://bx02otob6ncxd"

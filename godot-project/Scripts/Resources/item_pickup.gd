@@ -6,6 +6,7 @@ var instance: Node
 @export var texture_scale: Vector2
 var player: Player = null
 var prompt: Label
+var shader_material: ShaderMaterial
 
 func _ready() -> void:
 	collision_layer = 0
@@ -25,6 +26,12 @@ func _ready() -> void:
 		sprite.rotate(rotation)
 		rotation_degrees = 0
 	sprite.texture = item_data.texture
+	
+	shader_material = ShaderMaterial.new()
+	shader_material.shader = load("res://Shader/Shine.gdshader")
+	shader_material.set_shader_parameter("shine_size", 0.06)
+	sprite.material = shader_material
+	
 	add_child(sprite)
 	
 	prompt = Label.new()
@@ -39,6 +46,25 @@ func _ready() -> void:
 
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	shine()
+	
+func shine():
+	while true:
+		var shine_tween := create_tween()
+		
+		shader_material.set_shader_parameter("shine_progress", 1.0)
+		
+		shine_tween.tween_method(
+			func(value): shader_material.set_shader_parameter("shine_progress", value),
+			1.0,
+			0.0,
+			2.5
+		)
+		
+		await shine_tween.finished
+		
+		# Optional delay between shines
+		await get_tree().create_timer(1).timeout
 
 func _on_body_entered(body: Node) -> void:
 	if body is Player:

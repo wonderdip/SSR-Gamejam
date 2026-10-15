@@ -8,3 +8,4 @@ class_name ItemData
 @export var item_type: ItemEnums.ITEM_TYPE
 @export var rarity : ItemEnums.RARITIES
 @export var unlocked: bool
+@export var in_loot_pool: bool = true

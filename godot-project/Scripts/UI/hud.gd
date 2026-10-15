@@ -20,7 +20,7 @@ func update():
 		map.show()
 	else:
 		map.hide()
-
+		
 func show_weapon_hud(_weapon: Node) -> void:
 	if ascending:
 		return

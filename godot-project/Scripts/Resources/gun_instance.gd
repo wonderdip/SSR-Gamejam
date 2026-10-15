@@ -26,13 +26,14 @@ func _ready() -> void:
 func _process(delta: float):
 	if reloading:
 		reload_time_left = max(reload_time_left - delta, 0.0)
-	call_deferred("update_art")
+	
 	
 	if player.movement_locked:
 		can_shoot = false
 	else:
 		can_shoot = true
-	
+		call_deferred("update_art")
+		
 	if Input.is_action_just_pressed("reload"):
 		reload()
 	
@@ -92,8 +93,6 @@ func shoot():
 		
 	ScreenSfx.cam_shake(1, 0.5, 0.1)  # moved out of the loop so shotguns don't stack shakes
 	AudioManager.play_sfx(gun_data.shot_sound, -8, randf_range(0.95, 1.05))
-	
-	
 	
 	await get_tree().create_timer(gun_data.shot_delay).timeout
 	on_cooldown = false

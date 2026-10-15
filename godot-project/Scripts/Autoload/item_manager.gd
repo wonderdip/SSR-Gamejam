@@ -2,6 +2,7 @@ extends Node
 
 @export var melees: Array[MeleeData]
 @export var guns: Array[GunData]
+@export var unique: Array[ItemData]
 
 @export var rarity_weights: Dictionary = {
 	ItemEnums.RARITIES.Common: 60.0,
@@ -15,10 +16,10 @@ var _all_weapons: Array = []
 
 func _ready() -> void:
 	for g in guns:
-		if g != null:
+		if g != null and g.in_loot_pool:
 			_all_weapons.append(g)
 	for m in melees:
-		if m != null:
+		if m != null and m.in_loot_pool:
 			_all_weapons.append(m)
 
 # exclude: weapons you don't want returned (e.g. ones the player already owns)
@@ -69,6 +70,10 @@ func get_all_items() -> Array[ItemData]:
 	for m in melees:
 		if m != null:
 			items.append(m)
+	for u in unique:
+		if u!= null:
+			items.append(u)
+			
 	items.sort_custom(func(a: ItemData, b: ItemData) -> bool:
 		return a.item_name.naturalnocasecmp_to(b.item_name) < 0
 	)

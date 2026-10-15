@@ -1,17 +1,19 @@
 extends CanvasLayer
 
-@onready var current_item: Sprite2D = $CurrentItem
-@onready var item_name: Label = $ItemName
-@onready var rarity: Label = $Rarity
-@onready var description: Label = $Description
-@onready var gun_details: VBoxContainer = $GunDetails
-@onready var gun_dmg: Label = $GunDetails/Dmg
-@onready var mag: Label = $GunDetails/Mag
-@onready var reload: Label = $GunDetails/Reload
-@onready var melee_details: VBoxContainer = $MeleeDetails
-@onready var melee_dmg: Label = $MeleeDetails/Dmg
-@onready var swings: Label = $MeleeDetails/Swings
-@onready var cooldown: Label = $MeleeDetails/Cooldown
+@onready var current_item: Sprite2D = $Control/CurrentItem
+@onready var item_name: Label = $Control/ItemName
+@onready var rarity: Label = $Control/Rarity
+@onready var gun_details: VBoxContainer = $Control/VBoxContainer/GunDetails
+@onready var gun_dmg: Label = $Control/VBoxContainer/GunDetails/GunDmg
+@onready var mag: Label = $Control/VBoxContainer/GunDetails/Mag
+@onready var reload: Label = $Control/VBoxContainer/GunDetails/Reload
+@onready var melee_details: VBoxContainer = $Control/VBoxContainer/MeleeDetails
+@onready var melee_dmg: Label = $Control/VBoxContainer/MeleeDetails/MeleeDmg
+@onready var swings: Label = $Control/VBoxContainer/MeleeDetails/Swings
+@onready var cooldown: Label = $Control/VBoxContainer/MeleeDetails/Cooldown
+@onready var description: Label = $Control/VBoxContainer/Description
+
+@export var colors: Array[Color]
 
 var player: Player
 var items: Array[ItemData] = []
@@ -62,6 +64,7 @@ func _show_item() -> void:
 
 	item_name.text = item.item_name if known else ""
 	rarity.text = ItemEnums.RARITIES.keys()[item.rarity] if known else ""
+	rarity.add_theme_color_override("font_color", colors.get(item.rarity))
 	description.text = item.description if known else ""
 
 	var gun := item as GunData
