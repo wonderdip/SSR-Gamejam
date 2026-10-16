@@ -4,11 +4,28 @@
 [ext_resource type="FontFile" uid="uid://cm57baw7dxa43" path="res://Assets/Fonts/High_Birth.ttf" id="2_ic2qw"]
 [ext_resource type="Texture2D" uid="uid://dw16atv13hs8c" path="res://Assets/Items/Guns/railgun.png" id="2_osrsm"]
 [ext_resource type="Texture2D" uid="uid://drr1cehca5bkw" path="res://Assets/Items/book_inside.png" id="3_yyv02"]
+[ext_resource type="Shader" uid="uid://x7tre7ngh4b2" path="res://Shader/vignette.gdshader" id="5_yyv02"]
+[ext_resource type="Texture2D" uid="uid://lsebibaihke0" path="res://Assets/UI/x.png" id="6_t62he"]
 
 [sub_resource type="Theme" id="Theme_osrsm"]
 default_font = ExtResource("2_ic2qw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ic2qw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awwja"]
+shader = ExtResource("5_yyv02")
+shader_parameter/alpha = 1.835
+shader_parameter/inner_radius = 0.645
+shader_parameter/outer_radius = 1.8599999999999999
+
+[sub_resource type="Gradient" id="Gradient_ic2qw"]
+offsets = PackedFloat32Array(0, 0.5024155)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_ic2qw")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Inventory" type="CanvasLayer" unique_id=861110854]
 process_mode = 2
@@ -27,16 +44,48 @@ theme = SubResource("Theme_osrsm")
 metadata/_edit_use_anchors_ = true
 
 [node name="BG" type="Sprite2D" parent="Control" unique_id=2029960926]
-material = SubResource("ShaderMaterial_ic2qw")
+unique_name_in_owner = true
+z_index = -1
 position = Vector2(128, 72)
 texture = ExtResource("3_yyv02")
 
-[node name="CurrentItem" type="Sprite2D" parent="Control" unique_id=1717365741]
-position = Vector2(64, 72)
-scale = Vector2(2, 2)
+[node name="Vignette" type="ColorRect" parent="Control" unique_id=637242739]
+material = SubResource("ShaderMaterial_awwja")
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 144.0
+
+[node name="CurrentItem" type="TextureRect" parent="Control" unique_id=255152411]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -35.0
+offset_right = -26.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_osrsm")
+stretch_mode = 5
+
+[node name="RarityLight" type="PointLight2D" parent="Control/CurrentItem" unique_id=1375395356]
+unique_name_in_owner = true
+position = Vector2(34, 37)
+color = Color(0, 0.0666666, 1, 1)
+range_z_max = 1
+range_layer_min = -100
+range_layer_max = 100
+texture = SubResource("GradientTexture2D_awwja")
+texture_scale = 1.5
 
 [node name="Left" type="Button" parent="Control" unique_id=1190498347]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -50,6 +99,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "<"
 
 [node name="Right" type="Button" parent="Control" unique_id=1548681983]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -65,45 +115,48 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = ">"
 
-[node name="ItemName" type="Label" parent="Control" unique_id=249303826]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0390625
-anchor_top = 0.041666668
-anchor_right = 0.828125
-anchor_bottom = 0.14583333
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
+[node name="Exit" type="Button" parent="Control" unique_id=969382673]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(11, 11)
+layout_mode = 0
+offset_left = 236.0
+offset_top = 6.0
+offset_right = 247.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+icon = ExtResource("6_t62he")
+icon_alignment = 1
+
+[node name="LabelVbox" type="VBoxContainer" parent="Control" unique_id=944157455]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 122.0
+offset_bottom = 33.0
+theme_override_constants/separation = -4
+
+[node name="ItemName" type="Label" parent="Control/LabelVbox" unique_id=249303826]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(112, 16)
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Item Name"
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Rarity" type="Label" parent="Control" unique_id=379966398]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0390625
-anchor_top = 0.125
-anchor_right = 0.703125
-anchor_bottom = 0.22916667
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
+[node name="Rarity" type="Label" parent="Control/LabelVbox" unique_id=379966398]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Rarity"
 metadata/_edit_use_anchors_ = true
 
-[node name="Exit" type="Button" parent="Control" unique_id=969382673]
-layout_mode = 0
-offset_left = 211.0
-offset_top = 6.0
-offset_right = 250.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "Exit"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=351769930]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 134.0
 offset_top = 6.0
@@ -112,52 +165,61 @@ offset_bottom = 136.0
 mouse_filter = 2
 
 [node name="GunDetails" type="VBoxContainer" parent="Control/VBoxContainer" unique_id=1684105739]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
 [node name="GunDmg" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=1500307674]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Dmg:"
 
 [node name="Mag" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=990672537]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Mag Size:"
 
 [node name="Reload" type="Label" parent="Control/VBoxContainer/GunDetails" unique_id=1929206868]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Reload:"
 
 [node name="MeleeDetails" type="VBoxContainer" parent="Control/VBoxContainer" unique_id=1489764448]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
 [node name="MeleeDmg" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=1033793948]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Dmg:"
 
 [node name="Swings" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=2058889277]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Swings:"
 
 [node name="Cooldown" type="Label" parent="Control/VBoxContainer/MeleeDetails" unique_id=456350511]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
 text = "Cooldown:"
 
 [node name="Description" type="Label" parent="Control/VBoxContainer" unique_id=576532774]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 82)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -168,6 +230,9 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="Control/Left" to="." method="_on_left_mouse_entered"]
 [connection signal="pressed" from="Control/Left" to="." method="_on_left_pressed"]
+[connection signal="mouse_entered" from="Control/Right" to="." method="_on_right_mouse_entered"]
 [connection signal="pressed" from="Control/Right" to="." method="_on_right_pressed"]
+[connection signal="mouse_entered" from="Control/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]

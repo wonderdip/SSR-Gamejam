@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal main_menu_open
+
 @export var highlight: ColorRect
 @export var button_container: ButtonContainer
 
@@ -29,14 +31,14 @@ func _on_back_button_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.
 
-
 func _on_main_menu_button_pressed() -> void:
 	await tween_highlight()
 	MessageBus._message_box.close()
 	hide()
 	if LevelManager.main_cam: LevelManager.main_cam.set_enabled(false)
 	SceneManager.goto_scene("res://Scenes/UI/title_screen.tscn")
-
+	main_menu_open.emit()
+	
 func tween_highlight():
 	AudioManager.play_sfx("select")
 	var tween = create_tween()

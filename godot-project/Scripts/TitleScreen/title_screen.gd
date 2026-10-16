@@ -50,7 +50,7 @@ func _on_play_button_pressed() -> void:
 		await SceneManager.fade_out()
 		print("past the fade out")
 		SceneManager.remove_scene()
-		
+		 
 		SceneManager.fade_in()
 		print("past the fade in")
 		LevelManager.main_cam.set_enabled(true)
@@ -58,6 +58,7 @@ func _on_play_button_pressed() -> void:
 		print("placed player")
 	elif LevelManager.game_started:
 		print("going to hub")
+		LevelManager.main_cam.set_enabled(true)
 		SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
 	else:
 		SceneManager.goto_packed_scene(play_scene)
