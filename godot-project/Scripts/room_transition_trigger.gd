@@ -22,25 +22,35 @@ func _on_body_entered(body: Node2D) -> void:
 	var player: Player = body
 	player._exiting_level()
 	await get_tree().create_timer(0.25).timeout
-
+	 
 	if ascend_trigger:
 		_triggered = true
 		LevelManager.ascend_requested.emit()
 		return
-
-	if target_room == null:
-		push_warning("RoomTransitionTrigger: target_room is not set on %s" % name)
+		
+	var room := _get_target_room()
+	
+	if room == null:
+		push_warning("RoomTransitionTrigger: no target room found for %s" % name)
 		return
-
+	
 	var camera := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	if camera == null:
 		push_warning("RoomTransitionTrigger: no node in the 'room_camera' group was found.")
 		return
-
+	
 	_triggered = true
 	camera.player = player
-	camera.transition_to_room(target_room.get_room_center(), target_room.get_room_rect())
+	camera.transition_to_room(room.get_room_center(), room.get_room_rect())
 	
 	await camera.room_transition_finished
 	player._entering_level(false)
-	LevelManager.set_player_room(target_room)
+	LevelManager.set_player_room(room)
+
+func _get_target_room() -> Room:
+	if target_room != null:
+		return target_room
+	var node: Node = get_parent()
+	while node != null and not node is Room:
+		node = node.get_parent()
+	return node as Room

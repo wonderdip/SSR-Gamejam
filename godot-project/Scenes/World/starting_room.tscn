@@ -3115,7 +3115,7 @@ shape = SubResource("RectangleShape2D_awwja")
 [node name="RoomTransitionTrigger" type="Area2D" parent="." unique_id=981192508 node_paths=PackedStringArray("target_room")]
 collision_layer = 32
 script = ExtResource("9_ur81b")
-target_room = NodePath("")
+target_room = NodePath("..")
 metadata/_custom_type_script = "uid://c047k8lmipoby"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomTransitionTrigger" unique_id=1661785165]

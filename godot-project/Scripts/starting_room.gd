@@ -8,7 +8,8 @@ class_name StartingRoom
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var inv = SceneManager.player.inventory
-	LevelManager.main_cam.set_enabled(true)
+	if LevelManager.main_cam:
+		LevelManager.main_cam.set_enabled(true)
 	
 	if inv.current_weapon:
 		first_weapon.queue_free()
