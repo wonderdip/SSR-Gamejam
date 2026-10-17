@@ -43,11 +43,12 @@ func _ready() -> void:
 	sprite.material.shader = flash_shader
 	
 	if explosion_area:
+		animation_player.play("RESET")
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
 		
 func _physics_process(delta: float) -> void:
 	if exploding:
-		return  # frozen while the explode animation plays
+		return
 
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_friction * delta)
 
@@ -116,6 +117,7 @@ func take_damage(amount: float, knockback_dir: Vector2 = Vector2.ZERO, knockback
 		apply_knockback(knockback_dir, knockback_force)
 		
 	ScreenSfx.cam_shake(2, 1, 0.2)
+	ScreenSfx.framefreeze(0.035, 0)
 	
 	sprite.material.set_shader_parameter("active", true)
 	
@@ -131,11 +133,13 @@ func take_damage(amount: float, knockback_dir: Vector2 = Vector2.ZERO, knockback
 func die() -> void:
 	if exploding:
 		return
+		
 	exploding = true
 	died.emit(self)
 
 	if movement == MovementTypes.SUICIDE:
 		_explode()
+		ScreenSfx.framefreeze(0.08, 0)
 		if animation_player.has_animation("explode"):
 			animation_player.play("explode")
 			await animation_player.animation_finished
@@ -144,7 +148,10 @@ func die() -> void:
 
 func _explode() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
-	ScreenSfx.cam_shake(6, 2, 0.3)
+	
+	AudioManager.play_sfx("explosion", -5, randf_range(0.95, 1.05))
+	ScreenSfx.cam_shake(15, 5, 0.5)
+	
 	if explosion_area:
 		explosion_area.set_deferred("monitoring", true)
 

@@ -72,6 +72,7 @@ func shoot():
 	
 	if gun_data.player_lock:
 		player.movement_locked = true
+		ScreenSfx.framefreeze(0.08, 0)
 	
 	var base_angle = (get_global_mouse_position() - gun_sprite.global_position).angle()
 	base_angle += deg_to_rad(randf_range(-gun_data.accuracy, gun_data.accuracy))

@@ -98,7 +98,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [10.0]
+"values": [1.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -277,6 +277,7 @@ shader_parameter/flicker_speed = 40.0
 shader_parameter/flicker_amount = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awwja"]
+radius = 1.0
 
 [node name="Martyr" type="CharacterBody2D" unique_id=1191127945 node_paths=PackedStringArray("sprite", "animation_player", "explosion_area")]
 collision_layer = 4
@@ -289,7 +290,6 @@ speed = 20.0
 knockback_resistance = 0.7
 movement = 4
 weapon = 1
-attack_range = 30.0
 sprite = NodePath("Sprite2D")
 animation_player = NodePath("AnimationPlayer")
 explosion_area = NodePath("ExplosionArea")

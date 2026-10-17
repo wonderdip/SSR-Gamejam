@@ -137,6 +137,7 @@ func take_damage(amount: int):
 	player_sprite.material = flash_shader_material
 	player_sprite.material.set_shader_parameter("active", true)
 	
+	ScreenSfx.framefreeze(0.08, 0)
 	ScreenSfx.cam_shake(2, 1, 0.2)
 	
 	await get_tree().create_timer(0.1).timeout
