@@ -3,6 +3,8 @@ class_name Player
 
 enum Direction { DOWN, UP, LEFT, RIGHT }
 
+@export var max_health: int = 100
+
 @export_category("Movement")
 @export var walk_speed: float = 100.0
 @export var run_speed: float = 200.0
@@ -19,20 +21,28 @@ enum Direction { DOWN, UP, LEFT, RIGHT }
 
 @export_category("Other")
 @export var inventory: Inventory
-@export var max_inventory_size: int = 3
 @export var pixelate_shader: Shader
+@export var hit_flash_shader: Shader
 
 var facing: Direction = Direction.DOWN
 var _is_transitioning: bool = false
 var movement_locked: bool = false
 var pixel_shader_material: ShaderMaterial
+var flash_shader_material: ShaderMaterial
+var current_health: int
 var _step_timer: float = 0.0
 
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
 	pixel_shader_material.shader = pixelate_shader
+	
+	flash_shader_material = ShaderMaterial.new()
+	flash_shader_material.shader = hit_flash_shader
+	
 	add_to_group("player", true)
 	LevelManager.ascend_requested.connect(_on_ascending_floor)
+	
+	current_health = max_health
 	
 func _physics_process(delta: float) -> void:
 	if movement_locked:
@@ -120,3 +130,16 @@ func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 		max_pixel_size, 1.0, duration
 	)
 	await tween.finished
+
+func take_damage(amount: int):
+	current_health -= amount
+	
+	player_sprite.material = flash_shader_material
+	player_sprite.material.set_shader_parameter("active", true)
+	
+	ScreenSfx.cam_shake(2, 1, 0.2)
+	
+	await get_tree().create_timer(0.1).timeout
+	player_sprite.material.set_shader_parameter("active", false)
+	player_sprite.material = null
+	

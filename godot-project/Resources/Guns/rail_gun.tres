@@ -16,6 +16,7 @@ player_lock = true
 shot_delay = 0.35
 bullet = ExtResource("1_6ia60")
 scene = ExtResource("2_l383t")
+shot_sound = "railgun"
 item_name = "Railgun"
 texture = ExtResource("4_toxf7")
 mini_texture = ExtResource("2_toxf7")

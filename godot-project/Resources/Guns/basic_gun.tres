@@ -11,6 +11,7 @@ script = ExtResource("1_vf031")
 damage = 25
 bullet = ExtResource("1_8qnil")
 scene = ExtResource("2_5f2e2")
+shot_sound = "shot"
 item_name = "Basic Gun"
 texture = ExtResource("2_b3qae")
 mini_texture = ExtResource("2_iioyr")

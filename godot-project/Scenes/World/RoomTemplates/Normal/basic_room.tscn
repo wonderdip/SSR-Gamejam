@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://de5cowqywqdtg" path="res://Scripts/room.gd" id="1_d8gsv"]
 [ext_resource type="Texture2D" uid="uid://4na4ohygiq3o" path="res://Assets/TileSets/Room_Builder_free_16x16.png" id="2_66gei"]
 [ext_resource type="PackedScene" uid="uid://cvfnnn0f6vnbv" path="res://Resources/Enemies/recruit.tscn" id="2_mdoty"]
+[ext_resource type="PackedScene" uid="uid://coqrlcsnrn45o" path="res://Resources/Enemies/martyr.tscn" id="3_6vw0a"]
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mdoty"]
 [ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="4_66gei"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d8gsv"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdoty"]
 texture = ExtResource("2_66gei")
 3:0/0 = 0
 4:0/0 = 0
@@ -264,9 +265,9 @@ texture = ExtResource("2_66gei")
 [sub_resource type="TileSet" id="TileSet_gpfee"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_d8gsv")
+sources/0 = SubResource("TileSetAtlasSource_mdoty")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_66gei"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6vw0a"]
 texture = ExtResource("2_66gei")
 3:0/0 = 0
 4:0/0 = 0
@@ -552,9 +553,9 @@ texture = ExtResource("2_66gei")
 [sub_resource type="TileSet" id="TileSet_cau4u"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_66gei")
+sources/0 = SubResource("TileSetAtlasSource_6vw0a")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdoty"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_omftr"]
 texture = ExtResource("3_mdoty")
 1:0/0 = 0
 2:0/0 = 0
@@ -1704,9 +1705,9 @@ texture = ExtResource("3_mdoty")
 [sub_resource type="TileSet" id="TileSet_xi3rd"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_mdoty")
+sources/0 = SubResource("TileSetAtlasSource_omftr")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6vw0a"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r5g40"]
 texture = ExtResource("3_mdoty")
 1:0/0 = 0
 2:0/0 = 0
@@ -2844,13 +2845,13 @@ texture = ExtResource("3_mdoty")
 [sub_resource type="TileSet" id="TileSet_tsssq"]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
-sources/0 = SubResource("TileSetAtlasSource_6vw0a")
+sources/0 = SubResource("TileSetAtlasSource_r5g40")
 
-[sub_resource type="Gradient" id="Gradient_omftr"]
+[sub_resource type="Gradient" id="Gradient_1jxdn"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.6392157)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mdoty"]
-gradient = SubResource("Gradient_omftr")
+gradient = SubResource("Gradient_1jxdn")
 width = 96
 height = 96
 fill = 1
@@ -2859,7 +2860,7 @@ fill_to = Vector2(0.9, 0.5)
 
 [node name="BasicRoom" type="Node2D" unique_id=1714128476]
 script = ExtResource("1_d8gsv")
-enemy_list = Array[PackedScene]([ExtResource("2_mdoty")])
+enemy_list = Array[PackedScene]([ExtResource("2_mdoty"), ExtResource("3_6vw0a")])
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
 [node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=160450559]

@@ -105,11 +105,11 @@ _data = {
 &"walk": SubResource("Animation_7r56r")
 }
 
-[sub_resource type="Gradient" id="Gradient_ekxys"]
+[sub_resource type="Gradient" id="Gradient_juh3s"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
-gradient = SubResource("Gradient_ekxys")
+gradient = SubResource("Gradient_juh3s")
 width = 256
 height = 256
 fill = 1

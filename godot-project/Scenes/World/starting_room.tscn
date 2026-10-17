@@ -3152,7 +3152,7 @@ specific_note = "Good luck, hopefully you remember everything soon, be careful c
 [node name="FirstWeapon" type="Area2D" parent="." unique_id=2052252210]
 unique_name_in_owner = true
 position = Vector2(70, 210)
-rotation = -0.53524375
+rotation = -1.5707964
 script = ExtResource("13_pnb3q")
 item_data = ExtResource("10_12re5")
 texture_scale = Vector2(1, 1)

@@ -14,7 +14,7 @@ default_font = ExtResource("2_ic2qw")
 shader = ExtResource("5_yyv02")
 shader_parameter/alpha = 1.835
 shader_parameter/inner_radius = 0.645
-shader_parameter/outer_radius = 1.8599999999999999
+shader_parameter/outer_radius = 1.86
 
 [sub_resource type="Gradient" id="Gradient_ic2qw"]
 offsets = PackedFloat32Array(0, 0.5024155)
@@ -225,7 +225,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -1
 theme_override_font_sizes/font_size = 8
-text = "Description: this is a "
+text = "Description: this is an item"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 

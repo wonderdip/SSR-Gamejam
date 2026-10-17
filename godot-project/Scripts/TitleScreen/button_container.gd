@@ -59,17 +59,19 @@ func _process(_delta: float) -> void:
 		AudioManager.play_sfx("button_switch", - 10, randf_range(0.95, 1.05))
 		
 		current_button = new_button
+		
 		if current_button == -1:
 			pointer.hide()
 			highlight.hide()
 			return
+			
 		pointer.global_position.x = x_position
 		pointer.global_position.y = pointer_positions[current_button]
 		highlight.position.y = highlight_positions[current_button]
-
+		
 		pointer.show()
 		highlight.show()
-
+		
 		highlight_tween()
 
 func highlight_tween() -> void:
