@@ -7,7 +7,9 @@ signal damaged(amount: int)
 @export var enemy_name: String = ""
 @export var health: float = 100
 @export var damage: float = 10
+@export var attack_speed: float = 0.5
 @export var speed: float = 80
+@export var knockback: int = 100
 @export var knockback_resistance: float = 0.0  # 0 = full knockback, 1 = immune
 @export var knockback_friction: float = 600.0  # how fast the push fades (px/s²)
 @export var no_knockback: bool = false
@@ -33,6 +35,7 @@ var random_timer: float = 0.0
 var knockback_velocity := Vector2.ZERO
 var exploding := false
 var has_hit := false
+var can_attack := true
 
 func _ready() -> void:
 	max_health = health
@@ -44,6 +47,8 @@ func _ready() -> void:
 	
 	if explosion_area:
 		animation_player.play("RESET")
+		explosion_area.get_node("CollisionShape2D").shape.radius = 10
+		
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
 		
 func _physics_process(delta: float) -> void:
@@ -54,14 +59,27 @@ func _physics_process(delta: float) -> void:
 
 	var move_velocity := _get_movement_velocity(delta)
 	velocity = move_velocity + knockback_velocity
+	
+	if not (velocity.is_finite() and global_position.is_finite()):
+		push_error("%s bad state: vel=%s pos=%s kb=%s move=%s" % [name, velocity, global_position, knockback_velocity, move_velocity])
+		velocity = Vector2.ZERO
+		knockback_velocity = Vector2.ZERO
+	
 	move_and_slide()
 	_update_facing(move_velocity)
-
+	
+	
 	if movement == MovementTypes.SUICIDE and player_ref \
-			and global_position.distance_to(player_ref.global_position) <= attack_range:
+			and global_position.distance_to(_player_center()) <= attack_range:
 		die()
 		return
-
+	
+	if weapon == AttackTypes.MELEE and can_attack and is_instance_valid(player_ref) \
+			and global_position.distance_to(_player_center()) <= attack_range:
+		
+		attack()
+		
+	
 	if move_velocity.length() > 0.1:
 		if animation_player.has_animation("walk"): animation_player.play("walk")
 	else:
@@ -83,12 +101,12 @@ func _get_movement_velocity(delta: float) -> Vector2:
 func _seek_player() -> Vector2:
 	if not player_ref:
 		return Vector2.ZERO
-	return global_position.direction_to(player_ref.global_position) * speed * floor_multiplier
+	return global_position.direction_to(_player_center()) * speed * floor_multiplier
 
 func _flee_player() -> Vector2:
 	if not player_ref:
 		return Vector2.ZERO
-	return player_ref.global_position.direction_to(global_position) * speed * floor_multiplier
+	return global_position.direction_to(_player_center()) * speed * floor_multiplier
 
 func _wander(delta: float) -> Vector2:
 	random_timer -= delta
@@ -105,8 +123,10 @@ func _update_facing(move_velocity: Vector2) -> void:
 		sprite.flip_h = move_velocity.x < 0
 
 func apply_knockback(direction: Vector2, force: float) -> void:
-	if no_knockback:
+	if no_knockback or not direction.is_finite():
 		return
+	if direction.is_zero_approx():
+		direction = Vector2.from_angle(randf() * TAU)
 	knockback_velocity = direction.normalized() * force * (1.0 - knockback_resistance)
 
 func take_damage(amount: float, knockback_dir: Vector2 = Vector2.ZERO, knockback_force: float = 0.0) -> void:
@@ -159,5 +179,17 @@ func _on_explosion_body_entered(body: Node2D) -> void:
 	if has_hit or not body is Player:
 		return
 	has_hit = true
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
+	attack()
+
+
+func attack() -> void:
+	can_attack = false
+	if player_ref.has_method("take_damage"):
+		player_ref.take_damage(damage, global_position, knockback)
+
+	await get_tree().create_timer(attack_speed).timeout
+	if is_instance_valid(self):
+		can_attack = true
+
+func _player_center() -> Vector2:
+	return player_ref.center() if is_instance_valid(player_ref) else global_position

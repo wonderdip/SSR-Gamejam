@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal player_died
+
 enum Direction { DOWN, UP, LEFT, RIGHT }
 
 @export var max_health: int = 100
@@ -11,6 +13,13 @@ enum Direction { DOWN, UP, LEFT, RIGHT }
 @export var walk_step_interval: float = 0.266667
 @export var run_step_interval: float = 0.2
 
+@export_category("Knockback")
+@export var knockback_friction: float = 900.0
+@export var knockback_lock_time: float = 0.12  # brief loss of control so the push reads
+
+var knockback_velocity := Vector2.ZERO
+var _knockback_lock := 0.0
+
 @export_category("Input")
 @export var run_action: StringName = "run"
 
@@ -18,6 +27,8 @@ enum Direction { DOWN, UP, LEFT, RIGHT }
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var gun_pos: Marker2D = $GunPos
 @onready var melee_pos: Marker2D = $MeleePos
+@onready var body_shape: CollisionShape2D = $CollisionShape2D
+@onready var blood: ColorRect = $CanvasLayer/Blood
 
 @export_category("Other")
 @export var inventory: Inventory
@@ -43,23 +54,29 @@ func _ready() -> void:
 	LevelManager.ascend_requested.connect(_on_ascending_floor)
 	
 	current_health = max_health
+	blood.hide()
 	
 func _physics_process(delta: float) -> void:
+	assert(global_position.is_finite() and knockback_velocity.is_finite(), "player pos=%s kb=%s" % [global_position, knockback_velocity])
 	if movement_locked:
 		return
 
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_friction * delta)
+	_knockback_lock = max(_knockback_lock - delta, 0.0)
+
 	var input_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var is_running: bool = Input.is_action_pressed(run_action)
-	
+
 	var speed: float = run_speed if is_running else walk_speed
-	velocity = input_vector.normalized() * speed
-	
+	var move_velocity := Vector2.ZERO if _knockback_lock > 0.0 else input_vector.normalized() * speed
+	velocity = move_velocity + knockback_velocity
+
 	move_and_slide()
-	
-	var is_moving: bool = input_vector != Vector2.ZERO
+
+	var is_moving: bool = input_vector != Vector2.ZERO and _knockback_lock <= 0.0
 	if is_moving:
 		facing = _direction_from_vector(input_vector)
-		
+
 	_update_animation(is_moving, is_running)
 	_update_footsteps(is_moving, is_running, delta)
 
@@ -131,8 +148,21 @@ func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 	)
 	await tween.finished
 
-func take_damage(amount: int):
+func take_damage(amount: int, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
 	current_health -= amount
+	
+	
+	if current_health <= 40:
+		blood.show()
+	else:
+		blood.hide()
+		
+	if force > 0.0 and source_pos.is_finite():
+		var dir := (center() - source_pos).normalized()
+		if dir == Vector2.ZERO:
+			dir = Vector2.DOWN
+		knockback_velocity = dir * force
+		_knockback_lock = knockback_lock_time
 	
 	player_sprite.material = flash_shader_material
 	player_sprite.material.set_shader_parameter("active", true)
@@ -144,3 +174,13 @@ func take_damage(amount: int):
 	player_sprite.material.set_shader_parameter("active", false)
 	player_sprite.material = null
 	
+	if current_health <= 0:
+		die()
+
+func die():
+	player_died.emit()
+	movement_locked = true
+	animation_player.play("Died")
+
+func center() -> Vector2:
+	return body_shape.global_position

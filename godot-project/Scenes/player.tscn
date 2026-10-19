@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://duemve88qkyom" path="res://Shader/hit_flash.gdshader" id="3_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://bpjsa5ru570n6" path="res://Assets/Characters/Player/surprised.png" id="5_fkybt"]
 [ext_resource type="Script" uid="uid://dxnyqcl553ckp" path="res://Scripts/Resources/inventory.gd" id="5_x3wgy"]
+[ext_resource type="Shader" uid="uid://x7tre7ngh4b2" path="res://Shader/vignette.gdshader" id="7_3smsa"]
 
 [sub_resource type="Gradient" id="Gradient_vgqql"]
 interpolation_mode = 2
@@ -25,6 +26,70 @@ shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awwja"]
 radius = 4.0
+
+[sub_resource type="Animation" id="Animation_3smsa"]
+resource_name = "Died"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Blood:material:shader_parameter/alpha")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7, 2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Blood:material:shader_parameter/inner_radius")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Blood:material:shader_parameter/outer_radius")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Blood:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerSprite:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(120, 64)]
+}
 
 [sub_resource type="Animation" id="Animation_dewec"]
 resource_name = "IdleDown"
@@ -139,6 +204,66 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(8, -12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Blood:material:shader_parameter/alpha")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/Blood:material:shader_parameter/inner_radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/Blood:material:shader_parameter/outer_radius")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/Blood:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PlayerSprite:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ksbbd"]
@@ -331,6 +456,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0iea"]
 _data = {
+&"Died": SubResource("Animation_3smsa"),
 &"IdleDown": SubResource("Animation_dewec"),
 &"IdleLeft": SubResource("Animation_5ixxa"),
 &"IdleRight": SubResource("Animation_nn08x"),
@@ -347,11 +473,21 @@ _data = {
 &"intro_catch": SubResource("Animation_vgqql")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dtook"]
+shader = ExtResource("7_3smsa")
+shader_parameter/color = Color(0.33, 0, 0, 1)
+shader_parameter/alpha = 0.7
+shader_parameter/inner_radius = 0.3
+shader_parameter/outer_radius = 1.5
+
 [node name="Player" type="CharacterBody2D" unique_id=1871453495 node_paths=PackedStringArray("inventory") groups=["player"]]
 z_index = 10
 collision_mask = 54
+motion_mode = 1
+safe_margin = 0.16
 script = ExtResource("1_cvnsp")
 run_speed = 140.0
+knockback_lock_time = 0.1
 inventory = NodePath("Inventory")
 pixelate_shader = ExtResource("3_vgqql")
 hit_flash_shader = ExtResource("3_x3wgy")
@@ -364,6 +500,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_vgqql")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1900667381]
+z_index = 100
 material = SubResource("ShaderMaterial_jdi6d")
 texture = ExtResource("1_v0iea")
 centered = false
@@ -394,3 +531,12 @@ position = Vector2(8, 8)
 script = ExtResource("5_x3wgy")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dxnyqcl553ckp"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=905071600]
+layer = 8
+
+[node name="Blood" type="ColorRect" parent="CanvasLayer" unique_id=1849287728]
+visible = false
+material = SubResource("ShaderMaterial_dtook")
+offset_right = 256.0
+offset_bottom = 144.0

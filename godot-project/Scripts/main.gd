@@ -14,9 +14,11 @@ func _ready() -> void:
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape") and not event.is_echo():
-		if SceneManager.current_scene.name != "TitleScreen":
+		if SceneManager.current_scene:
+			if SceneManager.current_scene.name != "TitleScreen":
+				pause_menu.show()
+		elif SceneManager.current_scene == null:
 			pause_menu.show()
-	
 	if event.is_action_pressed("inventory") and not event.is_echo():
 		if SceneManager.player.inventory.unique_items.has(load("res://Resources/Items/sciontology_101.tres")):
 				inventory.show()
