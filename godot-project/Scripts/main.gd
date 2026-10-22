@@ -21,7 +21,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			pause_menu.show()
 	if event.is_action_pressed("inventory") and not event.is_echo():
 		if SceneManager.player.inventory.unique_items.has(load("res://Resources/Items/sciontology_101.tres")):
-				inventory.show()
+			inventory.show()
 	
 func _on_main_scene_changed(scene: Node):
 	if scene is Room:

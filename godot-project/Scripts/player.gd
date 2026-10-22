@@ -48,6 +48,7 @@ var _blood_on := false
 
 var enemies_killed: int = 0
 var chests_looted: int = 0
+var dead: bool = false
 
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
@@ -63,9 +64,27 @@ func _ready() -> void:
 	blood.hide()
 	animation_player.play("RESET")
 
-func reset():
+func reset() -> void:
 	current_health = max_health
 	movement_locked = false
+	set_physics_process(true)
+	body_shape.set_deferred("disabled", false)
+
+	velocity = Vector2.ZERO
+	knockback_velocity = Vector2.ZERO
+	_knockback_lock = 0.0
+	_is_transitioning = false
+	player_sprite.material = null
+
+	# blood overlay back to its starting look
+	if _blood_tween:
+		_blood_tween.kill()
+	_blood_on = false
+	var mat := blood.material as ShaderMaterial
+	mat.set_shader_parameter("radius", 0.67)
+	mat.set_shader_parameter("softness", 1.345)
+	blood.hide()
+
 	animation_player.play("RESET")
 	await animation_player.animation_finished
 	animation_player.play("IdleDown")
@@ -75,6 +94,7 @@ func reset():
 	inventory.consumables.clear()
 	enemies_killed = 0
 	chests_looted = 0
+	dead = false
 	
 func _physics_process(delta: float) -> void:
 	assert(global_position.is_finite() and knockback_velocity.is_finite(), "player pos=%s kb=%s" % [global_position, knockback_velocity])
@@ -200,7 +220,7 @@ func _set_blood(on: bool) -> void:
 	if _blood_tween:
 		_blood_tween.kill()
 	var mat := blood.material as ShaderMaterial
-	mat.set_shader_parameter("softness", 1.5)
+	mat.set_shader_parameter("softness", 1.345)
 	_blood_tween = create_tween()
 	if on:
 		mat.set_shader_parameter("radius", 0.67)
@@ -211,18 +231,23 @@ func _set_blood(on: bool) -> void:
 		_blood_tween.tween_callback(blood.hide)
 
 func die() -> void:
+	if dead:
+		return
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	movement_locked = true
 	velocity = Vector2.ZERO
-	
+	dead = true
 	var cam := get_viewport().get_camera_2d()
 	var center := cam.get_screen_center_position() - Vector2(8, 8)
 	
 	var mat := blood.material as ShaderMaterial
 	mat.set_shader_parameter("radius", 0.67)
-	mat.set_shader_parameter("softness", 1.5)
+	mat.set_shader_parameter("softness", 1.345)
 	var t := create_tween()
+	
+	if _blood_tween:
+		_blood_tween.kill()
 	
 	blood.show()
 	t.set_parallel()
@@ -240,7 +265,6 @@ func die() -> void:
 		
 	await t.finished
 	player_died.emit()
-	_set_blood(false)
 	
 func center() -> Vector2:
 	return body_shape.global_position

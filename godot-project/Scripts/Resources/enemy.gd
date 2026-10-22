@@ -50,7 +50,9 @@ func _ready() -> void:
 		explosion_area.get_node("CollisionShape2D").shape.radius = 10
 		
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
-		
+	
+	player_ref.player_died.connect(_on_player_death)
+	
 func _physics_process(delta: float) -> void:
 	if exploding:
 		return
@@ -149,13 +151,17 @@ func take_damage(amount: float, knockback_dir: Vector2 = Vector2.ZERO, knockback
 		
 	await get_tree().create_timer(0.1).timeout
 	sprite.material.set_shader_parameter("active", false)
-	
+
+func _on_player_death():
+	queue_free()
+
 func die() -> void:
 	if exploding:
 		return
 		
 	exploding = true
 	died.emit(self)
+	
 	player_ref.enemies_killed += 1
 	
 	if movement == MovementTypes.SUICIDE:

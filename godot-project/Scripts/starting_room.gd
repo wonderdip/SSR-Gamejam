@@ -10,9 +10,6 @@ func _ready() -> void:
 	var inv = SceneManager.player.inventory
 	if LevelManager.main_cam:
 		LevelManager.main_cam.set_enabled(true)
-	
-	if inv.current_weapon:
-		first_weapon.queue_free()
 		
 	if not inv.unique_items.is_empty():
 		book.queue_free()
