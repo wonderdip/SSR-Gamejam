@@ -46,6 +46,9 @@ var _step_timer: float = 0.0
 var _blood_tween: Tween
 var _blood_on := false
 
+var enemies_killed: int = 0
+var chests_looted: int = 0
+
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
 	pixel_shader_material.shader = pixelate_shader
@@ -58,6 +61,20 @@ func _ready() -> void:
 	
 	current_health = max_health
 	blood.hide()
+	animation_player.play("RESET")
+
+func reset():
+	current_health = max_health
+	movement_locked = false
+	animation_player.play("RESET")
+	await animation_player.animation_finished
+	animation_player.play("IdleDown")
+	inventory._remove_gun()
+	inventory._remove_melee()
+	inventory.anomalies.clear()
+	inventory.consumables.clear()
+	enemies_killed = 0
+	chests_looted = 0
 	
 func _physics_process(delta: float) -> void:
 	assert(global_position.is_finite() and knockback_velocity.is_finite(), "player pos=%s kb=%s" % [global_position, knockback_velocity])
@@ -183,6 +200,7 @@ func _set_blood(on: bool) -> void:
 	if _blood_tween:
 		_blood_tween.kill()
 	var mat := blood.material as ShaderMaterial
+	mat.set_shader_parameter("softness", 1.5)
 	_blood_tween = create_tween()
 	if on:
 		mat.set_shader_parameter("radius", 0.67)
@@ -199,24 +217,34 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	
 	var cam := get_viewport().get_camera_2d()
-	var center := cam.get_screen_center_position()
+	var center := cam.get_screen_center_position() - Vector2(8, 8)
 	
 	var mat := blood.material as ShaderMaterial
-	mat.set_shader_parameter("radius", 1.3)
-	mat.set_shader_parameter("aspect", get_viewport_rect().size.aspect())
-	blood.show()
-	
+	mat.set_shader_parameter("radius", 0.67)
+	mat.set_shader_parameter("softness", 1.5)
 	var t := create_tween()
-	# 1) glide to center
-	t.tween_property(self, "global_position", center, 2)\
+	
+	blood.show()
+	t.set_parallel()
+	t.tween_property(mat, "shader_parameter/radius", 0.0, 1.0)
+	
+	t.tween_property(self, "global_position", center, 1.2)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	# 2) play death anim once he's centered
-	#t.tween_callback(animation_player.play.bind("died"))
-	# 3) blood closes in
-	t.tween_property(mat, "shader_parameter/radius", 0.08, 1.4)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	# 4) hold, then game over / restart
-	t.tween_interval(0.8)
-
+		
+	t.set_parallel(false)
+	
+	t.tween_callback(animation_player.play.bind("Died"))
+	
+	t.tween_property(mat, "shader_parameter/softness", 0.3, 2)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN).set_delay(0.3)
+		
+	await t.finished
+	player_died.emit()
+	_set_blood(false)
+	
 func center() -> Vector2:
 	return body_shape.global_position
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("take_damage") and not event.is_echo():
+		take_damage(100, Vector2.ONE, 0.5)

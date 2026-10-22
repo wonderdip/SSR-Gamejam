@@ -28,7 +28,7 @@ enum MovementTypes { PLAYER, RANDOM, FAR, IDLE, SUICIDE }
 
 var floor_multiplier: float = 1.0
 var max_health: float
-var player_ref: Node2D
+var player_ref: Player
 var random_target: Vector2
 var random_timer: float = 0.0
 
@@ -156,7 +156,8 @@ func die() -> void:
 		
 	exploding = true
 	died.emit(self)
-
+	player_ref.enemies_killed += 1
+	
 	if movement == MovementTypes.SUICIDE:
 		_explode()
 		ScreenSfx.framefreeze(0.08, 0)

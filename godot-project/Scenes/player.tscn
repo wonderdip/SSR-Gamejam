@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cq7tmyhbvsjbc" path="res://Assets/Characters/Player/default-sheet.png" id="1_v0iea"]
 [ext_resource type="Shader" uid="uid://b6i48n1ujokta" path="res://Shader/pixelate.gdshader" id="3_vgqql"]
 [ext_resource type="Shader" uid="uid://duemve88qkyom" path="res://Shader/hit_flash.gdshader" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://c4yv4gjgvtlbd" path="res://Assets/Characters/Player/dead.png" id="5_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bpjsa5ru570n6" path="res://Assets/Characters/Player/surprised.png" id="5_fkybt"]
 [ext_resource type="Script" uid="uid://dxnyqcl553ckp" path="res://Scripts/Resources/inventory.gd" id="5_x3wgy"]
 [ext_resource type="Shader" uid="uid://byugfftux0xx6" path="res://Shader/blood.gdshader" id="7_3smsa"]
@@ -29,7 +30,7 @@ radius = 4.0
 
 [sub_resource type="Animation" id="Animation_3smsa"]
 resource_name = "Died"
-length = 2.0
+length = 0.19999999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,10 +38,46 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": []
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_8erm5")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerSprite:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_dewec"]
@@ -180,6 +217,42 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlayerSprite:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_v0iea")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PlayerSprite:hframes")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PlayerSprite:vframes")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_ksbbd"]
@@ -448,7 +521,7 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtook"]
 shader = ExtResource("7_3smsa")
 shader_parameter/radius = 0.0
-shader_parameter/softness = 1.345
+shader_parameter/softness = 1.5
 shader_parameter/aspect = 1.25
 shader_parameter/blood_color = Color(0.45, 0, 0.02, 1)
 

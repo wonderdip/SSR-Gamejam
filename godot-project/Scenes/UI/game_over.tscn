@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bqwp1ctx3klcm"]
+
+[ext_resource type="FontFile" uid="uid://cm57baw7dxa43" path="res://Assets/Fonts/High_Birth.ttf" id="1_w88jv"]
+[ext_resource type="Script" uid="uid://7va52co14t4a" path="res://Scripts/UI/game_over.gd" id="2_ckxb7"]
+[ext_resource type="FontFile" uid="uid://dp8u1phxc81c4" path="res://Assets/Fonts/Plump_Prose.ttf" id="3_73uea"]
+[ext_resource type="FontFile" uid="uid://bro1771qh380q" path="res://Assets/Fonts/Company_Contract.ttf" id="4_aqsr4"]
+
+[sub_resource type="Theme" id="Theme_dtook"]
+default_font = ExtResource("1_w88jv")
+default_font_size = 10
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=431741633]
+
+[node name="GameOver" type="Control" parent="." unique_id=1818494916]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_dtook")
+script = ExtResource("2_ckxb7")
+
+[node name="Label" type="Label" parent="GameOver" unique_id=578625902]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_right = 43.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_73uea")
+theme_override_font_sizes/font_size = 20
+text = "Game Over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver" unique_id=1073728143]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.25
+offset_top = -24.0
+offset_right = 74.25
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Enemies" type="Label" parent="GameOver/VBoxContainer" unique_id=765273267]
+layout_mode = 2
+text = "Enemies Killed:"
+
+[node name="Chests" type="Label" parent="GameOver/VBoxContainer" unique_id=258355355]
+layout_mode = 2
+text = "Chests Looted:"
+
+[node name="Floor" type="Label" parent="GameOver/VBoxContainer" unique_id=515718026]
+layout_mode = 2
+text = "Floor Reached:"
+
+[node name="NewRun" type="Button" parent="GameOver" unique_id=699867906]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.359375
+anchor_top = 0.8333333
+anchor_right = 0.640625
+anchor_bottom = 0.9513889
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_aqsr4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GameOver/NewRun" unique_id=278780577]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -7.0
+offset_right = 70.0
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("4_aqsr4")
+theme_override_font_sizes/font_size = 10
+text = "New Run"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="GameOver/NewRun" to="GameOver" method="_on_new_run_pressed"]

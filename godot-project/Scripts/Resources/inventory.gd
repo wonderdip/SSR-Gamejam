@@ -123,16 +123,18 @@ func _set_active(weapon: CanvasItem) -> void:
 	active_weapon_changed.emit(weapon)
 	
 func _remove_gun() -> void:
-	gun_instance.get_parent().remove_child(gun_instance)
-	gun_instance.queue_free()
-	gun_instance = null
-	equipped_gun = null
+	if not gun_instance == null:
+		gun_instance.get_parent().remove_child(gun_instance)
+		gun_instance.queue_free()
+		gun_instance = null
+		equipped_gun = null
 
 func _remove_melee() -> void:
-	melee_instance.get_parent().remove_child(melee_instance)
-	melee_instance.queue_free()
-	melee_instance = null
-	equipped_melee = null
+	if not melee_instance == null:
+		melee_instance.get_parent().remove_child(melee_instance)
+		melee_instance.queue_free()
+		melee_instance = null
+		equipped_melee = null
 	
 func _add_passive(item: ItemData) -> void:
 	anomalies.append(item)

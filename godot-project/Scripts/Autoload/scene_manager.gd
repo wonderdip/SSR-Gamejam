@@ -34,7 +34,8 @@ func _ready() -> void:
 	if player_scene != null:
 		player = player_scene.instantiate()
 		player.name = "Player"
-
+		player.player_died.connect(_on_player_death)
+		
 func register_container(container: Node) -> void:
 	_container = container
 	if _container.get_child_count() > 0:
@@ -89,3 +90,6 @@ func fade_in() -> void:
 	await tween.finished
 	print("past tween")
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _on_player_death():
+	goto_packed_scene(load("res://Scenes/UI/game_over.tscn"))

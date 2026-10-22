@@ -34,6 +34,7 @@ func _input(event: InputEvent) -> void:
 		
 		_spawn_pickup(weapon)
 		opened = true
+		player.chests_looted += 1
 		$Sprite2D.modulate = Color.DIM_GRAY
 		
 
