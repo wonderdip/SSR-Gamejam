@@ -27,6 +27,7 @@ func _on_main_scene_changed(scene: Node):
 	if scene is Room:
 		hud.update()
 	if scene.name == "TitleScreen": hud.update()
+	if scene.name == "GameOver": hud.update()
 	
 func _on_main_scene_removed():
 	hud.update()

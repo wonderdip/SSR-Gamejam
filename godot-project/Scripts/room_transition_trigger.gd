@@ -41,7 +41,8 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	_triggered = true
 	camera.player = player
-	camera.transition_to_room(room.get_room_center(), room.get_room_rect())
+	var target_pos := player.global_position if room.is_boss_room else room.get_room_center()
+	camera.transition_to_room(target_pos, room.get_room_rect())
 	
 	await camera.room_transition_finished
 	player._entering_level(false)

@@ -90,7 +90,12 @@ func _show_item() -> void:
 		melee_dmg.text = "Dmg: %d" % melee.damage
 		swings.text = "Swings: %d" % melee.swings_before_cd
 		cooldown.text = "Cooldown: %.1fs" % melee.cooldown
-
+	
+	if not known:
+		rarity_light.hide()
+	else:
+		rarity_light.show()
+		
 func _on_visibility_changed() -> void:
 	if visible:
 		get_tree().paused = true

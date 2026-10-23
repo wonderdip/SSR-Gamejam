@@ -14,6 +14,7 @@ func _ready() -> void:
 	weapon_hud.hide()
 	
 	player.inventory.active_weapon_changed.connect(show_weapon_hud)
+	player.death_anim_started.connect(hide_all)
 	SceneManager.ascension_started.connect(set_ascending.bind(true))
 	SceneManager.ascension_finished.connect(set_ascending.bind(false))
 	pause_menu.main_menu_open.connect(hide_weapon_hud)
@@ -28,7 +29,14 @@ func update():
 		weapon_hud.show()
 	else:
 		weapon_hud.hide()
-		
+
+	if player.dead:
+		hide_all()
+
+func hide_all():
+	weapon_hud.hide()
+	map.hide()
+	
 func hide_weapon_hud():
 	weapon_hud.hide()
 
@@ -37,6 +45,8 @@ func show_weapon_hud(_weapon: Node) -> void:
 		return
 	if player.inventory.current_weapon:
 		weapon_hud.show()
+	else:
+		weapon_hud.hide()
 
 func set_ascending(value: bool) -> void:
 	ascending = value

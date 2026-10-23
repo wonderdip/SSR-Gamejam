@@ -36,10 +36,11 @@ var knockback_velocity := Vector2.ZERO
 var exploding := false
 var has_hit := false
 var can_attack := true
+var movement_locked: bool = true
 
 func _ready() -> void:
 	max_health = health
-	player_ref = get_tree().get_first_node_in_group("player")
+	player_ref = SceneManager.player
 	_pick_random_target()
 	
 	sprite.material = ShaderMaterial.new()
@@ -51,10 +52,13 @@ func _ready() -> void:
 		
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
 	
-	player_ref.player_died.connect(_on_player_death)
+	player_ref.death_anim_started.connect(_on_player_death)
+	animation_player.play("spawn")
+	await animation_player.animation_finished
+	movement_locked = false
 	
 func _physics_process(delta: float) -> void:
-	if exploding:
+	if exploding or movement_locked:
 		return
 
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_friction * delta)

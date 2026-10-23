@@ -8,16 +8,33 @@ extends StaticBody2D
 var can_open: bool = false
 var opened: bool = false
 var player: Player = null
+var prompt: Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	interaction_area.body_entered.connect(_on_played_entered_interaction_area)
+	interaction_area.body_exited.connect(_on_played_exited_interaction_area)
+	prompt = Label.new()
+	prompt.text = "E"
+	prompt.add_theme_font_size_override("font_size", 8)
+	prompt.custom_minimum_size.x = 16
+	prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	prompt.position = Vector2(0, -10)   # -8 = half of the 16px width
+	prompt.z_index = 10
+	prompt.hide()
+	add_child(prompt)
+
+func _on_played_exited_interaction_area(body: Node):
+	if body is Player:
+		can_open = false
+		prompt.hide()
 
 func _on_played_entered_interaction_area(body: Node):
 	if body is Player:
 		player = body
 		can_open = true
-	
+		prompt.show()
+		
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("interact")
 	and not event.is_echo()

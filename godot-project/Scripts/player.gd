@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal player_died
+signal death_anim_started
 
 enum Direction { DOWN, UP, LEFT, RIGHT }
 
@@ -95,6 +96,7 @@ func reset() -> void:
 	enemies_killed = 0
 	chests_looted = 0
 	dead = false
+	LevelManager.floor_num = 0
 	
 func _physics_process(delta: float) -> void:
 	assert(global_position.is_finite() and knockback_velocity.is_finite(), "player pos=%s kb=%s" % [global_position, knockback_velocity])
@@ -233,6 +235,7 @@ func _set_blood(on: bool) -> void:
 func die() -> void:
 	if dead:
 		return
+		
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	movement_locked = true
@@ -249,6 +252,7 @@ func die() -> void:
 	if _blood_tween:
 		_blood_tween.kill()
 	
+	death_anim_started.emit()
 	blood.show()
 	t.set_parallel()
 	t.tween_property(mat, "shader_parameter/radius", 0.0, 1.0)
@@ -265,6 +269,7 @@ func die() -> void:
 		
 	await t.finished
 	player_died.emit()
+	LevelManager.in_dungeon = false
 	
 func center() -> Vector2:
 	return body_shape.global_position

@@ -3,6 +3,8 @@ class_name Room
 
 @export var enemy_list: Array[PackedScene] = []
 @export var room_size: Vector2 = Vector2(256, 144)
+@export var is_boss_room: bool = false
+var boss: Enemy
 
 ## Manually placed room vars
 @export var starting_room: bool = false
@@ -30,15 +32,32 @@ func spawn_enemies() -> void:
 	for enemy in enemy_list:
 		var enemy_instance = enemy.instantiate() as Enemy
 		add_child(enemy_instance)
-		enemy_instance.global_position = (
-			get_room_center() + 
-			Vector2(
-				randi_range(-(room_size.x / 4), (room_size.x / 4)),
-				randi_range(-(room_size.y / 4), (room_size.y / 4))
+		var spawn_marker := get_node_or_null("BossSpawn") as Marker2D
+		if is_boss_room and spawn_marker:
+			enemy_instance.global_position = spawn_marker.global_position
+			boss = enemy_instance
+			boss.process_mode = Node.PROCESS_MODE_DISABLED  # frozen until the intro ends
+		else:
+			enemy_instance.global_position = (
+				get_room_center() +
+				Vector2(
+					randi_range(-(room_size.x / 4), (room_size.x / 4)),
+					randi_range(-(room_size.y / 4), (room_size.y / 4))
 				)
 			)
 		enemy_instance.died.connect(_on_enemy_died)
 		enemies_alive += 1
+
+func play_boss_intro() -> void:
+	var player: Player = SceneManager.player
+	var cam := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
+	player.movement_locked = true
+	cam.follow_target = boss                # camera glides to the boss
+	await get_tree().create_timer(1.2).timeout
+	cam.follow_target = player              # and back to the player
+	await get_tree().create_timer(0.6).timeout
+	boss.process_mode = Node.PROCESS_MODE_INHERIT
+	player.movement_locked = false
 
 func _on_enemy_died(_enemy: Enemy) -> void:
 	enemies_alive -= 1
@@ -106,22 +125,24 @@ func erase_wall_for_door(direction: LevelManager.TRIGGERDIRECTION) -> void:
 				LevelManager.TRIGGERDIRECTION.DOWN:
 					_erase_down_doorway(tilemap)
 	
-func _erase_left_doorway(tilemap: TileMapLayer) -> void:
-	for y in range(4, 6):
-		tilemap.erase_cell(Vector2i(0, y))
-	
-func _erase_right_doorway(tilemap: TileMapLayer) -> void:
-	for y in range(4, 6):
-		tilemap.erase_cell(Vector2i(15, y))
-		
-func _erase_up_doorway(tilemap: TileMapLayer) -> void:
-	for x in range(7, 9):
-		tilemap.erase_cell(Vector2i(x, 0))
-	for x in range(7, 9):
-		tilemap.erase_cell(Vector2i(x, 1))
+func _tiles() -> Vector2i:
+	return Vector2i(room_size / 16.0)
 
-func _erase_down_doorway(tilemap: TileMapLayer) -> void:
-	for x in range(7, 9):
-		tilemap.erase_cell(Vector2i(x, 8))
+func _erase_left_doorway(tm: TileMapLayer) -> void:
+	for y in range(_tiles().y / 2, _tiles().y / 2 + 2):
+		tm.erase_cell(Vector2i(0, y))
+
+func _erase_right_doorway(tm: TileMapLayer) -> void:
+	for y in range(_tiles().y / 2, _tiles().y / 2 + 2):
+		tm.erase_cell(Vector2i(_tiles().x - 1, y))
+
+func _erase_up_doorway(tm: TileMapLayer) -> void:
+	for x in range(_tiles().x / 2 - 1, _tiles().x / 2 + 1):
+		tm.erase_cell(Vector2i(x, 0))
+		tm.erase_cell(Vector2i(x, 1))
+
+func _erase_down_doorway(tm: TileMapLayer) -> void:
+	for x in range(_tiles().x / 2 - 1, _tiles().x / 2 + 1):
+		tm.erase_cell(Vector2i(x, _tiles().y - 1))
 		
 		

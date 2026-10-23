@@ -12,6 +12,7 @@ default_font = ExtResource("1_w88jv")
 default_font_size = 10
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=431741633]
+layer = 20
 
 [node name="GameOver" type="Control" parent="." unique_id=1818494916]
 layout_mode = 3

@@ -28,6 +28,7 @@ var _room_container: Node = null
 var _room_type_by_index: Dictionary = {} ## int -> String, filled while generating
 var _room_instances: Dictionary = {} ## int -> Room, this floor's rooms
 var main_cam: Camera2D
+var _boss_retries: int = 0
 
 func _ready() -> void:
 	ascend_requested.connect(_on_ascend_requested)
@@ -72,6 +73,11 @@ func _on_generator_room_added(index: int, room_type: String) -> void:
 
 func _on_generator_complete(floorplan: Array[int], _boss: Array[int], _weapon: Array[int], _anomaly: Array[int]) -> void:
 	_instantiate_floor(floorplan)
+	if _boss_overlaps() and _boss_retries < 20:
+		_boss_retries += 1
+		call_deferred("_build_floor", false)  # re-roll the floor
+		return
+	_boss_retries = 0
 	_wire_room_doors(floorplan)
 	_place_player_on_floor()
 	await SceneManager.fade_in()
@@ -103,10 +109,41 @@ func _instantiate_floor(floorplan: Array[int]) -> void:
 		room.dungeon_index = index
 		if index == dungeon_generator.start_index:
 			room.cleared = true
-		room.position = Vector2(grid_x, grid_y) * room.room_size
+			
+		if not room.is_boss_room:
+			room.position = Vector2(grid_x, grid_y) * room.room_size
 		
 		_room_container.add_child(room)
 		_room_instances[index] = room
+
+	for r in _room_instances.values():
+		if (r as Room).is_boss_room:
+			_place_boss_room(r)
+
+func _opposite(d: TRIGGERDIRECTION) -> TRIGGERDIRECTION:
+	match d:
+		TRIGGERDIRECTION.LEFT: return TRIGGERDIRECTION.RIGHT
+		TRIGGERDIRECTION.RIGHT: return TRIGGERDIRECTION.LEFT
+		TRIGGERDIRECTION.UP: return TRIGGERDIRECTION.DOWN
+		_: return TRIGGERDIRECTION.UP
+
+func _place_boss_room(boss: Room) -> void:
+	var cols: int = dungeon_generator.grid_cols
+	for d in [TRIGGERDIRECTION.LEFT, TRIGGERDIRECTION.RIGHT, TRIGGERDIRECTION.UP, TRIGGERDIRECTION.DOWN]:
+		var neighbour: Room = _room_instances.get(_neighbour_index(boss.dungeon_index, d, cols))
+		if neighbour == null or neighbour == boss:
+			continue
+		boss.position = neighbour.position + neighbour._socket_position(_opposite(d)) - boss._socket_position(d)
+		return
+		
+func _boss_overlaps() -> bool:
+	for a: Room in _room_instances.values():
+		if not a.is_boss_room:
+			continue
+		for b: Room in _room_instances.values():
+			if a != b and a.get_room_rect().grow(-1).intersects(b.get_room_rect()):
+				return true
+	return false
 	
 func _pool_for_generator_type(room_type: String) -> Array[PackedScene]:
 	match room_type:
@@ -216,6 +253,9 @@ func _place_player_on_floor() -> void:
 func set_player_room(room: Room) -> void:
 	player_room = room
 	room.spawn_enemies()
+	if room.is_boss_room and room.boss and main_cam:
+		main_cam.follow(SceneManager.player, room.get_room_rect())
+		room.play_boss_intro()
 	if room.enemies_alive > 0:
 		room.lock_doors()
 	player_room_index = room.dungeon_index

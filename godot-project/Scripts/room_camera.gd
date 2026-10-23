@@ -14,6 +14,7 @@ const _LIMIT_MAX := 10000000
 
 var _active_tween: Tween
 var player: Player
+var follow_target: Node2D
 
 func _ready() -> void:
 	add_to_group(&"room_camera")
@@ -43,6 +44,7 @@ func transition_to_room(target_position: Vector2, bounds: Rect2 = Rect2()) -> vo
 	player._update_animation(false, false)
 	
 func _on_transition_finished(target_position: Vector2, bounds: Rect2) -> void:
+	stop_following()
 	_apply_bounds(bounds)
 	room_transition_finished.emit(target_position)
 	player.movement_locked = false
@@ -50,6 +52,7 @@ func _on_transition_finished(target_position: Vector2, bounds: Rect2) -> void:
 ## Instantly places the camera with no tween — used right after a floor is
 ## (re)built, where there's nothing meaningful to pan from.
 func snap_to_room(target_position: Vector2, bounds: Rect2) -> void:
+	stop_following()
 	if _active_tween and _active_tween.is_valid():
 		_active_tween.kill()
 	global_position = target_position
@@ -62,3 +65,19 @@ func _apply_bounds(bounds: Rect2) -> void:
 	limit_top = int(bounds.position.y)
 	limit_right = int(bounds.position.x + bounds.size.x)
 	limit_bottom = int(bounds.position.y + bounds.size.y)
+
+func follow(target: Node2D, bounds: Rect2) -> void:
+	if _active_tween and _active_tween.is_valid():
+		_active_tween.kill()
+	follow_target = target
+	_apply_bounds(bounds)
+	position_smoothing_enabled = true
+	position_smoothing_speed = 6.0
+
+func stop_following() -> void:
+	follow_target = null
+	position_smoothing_enabled = false
+
+func _physics_process(_delta: float) -> void:
+	if follow_target:
+		global_position = follow_target.global_position
