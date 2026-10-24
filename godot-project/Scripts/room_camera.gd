@@ -69,6 +69,8 @@ func _apply_bounds(bounds: Rect2) -> void:
 func follow(target: Node2D, bounds: Rect2) -> void:
 	if _active_tween and _active_tween.is_valid():
 		_active_tween.kill()
+	position_smoothing_enabled = true
+	position_smoothing_speed = 6
 	follow_target = target
 	_apply_bounds(bounds)
 	create_tween().tween_property(self, "zoom", Vector2(0.75, 0.75), 0.5)

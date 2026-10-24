@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+signal damaged
 signal player_died
 signal death_anim_started
 
@@ -191,10 +192,14 @@ func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 	await tween.finished
 
 func take_damage(amount: int, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
+	if dead:
+		return
 	current_health -= amount
 	blood_particles.restart()
 	_set_blood(current_health <= 50)
-		
+	
+	damaged.emit()
+	
 	if force > 0.0 and source_pos.is_finite():
 		var dir := (center() - source_pos).normalized()
 		if dir == Vector2.ZERO:
@@ -202,15 +207,20 @@ func take_damage(amount: int, source_pos: Vector2 = Vector2.INF, force: float = 
 		knockback_velocity = dir * force
 		_knockback_lock = knockback_lock_time
 	
-	player_sprite.material = flash_shader_material
-	player_sprite.material.set_shader_parameter("active", true)
+	if not player_sprite.material == flash_shader_material:
+		player_sprite.material = flash_shader_material
+	
+		if not player_sprite.material.get_shader_parameter("active"):
+			player_sprite.material.set_shader_parameter("active", true)
 	
 	ScreenSfx.framefreeze(0.08, 0)
 	ScreenSfx.cam_shake(2, 1, 0.2)
 	
 	await get_tree().create_timer(0.1).timeout
-	player_sprite.material.set_shader_parameter("active", false)
-	player_sprite.material = null
+	
+	if player_sprite.material == flash_shader_material:
+		player_sprite.material.set_shader_parameter("active", false)
+		player_sprite.material = null
 	
 	if current_health <= 0:
 		die()

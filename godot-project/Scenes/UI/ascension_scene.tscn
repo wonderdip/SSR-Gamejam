@@ -139,3 +139,9 @@ position = Vector2(166, 72)
 color = Color(0, 0.37231818, 0.0670176, 1)
 energy = 2.76
 texture = SubResource("GradientTexture2D_pqq61")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=933331456]
+position = Vector2(128, 72)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=876936392]
+position = Vector2(128, 72)

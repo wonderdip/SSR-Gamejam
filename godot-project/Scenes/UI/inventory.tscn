@@ -46,7 +46,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BG" type="Sprite2D" parent="Control" unique_id=2029960926]
 unique_name_in_owner = true
-modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
+modulate = Color(0.741384, 0.7413849, 0.74138397, 1)
 z_index = -1
 position = Vector2(128, 72)
 texture = ExtResource("3_yyv02")
@@ -80,7 +80,6 @@ stretch_mode = 5
 unique_name_in_owner = true
 position = Vector2(34, 37)
 color = Color(0.7778026, 0.7111797, 0.710705, 1)
-energy = 2.0
 range_z_max = 1
 range_layer_min = -100
 range_layer_max = 100

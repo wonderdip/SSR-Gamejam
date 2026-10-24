@@ -51,6 +51,6 @@ func show_weapon_hud(_weapon: Node) -> void:
 func set_ascending(value: bool) -> void:
 	ascending = value
 	if value:
-		weapon_hud.hide()
+		hide_all()
 	elif player.inventory.current_weapon:
 		weapon_hud.show()

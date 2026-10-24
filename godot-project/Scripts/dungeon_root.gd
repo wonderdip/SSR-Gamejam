@@ -8,7 +8,16 @@ func _ready() -> void:
 	SceneManager.scene_changed.connect(_on_main_scene_changed)
 	SceneManager.scene_removed.connect(_main_scene_removed)
 	canvas_modulate.hide()
-		
+	
+	SceneManager.ascension_started.connect(ascending)
+	SceneManager.ascension_finished.connect(ascended)
+	
+func ascending():
+	room_container.hide()
+	
+func ascended():
+	room_container.show()
+
 func _on_main_scene_changed(scene: Node):
 	if scene:
 		if scene is Room or scene.name == "DeliveryScene":

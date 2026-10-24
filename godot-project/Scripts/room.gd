@@ -52,13 +52,15 @@ func play_boss_intro() -> void:
 	var player: Player = SceneManager.player
 	var cam := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	player.movement_locked = true
-	cam.follow_target = boss                # camera glides to the boss
-	await get_tree().create_timer(1.2).timeout
-	cam.follow_target = player              # and back to the player
-	await get_tree().create_timer(0.6).timeout
+	cam.position_smoothing_enabled = true
+	cam.position_smoothing_speed = 3
+	cam.follow_target = boss # camera glides to the boss
+	await get_tree().create_timer(1.5).timeout
+	cam.follow_target = player # and back to the player
+	await get_tree().create_timer(1).timeout
 	boss.process_mode = Node.PROCESS_MODE_INHERIT
 	player.movement_locked = false
-	LevelManager.main_cam.follow(player, get_room_rect())
+	cam.follow(player, get_room_rect())
 	
 func _on_enemy_died(_enemy: Enemy) -> void:
 	enemies_alive -= 1
@@ -67,10 +69,25 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 		unlock_doors()
 		if is_boss_room:
 			spawn_portal()
+			var cam := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
+			create_tween().tween_property(cam, "zoom", Vector2(1, 1), 0.5)
 
 func spawn_portal():
-	pass
-
+	var portal := get_node_or_null("Portal") as AnimatedSprite2D
+	portal.show()
+	portal.play("portal_open")
+	await portal.animation_finished
+	portal.play("portal_normal")
+	
+	var area : Area2D = portal.get_child(0) as Area2D
+	area.body_entered.connect(_on_player_in_portal)
+	area.get_child(0).disabled = false
+	
+func _on_player_in_portal(body: Node2D):
+	if body is Player:
+		var portal := get_node_or_null("Portal") as AnimatedSprite2D
+		portal.play("portal_close")
+		
 func lock_doors() -> void:
 	for door in exit_doors:
 		door.set_locked(true)

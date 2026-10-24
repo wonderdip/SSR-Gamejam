@@ -7,16 +7,33 @@ class_name StatHUD
 @onready var weapon_icon: TextureRect = $Icon
 @onready var panel: NinePatchRect = $Panel
 @onready var container: HBoxContainer = $Container
+@onready var health_bar: TextureProgressBar = $HealthBar
 
 @export var melee_counter_texture: Texture2D
 @export var bullet_counter_texture: Texture2D
 
 var player: Player
+var _tween: Tween
 
 func _ready() -> void:
 	player = SceneManager.player
 	player.inventory.active_weapon_changed.connect(_on_active_weapon_changed)
+	player.damaged.connect(_on_player_damaged)
+	player.player_died.connect(_reset)
+	health_bar.max_value = player.max_health
+	health_bar.value = player.max_health
 	_on_active_weapon_changed(player.inventory.current_weapon)
+
+func _reset():
+	clear_counters()
+	health_bar.value = player.max_health
+
+func _on_player_damaged():
+	print("player damaged")
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
+	_tween.tween_property(health_bar, "value", maxf(player.current_health, 0.0), 0.25)
 
 func _on_active_weapon_changed(weapon: Node) -> void:
 	clear_counters()
