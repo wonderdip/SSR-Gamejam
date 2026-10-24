@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://ce0nxsmkh6bas"]
+
+[ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_su5sd"]
+[ext_resource type="Texture2D" uid="uid://cw6b0jjnm3bbu" path="res://Assets/Characters/Sciontology/boss1.png" id="2_vccb3"]
+[ext_resource type="PackedScene" uid="uid://bg5mw80yh0e2x" path="res://Scenes/UI/boss_bar.tscn" id="3_vccb3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awwja"]
+height = 32.0
+
+[node name="PriestOTI" type="CharacterBody2D" unique_id=928777256 node_paths=PackedStringArray("sprite", "animation_player")]
+collision_layer = 4
+collision_mask = 29
+script = ExtResource("1_su5sd")
+enemy_name = "Priest OT I"
+health = 200.0
+speed = 0.0
+no_knockback = true
+movement = 3
+sprite = NodePath("Sprite2D")
+animation_player = NodePath("AnimationPlayer")
+boss = true
+metadata/_custom_type_script = "uid://csbo78s7hwpng"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1974264072]
+shape = SubResource("CapsuleShape2D_awwja")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=941378704]
+texture = ExtResource("2_vccb3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=821918264]
+
+[node name="BossBar" parent="." unique_id=1392726133 node_paths=PackedStringArray("enemy") instance=ExtResource("3_vccb3")]
+enemy = NodePath("..")

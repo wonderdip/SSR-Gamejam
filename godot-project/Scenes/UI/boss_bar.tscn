@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bg5mw80yh0e2x"]
+
+[ext_resource type="Script" uid="uid://ck44jfs16qwwd" path="res://Scripts/UI/boss_bar.gd" id="1_g5742"]
+[ext_resource type="Texture2D" uid="uid://bq04q3dr7b8rc" path="res://Assets/UI/dark_panel.png" id="2_smymi"]
+[ext_resource type="Texture2D" uid="uid://d0x3bodwhwlbu" path="res://Assets/UI/progress_bar_under.png" id="3_8wc30"]
+[ext_resource type="Texture2D" uid="uid://d1jb643fw3wis" path="res://Assets/UI/progress_bar.png" id="4_7b8dh"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=638844199]
+script = ExtResource("1_g5742")
+
+[node name="BossBar" type="Control" parent="." unique_id=1392726133]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 128.0
+offset_right = 240.0
+offset_bottom = 140.0
+
+[node name="Panel" type="NinePatchRect" parent="BossBar" unique_id=1053712217]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 12.0
+texture = ExtResource("2_smymi")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ProgressBar" type="TextureProgressBar" parent="BossBar" unique_id=1783889473]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 222.0
+offset_bottom = 10.0
+step = 0.1
+value = 85.5
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 4
+stretch_margin_right = 1
+stretch_margin_bottom = 4
+texture_under = ExtResource("3_8wc30")
+texture_progress = ExtResource("4_7b8dh")

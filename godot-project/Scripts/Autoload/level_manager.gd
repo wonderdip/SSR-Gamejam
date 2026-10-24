@@ -254,7 +254,6 @@ func set_player_room(room: Room) -> void:
 	player_room = room
 	room.spawn_enemies()
 	if room.is_boss_room and room.boss and main_cam:
-		main_cam.follow(SceneManager.player, room.get_room_rect())
 		room.play_boss_intro()
 	if room.enemies_alive > 0:
 		room.lock_doors()

@@ -71,8 +71,7 @@ func follow(target: Node2D, bounds: Rect2) -> void:
 		_active_tween.kill()
 	follow_target = target
 	_apply_bounds(bounds)
-	position_smoothing_enabled = true
-	position_smoothing_speed = 6.0
+	create_tween().tween_property(self, "zoom", Vector2(0.75, 0.75), 0.5)
 
 func stop_following() -> void:
 	follow_target = null

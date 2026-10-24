@@ -20,6 +20,7 @@ signal damaged(amount: int)
 @export var sprite: Sprite2D
 @export var animation_player: AnimationPlayer
 @export var explosion_area: Area2D
+@export var boss: bool = false
 
 var flash_shader: Shader = preload("res://Shader/hit_flash.gdshader")
 
@@ -53,7 +54,7 @@ func _ready() -> void:
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
 	
 	player_ref.death_anim_started.connect(_on_player_death)
-	animation_player.play("spawn")
+	if animation_player.has_animation("spawn"): animation_player.play("spawn")
 	await animation_player.animation_finished
 	movement_locked = false
 	
@@ -174,7 +175,7 @@ func die() -> void:
 		if animation_player.has_animation("explode"):
 			animation_player.play("explode")
 			await animation_player.animation_finished
-
+	
 	queue_free()
 
 func _explode() -> void:

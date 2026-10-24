@@ -18,8 +18,7 @@ shader_parameter/inner_radius = 0.645
 shader_parameter/outer_radius = 1.86
 
 [sub_resource type="Gradient" id="Gradient_ic2qw"]
-offsets = PackedFloat32Array(0, 0.5024155)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.41981313, 0.41981313, 0.4198131, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
 gradient = SubResource("Gradient_ic2qw")
@@ -27,12 +26,13 @@ width = 96
 height = 96
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
 
 [node name="Inventory" type="CanvasLayer" unique_id=861110854]
 process_mode = 2
 layer = 15
 script = ExtResource("1_dt15g")
-colors = Array[Color]([Color(0.28118682, 0.28118688, 0.28118682, 1), Color(0, 0.65882355, 0, 1), Color(0, 0, 0.7176471, 1), Color(0.4627451, 0, 0.6627451, 1), Color(0.84705883, 0.67058825, 0, 1)])
+colors = Array[Color]([Color(0.28118682, 0.28118688, 0.28118682, 1), Color(0, 0.65882355, 0, 1), Color(0, 0.38133338, 0.88, 1), Color(0.59500027, 0, 0.85, 1), Color(1, 0.8000001, 0, 1)])
 
 [node name="Control" type="Control" parent="." unique_id=2017041428]
 layout_mode = 3
@@ -46,6 +46,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BG" type="Sprite2D" parent="Control" unique_id=2029960926]
 unique_name_in_owner = true
+modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
 z_index = -1
 position = Vector2(128, 72)
 texture = ExtResource("3_yyv02")
@@ -78,12 +79,13 @@ stretch_mode = 5
 [node name="RarityLight" type="PointLight2D" parent="Control/CurrentItem" unique_id=1375395356]
 unique_name_in_owner = true
 position = Vector2(34, 37)
-color = Color(0, 0.0666666, 1, 1)
+color = Color(0.7778026, 0.7111797, 0.710705, 1)
+energy = 2.0
 range_z_max = 1
 range_layer_min = -100
 range_layer_max = 100
 texture = SubResource("GradientTexture2D_awwja")
-texture_scale = 1.5
+texture_scale = 2.0
 
 [node name="Left" type="Button" parent="Control" unique_id=1190498347]
 unique_name_in_owner = true

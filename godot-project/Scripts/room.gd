@@ -58,12 +58,18 @@ func play_boss_intro() -> void:
 	await get_tree().create_timer(0.6).timeout
 	boss.process_mode = Node.PROCESS_MODE_INHERIT
 	player.movement_locked = false
-
+	LevelManager.main_cam.follow(player, get_room_rect())
+	
 func _on_enemy_died(_enemy: Enemy) -> void:
 	enemies_alive -= 1
 	if enemies_alive <= 0:
 		cleared = true
 		unlock_doors()
+		if is_boss_room:
+			spawn_portal()
+
+func spawn_portal():
+	pass
 
 func lock_doors() -> void:
 	for door in exit_doors:
