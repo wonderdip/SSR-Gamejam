@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bcclf3mcc1rx1" path="res://Scenes/mouse_area.tscn" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://blruyhpveobyg" path="res://Scenes/UI/pause_menu.tscn" id="7_344ge"]
 [ext_resource type="PackedScene" uid="uid://dqx8q1ofilley" path="res://Scenes/UI/inventory.tscn" id="8_hptm8"]
+[ext_resource type="PackedScene" uid="uid://ds8jy82d08ig4" path="res://Scenes/UI/settings_menu.tscn" id="11_d1ilt"]
 
 [sub_resource type="Environment" id="Environment_awwja"]
 background_mode = 3
@@ -48,6 +49,9 @@ visible = false
 layer = 101
 
 [node name="Inventory" parent="." unique_id=52060055 instance=ExtResource("8_hptm8")]
+
+[node name="SettingsMenu" parent="." unique_id=1192711160 instance=ExtResource("11_d1ilt")]
+layer = 102
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1288603135]
 environment = SubResource("Environment_awwja")

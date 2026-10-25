@@ -5,6 +5,8 @@ signal main_menu_open
 @export var highlight: ColorRect
 @export var button_container: ButtonContainer
 @onready var pointer: Sprite2D = $ButtonContainer/Pointer
+@onready var settings_menu: CanvasLayer = $"../SettingsMenu"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +17,7 @@ func _on_visibility_changed() -> void:
 		get_tree().paused = true
 		upscale_tween()
 		button_container.reset()
-	else:
+	elif not settings_menu.visible:
 		get_tree().paused = false
 		pointer.hide()
 		
@@ -33,8 +35,10 @@ func _on_back_button_pressed() -> void:
 	hide()
 
 func _on_settings_button_pressed() -> void:
-	pass # Replace with function body.
-
+	await tween_highlight()
+	settings_menu.show()
+	hide()
+	
 func _on_main_menu_button_pressed() -> void:
 	await tween_highlight()
 	MessageBus._message_box.close()

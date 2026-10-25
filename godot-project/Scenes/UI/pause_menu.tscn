@@ -100,6 +100,7 @@ flat = true
 alignment = 0
 
 [node name="Pointer" type="Sprite2D" parent="ButtonContainer" unique_id=1998597720]
+visible = false
 position = Vector2(-1, 11)
 texture = ExtResource("4_oykix")
 centered = false

@@ -1,10 +1,12 @@
 extends Node2D
 
 signal restart_game
+signal open_settings
 
 @onready var super_font: Sprite2D = $TitleName/SuperFont
 @onready var cross_sprite: Sprite2D = $CrossSprite
 @onready var highlight: ColorRect = $ButtonContainer/Highlight
+@onready var button_container: ButtonContainer = $ButtonContainer
 
 @export var play_scene: PackedScene
 
@@ -69,8 +71,10 @@ func _on_play_button_pressed() -> void:
 		print("going to play scene")
 
 func _on_settings_button_pressed() -> void:
-	pass # Replace with function body.
-
+	await tween_highlight()
+	open_settings.emit()
+	button_container.reset()
+	
 func _on_quit_button_pressed() -> void:
 	await tween_highlight()
 	get_tree().quit()
