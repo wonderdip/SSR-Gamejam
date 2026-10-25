@@ -46,8 +46,8 @@ func transition_to_room(target_position: Vector2, bounds: Rect2 = Rect2()) -> vo
 func _on_transition_finished(target_position: Vector2, bounds: Rect2) -> void:
 	stop_following()
 	_apply_bounds(bounds)
-	room_transition_finished.emit(target_position)
 	player.movement_locked = false
+	room_transition_finished.emit(target_position)
 	
 ## Instantly places the camera with no tween — used right after a floor is
 ## (re)built, where there's nothing meaningful to pan from.

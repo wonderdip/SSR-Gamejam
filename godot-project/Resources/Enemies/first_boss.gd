@@ -127,12 +127,14 @@ func _start_minion_drop() -> void:
 	
 	minion_drop.modulate.a = 1
 	var enemy_instance: Enemy = minions.pick_random().instantiate() as Enemy
-	enemy_instance.movement_locked = true
 	room.add_child(enemy_instance)  # add_child first, then set global_position
+	enemy_instance.movement_locked = true
+	
 	minion_drop.global_position = room.get_room_center()
 	var start := minion_drop.global_position
 	var center := room.get_room_center()
 	var target := center + Vector2(randi_range(-128, 128), randi_range(-128, 128))
+	
 	big_pinch.frame = 0
 	minion_drop.scale.x = -1.0 if start.x > center.x else 1.0  # flip before reading EnemyPos
 	enemy_instance.global_position = enemy_pos.global_position
@@ -147,15 +149,21 @@ func _start_minion_drop() -> void:
 func _carry_minion(pos: Vector2, enemy: Enemy) -> void:
 	minion_drop.global_position = pos
 	if is_instance_valid(enemy):
-		enemy.global_position = pos + enemy_pos.position
+		enemy.global_position = enemy_pos.global_position
 
 func _release_minion(enemy: Enemy) -> void:
 	big_pinch.frame = 1
+
+	var t := create_tween()
+	t.tween_property(minion_drop, "modulate:a", 0, 0.5).set_delay(0.5)
+
+	if not is_instance_valid(enemy):
+		return
+	# don't cut the enemy's own spawn animation short
+	if enemy.animation_player.current_animation == "spawn":
+		await enemy.animation_player.animation_finished
 	if is_instance_valid(enemy):
 		enemy.movement_locked = false
-	
-	var t := create_tween()
-	t.tween_property(minion_drop,"modulate:a", 0, 0.5).set_delay(0.5)
 	
 func fist_landed():
 	ScreenSfx.cam_shake(15, 5, 0.5)
@@ -187,4 +195,6 @@ func _on_punch_area_body_entered(body: Node2D) -> void:
 		return
 	punch_hit = true
 	if player_ref.has_method("take_damage"):
-		player_ref.take_damage(damage, punch_attack.global_position, 300)
+		var punch_dir := Vector2.LEFT  # the way the punch travels
+		var source := player_ref.center() - punch_dir * 100.0
+		player_ref.take_damage(damage, source, 400)

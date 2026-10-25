@@ -7,7 +7,7 @@ signal death_anim_started
 
 enum Direction { DOWN, UP, LEFT, RIGHT }
 
-@export var max_health: int = 100
+@export var max_health: float = 100
 
 @export_category("Movement")
 @export var walk_speed: float = 100.0
@@ -43,7 +43,7 @@ var _is_transitioning: bool = false
 var movement_locked: bool = false
 var pixel_shader_material: ShaderMaterial
 var flash_shader_material: ShaderMaterial
-var current_health: int
+var current_health: float
 var _step_timer: float = 0.0
 var _blood_tween: Tween
 var _blood_on := false
@@ -158,10 +158,9 @@ func _exiting_level() -> void:
 	_is_transitioning = true
 	
 func _entering_level(ascending: bool) -> void:
-	
 	if ascending:
 		await _pixelate_in()
-		
+	
 	movement_locked = false
 	player_sprite.material = null
 	_is_transitioning = false
@@ -191,12 +190,13 @@ func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 	)
 	await tween.finished
 
-func take_damage(amount: int, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
+func take_damage(amount: float, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
 	if dead:
 		return
 	current_health -= amount
 	blood_particles.restart()
-	_set_blood(current_health <= 50)
+	var health_percentage: float = current_health/max_health
+	_set_blood(health_percentage <= 0.5)
 	
 	damaged.emit()
 	
@@ -213,7 +213,7 @@ func take_damage(amount: int, source_pos: Vector2 = Vector2.INF, force: float = 
 		if not player_sprite.material.get_shader_parameter("active"):
 			player_sprite.material.set_shader_parameter("active", true)
 	
-	ScreenSfx.framefreeze(0.08, 0)
+	ScreenSfx.framefreeze(0.08 + amount/1000, 0)
 	ScreenSfx.cam_shake(2, 1, 0.2)
 	
 	await get_tree().create_timer(0.1).timeout

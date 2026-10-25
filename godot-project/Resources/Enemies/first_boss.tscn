@@ -237,7 +237,7 @@ fill_to = Vector2(0.2, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n46u5"]
 shader = ExtResource("6_ojcyj")
-shader_parameter/blur_amount = 0.3
+shader_parameter/blur_amount = 0.6000000285
 shader_parameter/blur_samples = 12
 shader_parameter/blur_strength = 0.0
 
@@ -476,7 +476,7 @@ tracks/2/keys = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0vlwr"]
 shader = ExtResource("6_ojcyj")
-shader_parameter/blur_amount = 0.0
+shader_parameter/blur_amount = 0.3
 shader_parameter/blur_samples = 12
 shader_parameter/blur_strength = 1.0
 
@@ -792,7 +792,6 @@ offset = Vector2(0, 4)
 
 [node name="PunchArea" type="Sprite2D" parent="." unique_id=2065903622]
 visible = false
-modulate = Color(1, 1, 1, 0)
 texture = ExtResource("12_2osqp")
 flip_h = true
 
@@ -827,7 +826,7 @@ hframes = 2
 frame = 1
 
 [node name="EnemyPos" type="Marker2D" parent="MinionDrop" unique_id=1424827468]
-position = Vector2(17, 28)
+position = Vector2(17, 34)
 
 [node name="PointLight2D2" type="PointLight2D" parent="MinionDrop" unique_id=227726271]
 color = Color(0.21835148, 0.2420766, 0.7975641, 1)

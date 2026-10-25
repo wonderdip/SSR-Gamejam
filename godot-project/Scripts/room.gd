@@ -51,6 +51,7 @@ func play_boss_intro() -> void:
 	var player: Player = SceneManager.player
 	var cam := get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	player.movement_locked = true
+	boss.animation_player.play("idle")
 	cam.position_smoothing_enabled = true
 	cam.position_smoothing_speed = 3
 	cam.follow_target = boss # camera glides to the boss
