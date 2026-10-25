@@ -1,5 +1,7 @@
 extends Node2D
 
+signal restart_game
+
 @onready var super_font: Sprite2D = $TitleName/SuperFont
 @onready var cross_sprite: Sprite2D = $CrossSprite
 @onready var highlight: ColorRect = $ButtonContainer/Highlight
@@ -55,11 +57,13 @@ func _on_play_button_pressed() -> void:
 		print("past the fade in")
 		LevelManager.main_cam.set_enabled(true)
 		LevelManager._place_player_on_floor()
+		restart_game.emit()
 		print("placed player")
 	elif LevelManager.game_started:
 		print("going to hub")
 		LevelManager.main_cam.set_enabled(true)
 		SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
+		restart_game.emit()
 	else:
 		SceneManager.goto_packed_scene(play_scene)
 		print("going to play scene")

@@ -4,6 +4,7 @@ extends Node
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
 @onready var inventory: CanvasLayer = $Inventory
+@onready var dungeon_root: Node2D = $DungeonRoot
 
 
 func _ready() -> void:
@@ -26,8 +27,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _on_main_scene_changed(scene: Node):
 	if scene is Room:
 		hud.update()
-	if scene.name == "TitleScreen": hud.update()
+	if scene.name == "TitleScreen": 
+		scene.restart_game.connect(restart_game)
+		hud.hide_all()
+		dungeon_root.process_mode = Node.PROCESS_MODE_DISABLED
 	if scene.name == "GameOver": hud.update()
-	
+
+func restart_game():
+	dungeon_root.process_mode = Node.PROCESS_MODE_INHERIT
+
 func _on_main_scene_removed():
 	hud.update()

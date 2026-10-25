@@ -29,6 +29,7 @@ var _room_type_by_index: Dictionary = {} ## int -> String, filled while generati
 var _room_instances: Dictionary = {} ## int -> Room, this floor's rooms
 var main_cam: Camera2D
 var _boss_retries: int = 0
+var player_pos: Vector2
 
 func _ready() -> void:
 	ascend_requested.connect(_on_ascend_requested)
@@ -73,7 +74,7 @@ func _on_generator_room_added(index: int, room_type: String) -> void:
 
 func _on_generator_complete(floorplan: Array[int], _boss: Array[int], _weapon: Array[int], _anomaly: Array[int]) -> void:
 	_instantiate_floor(floorplan)
-	if _boss_overlaps() and _boss_retries < 20:
+	if _boss_overlaps() and _boss_retries < 50:
 		_boss_retries += 1
 		call_deferred("_build_floor", false)  # re-roll the floor
 		return
@@ -212,8 +213,9 @@ func initial_player_spawn():
 	
 	main_cam = get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	if main_cam != null:
+		main_cam.set_enabled(true)
 		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
-
+		
 	game_started = true
 
 func _place_player_on_floor() -> void:
@@ -240,15 +242,23 @@ func _place_player_on_floor() -> void:
 		player.get_parent().remove_child(player)
 	_room_container.add_child(player)
 	
-	player.global_position = start_room.get_room_center()
+	if player_room_index == dungeon_generator.start_index:
+		player.global_position = start_room.get_room_center()
+	else:
+		player.global_position = player_pos
+		
 	player.show()
 	player._entering_level(true)
 	
 	main_cam = get_tree().get_first_node_in_group(&"room_camera") as RoomCamera
 	if main_cam != null:
+		main_cam.set_enabled(true)
 		main_cam.snap_to_room(start_room.get_room_center(), start_room.get_room_rect())
 
 	in_dungeon = true
+
+	if start_room.is_boss_room:
+		main_cam.follow(player, start_room.get_room_rect())
 
 func set_player_room(room: Room) -> void:
 	player_room = room

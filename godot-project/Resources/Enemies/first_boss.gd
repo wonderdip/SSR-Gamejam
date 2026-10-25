@@ -12,7 +12,9 @@ class_name Boss
 
 @export var minions: Array[PackedScene]
 
-@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
+@onready var fist_drop_player: AnimationPlayer = $FistDropPlayer
+@onready var side_punch_player: AnimationPlayer = $SidePunchPlayer
+
 @onready var fist_attack: Node2D = $FistAttack
 @onready var drop_area: Sprite2D = $DropArea
 @onready var minion_drop: Node2D = $MinionDrop
@@ -53,21 +55,22 @@ func _ready() -> void:
 	punch_attack.visible = false
 	punch_attack.top_level = true
 	punch_area.visible = false
-	animation_player_2.animation_finished.connect(_on_fist_anim_finished)
+	fist_drop_player.animation_finished.connect(_on_fist_anim_finished)
+	side_punch_player.animation_finished.connect(_on_punch_anim_finished)
 	
 	# Timer is a child, so it dies with the boss (no dangling await after queue_free)
 	fist_timer = Timer.new()
 	fist_timer.one_shot = true
 	add_child(fist_timer)
 	fist_timer.timeout.connect(_start_fist_drop)
-	#_schedule_next_fist()
+	_schedule_next_fist()
 
 	punch_timer = Timer.new()
 	punch_timer.one_shot = true
 	add_child(punch_timer)
 	punch_timer.timeout.connect(_start_punch)
 	_schedule_next_punch()
-
+	
 	minion_timer = Timer.new()
 	minion_timer.one_shot = true
 	add_child(minion_timer)
@@ -87,15 +90,16 @@ func _process(_delta: float) -> void:
 		drop_area.global_position = player_ref.center()
 		if not about_to_drop:
 			about_to_drop = true
-			animation_player_2.play("drop_telegraph")
+			fist_drop_player.play("drop_telegraph")
 			drop_area.visible = true
 	
 	
 	if punch_timer.time_left <= 1.1:
+		punch_area.global_position.x = LevelManager.player_room.get_room_center().x
 		punch_area.global_position.y = player_ref.center().y
 		if not about_to_punch:
 			about_to_punch = true
-			animation_player_2.play("punch_telegraph")
+			side_punch_player.play("punch_telegraph")
 			punch_area.visible = true
 		
 	return
@@ -106,7 +110,7 @@ func _start_punch():
 	punch_hit = false
 	punch_attack.global_position = player_ref.center()
 	punch_attack.visible = true
-	animation_player_2.play("punch")
+	side_punch_player.play("punch")
 
 func _start_fist_drop() -> void:
 	if exploding or not is_instance_valid(player_ref):
@@ -114,7 +118,7 @@ func _start_fist_drop() -> void:
 	fist_hit = false
 	fist_attack.global_position = player_ref.center()
 	fist_attack.visible = true
-	animation_player_2.play("fist_drop")
+	fist_drop_player.play("fist_drop")
 
 func _schedule_next_minion():
 	minion_timer.start(randf_range(minion_cooldown_min, minion_cooldown_max))
@@ -175,6 +179,8 @@ func _on_fist_anim_finished(anim_name: StringName) -> void:
 		fist_attack.visible = false
 		_schedule_next_fist()
 		return
+
+func _on_punch_anim_finished(anim_name: StringName):
 	if anim_name == &"punch":
 		punch_attack.visible = false
 		_schedule_next_punch()

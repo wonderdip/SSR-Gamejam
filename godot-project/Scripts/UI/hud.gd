@@ -17,7 +17,7 @@ func _ready() -> void:
 	player.death_anim_started.connect(hide_all)
 	SceneManager.ascension_started.connect(set_ascending.bind(true))
 	SceneManager.ascension_finished.connect(set_ascending.bind(false))
-	pause_menu.main_menu_open.connect(hide_weapon_hud)
+	pause_menu.main_menu_open.connect(hide_all)
 	
 func update():
 	if dungeon_root.room_container.get_child_count() > 0:

@@ -237,7 +237,7 @@ fill_to = Vector2(0.2, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n46u5"]
 shader = ExtResource("6_ojcyj")
-shader_parameter/blur_amount = 0.6000000285
+shader_parameter/blur_amount = 0.3
 shader_parameter/blur_samples = 12
 shader_parameter/blur_strength = 0.0
 
@@ -594,6 +594,13 @@ tracks/8/keys = {
 }]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2osqp"]
+_data = {
+&"RESET": SubResource("Animation_ojcyj"),
+&"drop_telegraph": SubResource("Animation_0vlwr"),
+&"fist_drop": SubResource("Animation_hhkxl")
+}
+
 [sub_resource type="Animation" id="Animation_iisj4"]
 resource_name = "punch"
 length = 2.0
@@ -708,11 +715,9 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_66fxd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iisj4"]
 _data = {
 &"RESET": SubResource("Animation_ojcyj"),
-&"drop_telegraph": SubResource("Animation_0vlwr"),
-&"fist_drop": SubResource("Animation_hhkxl"),
 &"punch": SubResource("Animation_iisj4"),
 &"punch_telegraph": SubResource("Animation_2osqp")
 }
@@ -782,8 +787,11 @@ texture = ExtResource("4_n46sm")
 hframes = 4
 frame = 3
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=1983206212]
-libraries/ = SubResource("AnimationLibrary_66fxd")
+[node name="FistDropPlayer" type="AnimationPlayer" parent="." unique_id=1983206212]
+libraries/ = SubResource("AnimationLibrary_2osqp")
+
+[node name="SidePunchPlayer" type="AnimationPlayer" parent="." unique_id=1740801728]
+libraries/ = SubResource("AnimationLibrary_iisj4")
 
 [node name="DropArea" type="Sprite2D" parent="." unique_id=1770606745]
 visible = false

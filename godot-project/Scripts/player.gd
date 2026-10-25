@@ -170,6 +170,7 @@ func _on_ascending_floor():
 	movement_locked = true
 	
 func _pixelate_out(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
+	body_shape.set_deferred("disabled", true)
 	player_sprite.material = pixel_shader_material
 
 	player_sprite.material.set_shader_parameter("pixel_size", 1.0)
@@ -179,17 +180,22 @@ func _pixelate_out(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 		1.0, max_pixel_size, duration
 	)
 	await tween.finished
+	body_shape.set_deferred("disabled", false)
 	
 func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
+	body_shape.set_deferred("disabled", true)
 	player_sprite.material = pixel_shader_material
-	player_sprite.material.set_shader_parameter("pixel_size", max_pixel_size)
+	pixel_shader_material.set_shader_parameter("pixel_size", max_pixel_size)
+
 	var tween: Tween = create_tween()
-	tween.tween_method(
-		func(value: float): player_sprite.material.set_shader_parameter("pixel_size", value),
-		max_pixel_size, 1.0, duration
-	)
+	tween.tween_property(pixel_shader_material, "shader_parameter/pixel_size", 1.0, duration)
 	await tween.finished
 
+	# only clear it if nothing else (e.g. the damage flash) has taken over
+	if player_sprite.material == pixel_shader_material:
+		player_sprite.material = null
+	body_shape.set_deferred("disabled", false)
+	
 func take_damage(amount: float, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
 	if dead:
 		return
