@@ -408,7 +408,7 @@ shape = SubResource("RectangleShape2D_7staa")
 
 [node name="Player" parent="." unique_id=1871453495 instance=ExtResource("4_ittcp")]
 visible = false
-pixelate_shader = null
+collision_mask = 32
 
 [node name="LevelTrigger" type="Area2D" parent="." unique_id=1036098764]
 collision_layer = 32

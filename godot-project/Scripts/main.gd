@@ -15,11 +15,22 @@ func _ready() -> void:
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape") and not event.is_echo():
-		if SceneManager.current_scene:
-			if SceneManager.current_scene.name != "TitleScreen":
-				pause_menu.show()
-		elif SceneManager.current_scene == null:
+		var scene: Node = SceneManager.current_scene
+		if scene != null:
+			if scene.name == "TitleScreen":
+				return
+			elif scene.name == "GameOver":
+				return
+			elif scene.name == "AscensionScene":
+				return
+			elif scene.name == "StartingRoom" and SceneManager.player.dead:
+				return
+				
 			pause_menu.show()
+		elif scene == null and not SceneManager.player.dead:
+			pause_menu.show()
+			
+			
 	if event.is_action_pressed("inventory") and not event.is_echo():
 		if SceneManager.player.inventory.unique_items.has(load("res://Resources/Items/sciontology_101.tres")):
 			inventory.show()
@@ -32,7 +43,9 @@ func _on_main_scene_changed(scene: Node):
 		hud.hide_all()
 		dungeon_root.process_mode = Node.PROCESS_MODE_DISABLED
 	if scene.name == "GameOver": hud.update()
-
+	
+	AudioManager.music_player.stop()
+	
 func restart_game():
 	dungeon_root.process_mode = Node.PROCESS_MODE_INHERIT
 

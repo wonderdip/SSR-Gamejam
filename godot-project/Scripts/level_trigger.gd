@@ -1,7 +1,7 @@
 extends Area2D
 class_name LevelTrigger
 
-@export var direction : LevelManager.TRIGGERDIRECTION
+@export var direction : LevelManager.TRIGGERDIRECTION = LevelManager.TRIGGERDIRECTION.RIGHT
 @export var first_level_trigger: bool = false
 @export var ascend_trigger: bool = false
 @export var key: ItemData
@@ -26,7 +26,6 @@ func _on_body_entered(body: Node2D):
 				MessageBus.send([key_warning])
 				ScreenSfx.cam_shake(6, 4, 0.6)
 				await MessageBus.message_box_closed
-			return
 			
 		body._exiting_level()
 		await get_tree().create_timer(0.25).timeout
@@ -35,7 +34,13 @@ func _on_body_entered(body: Node2D):
 			LevelManager.in_dungeon = false
 			LevelManager.game_started = true
 			if LevelManager.main_cam: LevelManager.main_cam.set_enabled(false)
+			
+			if warning:
+				MessageBus.send([warning_msg])
+				await MessageBus.message_box_closed
+			
 			SceneManager.goto_scene("res://Scenes/World/starting_room.tscn")
+		
 		else:
 			if warning:
 				MessageBus.send([warning_msg])

@@ -19,6 +19,13 @@ func _ready() -> void:
 	var modt = create_tween()
 	control.modulate.a = 0
 	modt.tween_property(control, "modulate:a", 1, 0.5)
+	
+	match LevelManager.floor_num:
+		1: enemy.enemy_name = "Priest OT I"
+		2: enemy.enemy_name = "Priest OT II"
+		3: enemy.enemy_name = "Priest OT III"
+		4: enemy.enemy_name = "Priest OT IV"
+		
 	boss_name.text = enemy.enemy_name
 	
 func _on_boss_hp_down(_amount) -> void:
