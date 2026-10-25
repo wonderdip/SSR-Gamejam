@@ -3,6 +3,7 @@ class_name BossBar
 
 @onready var progress_bar: TextureProgressBar = $BossBar/ProgressBar
 @onready var control: Control = $BossBar
+@onready var boss_name: Label = $BossBar/BossName
 @export var enemy: Enemy
 
 var _tween: Tween
@@ -15,6 +16,7 @@ func _ready() -> void:
 	var modt = create_tween()
 	control.modulate.a = 0
 	modt.tween_property(control, "modulate:a", 1, 0.5)
+	boss_name.text = enemy.enemy_name
 	
 func _on_boss_hp_down(_amount) -> void:
 	if _tween:

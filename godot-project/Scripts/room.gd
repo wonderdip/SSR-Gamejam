@@ -32,9 +32,8 @@ func spawn_enemies() -> void:
 	for enemy in enemy_list:
 		var enemy_instance = enemy.instantiate() as Enemy
 		add_child(enemy_instance)
-		var spawn_marker := get_node_or_null("BossSpawn") as Marker2D
-		if is_boss_room and spawn_marker:
-			enemy_instance.global_position = spawn_marker.global_position
+		if is_boss_room:
+			enemy_instance.global_position = get_room_center()
 			boss = enemy_instance
 			boss.process_mode = Node.PROCESS_MODE_DISABLED  # frozen until the intro ends
 		else:
@@ -74,6 +73,7 @@ func _on_enemy_died(_enemy: Enemy) -> void:
 
 func spawn_portal():
 	var portal := get_node_or_null("Portal") as AnimatedSprite2D
+	portal.global_position = get_room_center()
 	portal.show()
 	portal.play("portal_open")
 	await portal.animation_finished

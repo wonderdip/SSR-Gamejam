@@ -73,8 +73,12 @@ func follow(target: Node2D, bounds: Rect2) -> void:
 	position_smoothing_speed = 6
 	follow_target = target
 	_apply_bounds(bounds)
-	create_tween().tween_property(self, "zoom", Vector2(0.75, 0.75), 0.5)
-
+	
+	player.movement_locked = true
+	var t := create_tween().tween_property(self, "zoom", Vector2(0.7, 0.7), 0.5)
+	await t.finished
+	player.movement_locked = false
+	 
 func stop_following() -> void:
 	follow_target = null
 	position_smoothing_enabled = false

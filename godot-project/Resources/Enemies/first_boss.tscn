@@ -1,18 +1,739 @@
 [gd_scene format=3 uid="uid://ce0nxsmkh6bas"]
 
-[ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_su5sd"]
-[ext_resource type="Texture2D" uid="uid://cw6b0jjnm3bbu" path="res://Assets/Characters/Sciontology/boss1.png" id="2_vccb3"]
+[ext_resource type="Script" uid="uid://lewnhk0vxbxu" path="res://Resources/Enemies/first_boss.gd" id="1_0vlwr"]
+[ext_resource type="PackedScene" uid="uid://coqrlcsnrn45o" path="res://Resources/Enemies/martyr.tscn" id="2_66fxd"]
+[ext_resource type="Texture2D" uid="uid://c0thdlk8ccn0u" path="res://Assets/Characters/Sciontology/boss2.png" id="2_vccb3"]
+[ext_resource type="PackedScene" uid="uid://cvfnnn0f6vnbv" path="res://Resources/Enemies/recruit.tscn" id="3_cishq"]
 [ext_resource type="PackedScene" uid="uid://bg5mw80yh0e2x" path="res://Scenes/UI/boss_bar.tscn" id="3_vccb3"]
+[ext_resource type="Texture2D" uid="uid://dh1oewfx7q6tf" path="res://Assets/Characters/Sciontology/boss_hands.png" id="4_n46sm"]
+[ext_resource type="Texture2D" uid="uid://dmpnyo71tn1g7" path="res://Assets/Characters/Sciontology/big_shackle.png" id="5_n46u5"]
+[ext_resource type="Texture2D" uid="uid://d2wdh037cr4sk" path="res://Assets/Characters/Sciontology/big_hand.png" id="6_0vlwr"]
+[ext_resource type="Shader" uid="uid://w7svwbtqc0kx" path="res://Shader/upward_motion_blur.gdshader" id="6_ojcyj"]
+[ext_resource type="Texture2D" uid="uid://brx2qi4ptbrxm" path="res://Assets/Characters/Sciontology/fist_drop.png" id="8_ojcyj"]
+[ext_resource type="Texture2D" uid="uid://bjaxe5l8c1fpn" path="res://Assets/Characters/Sciontology/big_hand_pinch.png" id="9_66fxd"]
+[ext_resource type="Texture2D" uid="uid://qo18pbrelt7k" path="res://Assets/Characters/Sciontology/punch_telegraph.png" id="12_2osqp"]
+[ext_resource type="Texture2D" uid="uid://c7aoa2gqm4kvm" path="res://Assets/Characters/Sciontology/side_punch.png" id="12_vyfjy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awwja"]
-height = 32.0
+radius = 20.0
+height = 64.0
+
+[sub_resource type="Animation" id="Animation_n46sm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-24, -18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(22, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hand3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26, 4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hand4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hand1:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hand2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hand3:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hand4:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_442a3"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-24, -18), Vector2(-28, -22), Vector2(-22, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.40000004, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(22, -16), Vector2(20, -14), Vector2(22, -22)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hand3:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-26, 4), Vector2(-27, 8), Vector2(-28, 7)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hand4:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(24, 4), Vector2(26, 8), Vector2(24, 5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hand1:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hand2:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hand3:rotation")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hand4:rotation")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n46u5"]
+_data = {
+&"RESET": SubResource("Animation_n46sm"),
+&"idle": SubResource("Animation_442a3")
+}
+
+[sub_resource type="Gradient" id="Gradient_juh3s"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vccb3"]
+gradient = SubResource("Gradient_juh3s")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n46u5"]
+shader = ExtResource("6_ojcyj")
+shader_parameter/blur_amount = 0.3
+shader_parameter/blur_samples = 12
+shader_parameter/blur_strength = 0.0
+
+[sub_resource type="Animation" id="Animation_ojcyj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FistAttack/BigFist:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FistAttack/BigShackle:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FistAttack/BigFist:material:shader_parameter/blur_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FistAttack/BigFist:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FistAttack/BigFist:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_n46u5")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FistAttack/BigShackle:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FistAttack/BigFist/Area2D/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DropArea:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DropArea:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MinionDrop/BigPinch:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PunchAttack/SidePunch:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(48, 54)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PunchAttack/SidePunch:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PunchAttack/SidePunch/PunchArea/CollisionShape2D:disabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0vlwr"]
+resource_name = "drop_telegraph"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DropArea:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DropArea:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vlwr"]
+shader = ExtResource("6_ojcyj")
+shader_parameter/blur_amount = 0.0
+shader_parameter/blur_samples = 12
+shader_parameter/blur_strength = 1.0
+
+[sub_resource type="Animation" id="Animation_hhkxl"]
+resource_name = "fist_drop"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FistAttack/BigFist:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -50), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FistAttack/BigShackle:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -60), Vector2(0, 0), Vector2(0, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FistAttack/BigFist:material:shader_parameter/blur_amount")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6000000285, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FistAttack/BigFist:material:shader_parameter/blur_strength")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FistAttack/BigFist:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.2333333, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FistAttack/BigFist:material")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_0vlwr"), null]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FistAttack/BigShackle:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.2333333, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FistAttack/BigFist/Area2D/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fist_landed"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iisj4"]
+resource_name = "punch"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PunchAttack/SidePunch:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(192, 0), Vector2(-192, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PunchAttack/SidePunch:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PunchAttack/SidePunch/PunchArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2osqp"]
+resource_name = "punch_telegraph"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PunchArea:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PunchArea:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66fxd"]
+_data = {
+&"RESET": SubResource("Animation_ojcyj"),
+&"drop_telegraph": SubResource("Animation_0vlwr"),
+&"fist_drop": SubResource("Animation_hhkxl"),
+&"punch": SubResource("Animation_iisj4"),
+&"punch_telegraph": SubResource("Animation_2osqp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vlwr"]
+size = Vector2(44, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
+size = Vector2(52, 42)
 
 [node name="PriestOTI" type="CharacterBody2D" unique_id=928777256 node_paths=PackedStringArray("sprite", "animation_player")]
 collision_layer = 4
 collision_mask = 29
-script = ExtResource("1_su5sd")
+motion_mode = 1
+script = ExtResource("1_0vlwr")
+minion_cooldown_min = 5.0
+minion_cooldown_max = 8.0
+minions = Array[PackedScene]([ExtResource("2_66fxd"), ExtResource("3_cishq")])
 enemy_name = "Priest OT I"
 health = 500.0
+damage = 100.0
 speed = 0.0
 no_knockback = true
 movement = 3
@@ -28,6 +749,112 @@ shape = SubResource("CapsuleShape2D_awwja")
 texture = ExtResource("2_vccb3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=821918264]
+libraries/ = SubResource("AnimationLibrary_n46u5")
 
 [node name="BossBar" parent="." unique_id=1392726133 node_paths=PackedStringArray("enemy") instance=ExtResource("3_vccb3")]
 enemy = NodePath("..")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=678473231]
+color = Color(0.64900994, 0.22193083, 0.88151234, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_vccb3")
+
+[node name="Hand1" type="Sprite2D" parent="." unique_id=1023851591]
+position = Vector2(-24, -18)
+texture = ExtResource("4_n46sm")
+hframes = 4
+
+[node name="Hand2" type="Sprite2D" parent="." unique_id=762611757]
+position = Vector2(22, -16)
+texture = ExtResource("4_n46sm")
+hframes = 4
+frame = 1
+
+[node name="Hand3" type="Sprite2D" parent="." unique_id=533905418]
+position = Vector2(-26, 4)
+texture = ExtResource("4_n46sm")
+hframes = 4
+frame = 2
+
+[node name="Hand4" type="Sprite2D" parent="." unique_id=1061660275]
+position = Vector2(24, 4)
+texture = ExtResource("4_n46sm")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=1983206212]
+libraries/ = SubResource("AnimationLibrary_66fxd")
+
+[node name="DropArea" type="Sprite2D" parent="." unique_id=1770606745]
+visible = false
+texture = ExtResource("8_ojcyj")
+offset = Vector2(0, 4)
+
+[node name="PunchArea" type="Sprite2D" parent="." unique_id=2065903622]
+visible = false
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("12_2osqp")
+flip_h = true
+
+[node name="FistAttack" type="Node2D" parent="." unique_id=306949462]
+visible = false
+
+[node name="BigShackle" type="Sprite2D" parent="FistAttack" unique_id=1867315078]
+texture = ExtResource("5_n46u5")
+
+[node name="BigFist" type="Sprite2D" parent="FistAttack" unique_id=309639694]
+material = SubResource("ShaderMaterial_n46u5")
+texture = ExtResource("6_0vlwr")
+
+[node name="Area2D" type="Area2D" parent="FistAttack/BigFist" unique_id=176177979]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FistAttack/BigFist/Area2D" unique_id=1685660745]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_0vlwr")
+
+[node name="PointLight2D2" type="PointLight2D" parent="FistAttack/BigFist" unique_id=687963160]
+color = Color(0.21835148, 0.2420766, 0.7975641, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_vccb3")
+
+[node name="MinionDrop" type="Node2D" parent="." unique_id=1684425854]
+visible = false
+
+[node name="BigPinch" type="Sprite2D" parent="MinionDrop" unique_id=1340043116]
+texture = ExtResource("9_66fxd")
+hframes = 2
+frame = 1
+
+[node name="EnemyPos" type="Marker2D" parent="MinionDrop" unique_id=1424827468]
+position = Vector2(17, 28)
+
+[node name="PointLight2D2" type="PointLight2D" parent="MinionDrop" unique_id=227726271]
+color = Color(0.21835148, 0.2420766, 0.7975641, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_vccb3")
+
+[node name="PunchAttack" type="Node2D" parent="." unique_id=1842870502]
+visible = false
+
+[node name="SidePunch" type="Sprite2D" parent="PunchAttack" unique_id=353051299]
+position = Vector2(48, 54)
+texture = ExtResource("12_vyfjy")
+offset = Vector2(0, -4)
+
+[node name="PunchArea" type="Area2D" parent="PunchAttack/SidePunch" unique_id=825213601]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchAttack/SidePunch/PunchArea" unique_id=1631204785]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_awwja")
+
+[node name="PointLight2D2" type="PointLight2D" parent="PunchAttack" unique_id=1697489039]
+visible = false
+position = Vector2(-30, 0)
+color = Color(0.21835148, 0.2420766, 0.7975641, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_vccb3")
+
+[connection signal="body_entered" from="FistAttack/BigFist/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="PunchAttack/SidePunch/PunchArea" to="." method="_on_punch_area_body_entered"]

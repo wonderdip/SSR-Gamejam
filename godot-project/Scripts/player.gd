@@ -71,7 +71,7 @@ func reset() -> void:
 	movement_locked = false
 	set_physics_process(true)
 	body_shape.set_deferred("disabled", false)
-
+	LevelManager.main_cam.zoom = Vector2.ONE
 	velocity = Vector2.ZERO
 	knockback_velocity = Vector2.ZERO
 	_knockback_lock = 0.0
@@ -86,7 +86,7 @@ func reset() -> void:
 	mat.set_shader_parameter("radius", 0.67)
 	mat.set_shader_parameter("softness", 1.345)
 	blood.hide()
-
+	
 	animation_player.play("RESET")
 	await animation_player.animation_finished
 	animation_player.play("IdleDown")

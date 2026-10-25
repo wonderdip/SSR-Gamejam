@@ -75,7 +75,8 @@ func set_locked(value: bool) -> void:
 	for light in _lights:
 		light.color = color
 	_blocker_shape.set_deferred("disabled", not locked)
-
+	collision_shape_2d.set_deferred("disabled", locked)
+	
 func _rotation_for(direction: LevelManager.TRIGGERDIRECTION) -> float:
 	match direction:
 		LevelManager.TRIGGERDIRECTION.UP:

@@ -48,14 +48,16 @@ func _ready() -> void:
 	sprite.material.shader = flash_shader
 	
 	if explosion_area:
-		animation_player.play("RESET")
-		explosion_area.get_node("CollisionShape2D").shape.radius = 10
-		
+		var explosion_shape: CollisionShape2D = explosion_area.get_node("CollisionShape2D")
+		explosion_shape.shape = explosion_shape.shape.duplicate()
 		explosion_area.body_entered.connect(_on_explosion_body_entered)
 	
 	player_ref.death_anim_started.connect(_on_player_death)
-	if animation_player.has_animation("spawn"): animation_player.play("spawn")
-	await animation_player.animation_finished
+	
+	if animation_player.has_animation("spawn"):
+		animation_player.play("spawn")
+		await animation_player.animation_finished
+	
 	movement_locked = false
 	
 func _physics_process(delta: float) -> void:
