@@ -25,6 +25,13 @@ func _ready() -> void:
 		2: enemy.enemy_name = "Priest OT II"
 		3: enemy.enemy_name = "Priest OT III"
 		4: enemy.enemy_name = "Priest OT IV"
+		5: enemy.enemy_name = "Priest OT V"
+		6: enemy.enemy_name = "Priest OT VI"
+		7: enemy.enemy_name = "Priest OT VII"
+		8: enemy.enemy_name = "Priest OT VIII"
+		9: enemy.enemy_name = "Priest OT IX"
+		10: enemy.enemy_name = "Priest OT X"
+		_: enemy.enemy_name = "Priest OT " + str(LevelManager.floor_num)
 		
 	boss_name.text = enemy.enemy_name
 	

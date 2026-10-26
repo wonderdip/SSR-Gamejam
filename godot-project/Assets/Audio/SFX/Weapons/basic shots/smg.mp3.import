@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ck48badyh3od5"
+path="res://.godot/imported/smg.mp3-d4c64e8f58bd445f6c7fdb44d6f3832b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Weapons/basic shots/smg.mp3"
+dest_files=["res://.godot/imported/smg.mp3-d4c64e8f58bd445f6c7fdb44d6f3832b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

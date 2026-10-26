@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c6x7a31cirbpe"]
+
+[ext_resource type="Script" uid="uid://sb675u4ieusj" path="res://Scripts/weapon_test.gd" id="1_n41g8"]
+[ext_resource type="PackedScene" uid="uid://4tk06hpv3qyv" path="res://Scenes/player.tscn" id="2_uck13"]
+
+[node name="WeaponTest" type="Node2D" unique_id=2131091553]
+script = ExtResource("1_n41g8")
+
+[node name="Control" type="Control" parent="." unique_id=92451000]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=1081320116]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=716001854]
+layout_mode = 2
+
+[node name="Player" parent="." unique_id=1871453495 instance=ExtResource("2_uck13")]
