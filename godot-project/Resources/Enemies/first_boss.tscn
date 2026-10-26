@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bjaxe5l8c1fpn" path="res://Assets/Characters/Sciontology/big_hand_pinch.png" id="9_66fxd"]
 [ext_resource type="Texture2D" uid="uid://qo18pbrelt7k" path="res://Assets/Characters/Sciontology/punch_telegraph.png" id="12_2osqp"]
 [ext_resource type="Texture2D" uid="uid://c7aoa2gqm4kvm" path="res://Assets/Characters/Sciontology/side_punch.png" id="12_vyfjy"]
+[ext_resource type="Texture2D" uid="uid://dquhoop7g5o2y" path="res://Assets/Characters/Sciontology/front_punch.png" id="14_iisj4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awwja"]
 radius = 20.0
@@ -399,6 +400,18 @@ tracks/12/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("DownPunchAttack/BigShackle:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_0vlwr"]
 resource_name = "drop_telegraph"
@@ -601,9 +614,8 @@ _data = {
 &"fist_drop": SubResource("Animation_hhkxl")
 }
 
-[sub_resource type="Animation" id="Animation_iisj4"]
+[sub_resource type="Animation" id="Animation_1swe3"]
 resource_name = "punch"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -641,7 +653,7 @@ tracks/2/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_2osqp"]
+[sub_resource type="Animation" id="Animation_w12bk"]
 resource_name = "punch_telegraph"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -715,7 +727,151 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iisj4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w12bk"]
+_data = {
+&"punch": SubResource("Animation_1swe3"),
+&"punch_telegraph": SubResource("Animation_w12bk")
+}
+
+[sub_resource type="Animation" id="Animation_iisj4"]
+resource_name = "punch"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DownPunchAttack/DownPunch:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -192), Vector2(0, 192)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DownPunchAttack/DownPunch:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DownPunchAttack/DownPunch/PunchArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DownPunchAttack/BigShackle:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -192), Vector2(0, 182), Vector2(0, 172)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DownPunchAttack/BigShackle:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.93333334, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2osqp"]
+resource_name = "punch_telegraph"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DownPunchArea:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DownPunchArea:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(0.41981313, 0.41981313, 0.4198131, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}, {
+"args": [],
+"method": &"play_telegraph"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1swe3"]
 _data = {
 &"RESET": SubResource("Animation_ojcyj"),
 &"punch": SubResource("Animation_iisj4"),
@@ -727,6 +883,9 @@ size = Vector2(44, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awwja"]
 size = Vector2(52, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1swe3"]
+size = Vector2(52, 28)
 
 [node name="PriestOTI" type="CharacterBody2D" unique_id=928777256 node_paths=PackedStringArray("sprite", "animation_player")]
 collision_layer = 4
@@ -790,8 +949,11 @@ frame = 3
 [node name="FistDropPlayer" type="AnimationPlayer" parent="." unique_id=1983206212]
 libraries/ = SubResource("AnimationLibrary_2osqp")
 
-[node name="SidePunchPlayer" type="AnimationPlayer" parent="." unique_id=1740801728]
-libraries/ = SubResource("AnimationLibrary_iisj4")
+[node name="SidePunchPlayer" type="AnimationPlayer" parent="." unique_id=1299065609]
+libraries/ = SubResource("AnimationLibrary_w12bk")
+
+[node name="DownPunchPlayer" type="AnimationPlayer" parent="." unique_id=611385938]
+libraries/ = SubResource("AnimationLibrary_1swe3")
 
 [node name="DropArea" type="Sprite2D" parent="." unique_id=1770606745]
 visible = false
@@ -802,6 +964,11 @@ offset = Vector2(0, 4)
 visible = false
 texture = ExtResource("12_2osqp")
 flip_h = true
+
+[node name="DownPunchArea" type="Sprite2D" parent="." unique_id=1701013320]
+visible = false
+rotation = 1.5707964
+texture = ExtResource("12_2osqp")
 
 [node name="FistAttack" type="Node2D" parent="." unique_id=306949462]
 visible = false
@@ -857,11 +1024,35 @@ position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_awwja")
 
 [node name="PointLight2D2" type="PointLight2D" parent="PunchAttack" unique_id=1697489039]
+position = Vector2(26, 54)
+color = Color(0.21835148, 0.2420766, 0.7975641, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_vccb3")
+
+[node name="DownPunchAttack" type="Node2D" parent="." unique_id=1196912279]
 visible = false
-position = Vector2(-30, 0)
+
+[node name="BigShackle" type="Sprite2D" parent="DownPunchAttack" unique_id=431251696]
+texture = ExtResource("5_n46u5")
+
+[node name="DownPunch" type="Sprite2D" parent="DownPunchAttack" unique_id=646534926]
+position = Vector2(0, -192)
+texture = ExtResource("14_iisj4")
+offset = Vector2(0, -4)
+
+[node name="PunchArea" type="Area2D" parent="DownPunchAttack/DownPunch" unique_id=1533985718]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownPunchAttack/DownPunch/PunchArea" unique_id=1102512863]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_1swe3")
+
+[node name="PointLight2D2" type="PointLight2D" parent="DownPunchAttack" unique_id=1629295146]
+position = Vector2(48, 54)
 color = Color(0.21835148, 0.2420766, 0.7975641, 1)
 energy = 0.6
 texture = SubResource("GradientTexture2D_vccb3")
 
 [connection signal="body_entered" from="FistAttack/BigFist/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="PunchAttack/SidePunch/PunchArea" to="." method="_on_punch_area_body_entered"]
+[connection signal="body_entered" from="DownPunchAttack/DownPunch/PunchArea" to="." method="_on_down_punch_area_body_entered"]

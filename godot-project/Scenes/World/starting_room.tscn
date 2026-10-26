@@ -3149,6 +3149,10 @@ specific_note = "Once you start you can't stop until... anyway I've left more no
 position = Vector2(56, 52)
 specific_note = "Good luck, hopefully you remember everything soon, be careful climbing the floors, the \"Church\" of Sciontology hides many mysteries "
 
+[node name="Note4" parent="." unique_id=25472382 instance=ExtResource("10_ur81b")]
+position = Vector2(186, 194)
+specific_note = "Press B to open the book"
+
 [node name="FirstWeapon" type="Area2D" parent="." unique_id=2052252210]
 unique_name_in_owner = true
 position = Vector2(70, 210)

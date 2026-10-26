@@ -51,6 +51,7 @@ var _blood_on := false
 var enemies_killed: int = 0
 var chests_looted: int = 0
 var dead: bool = false
+var invincible: bool = false
 
 func _ready() -> void:
 	pixel_shader_material = ShaderMaterial.new()
@@ -156,11 +157,13 @@ func _exiting_level() -> void:
 	if _is_transitioning:
 		return
 	_is_transitioning = true
+	invincible = true
 	
 func _entering_level(ascending: bool) -> void:
 	if ascending:
 		await _pixelate_in()
-	
+		
+	invincible = false
 	movement_locked = false
 	player_sprite.material = null
 	_is_transitioning = false
@@ -197,7 +200,7 @@ func _pixelate_in(duration: float = 0.5, max_pixel_size: float = 8.0) -> void:
 	body_shape.set_deferred("disabled", false)
 	
 func take_damage(amount: float, source_pos: Vector2 = Vector2.INF, force: float = 0.0) -> void:
-	if dead:
+	if dead or invincible:
 		return
 	current_health -= amount
 	blood_particles.restart()
@@ -222,7 +225,8 @@ func take_damage(amount: float, source_pos: Vector2 = Vector2.INF, force: float 
 	ScreenSfx.framefreeze(0.08 + amount/1000, 0)
 	ScreenSfx.cam_shake(2, 1, 0.2)
 	
-	await get_tree().create_timer(0.1).timeout
+	if is_inside_tree():
+		await get_tree().create_timer(0.1).timeout
 	
 	if player_sprite.material == flash_shader_material:
 		player_sprite.material.set_shader_parameter("active", false)
