@@ -118,26 +118,27 @@ collision_shape = NodePath("CollisionShape2D")
 hit_particle = NodePath("VFX/HitParticle")
 animation_player = NodePath("AnimationPlayer")
 vfx = NodePath("VFX")
+flip_collision = true
 metadata/_custom_type_script = "uid://c34up5750mih5"
 
 [node name="VFX" type="Node2D" parent="." unique_id=1178164271]
-
-[node name="SlashRect" type="ColorRect" parent="VFX" unique_id=1332759526]
-visible = false
-material = SubResource("ShaderMaterial_prxdd")
-offset_left = -2.0
-offset_top = 42.0
-offset_right = 78.0
-offset_bottom = 122.0
-rotation = -2.3561945
-
-[node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=1361282197]
-emitting = false
 
 [node name="MeleeSprite" type="Sprite2D" parent="VFX" unique_id=271337184]
 position = Vector2(4, -24)
 rotation = 0.6946605
 texture = ExtResource("4_liscn")
+
+[node name="SlashRect" type="ColorRect" parent="VFX" unique_id=1332759526]
+visible = false
+material = SubResource("ShaderMaterial_prxdd")
+offset_left = -18.0
+offset_top = 42.0
+offset_right = 62.0
+offset_bottom = 122.0
+rotation = -1.8325958
+
+[node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=1361282197]
+emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67705902]
 position = Vector2(14, -36)

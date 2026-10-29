@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://t4aa54l5luob"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_duam8"]
+[ext_resource type="Texture2D" uid="uid://6byr3pds04vk" path="res://Assets/Items/Bullets/small_bullet.png" id="2_vyqrf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b4xh"]
+size = Vector2(4, 2)
+
+[resource]
+script = ExtResource("1_duam8")
+speed = 400
+max_distance = 900
+knockback = 50
+speed_variance = 0.25
+area_shape = SubResource("RectangleShape2D_7b4xh")
+item_name = "Small Bullet"
+texture = ExtResource("2_vyqrf")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

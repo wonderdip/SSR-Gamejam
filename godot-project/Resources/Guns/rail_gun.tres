@@ -10,10 +10,9 @@
 script = ExtResource("1_607ng")
 damage = 100
 magazine_size = 1
-reload_time = 0.2
+reload_time = 4.0
 accuracy = 0
 player_lock = true
-shot_delay = 0.35
 bullet = ExtResource("1_6ia60")
 scene = ExtResource("2_l383t")
 shot_sound = "railgun"

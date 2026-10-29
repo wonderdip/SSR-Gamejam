@@ -1,35 +1,19 @@
 [gd_resource type="Resource" script_class="GunData" format=3 uid="uid://cohoep376608y"]
 
-[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_2alki"]
 [ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_gumag"]
 [ext_resource type="Texture2D" uid="uid://dqnb4dbxnpcf" path="res://Assets/Items/Guns/surgefire_smg.png" id="1_kpm4k"]
+[ext_resource type="Resource" uid="uid://t4aa54l5luob" path="res://Resources/Bullets/small_bullet.tres" id="1_x0fgs"]
 [ext_resource type="PackedScene" uid="uid://d1cvi8jgh0fa" path="res://Resources/Guns/surgefire_smg.tscn" id="2_x0fgs"]
-[ext_resource type="Texture2D" uid="uid://6byr3pds04vk" path="res://Assets/Items/Bullets/small_bullet.png" id="2_ym6k0"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b4xh"]
-size = Vector2(4, 2)
-
-[sub_resource type="Resource" id="Resource_2alki"]
-script = ExtResource("1_2alki")
-speed = 400
-max_distance = 900
-knockback = 50
-speed_variance = 0.25
-area_shape = SubResource("RectangleShape2D_7b4xh")
-item_name = "Small Bullet"
-texture = ExtResource("2_ym6k0")
-metadata/_custom_type_script = "uid://b56aohcca4nqb"
 
 [resource]
 script = ExtResource("1_gumag")
-damage = 3
-magazine_size = 60
-reload_time = 3.5
-accuracy = 7
+magazine_size = 35
+reload_time = 3.0
+accuracy = 14
 shot_radius = 20.0
 shot_delay = 0.02
 holdable = true
-bullet = SubResource("Resource_2alki")
+bullet = ExtResource("1_x0fgs")
 scene = ExtResource("2_x0fgs")
 shot_sound = "smg_shot"
 item_name = "Surgefire SMG"

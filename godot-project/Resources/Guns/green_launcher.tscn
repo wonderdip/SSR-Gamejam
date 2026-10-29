@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cernedsaswip0"]
+
+[ext_resource type="Script" uid="uid://c6jbssk0vys0" path="res://Scripts/Resources/gun_instance.gd" id="1_f4m6b"]
+[ext_resource type="Texture2D" uid="uid://8yv73x37u131" path="res://Assets/Items/Guns/gun_sheet.png" id="2_vmopr"]
+
+[node name="GunInstance" type="Node2D" unique_id=1999045579 node_paths=PackedStringArray("gun_sprite", "bullet_point")]
+script = ExtResource("1_f4m6b")
+gun_sprite = NodePath("Sprite2D")
+bullet_point = NodePath("Marker2D")
+metadata/_custom_type_script = "uid://c6jbssk0vys0"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=562582107]
+position = Vector2(4, -8)
+rotation = 0.7853982
+texture = ExtResource("2_vmopr")
+hframes = 40
+frame = 6
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1507432474]
+position = Vector2(22, -10)

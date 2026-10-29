@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://b8d70yeseffs5"]
+
+[ext_resource type="Resource" uid="uid://ct4sgdptvoota" path="res://Resources/Bullets/grenade.tres" id="1_l80r5"]
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_wfhyy"]
+[ext_resource type="PackedScene" uid="uid://cernedsaswip0" path="res://Resources/Guns/green_launcher.tscn" id="2_l80r5"]
+[ext_resource type="Texture2D" uid="uid://daw5bnkgvik3b" path="res://Assets/Items/Guns/launcher.png" id="2_ued4c"]
+
+[resource]
+script = ExtResource("1_wfhyy")
+damage = 30
+reload_time = 2.0
+accuracy = 3
+shot_delay = 1.0
+holdable = true
+bullet = ExtResource("1_l80r5")
+scene = ExtResource("2_l80r5")
+shot_sound = "grenade_launcher"
+item_name = "Green Launcher"
+texture = ExtResource("2_ued4c")
+mini_texture = ExtResource("2_ued4c")
+description = "A big boy that launches bigger boys"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

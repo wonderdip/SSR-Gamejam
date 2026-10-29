@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("1_cuw5c")
-damage = 5
-magazine_size = 30
+damage = 6
+magazine_size = 32
 full_reload = false
 accuracy = 10
 shot_delay = 0.15

@@ -11,6 +11,7 @@ var swings: int
 @export var hit_particle: GPUParticles2D
 @export var animation_player: AnimationPlayer
 @export var vfx: Node2D
+@export var flip_collision: bool = false
 
 var pivot: Marker2D
 var dead_zone: float = 5.0
@@ -19,14 +20,18 @@ var is_swinging: bool = false
 var swing_tween: Tween
 var recharging: bool = false
 var cooldown_time_left: float = 0.0
+var og_pos: Vector2
+var flipped_pos: Vector2
 
 func _ready() -> void:
-	pivot = player.melee_pos
+	if player: pivot = player.melee_pos
 	rotation = deg_to_rad(90)
 	set_physics_layers()
 	collision_shape.disabled = true
 	body_entered.connect(_on_area_2d_body_entered)
 	swings = melee_data.swings_before_cd
+	og_pos = collision_shape.position
+	flipped_pos = Vector2(-og_pos.x, og_pos.y)
 	
 	if melee_data.equip_sound:
 		AudioManager.play_sfx(melee_data.equip_sound,0 ,randf_range(0.95, 1.05))
@@ -59,9 +64,12 @@ func update_art():
 	
 	if mouse_pos.x < pivot_pos.x - dead_zone:
 		vfx.scale.x = -1
+		if flip_collision:
+			collision_shape.position = flipped_pos
 	else:
 		vfx.scale.x = 1
-
+		if flip_collision:
+			collision_shape.position = og_pos
 		
 func swing():
 	is_swinging = true

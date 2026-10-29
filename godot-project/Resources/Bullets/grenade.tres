@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://ct4sgdptvoota"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_2i5fe"]
+[ext_resource type="Texture2D" uid="uid://cmdoqcfw41fo" path="res://Assets/Items/Bullets/grenade.png" id="2_n65pw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4a0f0"]
+radius = 4.0
+
+[resource]
+script = ExtResource("1_2i5fe")
+speed = 150
+max_distance = 400
+knockback = 160
+area_shape = SubResource("CircleShape2D_4a0f0")
+animated = true
+hframes = 4
+item_name = "grenade"
+texture = ExtResource("2_n65pw")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"

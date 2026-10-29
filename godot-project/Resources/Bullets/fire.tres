@@ -20,6 +20,7 @@ shader_parameter/flicker_amount = 0.250000011875
 script = ExtResource("1_35ric")
 speed = 30
 max_distance = 20
+knockback = 10
 piercing = true
 speed_variance = 0.25
 end_scale = 1.1

@@ -21,6 +21,7 @@ shader_parameter/flicker_amount = 0.250000011875
 script = ExtResource("1_ep7tm")
 speed = 100
 max_distance = 30
+knockback = 70
 piercing = true
 speed_variance = 0.25
 end_scale = 1.1
