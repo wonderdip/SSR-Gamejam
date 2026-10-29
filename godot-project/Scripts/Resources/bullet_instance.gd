@@ -103,7 +103,7 @@ func _physics_process(delta):
 			sprite.modulate.a = 1.0 - t
 
 		if travelled_distance > bullet_data.max_distance:
-			queue_free()
+			delete_bullet()
 
 func _on_area_2d_body_entered(body: Node):
 	if has_hit:
@@ -115,15 +115,27 @@ func _on_area_2d_body_entered(body: Node):
 		hit_bodies.append(body)
 		body.take_damage(damage, Vector2.RIGHT.rotated(rotation), bullet_data.knockback)
 		if not bullet_data.piercing:
+			has_hit = true
 			delete_bullet()
 			
 	elif body is TileMapLayer and not bullet_data.piercing:
+		has_hit = true
 		delete_bullet()
 
 func delete_bullet():
-	has_hit = true
 	can_move = false
 	sprite.hide()
-	particles.emitting = true
-	await get_tree().create_timer(particles.lifetime).timeout
+
+	if bullet_data.end_scene:
+		var scene : Node2D = bullet_data.end_scene.instantiate()
+		if LevelManager.game_started:
+			LevelManager._room_container.call_deferred("add_child", scene)
+		else:
+			get_parent().get_parent(
+			).get_parent().get_parent().call_deferred("add_child", scene)
+		scene.global_position = global_position
+		
+	if has_hit:
+		particles.emitting = true
+		await get_tree().create_timer(particles.lifetime).timeout
 	queue_free()

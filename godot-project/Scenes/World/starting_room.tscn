@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="10_ur81b"]
 [ext_resource type="Script" uid="uid://bnis4nlstit3m" path="res://Scripts/Resources/item_pickup.gd" id="13_pnb3q"]
 [ext_resource type="Resource" uid="uid://58w0jkbpbjwo" path="res://Resources/Items/sciontology_101.tres" id="13_s43t6"]
-[ext_resource type="Resource" uid="uid://cohoep376608y" path="res://Resources/Guns/surgefire_smg.tres" id="13_xrt8h"]
+[ext_resource type="Resource" uid="uid://bmbbepittn0eq" path="res://Resources/Guns/big_boom.tres" id="13_xrt8h"]
 
 [sub_resource type="Animation" id="Animation_wsauq"]
 length = 0.001

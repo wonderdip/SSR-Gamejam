@@ -33,8 +33,9 @@ func _update_dps_label() -> void:
 func _calculate_dps(weapon: ItemData) -> float:
 	# If fire_rate is shots per second:
 	if weapon is GunData:
-		return (weapon.damage * weapon.magazine_size) / ((
+		return ((weapon.damage * weapon.magazine_size) / ((
 			weapon.magazine_size * weapon.shot_delay) + weapon.reload_time)
+			) * weapon.bullet_count
 	elif weapon is MeleeData:
 		return (weapon.damage * weapon.swings_before_cd) / ((
 			weapon.swings_before_cd / weapon.swing_speed) + weapon.cooldown)

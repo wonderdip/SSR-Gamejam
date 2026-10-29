@@ -91,8 +91,9 @@ func shoot():
 			new_bullet.global_rotation = base_angle + (increment * i - arc_rad / 2)
 
 		get_parent().call_deferred("add_child", new_bullet)
+		ScreenSfx.cam_shake(1, 0.5, 0.1)
 		
-	ScreenSfx.cam_shake(1, 0.5, 0.1)  # moved out of the loop so shotguns don't stack shakes
+	  # moved out of the loop so shotguns don't stack shakes
 	AudioManager.play_sfx(gun_data.shot_sound, -8, randf_range(0.95, 1.05))
 	
 	await get_tree().create_timer(gun_data.shot_delay).timeout

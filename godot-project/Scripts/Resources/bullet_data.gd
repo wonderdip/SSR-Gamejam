@@ -24,3 +24,4 @@ class_name BulletData
 @export var random_frame_range: Vector2i
 
 @export var material: ShaderMaterial
+@export var end_scene: PackedScene

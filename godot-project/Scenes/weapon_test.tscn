@@ -2,9 +2,14 @@
 
 [ext_resource type="Script" uid="uid://sb675u4ieusj" path="res://Scripts/weapon_test.gd" id="1_n41g8"]
 [ext_resource type="PackedScene" uid="uid://4tk06hpv3qyv" path="res://Scenes/player.tscn" id="2_uck13"]
+[ext_resource type="Texture2D" uid="uid://30ovvwxfhqyi" path="res://Assets/Characters/Sciontology/recruit.png" id="3_uck13"]
 
 [sub_resource type="Theme" id="Theme_n41g8"]
 default_font_size = 8
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dtook"]
+radius = 8.0
+height = 28.0
 
 [node name="WeaponTest" type="Node2D" unique_id=2131091553]
 script = ExtResource("1_n41g8")
@@ -41,3 +46,14 @@ text = "DPS:"
 
 [node name="Player" parent="." unique_id=1871453495 instance=ExtResource("2_uck13")]
 position = Vector2(86, 36)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=987193898]
+position = Vector2(230, 74)
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1332693808]
+shape = SubResource("CapsuleShape2D_dtook")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1608251568]
+texture = ExtResource("3_uck13")

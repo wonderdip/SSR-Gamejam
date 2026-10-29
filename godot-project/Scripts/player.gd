@@ -66,7 +66,9 @@ func _ready() -> void:
 	current_health = max_health
 	blood.hide()
 	animation_player.play("RESET")
-
+	if body_shape == null:
+		body_shape = get_node_or_null("CollisionShape2D")
+		
 func reset() -> void:
 	current_health = max_health
 	movement_locked = false

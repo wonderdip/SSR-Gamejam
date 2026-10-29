@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://bmbbepittn0eq"]
+
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_dyhjx"]
+[ext_resource type="Resource" uid="uid://dqhg28s467s37" path="res://Resources/Bullets/basic_bullet.tres" id="1_rsqau"]
+[ext_resource type="PackedScene" uid="uid://doitvhhcvi6pt" path="res://Resources/Guns/big_boom.tscn" id="2_477dh"]
+[ext_resource type="Texture2D" uid="uid://dwee0p2i1s2it" path="res://Assets/Items/Guns/big_boom.png" id="2_k4utd"]
+
+[resource]
+script = ExtResource("1_dyhjx")
+damage = 4
+magazine_size = 5
+bullet_count = 5
+reload_time = 1.6
+accuracy = 5
+shot_radius = 30.0
+bullet = ExtResource("1_rsqau")
+scene = ExtResource("2_477dh")
+shot_sound = "shot"
+item_name = "Big Boom"
+texture = ExtResource("2_k4utd")
+mini_texture = ExtResource("2_k4utd")
+description = "A futuristic take on a shotgun"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://de2de4uptnmcm"]
+
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_7mp18"]
+[ext_resource type="Resource" uid="uid://t4aa54l5luob" path="res://Resources/Bullets/small_bullet.tres" id="1_7wwoi"]
+[ext_resource type="Texture2D" uid="uid://cx0t85pwhdhiv" path="res://Assets/Items/Guns/burster.png" id="2_uffkx"]
+[ext_resource type="PackedScene" uid="uid://bigmr748q04jf" path="res://Resources/Guns/burster.tscn" id="3_te5en"]
+
+[resource]
+script = ExtResource("1_7mp18")
+damage = 3
+magazine_size = 24
+bullet_count = 2
+reload_time = 2.2
+accuracy = 1
+shot_radius = 2.0
+shot_delay = 0.14
+holdable = true
+bullet = ExtResource("1_7wwoi")
+scene = ExtResource("3_te5en")
+shot_sound = "shot"
+item_name = "Burster"
+texture = ExtResource("2_uffkx")
+mini_texture = ExtResource("2_uffkx")
+description = "A legacy rifle with a double shot burst"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

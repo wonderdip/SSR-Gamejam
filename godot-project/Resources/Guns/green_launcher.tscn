@@ -11,10 +11,10 @@ metadata/_custom_type_script = "uid://c6jbssk0vys0"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=562582107]
 position = Vector2(4, -8)
-rotation = 0.7853982
+rotation = 0.8726746
 texture = ExtResource("2_vmopr")
 hframes = 40
 frame = 6
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1507432474]
-position = Vector2(22, -10)
+position = Vector2(26, -10)

@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("1_wfhyy")
-damage = 30
+damage = 5
 reload_time = 2.0
 accuracy = 3
 shot_delay = 1.0
@@ -18,5 +18,5 @@ shot_sound = "grenade_launcher"
 item_name = "Green Launcher"
 texture = ExtResource("2_ued4c")
 mini_texture = ExtResource("2_ued4c")
-description = "A big boy that launches bigger boys"
+description = "A big boy that launches bigger boys dealing explosion damage"
 metadata/_custom_type_script = "uid://bx02otob6ncxd"
