@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://fde55e44rmjy"]
+
+[ext_resource type="Script" uid="uid://c34up5750mih5" path="res://Scripts/Resources/melee_instance.gd" id="1_4h5mi"]
+[ext_resource type="Shader" uid="uid://co7whhu2bl5d4" path="res://Shader/slash.gdshader" id="2_aqg2q"]
+[ext_resource type="Texture2D" uid="uid://d1t8qmhe2f67w" path="res://Assets/Items/Melees/skyward.png" id="3_7ho8l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjq00"]
+shader = ExtResource("2_aqg2q")
+shader_parameter/slash_color = Color(0.07058824, 0.58431375, 0.7490196, 1)
+shader_parameter/edge_color = Color(0.23529412, 0.7529412, 0.8745098, 1)
+shader_parameter/glow_color = Color(1, 1, 1, 0)
+shader_parameter/progress = 1.0
+shader_parameter/arc_degrees = 170.0000076
+shader_parameter/radius = 0.10000000149012
+shader_parameter/thickness = 0.08300000324398
+shader_parameter/edge_width = 0.0310000014725
+shader_parameter/glow_width = 0.00999999977648
+shader_parameter/taper = 5.0
+shader_parameter/glow_strength = 0.0
+shader_parameter/streak_strength = 0.0
+shader_parameter/streak_width = 0.0010000000475
+shader_parameter/distortion = 0.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/pixel_size = 0.0010000000475
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qg8dr"]
+size = Vector2(12, 58)
+
+[sub_resource type="Animation" id="Animation_t0m4r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08300000324398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VFX/SlashRect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_sti6j"]
+resource_name = "slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX/SlashRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.666000031635, 0.250000011875, 0.250000011875, 0.666000031635]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX/SlashRect:material:shader_parameter/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.9802322e-08, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.00999999977648, 0.29900001350398, 0.29900001350398, 0.00999999977648]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX/SlashRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VFX/SlashRect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 29), Vector2(3, 62), Vector2(3, 62), Vector2(3, 29)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sekoe"]
+_data = {
+&"RESET": SubResource("Animation_t0m4r"),
+&"slash": SubResource("Animation_sti6j")
+}
+
+[node name="MeleeInstance" type="Area2D" unique_id=427393126 node_paths=PackedStringArray("melee_sprite", "collision_shape", "hit_particle", "animation_player", "vfx")]
+script = ExtResource("1_4h5mi")
+melee_sprite = NodePath("VFX/MeleeSprite")
+collision_shape = NodePath("CollisionShape2D")
+hit_particle = NodePath("VFX/HitParticle")
+animation_player = NodePath("AnimationPlayer")
+vfx = NodePath("VFX")
+metadata/_custom_type_script = "uid://c34up5750mih5"
+
+[node name="VFX" type="Node2D" parent="." unique_id=746443596]
+
+[node name="SlashRect" type="ColorRect" parent="VFX" unique_id=53840342]
+visible = false
+material = SubResource("ShaderMaterial_qjq00")
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 103.0
+offset_bottom = 118.999985
+rotation = -2.3561945
+
+[node name="HitParticle" type="GPUParticles2D" parent="VFX" unique_id=168073262]
+emitting = false
+
+[node name="MeleeSprite" type="Sprite2D" parent="VFX" unique_id=660710337]
+position = Vector2(0, -32)
+rotation = 0.7853982
+texture = ExtResource("3_7ho8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=758690204]
+position = Vector2(0, -42)
+shape = SubResource("RectangleShape2D_qg8dr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=592474321]
+libraries/ = SubResource("AnimationLibrary_sekoe")

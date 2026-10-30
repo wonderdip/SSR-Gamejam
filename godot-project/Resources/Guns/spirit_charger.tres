@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://wl1d2gc6h2us"]
+
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_es711"]
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_ih4ko"]
+[ext_resource type="Texture2D" uid="uid://lnf176ch42ws" path="res://Assets/Items/Bullets/spirit_bomb.png" id="2_pgagp"]
+[ext_resource type="Texture2D" uid="uid://blhyknwgiwy5n" path="res://Assets/Items/Guns/spirit_charger.png" id="3_3tv1o"]
+[ext_resource type="PackedScene" uid="uid://bx03inyrxvm4i" path="res://Resources/Guns/spirit_charger.tscn" id="4_88l4e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pgagp"]
+radius = 16.0
+
+[sub_resource type="Resource" id="Resource_es711"]
+script = ExtResource("1_es711")
+speed = 30
+knockback = 200
+piercing = true
+end_scale = 0.5
+fade_out = true
+area_shape = SubResource("CircleShape2D_pgagp")
+windup = 0.3
+animated = true
+vframes = 16
+anim_loop = false
+texture = ExtResource("2_pgagp")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"
+
+[resource]
+script = ExtResource("1_ih4ko")
+damage = 60
+magazine_size = 3
+reload_time = 4.0
+accuracy = 0
+player_lock = true
+shot_delay = 0.3
+bullet = SubResource("Resource_es711")
+scene = ExtResource("4_88l4e")
+shot_sound = "charger"
+item_name = "Spirit Charger"
+texture = ExtResource("3_3tv1o")
+mini_texture = ExtResource("3_3tv1o")
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

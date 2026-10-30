@@ -22,6 +22,7 @@ class_name BulletData
 @export var vframes: int = 1
 @export var fps: int = 12
 @export var random_frame_range: Vector2i
+@export var anim_loop: bool = true
 
 @export var material: ShaderMaterial
 @export var end_scene: PackedScene

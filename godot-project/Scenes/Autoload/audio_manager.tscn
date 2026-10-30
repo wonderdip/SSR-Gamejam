@@ -46,6 +46,9 @@
 [ext_resource type="AudioStream" uid="uid://c4nk1i0qha8qa" path="res://Assets/Audio/SFX/explosion.wav" id="42_04j8l"]
 [ext_resource type="AudioStream" uid="uid://c3qepxlirwbny" path="res://Assets/Audio/SFX/Weapons/basic shots/smg_good.mp3" id="43_lx4eg"]
 [ext_resource type="AudioStream" uid="uid://b4eahjkybn3sp" path="res://Assets/Audio/SFX/Weapons/basic shots/grenade-launcher.mp3" id="44_k5mbi"]
+[ext_resource type="AudioStream" uid="uid://cw47sxa065b56" path="res://Assets/Audio/SFX/Weapons/reload.wav" id="45_eplsf"]
+[ext_resource type="AudioStream" uid="uid://fb2uqh1eriwe" path="res://Assets/Audio/SFX/Weapons/basic shots/shotgun.mp3" id="46_axjax"]
+[ext_resource type="AudioStream" uid="uid://ddqld1rdq8e7u" path="res://Assets/Audio/SFX/Weapons/plasma/powerdown.wav" id="47_rpmop"]
 
 [sub_resource type="Resource" id="Resource_1npab"]
 script = ExtResource("2_rx4vr")
@@ -221,6 +224,24 @@ tag = "grenade_launcher"
 audio_streams = Array[AudioStream]([ExtResource("44_k5mbi")])
 metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
+[sub_resource type="Resource" id="Resource_uck13"]
+script = ExtResource("2_rx4vr")
+tag = "reload"
+audio_streams = Array[AudioStream]([ExtResource("45_eplsf")])
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_vql21"]
+script = ExtResource("2_rx4vr")
+tag = "shotgun"
+audio_streams = Array[AudioStream]([ExtResource("46_axjax")])
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
+[sub_resource type="Resource" id="Resource_pkruf"]
+script = ExtResource("2_rx4vr")
+tag = "charger"
+audio_streams = Array[AudioStream]([ExtResource("47_rpmop")])
+metadata/_custom_type_script = "uid://cv7mgm84vltp2"
+
 [sub_resource type="Resource" id="Resource_nkd2g"]
 script = ExtResource("2_rx4vr")
 tag = "lobby"
@@ -235,5 +256,5 @@ metadata/_custom_type_script = "uid://cv7mgm84vltp2"
 
 [node name="AudioManager" type="Node" unique_id=1886217390]
 script = ExtResource("1_1npab")
-sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_0ljai"), SubResource("Resource_i0578"), SubResource("Resource_wm0aq"), SubResource("Resource_r50q1"), SubResource("Resource_1xg3f"), SubResource("Resource_wj1s4"), SubResource("Resource_xtm57"), SubResource("Resource_kpqb3"), SubResource("Resource_n5r1e"), SubResource("Resource_w7ia4"), SubResource("Resource_l383t"), SubResource("Resource_ridcd"), SubResource("Resource_18hha"), SubResource("Resource_rw5kp"), SubResource("Resource_7v23x")])
+sfx_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_1npab"), SubResource("Resource_kixh8"), SubResource("Resource_lidyv"), SubResource("Resource_mkwg0"), SubResource("Resource_p4d3l"), SubResource("Resource_hjsbf"), SubResource("Resource_ojc52"), SubResource("Resource_gwgwg"), SubResource("Resource_6t5aa"), SubResource("Resource_pqq61"), SubResource("Resource_53vhv"), SubResource("Resource_gif3i"), SubResource("Resource_8eosv"), SubResource("Resource_kp4jo"), SubResource("Resource_0ljai"), SubResource("Resource_i0578"), SubResource("Resource_wm0aq"), SubResource("Resource_r50q1"), SubResource("Resource_1xg3f"), SubResource("Resource_wj1s4"), SubResource("Resource_xtm57"), SubResource("Resource_kpqb3"), SubResource("Resource_n5r1e"), SubResource("Resource_w7ia4"), SubResource("Resource_l383t"), SubResource("Resource_ridcd"), SubResource("Resource_18hha"), SubResource("Resource_rw5kp"), SubResource("Resource_7v23x"), SubResource("Resource_uck13"), SubResource("Resource_vql21"), SubResource("Resource_pkruf")])
 music_pool = Array[ExtResource("2_rx4vr")]([SubResource("Resource_nkd2g"), SubResource("Resource_pqvgl")])

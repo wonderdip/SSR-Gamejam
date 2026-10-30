@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://cu5gtkk7mno62" path="res://Resources/Melees/plasma_sword.tres" id="5_g8pkp"]
 [ext_resource type="Resource" uid="uid://blujy4yyy8f54" path="res://Resources/Melees/soul_reaper.tres" id="5_rdw3f"]
 [ext_resource type="Resource" uid="uid://dkpac7kx1l2i7" path="res://Resources/Melees/ifrits_revenge.tres" id="6_g8pkp"]
+[ext_resource type="Resource" uid="uid://dighoxxbg05vf" path="res://Resources/Melees/skyward_blade.tres" id="7_r8ede"]
 [ext_resource type="Resource" uid="uid://bqr8vfjcjiitp" path="res://Resources/Guns/thunderwhine.tres" id="7_rdw3f"]
 [ext_resource type="Resource" uid="uid://cnn02f1100oq6" path="res://Resources/Guns/flame_thrower.tres" id="9_g6ydc"]
 [ext_resource type="Resource" uid="uid://wosod8edvhkm" path="res://Resources/Guns/rail_gun.tres" id="10_8w0mq"]
@@ -17,11 +18,13 @@
 [ext_resource type="Resource" uid="uid://b8d70yeseffs5" path="res://Resources/Guns/green_launcher.tres" id="13_x4w1q"]
 [ext_resource type="Resource" uid="uid://bmbbepittn0eq" path="res://Resources/Guns/big_boom.tres" id="14_m6ay8"]
 [ext_resource type="Resource" uid="uid://de2de4uptnmcm" path="res://Resources/Guns/burster.tres" id="15_1vdnr"]
+[ext_resource type="Resource" uid="uid://dpo55ocxkndaa" path="res://Resources/Guns/lean_blicky.tres" id="16_pl2uc"]
+[ext_resource type="Resource" uid="uid://wl1d2gc6h2us" path="res://Resources/Guns/spirit_charger.tres" id="17_7c1oq"]
 
 [node name="ItemManager" type="Node" unique_id=838053468]
 script = ExtResource("1_efi6f")
-melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f"), ExtResource("4_rdw3f"), ExtResource("5_g8pkp"), ExtResource("6_g8pkp")])
-guns = Array[ExtResource("3_dbrv6")]([ExtResource("7_rdw3f"), ExtResource("9_g6ydc"), ExtResource("10_8w0mq"), ExtResource("11_cai3q"), ExtResource("12_256f8"), ExtResource("13_x4w1q"), ExtResource("14_m6ay8"), ExtResource("15_1vdnr")])
+melees = Array[ExtResource("2_dbrv6")]([ExtResource("5_rdw3f"), ExtResource("4_rdw3f"), ExtResource("5_g8pkp"), ExtResource("6_g8pkp"), ExtResource("7_r8ede")])
+guns = Array[ExtResource("3_dbrv6")]([ExtResource("7_rdw3f"), ExtResource("9_g6ydc"), ExtResource("10_8w0mq"), ExtResource("11_cai3q"), ExtResource("12_256f8"), ExtResource("13_x4w1q"), ExtResource("14_m6ay8"), ExtResource("15_1vdnr"), ExtResource("16_pl2uc"), ExtResource("17_7c1oq")])
 unique = Array[ExtResource("12_cai3q")]([ExtResource("13_256f8")])
 rarity_weights = {
 0: 100.0,

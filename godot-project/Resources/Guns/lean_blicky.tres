@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="GunData" format=3 uid="uid://dpo55ocxkndaa"]
+
+[ext_resource type="Script" uid="uid://bx02otob6ncxd" path="res://Scripts/Resources/gun_data.gd" id="1_3f1ry"]
+[ext_resource type="Script" uid="uid://b56aohcca4nqb" path="res://Scripts/Resources/bullet_data.gd" id="1_gkvnl"]
+[ext_resource type="Texture2D" uid="uid://cd2ojh8mh2mqw" path="res://Assets/Items/Guns/lean_blicky.png" id="2_gkvnl"]
+[ext_resource type="PackedScene" uid="uid://cyfvlu86ae31o" path="res://Resources/Guns/lean_blicky.tscn" id="3_mvmtb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyf8i"]
+radius = 5.0
+
+[sub_resource type="Curve" id="Curve_gkvnl"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mvmtb"]
+curve = SubResource("Curve_gkvnl")
+
+[sub_resource type="Curve" id="Curve_ybgdr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vwrig"]
+curve = SubResource("Curve_ybgdr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6agqj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+radial_velocity_min = 29.999977
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 5, 0)
+scale_min = 1.1999999
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_vwrig")
+color = Color(0.2975, 0.17, 0.68, 1)
+hue_variation_curve = SubResource("CurveTexture_mvmtb")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7far5"]
+load_path = "res://.godot/imported/purple_bullet.png-7ac71ba8f77897d6f664eccd2a127736.ctex"
+
+[sub_resource type="Resource" id="Resource_i8u84"]
+script = ExtResource("1_gkvnl")
+speed = 200
+area_shape = SubResource("CircleShape2D_jyf8i")
+collision_particles = SubResource("ParticleProcessMaterial_6agqj")
+texture = SubResource("CompressedTexture2D_7far5")
+metadata/_custom_type_script = "uid://b56aohcca4nqb"
+
+[resource]
+script = ExtResource("1_3f1ry")
+damage = 6
+magazine_size = 9
+reload_time = 1.2
+shot_delay = 0.16
+bullet = SubResource("Resource_i8u84")
+scene = ExtResource("3_mvmtb")
+shot_sound = "shot"
+item_name = "Lean Blicky"
+texture = ExtResource("2_gkvnl")
+mini_texture = ExtResource("2_gkvnl")
+description = "A blicky dyed with a special liquid"
+metadata/_custom_type_script = "uid://bx02otob6ncxd"

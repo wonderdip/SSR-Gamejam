@@ -1,0 +1,270 @@
+[gd_scene format=3 uid="uid://b03l8i4634bid"]
+
+[ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_165ng"]
+[ext_resource type="Shader" uid="uid://duemve88qkyom" path="res://Shader/hit_flash.gdshader" id="2_rof31"]
+[ext_resource type="Texture2D" uid="uid://byakp1rl4fenw" path="res://Assets/Characters/Sciontology/lil_gremlin.png" id="3_td4c4"]
+[ext_resource type="Texture2D" uid="uid://bpjsa5ru570n6" path="res://Assets/Characters/Player/surprised.png" id="4_ou6qd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8coix"]
+radius = 7.0
+height = 14.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iurh2"]
+shader = ExtResource("2_rof31")
+shader_parameter/active = false
+
+[sub_resource type="Animation" id="Animation_hkmql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w40mc"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.01745329251994329]
+}
+
+[sub_resource type="Animation" id="Animation_0o1c6"]
+resource_name = "spawn"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SurprisedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurprisedSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SurprisedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -12), Vector2(0, -13), Vector2(0, -11), Vector2(0, -13), Vector2(0, -11), Vector2(0, -12), Vector2(0, -6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xoolo"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.08726646259971647, -0.08726646259971647]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.05235987755982989, 0.05235987755982989]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pa5g2"]
+_data = {
+&"RESET": SubResource("Animation_hkmql"),
+&"idle": SubResource("Animation_w40mc"),
+&"spawn": SubResource("Animation_0o1c6"),
+&"walk": SubResource("Animation_xoolo")
+}
+
+[sub_resource type="Gradient" id="Gradient_juh3s"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mlohr"]
+gradient = SubResource("Gradient_juh3s")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.2)
+
+[node name="Gremlin" type="CharacterBody2D" unique_id=292173565 node_paths=PackedStringArray("sprite", "animation_player")]
+collision_layer = 4
+script = ExtResource("1_165ng")
+enemy_name = "Gremlin"
+health = 30.0
+damage = 15.0
+attack_speed = 1.0
+speed = 55.0
+knockback = 50
+knockback_friction = 500.0
+weapon = 1
+attack_range = 17.0
+sprite = NodePath("Sprite2D")
+animation_player = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://csbo78s7hwpng"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=385261911]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_8coix")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1523725132]
+material = SubResource("ShaderMaterial_iurh2")
+texture = ExtResource("3_td4c4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=478074009]
+libraries/ = SubResource("AnimationLibrary_pa5g2")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=125869046]
+color = Color(0.593666, 0.4482121, 0.25295055, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_mlohr")
+texture_scale = 0.5
+
+[node name="SurprisedSprite" type="Sprite2D" parent="." unique_id=901261303]
+visible = false
+position = Vector2(0, -6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_ou6qd")

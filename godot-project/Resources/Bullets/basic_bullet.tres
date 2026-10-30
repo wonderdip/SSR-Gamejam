@@ -21,7 +21,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_juo7y"]
 curve = SubResource("Curve_5nt5x")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oljys"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xu7i1"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -31,12 +31,13 @@ gravity = Vector3(0, 5, 0)
 scale_min = 1.1999999
 scale_max = 1.1999999
 scale_curve = SubResource("CurveTexture_juo7y")
+color = Color(0.7, 0.084, 0.084, 1)
 hue_variation_curve = SubResource("CurveTexture_3c5tf")
 
 [resource]
 script = ExtResource("1_70u62")
 speed = 200
 area_shape = SubResource("CircleShape2D_3txao")
-collision_particles = SubResource("ParticleProcessMaterial_oljys")
+collision_particles = SubResource("ParticleProcessMaterial_xu7i1")
 texture = ExtResource("2_xu7i1")
 metadata/_custom_type_script = "uid://b56aohcca4nqb"

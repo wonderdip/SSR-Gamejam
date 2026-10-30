@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="10_ur81b"]
 [ext_resource type="Script" uid="uid://bnis4nlstit3m" path="res://Scripts/Resources/item_pickup.gd" id="13_pnb3q"]
 [ext_resource type="Resource" uid="uid://58w0jkbpbjwo" path="res://Resources/Items/sciontology_101.tres" id="13_s43t6"]
-[ext_resource type="Resource" uid="uid://bmbbepittn0eq" path="res://Resources/Guns/big_boom.tres" id="13_xrt8h"]
 
 [sub_resource type="Animation" id="Animation_wsauq"]
 length = 0.001
@@ -3106,7 +3105,6 @@ hframes = 4
 
 [node name="InteractionTrigger" type="Area2D" parent="." unique_id=1613448490]
 collision_layer = 32
-collision_mask = 0
 script = ExtResource("6_gwgwg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionTrigger" unique_id=184728082]
@@ -3152,15 +3150,16 @@ specific_note = "Good luck, hopefully you remember everything soon, be careful c
 
 [node name="Note4" parent="." unique_id=25472382 instance=ExtResource("10_ur81b")]
 position = Vector2(186, 194)
-specific_note = "Press B to open the book"
+specific_note = "Press B to open the book, SCROLL to swap between equipped gun and sword, G to drop weapons however they despawn"
 
 [node name="FirstWeapon" type="Area2D" parent="." unique_id=2052252210]
 unique_name_in_owner = true
 position = Vector2(70, 210)
 rotation = -1.5707964
 script = ExtResource("13_pnb3q")
-item_data = ExtResource("13_xrt8h")
+item_data = ExtResource("10_12re5")
 texture_scale = Vector2(1, 1)
+despawns = false
 metadata/_custom_type_script = "uid://bnis4nlstit3m"
 
 [node name="Book" type="Area2D" parent="." unique_id=321959210]
@@ -3169,6 +3168,7 @@ position = Vector2(128, 224)
 script = ExtResource("13_pnb3q")
 item_data = ExtResource("13_s43t6")
 texture_scale = Vector2(1, 1)
+despawns = false
 metadata/_custom_type_script = "uid://bnis4nlstit3m"
 
 [node name="BookLight" type="PointLight2D" parent="Book" unique_id=8348600]

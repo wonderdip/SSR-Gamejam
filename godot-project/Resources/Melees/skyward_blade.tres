@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MeleeData" format=3 uid="uid://dighoxxbg05vf"]
+
+[ext_resource type="Script" uid="uid://beapjtsj1udek" path="res://Scripts/Resources/melee_data.gd" id="1_e1o22"]
+[ext_resource type="Texture2D" uid="uid://bvktumqs63grh" path="res://Assets/Items/Melees/mini_skyward.png" id="1_jwacp"]
+[ext_resource type="PackedScene" uid="uid://fde55e44rmjy" path="res://Resources/Guns/skyward_blade.tscn" id="1_v4lib"]
+[ext_resource type="Texture2D" uid="uid://d1t8qmhe2f67w" path="res://Assets/Items/Melees/skyward.png" id="3_uky16"]
+
+[resource]
+script = ExtResource("1_e1o22")
+scene = ExtResource("1_v4lib")
+swing_sound = "sword_swing"
+equip_sound = "heavy_sword"
+hit_sound = "heavy_hit"
+item_name = "Skyward Blade"
+texture = ExtResource("3_uky16")
+mini_texture = ExtResource("1_jwacp")
+description = "A blade thats power rivals the skies above"
+item_type = 1
+metadata/_custom_type_script = "uid://beapjtsj1udek"

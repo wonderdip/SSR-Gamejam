@@ -13,6 +13,7 @@ var has_hit: bool = false
 var anim_timer: float = 0.0
 var speed: float
 var hit_bodies: Array[Node] = []
+var animated: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -55,7 +56,9 @@ func _ready() -> void:
 	body_entered.connect(_on_area_2d_body_entered)
 	speed = bullet_data.speed * randf_range(1.0 - bullet_data.speed_variance, 1.0 + bullet_data.speed_variance)
 	
-	if bullet_data.animated:
+	animated = bullet_data.animated
+	
+	if animated:
 		sprite.frame = randi_range(bullet_data.random_frame_range.x, bullet_data.random_frame_range.y)
 		
 	sprite.flip_v = randf() < 0.5 
@@ -78,11 +81,14 @@ func _ready() -> void:
 		)
 	
 func _physics_process(delta):
-	if bullet_data.animated and not has_hit:
+	if animated and not has_hit:
 		var last_frame = bullet_data.hframes * bullet_data.vframes - 1
 		if sprite.frame >= last_frame and bullet_data.delete_on_anim_done:
 			await get_tree().create_timer(1.0 / bullet_data.fps).timeout
 			delete_bullet()
+		
+		if sprite.frame >= last_frame and not bullet_data.anim_loop:
+			animated = false
 			
 		anim_timer += delta
 		var frame_duration := 1.0 / bullet_data.fps

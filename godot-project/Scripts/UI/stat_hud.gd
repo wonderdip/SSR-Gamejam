@@ -88,6 +88,7 @@ func _update_counters(container: Control, instance: Node) -> void:
 		if instance.recharging:
 			var progress : float = 1.0 - (instance.cooldown_time_left / instance.melee_data.cooldown)
 			lit_count = floor(progress * total)
+			
 		else:
 			lit_count = instance.swings
 			
@@ -96,9 +97,10 @@ func _update_counters(container: Control, instance: Node) -> void:
 		if instance.reloading:
 			var progress : float = 1.0 - (instance.reload_time_left / instance.gun_data.reload_time)
 			lit_count = floor(progress * total)
+			
 		else:
 			lit_count = instance.current_ammo
-
+			
 	var counters := container.get_children()
 	for i in counters.size():
 		counters[i].modulate = COUNTER_LIT if i < lit_count else COUNTER_SPENT

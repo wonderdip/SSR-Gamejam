@@ -4,9 +4,12 @@ class_name WeaponPickup
 var instance: Node
 @export var item_data: ItemData
 @export var texture_scale: Vector2
+@export var despawns: bool = true
 var player: Player = null
 var prompt: Label
 var shader_material: ShaderMaterial
+
+var timer: Timer
 
 func _ready() -> void:
 	collision_layer = 0
@@ -48,6 +51,15 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	shine()
 	
+	if despawns:
+		timer = Timer.new()
+		add_child(timer)
+		timer.start(20)
+		timer.timeout.connect(despawn)
+
+func despawn():
+	queue_free()
+	
 func shine():
 	while true:
 		var shine_tween := create_tween()
@@ -70,12 +82,14 @@ func _on_body_entered(body: Node) -> void:
 	if body is Player:
 		player = body
 		prompt.show()
-
+		if timer: timer.stop()
+		
 func _on_body_exited(body: Node) -> void:
 	if body == player:
 		player = null
 		prompt.hide()
-
+		if timer: timer.start(20)
+		
 func _input(event: InputEvent) -> void:
 	if player and event.is_action_pressed("interact") and not event.is_echo():
 		get_viewport().set_input_as_handled()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dg3t7kkncsa85"
+path="res://.godot/imported/Z-180 Scattershot Gun Sound Effect - Special Audio.mp3-670e70577a25d4eeaaa287a2e18aad66.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Weapons/basic shots/Z-180 Scattershot Gun Sound Effect - Special Audio.mp3"
+dest_files=["res://.godot/imported/Z-180 Scattershot Gun Sound Effect - Special Audio.mp3-670e70577a25d4eeaaa287a2e18aad66.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
