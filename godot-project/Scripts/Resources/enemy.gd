@@ -16,10 +16,12 @@ signal damaged(amount: int)
 
 @export var movement: MovementTypes
 @export var weapon: AttackTypes
+@export var bullet: BulletData
 @export var attack_range: float = 50
 @export var sprite: Sprite2D
 @export var animation_player: AnimationPlayer
 @export var explosion_area: Area2D
+@export var bullet_point: Marker2D
 @export var boss: bool = false
 
 var flash_shader: Shader = preload("res://Shader/hit_flash.gdshader")
@@ -43,7 +45,8 @@ func _ready() -> void:
 	max_health = health
 	player_ref = SceneManager.player
 	_pick_random_target()
-	
+	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	safe_margin = 1
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = flash_shader
 	
@@ -77,7 +80,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_update_facing(move_velocity)
 	
-	
 	if movement == MovementTypes.SUICIDE and player_ref \
 			and global_position.distance_to(_player_center()) <= attack_range:
 		die()
@@ -87,8 +89,12 @@ func _physics_process(delta: float) -> void:
 			and global_position.distance_to(_player_center()) <= attack_range:
 		
 		attack()
-		
 	
+	if weapon == AttackTypes.GUN and can_attack and is_instance_valid(player_ref) \
+			and global_position.distance_to(_player_center()) <= attack_range:
+		
+		shoot()
+		
 	if move_velocity.length() > 0.1:
 		if animation_player.has_animation("walk"): animation_player.play("walk")
 	else:
@@ -204,6 +210,14 @@ func attack() -> void:
 	await get_tree().create_timer(attack_speed).timeout
 	if is_instance_valid(self):
 		can_attack = true
+
+func shoot():
+	var new_bullet = BulletInstance.new()
+	new_bullet.bullet_data = bullet
+	new_bullet.global_position = bullet_point.global_position
+	get_parent().call_deferred("add_child", new_bullet)
+	ScreenSfx.cam_shake(1, 0.5, 0.1)
+	
 
 func _player_center() -> Vector2:
 	return player_ref.center() if is_instance_valid(player_ref) else global_position

@@ -37,7 +37,6 @@ color = Color(0.2975, 0.17, 0.68, 1)
 hue_variation_curve = SubResource("CurveTexture_mvmtb")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7far5"]
-load_path = "res://.godot/imported/purple_bullet.png-7ac71ba8f77897d6f664eccd2a127736.ctex"
 
 [sub_resource type="Resource" id="Resource_i8u84"]
 script = ExtResource("1_gkvnl")

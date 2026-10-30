@@ -75,13 +75,6 @@ func _ready() -> void:
 	# loops, so it never fires) which leaves movement_locked = true forever.
 	movement_locked = false
 	
-	match LevelManager.floor_num:
-		1: enemy_name = "Priest OT I"
-		2: enemy_name = "Priest OT II"
-		3: enemy_name = "Priest OT III"
-		4: enemy_name = "Priest OT IV"
-		_: enemy_name = "Priest OT " + str(LevelManager.floor_num)
-	
 	_setup_progression()
 		
 	# Detach the fist from the boss's transform so it stays where we drop it.
@@ -121,6 +114,8 @@ func _ready() -> void:
 
 func _setup_progression() -> void:
 	var floor_n := maxi(LevelManager.floor_num, 1)
+	
+	health = 150 * floor_n
 	
 	# New run (floor 1): pick a fresh random order. Later floors reuse it.
 	if floor_n == 1 or _ability_order.is_empty():

@@ -27,13 +27,13 @@ func _ready() -> void:
 func _on_played_exited_interaction_area(body: Node):
 	if body is Player:
 		can_open = false
-		prompt.hide()
+		if prompt: prompt.hide()
 
 func _on_played_entered_interaction_area(body: Node):
 	if body is Player:
 		player = body
 		can_open = true
-		prompt.show()
+		if prompt: prompt.show()
 		
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("interact")
@@ -53,7 +53,8 @@ func _input(event: InputEvent) -> void:
 		opened = true
 		player.chests_looted += 1
 		$Sprite2D.modulate = Color.DIM_GRAY
-		
+		prompt.queue_free()
+		interaction_area.get_node_or_null("CollisionShape2D").disabled = true
 
 func _spawn_pickup(data: ItemData) -> void:
 	var pickup := WeaponPickup.new()

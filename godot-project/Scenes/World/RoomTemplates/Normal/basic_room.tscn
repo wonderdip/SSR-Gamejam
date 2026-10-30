@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://coqrlcsnrn45o" path="res://Resources/Enemies/martyr.tscn" id="3_6vw0a"]
 [ext_resource type="Texture2D" uid="uid://bph0pr08tjqq8" path="res://Assets/TileSets/Interiors_free_16x16.png" id="3_mdoty"]
 [ext_resource type="PackedScene" uid="uid://bdujxs8si072i" path="res://Scenes/World/note.tscn" id="4_66gei"]
+[ext_resource type="PackedScene" uid="uid://bee4ud23osjsm" path="res://Resources/Enemies/shaman.tscn" id="4_omftr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdoty"]
 texture = ExtResource("2_66gei")
@@ -2860,7 +2861,7 @@ fill_to = Vector2(0.9, 0.5)
 
 [node name="BasicRoom" type="Node2D" unique_id=1714128476]
 script = ExtResource("1_d8gsv")
-enemy_list = Array[PackedScene]([ExtResource("2_mdoty"), ExtResource("3_6vw0a")])
+enemy_list = Array[PackedScene]([ExtResource("2_mdoty"), ExtResource("3_6vw0a"), ExtResource("4_omftr")])
 metadata/_custom_type_script = "uid://de5cowqywqdtg"
 
 [node name="WallsAndFloor" type="TileMapLayer" parent="." unique_id=160450559]

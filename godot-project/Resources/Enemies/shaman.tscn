@@ -1,0 +1,285 @@
+[gd_scene format=3 uid="uid://bee4ud23osjsm"]
+
+[ext_resource type="Script" uid="uid://csbo78s7hwpng" path="res://Scripts/Resources/enemy.gd" id="1_do15m"]
+[ext_resource type="Resource" uid="uid://dqhg28s467s37" path="res://Resources/Bullets/basic_bullet.tres" id="2_2ctq4"]
+[ext_resource type="Shader" uid="uid://duemve88qkyom" path="res://Shader/hit_flash.gdshader" id="2_fe2re"]
+[ext_resource type="Texture2D" uid="uid://d17eux7684i73" path="res://Assets/Characters/Sciontology/shaman.png" id="3_do15m"]
+[ext_resource type="Texture2D" uid="uid://bpjsa5ru570n6" path="res://Assets/Characters/Player/surprised.png" id="4_4atoo"]
+[ext_resource type="Texture2D" uid="uid://pdjfl6bgq1eo" path="res://Assets/Characters/Sciontology/staff.png" id="5_fe2re"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdoty"]
+radius = 12.0
+height = 34.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+shader = ExtResource("2_fe2re")
+shader_parameter/active = false
+
+[sub_resource type="Animation" id="Animation_ekxys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_juh3s"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.01745329251994329]
+}
+
+[sub_resource type="Animation" id="Animation_rarie"]
+resource_name = "spawn"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SurprisedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurprisedSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SurprisedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -12), Vector2(0, -13), Vector2(0, -11), Vector2(0, -13), Vector2(0, -11), Vector2(0, -12), Vector2(0, -6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7r56r"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.08726646259971647, -0.08726646259971647]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.05235987755982989, 0.05235987755982989]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fe2re"]
+_data = {
+&"RESET": SubResource("Animation_ekxys"),
+&"idle": SubResource("Animation_juh3s"),
+&"spawn": SubResource("Animation_rarie"),
+&"walk": SubResource("Animation_7r56r")
+}
+
+[sub_resource type="Gradient" id="Gradient_dx1hn"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awwja"]
+gradient = SubResource("Gradient_dx1hn")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.2)
+
+[node name="Shaman" type="CharacterBody2D" unique_id=1706568622 node_paths=PackedStringArray("sprite", "animation_player", "bullet_point")]
+z_index = 10
+collision_layer = 4
+collision_mask = 29
+motion_mode = 1
+script = ExtResource("1_do15m")
+enemy_name = "Shaman"
+health = 70.0
+damage = 20.0
+attack_speed = 2.0
+speed = 50.0
+movement = 2
+bullet = ExtResource("2_2ctq4")
+attack_range = 90.0
+sprite = NodePath("Sprite2D")
+animation_player = NodePath("AnimationPlayer")
+bullet_point = NodePath("Marker2D/Marker2D")
+metadata/_custom_type_script = "uid://csbo78s7hwpng"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171013243]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_mdoty")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=641295790]
+material = SubResource("ShaderMaterial_ynf5e")
+texture = ExtResource("3_do15m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1124190504]
+libraries/ = SubResource("AnimationLibrary_fe2re")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=235084388]
+color = Color(0.593666, 0.4482121, 0.25295055, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_awwja")
+texture_scale = 0.5
+
+[node name="SurprisedSprite" type="Sprite2D" parent="." unique_id=1853917238]
+visible = false
+position = Vector2(0, -6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_4atoo")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=405946848]
+position = Vector2(10, 1.0000002)
+rotation = 0.29147
+
+[node name="Sprite2D2" type="Sprite2D" parent="Marker2D" unique_id=223119421]
+texture = ExtResource("5_fe2re")
+
+[node name="Marker2D" type="Marker2D" parent="Marker2D" unique_id=1724493114]
+position = Vector2(2.3841858e-07, -11)

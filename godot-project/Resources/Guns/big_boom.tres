@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://b56aohcca4nqb"
 
 [resource]
 script = ExtResource("1_dyhjx")
-damage = 4
+damage = 6
 magazine_size = 5
 bullet_count = 5
 reload_time = 1.6

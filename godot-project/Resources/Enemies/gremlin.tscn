@@ -231,7 +231,11 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.2, 0.2)
 
 [node name="Gremlin" type="CharacterBody2D" unique_id=292173565 node_paths=PackedStringArray("sprite", "animation_player")]
+z_index = 10
 collision_layer = 4
+collision_mask = 29
+motion_mode = 1
+safe_margin = 4.0
 script = ExtResource("1_165ng")
 enemy_name = "Gremlin"
 health = 30.0
@@ -258,10 +262,10 @@ texture = ExtResource("3_td4c4")
 libraries/ = SubResource("AnimationLibrary_pa5g2")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=125869046]
-color = Color(0.593666, 0.4482121, 0.25295055, 1)
+color = Color(0.45, 0.049500003, 0.049500003, 1)
 energy = 0.4
 texture = SubResource("GradientTexture2D_mlohr")
-texture_scale = 0.5
+texture_scale = 0.3
 
 [node name="SurprisedSprite" type="Sprite2D" parent="." unique_id=901261303]
 visible = false
